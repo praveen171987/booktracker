@@ -1,0 +1,78 @@
+<html>
+	<head><title>Dynamically changing DIV based Table</title></head>
+	<style type="text/css">
+		#container { height:100%;}
+		#div1 { height: 100%; float:left; background-color: beige; width:250px;}
+		#div2 { float:left; width:250px; background-color: red; height: 100%;}
+		#div3 { float:left; width:250px; background-color: blue; height: 100%;}
+		#div4 { float:left; width:250px; background-color: orange; height: 100%;}
+		#div5 { float:left; width:250px; background-color: green; height: 100%;}
+	</style>
+	<script type="text/javascript">
+		var idArray = new Array("div1","div2","div3","div4","div5");
+		function switchColumns(){
+			alert(idArray);
+			var source = document.getElementById('list').value;
+			var direction = parseInt(document.getElementById('direction').value);
+			var i;
+			var found = false;
+			for(i=0;i<idArray.length;i++){
+				if(idArray[i] == source){
+					found = true;
+					break;
+				}
+			}
+			if(!found) return;
+			var srcIndex = i;
+			var destIndex = i+direction;
+			var srcNode = document.getElementById(idArray[srcIndex]);
+			var tempNode = srcNode.cloneNode(true);
+
+			var parent = document.getElementById('container');
+			
+			if(direction == 1){//right shift
+				if(idArray[destIndex+1] == null){
+					parent.appendChild(tempNode);
+					var temp = idArray[idArray.length-1];
+					idArray[idArray.length-1] = idArray[srcIndex];
+					idArray[srcIndex] = temp;
+				}else{
+					parent.insertBefore(tempNode,document.getElementById(idArray[destIndex+1]));
+					var temp = idArray[destIndex];
+					idArray[destIndex] = idArray[srcIndex];
+					idArray[srcIndex] = temp;
+				}
+			}else { //right shift
+				parent.insertBefore(tempNode,document.getElementById(idArray[destIndex]));
+				var temp = idArray[destIndex];
+				idArray[destIndex] = idArray[srcIndex];
+				idArray[srcIndex] = temp;
+			}
+			
+			
+			parent.removeChild(srcNode);
+			
+		}
+	</script>
+	<body>
+		<form>
+			Move the <select id="list">
+						<option value="div1">Beige</option>
+						<option value="div2">Red</option>
+						<option value="div3">Blue</option>
+						<option value="div4">Orange</option>
+						<option value="div5">Green</option>
+					</select> tab to the <select id="direction">
+											<option value="-1">Left</option>
+											<option value="1">Right</option>
+										</select>
+			<input type="button" value="submit" onclick="switchColumns();">
+		</form>
+		<div id="container">
+			<div id="div1">one</div>
+			<div id="div2">two</div>
+			<div id="div3">three</div>
+			<div id="div4">four</div>
+			<div id="div5">five</div>
+		</div>
+</html>
