@@ -1,10 +1,12 @@
 package com.softwaresmithy.amazon;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
 
+import com.amazonaws.a2s.model.AlternateVersion;
 import com.amazonaws.a2s.model.Item;
 import com.amazonaws.a2s.model.Tag;
 
@@ -19,7 +21,13 @@ public class AmazonResult {
 	private String smallImageUrl;
 	private String mediumImageUrl;
 	private String largeImageUrl;
-	
+	private List<String> alternateVersions;
+	public List<String> getAlternateVersions() {
+		return alternateVersions;
+	}
+	public void setAlternateVersions(List<String> alternateVersions) {
+		this.alternateVersions = alternateVersions;
+	}
 	AmazonResult(Item item){
 		if(item.isSetASIN())
 			this.setISBN(item.getASIN());
@@ -37,6 +45,14 @@ public class AmazonResult {
 			this.setSmallImageUrl(item.getSmallImage().getURL());
 			this.setMediumImageUrl(item.getMediumImage().getURL());
 			this.setLargeImageUrl(item.getLargeImage().getURL());
+		}
+		if(item.isSetAlternateVersions()){
+			List<String> isbns = new ArrayList<String>();
+			List<AlternateVersion> temp = item.getAlternateVersions().getAlternateVersion();
+			for(int i=0;i<temp.size();i++){
+				isbns.add(temp.get(i).getASIN());
+			}
+			this.setAlternateVersions(isbns);
 		}
 	}
 	public Document getDocument() {
@@ -69,6 +85,12 @@ public class AmazonResult {
 			doc.add(new Field("mediumImageUrl",this.getMediumImageUrl(),Field.Store.YES,Field.Index.UN_TOKENIZED));
 		if(this.getLargeImageUrl()!= null)
 			doc.add(new Field("largeImageUrl",this.getLargeImageUrl(),Field.Store.YES,Field.Index.UN_TOKENIZED));
+		if(this.getAlternateVersions()!= null){
+			List<String> temp = this.getAlternateVersions();
+			for(int i=0;i<temp.size();i++){
+				doc.add(new Field("alternateVersion", temp.get(i),Field.Store.YES, Field.Index.UN_TOKENIZED));
+			}
+		}
 		return doc;
 	}
 	
