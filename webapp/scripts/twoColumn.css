@@ -1,0 +1,56 @@
+body
+{
+	margin: 0;
+	padding: 0;
+	font-family: georgia, times, "times new roman", serif;
+	color: #000;
+	background-color: #ddd;
+}
+
+#container
+{
+	margin: 1em 5%;
+	background-color: #FFF;
+	background-image:  url(/BookTracker/images/background.jpg);
+	background-repeat: repeat-y;
+	border: 1px solid #333;
+}
+
+#banner
+{
+	background-color: #666;
+	border-bottom: 1px solid #333;
+}
+
+#banner h1
+{
+	margin: 0;
+	padding: .5em;
+}
+
+#nav
+{
+	float: left;
+	width: 160px;
+	margin-left: 10px;
+	padding-top: 1em;
+}
+
+#nav p { margin-top: 0; }
+
+#content
+{
+	padding-top: 1em;
+	margin: 0 2em 0 200px;
+}
+
+#content h2 { margin-top: 0; }
+
+#footer
+{
+	clear: both;
+	background-color: #666;
+	padding: 1em;
+	text-align: right;
+	border-top: 1px solid #333;
+}
