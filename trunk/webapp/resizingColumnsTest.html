@@ -1,0 +1,66 @@
+<html>
+	<head>
+		<title>Resizing Columns Test</title>
+	</head>
+		<style type="text/css">
+			body
+			{
+				margin: 0;
+				padding: 0;
+			}
+
+			.columnGrabber
+			{
+				position: fixed;
+				position: expression("absolute");
+				top: 0;
+				top: expression(eval(document.body.scrollTop));
+				width: 18px;
+				height: 100%;
+				margin-left: -4px;
+				cursor: col-resize;
+				
+				background-color: #000000;
+			}
+		</style>
+
+	<script type="text/javascript">
+		function start(){
+			var grabber = document.createElement("div");
+			grabber.className = "columnGrabber";
+			grabber.style.left = "300px";
+			
+			grabber.moving = false;
+
+			grabber.onmousedown = columnMouseDown;			
+			window.onmousemove = columnMouseMove;
+			window.onmouseup = columnMouseUp;
+			
+			document.body.appendChild(grabber);
+		}
+		function columnMouseDown(event){
+			if (this.moving) window.onmouseup(event);
+			this.moving = true;
+			
+			window.movingDiv = this;
+			
+			window.onmousemove(event);
+		}
+		function columnMouseMove(event){
+			if(window.movingDiv != null && window.movingDiv.moving) {
+				window.movingDiv.style.left = event.clientX;
+			}
+		}
+		function columnMouseUp(event) {
+			if(window.movingDiv != null && window.movingDiv.moving) {
+				window.movingDiv.moving = false;
+				window.movingDiv = null;
+				//Adjust all column widths;
+			}
+		}
+	
+	</script>
+	<body onLoad="start();">
+		<img src="images\background.jpg"></img>
+	</body>
+</html>

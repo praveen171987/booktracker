@@ -1,7 +1,6 @@
 package com.softwaresmithy.amazon;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServlet;
@@ -51,6 +50,7 @@ public class AmazonQuery extends HttpServlet {
         //SearchInside, Similarities, Small, Subjects, Tags, TagsSummary, Tracks, VariationMatrix, 
         //VariationMinimum, VariationOffers, VariationSummary, Variations.
         java.util.List<String> responseGroup = new java.util.ArrayList<String>();
+        	responseGroup.add("ItemAttributes");
 	        responseGroup.add("Small");
 	        responseGroup.add("AlternateVersions");
 	        responseGroup.add("Images");
@@ -76,7 +76,6 @@ public class AmazonQuery extends HttpServlet {
 			request.setKeywords("Hood Stephen Lawhead");
 			try{
 	             //AcornWebQueryEngine query = new AcornWebQueryEngine();
-	             
 				
 	             ItemSearchResponse response = service.itemSearch(request);
 
@@ -89,8 +88,7 @@ public class AmazonQuery extends HttpServlet {
 	                 resp.getWriter().write(formatHttpResult(temp));
 	                 //System.out.println(temp.getTitle()+": "+temp.getISBN());
 	                 //System.out.println("at library: "+query.atLibrary(isbns));
-	             }
-	             
+	             }	             
 	         }catch(Exception e){
 	             e.printStackTrace();
 	         }
