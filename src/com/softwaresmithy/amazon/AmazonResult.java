@@ -28,14 +28,19 @@ public class AmazonResult {
 	public void setAlternateVersions(List<String> alternateVersions) {
 		this.alternateVersions = alternateVersions;
 	}
-	AmazonResult(Item item){
+	public AmazonResult(Item item){
 		if(item.isSetASIN())
 			this.setISBN(item.getASIN());
 		if(item.isSetItemAttributes()){
-			this.setAuthor(item.getItemAttributes().getAuthor());
-			this.setTitle(item.getItemAttributes().getTitle());
-			this.setPubDate(item.getItemAttributes().getPublicationDate());
-			this.setPages(item.getItemAttributes().getNumberOfPages().intValue());
+			if(item.getItemAttributes().isSetAuthor())
+				this.setAuthor(item.getItemAttributes().getAuthor());
+			if(item.getItemAttributes().isSetTitle())
+				this.setTitle(item.getItemAttributes().getTitle());
+			if(item.getItemAttributes().isSetPublicationDate())
+				this.setPubDate(item.getItemAttributes().getPublicationDate());
+			if(item.getItemAttributes().isSetNumberOfPages())
+				this.setPages(item.getItemAttributes().getNumberOfPages().intValue());
+				
 		}
 		if(item.isSetCustomerReviews())
 			this.setRating(item.getCustomerReviews().getAverageRating().doubleValue());
