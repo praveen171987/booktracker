@@ -5,15 +5,17 @@ body
 	font-family: georgia, times, "times new roman", serif;
 	color: #000;
 	background-color: #ddd;
+	overflow: hidden;
 }
 
 #container
 {
-	margin: 1em 5%;
 	background-color: #FFF;
 	background-image:  url(/BookTracker/images/background.jpg);
 	background-repeat: repeat-y;
 	border: 1px solid #333;
+	width: 100%;
+	height: 100%;
 }
 
 #banner
@@ -41,7 +43,7 @@ body
 #content
 {
 	padding-top: 1em;
-	margin: 0 2em 0 200px;
+	margin-left: 180px;
 }
 
 #content h2 { margin-top: 0; }
@@ -50,7 +52,10 @@ body
 {
 	clear: both;
 	background-color: #666;
-	padding: 1em;
+	padding: 1em 1em 1em 0;
 	text-align: right;
 	border-top: 1px solid #333;
+	bottom: 0px;
+	position: absolute;
+	width: 100%;
 }

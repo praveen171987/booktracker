@@ -10,11 +10,15 @@ import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
 import org.apache.lucene.index.IndexWriter;
+import org.apache.lucene.index.Term;
+import org.apache.lucene.search.IndexSearcher;
+import org.apache.lucene.search.TermQuery;
 
 import com.amazonaws.a2s.AmazonA2S;
 import com.amazonaws.a2s.AmazonA2SClient;
 import com.amazonaws.a2s.model.ItemLookupRequest;
 import com.amazonaws.a2s.model.ItemLookupResponse;
+import com.softwaresmithy.acornweb.AcornWebQueryEngine;
 import com.softwaresmithy.amazon.AmazonResult;
 
 public class Test {
@@ -39,12 +43,16 @@ public class Test {
 	        AmazonA2S service = new AmazonA2SClient(accessKeyId, associateTag);
 
 	        boolean stop = false;
-	        writer = new IndexWriter(INDEX_DIR, new StandardAnalyzer(), false);			
+	        writer = new IndexWriter(INDEX_DIR, new StandardAnalyzer(), false);
+	        
+	        AcornWebQueryEngine library = new AcornWebQueryEngine();
+	        IndexSearcher searcher = new IndexSearcher("index");
+	        
 	        while(!stop){
 	        	System.out.print("query isbn: ");
 	        	BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 	        	String isbn = br.readLine();
-	        	if(isbn==null || isbn=="") break;
+	        	if(isbn==null || isbn.equals("")) break;
 		        ItemLookupRequest request = new ItemLookupRequest();
 		         java.util.List<String> responseGroup = new java.util.ArrayList<String>();
 			        responseGroup.add("Small");
@@ -64,9 +72,16 @@ public class Test {
 		        	System.out.println(response.getItems().get(0).getItem().get(0).getItemAttributes().getTitle());
 		        	
 					AmazonResult result = new AmazonResult(response.getItems().get(0).getItem().get(0));
-					writer.addDocument(result.getDocument());
-
-					System.out.println("Successfully added");
+					String bookId = library.atLibrary(result);
+					Document doc = result.getDocument();
+					if(bookId != null)
+						doc.add(new Field("bookId",bookId,Field.Store.YES,Field.Index.NO));
+					if(searcher.search(new TermQuery(new Term("alternateVersion",result.getISBN()))).length()>0 ){
+						System.out.println("Exists as AltVersion");
+					}else {
+						writer.updateDocument(new Term("ISBN",result.getISBN()),doc);
+						System.out.println("Successfully added");
+					}
 		        }
 		        else System.out.println("no results");
 	        }
@@ -75,6 +90,7 @@ public class Test {
 
 		}finally{
 			try{
+				writer.optimize();
 				writer.flush();
 				writer.close();
 			}catch(Exception e){}

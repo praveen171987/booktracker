@@ -13,6 +13,8 @@ import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.UsernamePasswordCredentials;
 import org.apache.commons.httpclient.auth.AuthScope;
 import org.apache.commons.httpclient.methods.GetMethod;
+
+import com.softwaresmithy.amazon.AmazonResult;
 /**
  *
  * @author Matt
@@ -23,6 +25,12 @@ public class AcornWebQueryEngine {
     String[][] checkedOut;
     HttpClient client;
     
+    public static void main(String[] args) {
+    	AcornWebQueryEngine library = new AcornWebQueryEngine();
+    	List<String> list = new java.util.ArrayList<String>();
+    	list.add("1595540865");
+    	System.out.println(library.atLibrary(list));
+    }
     public AcornWebQueryEngine(){
         System.out.println("Constructed");
         //Initialize web client
@@ -39,7 +47,7 @@ public class AcornWebQueryEngine {
     public AcornWebQueryEngine(String userid, String lastname) {
         client = new HttpClient();
     }
-    public boolean atLibrary(List<String> isbns){
+    public String atLibrary(List<String> isbns){
         //http://visual.acornweb.org/staging/result.ashx?q=isbn:1595540865%20OR%20isbn:1595540857&output=xml
         System.out.println("Executing atLibrary");
         int responseCode = -1;
@@ -55,12 +63,28 @@ public class AcornWebQueryEngine {
             responseCode = client.executeMethod(get);            
             //System.out.println(get.getResponseBodyAsString());
             numRecords = get.getResponseBodyAsString().split("<record").length-1;
+            if(numRecords>0){
+	            String firstRecord = get.getResponseBodyAsString().split("<record")[1];
+	            int idStart = firstRecord.indexOf("<id>")+4;
+	            int idEnd = firstRecord.indexOf("</id>")-1;
+	            String carlId = firstRecord.substring(idStart,idEnd);
+	            return carlId.substring(carlId.length()-6);
+            }
+            
         }catch(Exception e){
             e.printStackTrace();
         }finally{
             get.releaseConnection();
         }
-        return numRecords>0;
+        return null;
+    }
+    public String atLibrary(AmazonResult item){
+    	List<String> isbns = new java.util.ArrayList<String>();
+    	if(item.getISBN()!= null)
+    		isbns.add(item.getISBN());
+    	if(item.getAlternateVersions()!= null)
+    		isbns.addAll(item.getAlternateVersions());
+    	return atLibrary(isbns);
     }
     public String[][] getHolds(){
         return holds;
