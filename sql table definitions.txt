@@ -1,0 +1,62 @@
+CREATE TABLE book(
+	isbn VARCHAR(10) NOT NULL PRIMARY KEY,
+	title TEXT NULL,
+	amaz_rating DECIMAL(4,3) UNSIGNED NULL,
+	pub_date VARCHAR(10) NULL,
+	pages INT UNSIGNED NULL,
+	small_url TEXT NULL,
+	medium_url TEXT NULL,
+	large_url TEXT NULL
+	);
+	
+CREATE TABLE user(
+	user_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+	username VARCHAR(30) NOT NULL,
+	password VARCHAR(30) NOT NULL,
+	email VARCHAR(255) NULL,
+	date_joined DATE NOT NULL
+	);
+	
+CREATE TABLE lib_entry(
+	lib_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+	user_entry_id INT UNSIGNED NOT NULL,
+	isbn VARCHAR(10) NOT NULL,
+	user_rating DECIMAL(4,3) UNSIGNED NULL,
+	date_added DATE NOT NULL,
+	date_started DATE NULL,
+	date_finished DATE NULL,
+	FOREIGN KEY(isbn) REFERENCES book(isbn),
+	FOREIGN KEY(user_entry_id) REFERENCES user(user_id)
+	);
+	
+CREATE TABLE playlist_entry(
+	playlist_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+	entry_id INT UNSIGNED NOT NULL,
+	user_id INT UNSIGNED NOT NULL,
+	playlist_name VARCHAR(30),
+	FOREIGN KEY(entry_id) REFERENCES lib_entry(lib_id),
+	FOREIGN KEY(user_id) REFERENCES user(user_id)
+	);
+CREATE TABLE authors(
+	author_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+	isbn VARCHAR(10),
+	author VARCHAR(255),
+	FOREIGN KEY(isbn) REFERENCES book(isbn)
+	);
+CREATE TABLE tags(
+	tag_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+	isbn VARCHAR(10),
+	tag VARCHAR(255),
+	FOREIGN KEY(isbn) REFERENCES book(isbn)
+	);
+CREATE TABLE alt_vers(
+	alt_ver_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+	isbn VARCHAR(10),
+	alt_ver VARCHAR(10),
+	FOREIGN KEY(isbn) REFERENCES book(isbn)
+	);
+CREATE TABLE carlweb(
+	isbn VARCHAR(10) NOT NULL PRIMARY KEY,
+	carlweb_id INT	NOT NULL,
+	FOREIGN KEY(isbn) REFERENCES book(isbn)
+	);

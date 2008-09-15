@@ -99,6 +99,22 @@ public class AmazonResult {
 		return doc;
 	}
 	
+	public String insertStatement() {
+		String temp = "INSERT INTO book VALUES("+
+			"\""+((this.getISBN()!=null)?this.getISBN():"")+"\","+
+			"\""+((this.getAlternateVersions()!=null)?listToCSV(this.getAlternateVersions()):"")+"\","+
+			"\""+((this.getTitle()!=null)?this.getTitle():"")+"\","+
+			"\""+((this.getAuthor()!=null)?listToCSV(this.getAuthor()):"")+"\","+
+			""+((this.getRating()!=Double.NaN)?this.getRating():"")+","+
+			"\""+((this.getTags()!=null)?taglistToCSV(this.getTags()):"")+"\","+
+			"\""+((this.getPubDate()!=null)?this.getPubDate():"")+"\","+
+			""+((this.getPages()!=-1)?this.getPages():"")+","+
+			"\""+((this.getSmallImageUrl()!=null)?this.getSmallImageUrl():"")+"\","+
+			"\""+((this.getMediumImageUrl()!=null)?this.getMediumImageUrl():"")+"\","+
+			"\""+((this.getLargeImageUrl()!=null)?this.getLargeImageUrl():"")+"\","+
+			"null)";//CARLWEB id
+		return temp;
+	}
 	public String getISBN() {
 		return ISBN;
 	}
@@ -158,5 +174,21 @@ public class AmazonResult {
 	}
 	public void setLargeImageUrl(String largeImageUrl) {
 		this.largeImageUrl = largeImageUrl;
+	}
+	public String listToCSV(List<String> list){
+		String temp = "";
+		for(int i=0;i<list.size();i++){
+			temp += list.get(i);
+			if(i<list.size()-1)temp+=",";
+		}
+		return temp;
+	}
+	public String taglistToCSV(List<Tag> list){
+		String temp = "";
+		for(int i=0;i<list.size();i++){
+			temp += list.get(i).getName();
+			if(i<list.size()-1)temp+=",";
+		}
+		return temp;
 	}
 }

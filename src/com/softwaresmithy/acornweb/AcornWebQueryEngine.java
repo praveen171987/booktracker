@@ -38,11 +38,11 @@ public class AcornWebQueryEngine {
         //Default to my username/password
         //Create a new session (w/Post) at every query, or
         //AcornWebQueryEngine("202002686286","levan");
-//		Credentials defaultcreds = new UsernamePasswordCredentials("szy4zq", "scumBKT19");		
-//		
+		Credentials defaultcreds = new UsernamePasswordCredentials("szy4zq", "scumBKT19");		
+		
 		client = new HttpClient();
-//		client.getHostConfiguration().setProxy("Internetpln.eds.com", 80);
-//		client.getState().setProxyCredentials(AuthScope.ANY, defaultcreds);
+		client.getHostConfiguration().setProxy("Internetpln.eds.com", 80);
+		client.getState().setProxyCredentials(AuthScope.ANY, defaultcreds);
     }
     public AcornWebQueryEngine(String userid, String lastname) {
         client = new HttpClient();

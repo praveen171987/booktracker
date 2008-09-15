@@ -26,8 +26,8 @@ public class Test {
 	/**
 	 * @param args
 	 */
-	//static final File INDEX_DIR = new File("index");
-        static final File INDEX_DIR = new File("F:\\Users\\Matt\\BookTracker\\src\\index");
+	static final File INDEX_DIR = new File("index");
+        //static final File INDEX_DIR = new File("F:\\Users\\Matt\\BookTracker\\src\\index");
 	public static void main(String[] args) {
 		IndexWriter writer = null;
 		try{
@@ -86,6 +86,7 @@ public class Test {
 		        	System.out.println(response.getItems().get(0).getItem().get(0).getItemAttributes().getTitle());
 		        	
 					AmazonResult result = new AmazonResult(response.getItems().get(0).getItem().get(0));
+					System.out.println(result.insertStatement());
 					String bookId = library.atLibrary(result);
 					Document doc = result.getDocument();
 					if(bookId != null)
@@ -94,6 +95,7 @@ public class Test {
 						System.out.println("Exists as AltVersion");
 					}else {
 						writer.updateDocument(new Term("ISBN",result.getISBN()),doc);
+						
 						System.out.println("Successfully added");
 					}
 		        }
