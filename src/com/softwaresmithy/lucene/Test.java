@@ -26,7 +26,8 @@ public class Test {
 	/**
 	 * @param args
 	 */
-	static final File INDEX_DIR = new File("index");
+	//static final File INDEX_DIR = new File("index");
+        static final File INDEX_DIR = new File("F:\\Users\\Matt\\BookTracker\\src\\index");
 	public static void main(String[] args) {
 		IndexWriter writer = null;
 		try{
@@ -46,7 +47,7 @@ public class Test {
 	        writer = new IndexWriter(INDEX_DIR, new StandardAnalyzer(), false);
 	        
 	        AcornWebQueryEngine library = new AcornWebQueryEngine();
-	        IndexSearcher searcher = new IndexSearcher("index");
+	        IndexSearcher searcher = new IndexSearcher(INDEX_DIR.getPath());
 	        
 	        while(!stop){
 	        	System.out.print("query isbn: ");
@@ -66,6 +67,19 @@ public class Test {
 		        java.util.List<String> itemId = new ArrayList<String>();
 		        	itemId.add(isbn);
 		        request.setItemId(itemId);
+                        if(isbn.length()==10){
+                            //Standard ISBN
+                        }
+                        else if(isbn.length()==13){
+                            //ISBN-13
+                            request.setIdType("EAN");
+                            request.setSearchIndex("Books");    
+                        }
+                        else{
+                            //Not a valid number
+                            System.out.println("Not a valid ISBN");
+                            continue;
+                        }
 		        ItemLookupResponse response = service.itemLookup(request);
 		        
 		        if(response.getItems().size()>0){
