@@ -25,6 +25,7 @@
 //// ===================================================================
 document.onmousemove = mouseMove;
 document.onmouseup   = mouseUp;
+window.onresize = resizeContentDiv;
 
 var MIN_WIDTH = 50;
 var dragObject  = null;
@@ -99,7 +100,25 @@ function mouseMove(ev){
         ev   = ev || window.event;
         var mousePos = currenttable.mouseCoords(ev);
         var y = mousePos.y - currenttable.mouseOffset.y;
-        if (y != currenttable.oldY) {
+		var x = mousePos.x - currenttable.mouseOffset.x;
+		if (x != currenttable.oldX) {
+			if(!currenttable.playlistDragObject){
+				var obj = document.createElement("div");
+				var text = document.createElement("p");
+				text.innerHTML = "Matt was here"; 
+				obj.appendChild(text);
+				obj.style.position = "absolute";
+				obj.style.display = "block";
+				currenttable.playlistDragObject = obj;
+				document.body.appendChild(obj);
+			}else {
+				currenttable.playlistDragObject.style.top = mousePos.y;
+				currenttable.playlistDragObject.style.left = mousePos.x;
+			}
+			currenttable.oldX = x;
+			currenttable.dragToPlaylist = x < 170;
+		}
+        if (y != currenttable.oldY && !currenttable.dragToPlaylist) {
             // work out if we're going up or down...
             var movingDown = y > currenttable.oldY;
             // update the old value
@@ -137,7 +156,23 @@ function mouseUp(ev){
 		}
 	}
 	dragObject = null;
-	
+	if(currenttable && currenttable.playlistDragObject) {
+		ev   = ev || window.event;
+        var mousePos = currenttable.mouseCoords(ev);
+		document.body.removeChild(currenttable.playlistDragObject);
+		currenttable.playlistDragObject = null;
+		var playlists = document.getElementById("playlists");
+		if(playlists){
+			for(var i=0;i<playlists.rows.length;i++){
+				var rowPos = getElementOffset(playlists.rows[i]);
+				if(mousePos.x > rowPos.x && mousePos.x < rowPos.x+playlists.rows[i].clientWidth){
+					if(mousePos.y > rowPos.y && mousePos.y < rowPos.y+playlists.rows[i].clientHeight){
+						alert("added to "+playlists.rows[i].innerHTML);
+					}
+				}
+			}
+		}
+	}
 	if (currenttable && currenttable.dragObject) {
         var droppedRow = currenttable.dragObject;
         // If we have a dragObject, then we need to release it,
@@ -202,6 +237,9 @@ function getEventSource(evt) {
         return evt.target; // For Firefox
     }
 }
+function resizeContentDiv() {
+	document.getElementById("content").style.height = document.body.clientHeight-16-51-71;
+}
 
 function TableDnD() {
     /** Keep hold of the current drag object if any */
@@ -212,7 +250,9 @@ function TableDnD() {
     this.table = null;
     /** Remember the old value of Y so that we don't do too much processing */
     this.oldY = 0;
-
+	this.oldX = 0;
+	this.dragToPlaylist = false;
+	
     /** Initialise the drag and drop by capturing mouse move events */
     this.init = function(table) {
         this.table = table;
@@ -220,7 +260,6 @@ function TableDnD() {
         for (var i=0; i<rows.length; i++) {
 			// John Tarr: added to ignore rows that I've added the NoDnD attribute to (Category and Header rows)
 			var nodrag = rows[i].getAttribute("NoDrag")
-			alert(nodrag);
 			if (nodrag == null || nodrag == "undefined") { //There is no NoDnD attribute on rows I want to drag
 				this.makeDraggable(rows[i]);
 			}

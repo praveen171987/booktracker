@@ -46,19 +46,17 @@
 				var table = document.getElementById("sizable");
 				var tableDnD = new TableDnD();
 				tableDnD.init(table);
+				resizeContentDiv();
 			}
 		</script>
 	</head>
 	<body onLoad="load();">
 		<div id="container">
 			<div id="banner">
-				<h1>Site name</h1>
-
+				<%@ include file="pieces/header.jsp"%>
 			</div>
 			<div id="nav">
-				<p>
-					Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod.
-				</p>
+				<%@ include file="pieces/leftNav.jsp"%>
 			</div>
 			<div id="content">
 				<table id="sizable">
@@ -72,7 +70,8 @@
 					</tr>
 					<%
 					String[] isbns = {"0765319209","1416555870","1416555919","159102594X","0765315459","159554089X"};
-					IndexReader reader = IndexReader.open("D:\\Documents and Settings\\szy4zq\\My Documents\\BookTracker\\src\\index");
+					//IndexReader reader = IndexReader.open("D:\\Documents and Settings\\szy4zq\\My Documents\\BookTracker\\src\\index");
+					IndexReader reader = IndexReader.open("F:\\Users\\Matt\\BookTracker\\src\\index");
 					IndexSearcher searcher = new IndexSearcher(reader);
 					
 					String field = "ISBN";
