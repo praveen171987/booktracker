@@ -4,20 +4,17 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
 import java.util.ArrayList;
-
-import org.apache.lucene.analysis.standard.StandardAnalyzer;
-import org.apache.lucene.document.Document;
-import org.apache.lucene.document.Field;
-import org.apache.lucene.index.IndexWriter;
-import org.apache.lucene.index.Term;
-import org.apache.lucene.search.IndexSearcher;
-import org.apache.lucene.search.TermQuery;
 
 import com.amazonaws.a2s.AmazonA2S;
 import com.amazonaws.a2s.AmazonA2SClient;
 import com.amazonaws.a2s.model.ItemLookupRequest;
 import com.amazonaws.a2s.model.ItemLookupResponse;
+import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
 import com.softwaresmithy.acornweb.AcornWebQueryEngine;
 import com.softwaresmithy.amazon.AmazonResult;
 
@@ -29,7 +26,7 @@ public class Test {
 	static final File INDEX_DIR = new File("index");
         //static final File INDEX_DIR = new File("F:\\Users\\Matt\\BookTracker\\src\\index");
 	public static void main(String[] args) {
-		IndexWriter writer = null;
+		Connection con = null;
 		try{
 	        /************************************************************************
 	         * Access Key ID obtained from:
@@ -44,10 +41,11 @@ public class Test {
 	        AmazonA2S service = new AmazonA2SClient(accessKeyId, associateTag);
 
 	        boolean stop = false;
-	        writer = new IndexWriter(INDEX_DIR, new StandardAnalyzer(), false);
-	        
+
 	        AcornWebQueryEngine library = new AcornWebQueryEngine();
-	        IndexSearcher searcher = new IndexSearcher(INDEX_DIR.getPath());
+		    Class.forName("com.mysql.jdbc.Driver").newInstance();
+		    con = DriverManager.getConnection("jdbc:mysql://localhost:3306/booktracker",
+	    		"root", "mdl3128");
 	        
 	        while(!stop){
 	        	System.out.print("query isbn: ");
@@ -86,17 +84,23 @@ public class Test {
 		        	System.out.println(response.getItems().get(0).getItem().get(0).getItemAttributes().getTitle());
 		        	
 					AmazonResult result = new AmazonResult(response.getItems().get(0).getItem().get(0));
-					System.out.println(result.insertStatement());
-					String bookId = library.atLibrary(result);
-					Document doc = result.getDocument();
-					if(bookId != null)
-						doc.add(new Field("bookId",bookId,Field.Store.YES,Field.Index.NO));
-					if(searcher.search(new TermQuery(new Term("alternateVersion",result.getISBN()))).length()>0 ){
+					//String bookId = library.atLibrary(result);
+					Statement statement = con.createStatement();
+					statement.execute("SELECT count(isbn) FROM alt_vers WHERE alt_ver = '"+result.getISBN()+"'");
+					statement.getResultSet().first();
+					//if(bookId != null){}
+						//doc.add(new Field("bookId",bookId,Field.Store.YES,Field.Index.NO));
+					if(statement.getResultSet().getInt(1)>0){//if(select count(isbn) in alt_vers where alt_ver = result.getISBN();
 						System.out.println("Exists as AltVersion");
 					}else {
-						writer.updateDocument(new Term("ISBN",result.getISBN()),doc);
-						
-						System.out.println("Successfully added");
+						CallableStatement cs = con.prepareCall("{call insertBook(?,?,?,?,?,?,?,?,?,?,?)}");
+						cs = result.prepareCS(cs);
+						try{
+							cs.execute();
+							System.out.println("Successfully added");
+						}catch(MySQLIntegrityConstraintViolationException e){
+							System.out.println("Already in the database");
+						}
 					}
 		        }
 		        else System.out.println("no results");
@@ -106,9 +110,7 @@ public class Test {
 
 		}finally{
 			try{
-				writer.optimize();
-				writer.flush();
-				writer.close();
+				con.close();
 			}catch(Exception e){}
 		}
 	}

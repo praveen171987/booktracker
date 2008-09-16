@@ -1,5 +1,6 @@
 package com.softwaresmithy.sql;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -23,10 +24,14 @@ public class AddBook {
 	        "root", "mdl3128");
 	      
 	      Statement statement = con.createStatement();
-	      statement.execute("describe book");
+			statement.execute("SELECT count(isbn) FROM alt_vers WHERE alt_ver = '0123456789'");
+			System.out.println(statement.getResultSet());
 	      ResultSet results = statement.getResultSet();
+	      results.first();
+	      System.out.println(results.getInt(1));
+	      
 	      while(results.next()){
-
+	    	  
 	      }
 	      
 	      if(!con.isClosed())
@@ -34,7 +39,7 @@ public class AddBook {
 	          "MySQL server using TCP/IP...");
 
 	    } catch(Exception e) {
-	      System.err.println("Exception: " + e.getMessage());
+	      e.printStackTrace();
 	    } finally {
 	      try {
 	        if(con != null)

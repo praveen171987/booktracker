@@ -38,19 +38,16 @@ CREATE TABLE playlist_entry(
 	FOREIGN KEY(user_id) REFERENCES user(user_id)
 	);
 CREATE TABLE authors(
-	author_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 	isbn VARCHAR(10),
 	author VARCHAR(255),
 	FOREIGN KEY(isbn) REFERENCES book(isbn)
 	);
 CREATE TABLE tags(
-	tag_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 	isbn VARCHAR(10),
 	tag VARCHAR(255),
 	FOREIGN KEY(isbn) REFERENCES book(isbn)
 	);
 CREATE TABLE alt_vers(
-	alt_ver_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 	isbn VARCHAR(10),
 	alt_ver VARCHAR(10),
 	FOREIGN KEY(isbn) REFERENCES book(isbn)
@@ -60,3 +57,77 @@ CREATE TABLE carlweb(
 	carlweb_id INT	NOT NULL,
 	FOREIGN KEY(isbn) REFERENCES book(isbn)
 	);
+	
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insertAltVers`(isbn VARCHAR(10), altVers TEXT)
+BEGIN
+   DECLARE i INT;
+   DECLARE temp TEXT;
+   DECLARE done BOOLEAN;
+
+   IF NOT altVers IS NULL THEN
+      SET i = LOCATE(',',altVers)+1;
+      SET temp = altVers;
+      SET done = false;
+
+      WHILE NOT done DO
+         INSERT INTO alt_vers VALUES(null, isbn,SUBSTRING_INDEX(temp,',',1));
+         SET i = LOCATE(',',temp)+1;
+         IF i=1 THEN SET done = true; END IF;
+         SET temp = SUBSTRING(temp, i);
+      END WHILE;
+   END IF;
+END
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insertAuthors`(isbn VARCHAR(10), authors TEXT)
+BEGIN
+   DECLARE i INT;
+   DECLARE temp TEXT;
+   DECLARE done BOOLEAN;
+
+
+   IF NOT authors IS NULL THEN
+      SET i = LOCATE(',',authors)+1;
+      SET temp = authors;
+      SET done = false;
+
+
+      WHILE NOT done DO
+         INSERT INTO authors VALUES(null, isbn,SUBSTRING_INDEX(temp,',',1));
+         SET i = LOCATE(',',temp)+1;
+         IF i=1 THEN SET done = true; END IF;
+         SET temp = SUBSTRING(temp, i);
+      END WHILE;
+   END IF;
+END
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insertBook`(
+        isbn VARCHAR(10), title TEXT, amaz_rating DECIMAL(4,3), pub_date VARCHAR(10),
+        pages INTEGER, small_url TEXT, medium_url TEXT, large_url TEXT,
+        authors TEXT, altVers TEXT, tags TEXT)
+BEGIN
+   INSERT INTO book VALUES(isbn, title, amaz_rating, pub_date, pages, small_url, medium_url, large_url);
+   CALL insertAltVers(isbn, altVers);
+   CALL insertAuthors(isbn, authors);
+   CALL insertTags(isbn, tags);
+END
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insertTags`(isbn VARCHAR(10), tags TEXT)
+BEGIN
+   DECLARE i INT;
+   DECLARE temp TEXT;
+   DECLARE done BOOLEAN;
+
+   IF NOT tags IS NULL THEN
+      SET i = LOCATE(',',tags)+1;
+      SET temp = tags;
+      SET done = false;
+
+      WHILE NOT done DO
+         INSERT INTO tags VALUES(null, isbn,SUBSTRING_INDEX(temp,',',1));
+         SET i = LOCATE(',',temp)+1;
+         IF i=1 THEN SET done = true; END IF;
+         SET temp = SUBSTRING(temp, i);
+         SELECT done;
+     END WHILE;
+   END IF;
+END

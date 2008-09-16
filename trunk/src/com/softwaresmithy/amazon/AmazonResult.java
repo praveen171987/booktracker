@@ -1,10 +1,11 @@
 package com.softwaresmithy.amazon;
 
+import java.math.BigDecimal;
+import java.sql.Blob;
+import java.sql.CallableStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.apache.lucene.document.Document;
-import org.apache.lucene.document.Field;
 
 import com.amazonaws.a2s.model.AlternateVersion;
 import com.amazonaws.a2s.model.Item;
@@ -60,60 +61,38 @@ public class AmazonResult {
 			this.setAlternateVersions(isbns);
 		}
 	}
-	public Document getDocument() {
-		Document doc = new Document();
-		if(this.getISBN()!= null)
-			doc.add(new Field("ISBN",this.getISBN(),Field.Store.YES,Field.Index.UN_TOKENIZED));
-		if(this.getTitle()!=null)
-			doc.add(new Field("title",this.getTitle(),Field.Store.YES,Field.Index.UN_TOKENIZED));
-		if(this.getAuthor()!=null){
-			List<String> temp = this.getAuthor();
-			for(int i=0;i<temp.size();i++){
-				doc.add(new Field("author",temp.get(i),Field.Store.YES,Field.Index.UN_TOKENIZED));
-			}
-		}
-		if(this.getRating()!= Double.NaN)
-			doc.add(new Field("rating",Double.toString(this.getRating()),Field.Store.YES,Field.Index.UN_TOKENIZED));
-		if(this.getTags()!= null){
-			List<Tag> temp = this.getTags();
-			for(int i=0;i<temp.size();i++){
-				doc.add(new Field("tag",temp.get(i).getName(),Field.Store.YES,Field.Index.UN_TOKENIZED));
-			}
-		}
-		if(this.getPubDate() != null)
-			doc.add(new Field("pubDate",this.getPubDate(),Field.Store.YES,Field.Index.UN_TOKENIZED));
-		if(this.getPages() != -1)
-			doc.add(new Field("pages",Integer.toString(this.getPages()),Field.Store.YES,Field.Index.UN_TOKENIZED));
-		if(this.getSmallImageUrl()!= null)
-			doc.add(new Field("smallImageUrl",this.getSmallImageUrl(),Field.Store.YES,Field.Index.UN_TOKENIZED));
-		if(this.getMediumImageUrl()!= null)
-			doc.add(new Field("mediumImageUrl",this.getMediumImageUrl(),Field.Store.YES,Field.Index.UN_TOKENIZED));
-		if(this.getLargeImageUrl()!= null)
-			doc.add(new Field("largeImageUrl",this.getLargeImageUrl(),Field.Store.YES,Field.Index.UN_TOKENIZED));
-		if(this.getAlternateVersions()!= null){
-			List<String> temp = this.getAlternateVersions();
-			for(int i=0;i<temp.size();i++){
-				doc.add(new Field("alternateVersion", temp.get(i),Field.Store.YES, Field.Index.UN_TOKENIZED));
-			}
-		}
-		return doc;
-	}
 	
-	public String insertStatement() {
-		String temp = "INSERT INTO book VALUES("+
-			"\""+((this.getISBN()!=null)?this.getISBN():"")+"\","+
-			"\""+((this.getAlternateVersions()!=null)?listToCSV(this.getAlternateVersions()):"")+"\","+
-			"\""+((this.getTitle()!=null)?this.getTitle():"")+"\","+
-			"\""+((this.getAuthor()!=null)?listToCSV(this.getAuthor()):"")+"\","+
-			""+((this.getRating()!=Double.NaN)?this.getRating():"")+","+
-			"\""+((this.getTags()!=null)?taglistToCSV(this.getTags()):"")+"\","+
-			"\""+((this.getPubDate()!=null)?this.getPubDate():"")+"\","+
-			""+((this.getPages()!=-1)?this.getPages():"")+","+
-			"\""+((this.getSmallImageUrl()!=null)?this.getSmallImageUrl():"")+"\","+
-			"\""+((this.getMediumImageUrl()!=null)?this.getMediumImageUrl():"")+"\","+
-			"\""+((this.getLargeImageUrl()!=null)?this.getLargeImageUrl():"")+"\","+
-			"null)";//CARLWEB id
-		return temp;
+	public CallableStatement prepareCS(CallableStatement cs) throws SQLException {
+		cs.setString(1, this.getISBN());
+		cs.setString(2, this.getTitle());
+		if(Double.isNaN(this.getRating())){
+			System.out.println("NaN");
+			cs.setNull(3,java.sql.Types.NUMERIC);
+		}else{
+			System.out.println("Not NaN");
+			cs.setBigDecimal(3, new BigDecimal(this.getRating()));
+		}
+		cs.setString(4, this.getPubDate());
+		cs.setInt(5, this.getPages());
+		cs.setString(6, this.getSmallImageUrl());
+		cs.setString(7, this.getMediumImageUrl());
+		cs.setString(8, this.getLargeImageUrl());
+		if(this.getAuthor() == null){
+			cs.setNull(9, java.sql.Types.BLOB);
+		}else {
+			cs.setString(9, listToCSV(this.getAuthor()));
+		}
+		if(this.getAlternateVersions() == null){
+			cs.setNull(10, java.sql.Types.BLOB);
+		}else {
+			cs.setString(10, listToCSV(this.getAlternateVersions()));
+		}
+		if(this.getTags() == null){
+			cs.setNull(11, java.sql.Types.BLOB);
+		}else {
+			cs.setString(11, taglistToCSV(this.getTags()));
+		}
+		return cs;
 	}
 	public String getISBN() {
 		return ISBN;
