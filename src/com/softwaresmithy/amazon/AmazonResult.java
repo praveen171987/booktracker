@@ -66,14 +66,16 @@ public class AmazonResult {
 		cs.setString(1, this.getISBN());
 		cs.setString(2, this.getTitle());
 		if(Double.isNaN(this.getRating())){
-			System.out.println("NaN");
 			cs.setNull(3,java.sql.Types.NUMERIC);
 		}else{
-			System.out.println("Not NaN");
 			cs.setBigDecimal(3, new BigDecimal(this.getRating()));
 		}
 		cs.setString(4, this.getPubDate());
-		cs.setInt(5, this.getPages());
+		if(this.getPages() == -1){
+			cs.setNull(5, java.sql.Types.NUMERIC);
+		}else {
+			cs.setInt(5, this.getPages());
+		}
 		cs.setString(6, this.getSmallImageUrl());
 		cs.setString(7, this.getMediumImageUrl());
 		cs.setString(8, this.getLargeImageUrl());

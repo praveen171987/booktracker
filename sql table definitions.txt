@@ -10,8 +10,7 @@ CREATE TABLE book(
 	);
 	
 CREATE TABLE user(
-	user_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-	username VARCHAR(30) NOT NULL,
+	username VARCHAR(30) NOT NULL PRIMARY KEY,
 	password VARCHAR(30) NOT NULL,
 	email VARCHAR(255) NULL,
 	date_joined DATE NOT NULL
@@ -19,23 +18,24 @@ CREATE TABLE user(
 	
 CREATE TABLE lib_entry(
 	lib_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-	user_entry_id INT UNSIGNED NOT NULL,
+	username VARCHAR(30) NOT NULL,
 	isbn VARCHAR(10) NOT NULL,
 	user_rating DECIMAL(4,3) UNSIGNED NULL,
 	date_added DATE NOT NULL,
 	date_started DATE NULL,
 	date_finished DATE NULL,
 	FOREIGN KEY(isbn) REFERENCES book(isbn),
-	FOREIGN KEY(user_entry_id) REFERENCES user(user_id)
+	FOREIGN KEY(username) REFERENCES user(username) 
 	);
 	
 CREATE TABLE playlist_entry(
 	playlist_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 	entry_id INT UNSIGNED NOT NULL,
-	user_id INT UNSIGNED NOT NULL,
 	playlist_name VARCHAR(30),
+	order_num INT UNSIGNED,
+	username VARCHAR(30),
 	FOREIGN KEY(entry_id) REFERENCES lib_entry(lib_id),
-	FOREIGN KEY(user_id) REFERENCES user(user_id)
+	FOREIGN KEY(username) REFERENCES user(username)
 	);
 CREATE TABLE authors(
 	isbn VARCHAR(10),
@@ -70,7 +70,7 @@ BEGIN
       SET done = false;
 
       WHILE NOT done DO
-         INSERT INTO alt_vers VALUES(null, isbn,SUBSTRING_INDEX(temp,',',1));
+         INSERT INTO alt_vers VALUES(isbn,SUBSTRING_INDEX(temp,',',1));
          SET i = LOCATE(',',temp)+1;
          IF i=1 THEN SET done = true; END IF;
          SET temp = SUBSTRING(temp, i);
@@ -92,7 +92,7 @@ BEGIN
 
 
       WHILE NOT done DO
-         INSERT INTO authors VALUES(null, isbn,SUBSTRING_INDEX(temp,',',1));
+         INSERT INTO authors VALUES(isbn,SUBSTRING_INDEX(temp,',',1));
          SET i = LOCATE(',',temp)+1;
          IF i=1 THEN SET done = true; END IF;
          SET temp = SUBSTRING(temp, i);
@@ -123,11 +123,66 @@ BEGIN
       SET done = false;
 
       WHILE NOT done DO
-         INSERT INTO tags VALUES(null, isbn,SUBSTRING_INDEX(temp,',',1));
+         INSERT INTO tags VALUES(isbn,SUBSTRING_INDEX(temp,',',1));
          SET i = LOCATE(',',temp)+1;
          IF i=1 THEN SET done = true; END IF;
          SET temp = SUBSTRING(temp, i);
-         SELECT done;
      END WHILE;
    END IF;
 END
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `addToPlaylist`(entryId INT UNSIGNED, playlistName VARCHAR(30))
+BEGIN
+   DECLARE newOrderNum INT UNSIGNED;
+   DECLARE curUserName VARCHAR(30);
+   SELECT username INTO curUserName FROM lib_entry WHERE lib_id = entryId;
+   SELECT count(*) INTO newOrderNum FROM playlist_entry WHERE playlist_name = playlistName AND username = curUserName;
+   SET newOrderNum = newOrderNum+1;
+   INSERT INTO playlist_entry VALUES(null, entryId, playlistName, newOrderNum, curUserName);
+END
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `movePlaylistEntry`(playlistId INT UNSIGNED, newIndex INT UNSIGNED)
+BEGIN
+
+   DECLARE oldIndex INT UNSIGNED;
+   DECLARE temp INT UNSIGNED;
+   DECLARE playlistName VARCHAR(30);
+
+   SELECT order_num INTO oldIndex FROM playlist_entry WHERE playlist_id = playlistId;
+   SELECT playlist_name INTO playlistName FROM playlist_entry WHERE playlist_id = playlistId;
+
+   IF newIndex > oldIndex THEN
+      WHILE newIndex > oldIndex DO
+         SET temp = oldIndex;
+         UPDATE playlist_entry SET order_num = oldIndex WHERE order_num = oldIndex+1 AND playlist_name = playlistName;
+         SET oldIndex = oldIndex+1;
+      END WHILE;
+      UPDATE playlist_entry SET order_num = newIndex WHERE playlist_id = playlistId;
+   ELSEIF newIndex <= oldIndex THEN
+      WHILE newIndex < oldIndex DO
+         SET temp = oldIndex;
+         UPDATE playlist_entry SET order_num = oldIndex+1 WHERE order_num = oldIndex AND playlist_name = playlistName;
+         SET oldIndex = oldIndex-1;
+      END WHILE;
+      UPDATE playlist_entry SET order_num = newIndex WHERE playlist_id = playlistId;
+   END IF;
+END
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `deletePlaylistEntry`(playlistId INT UNSIGNED)
+BEGIN
+   DECLARE playlistName VARCHAR(30);
+   SELECT playlist_name INTO playlistName FROM playlist_entry WHERE playlist_id = playlistId;
+   CALL movePlaylistEntry(playlistId,(SELECT COUNT(*) from playlist_entry WHERE playlist_name = playlistName));
+   DELETE FROM playlist_entry WHERE playlist_id = playlistId;
+END
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `retrievePlaylist`(username varchar(30), playlist varchar(30))
+BEGIN
+   SELECT *,
+      (select GROUP_CONCAT(author SEPARATOR ', ') from booktracker.authors where authors.isbn=book.isbn) as author
+    FROM book where isbn in
+      (SELECT isbn FROM `booktracker`.`lib_entry` a
+         inner join booktracker.playlist_entry b on a.lib_id = b.entry_id
+            where a.username = username
+               AND b.playlist_name=playlist);
+ENDd

@@ -8,7 +8,9 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import com.amazonaws.a2s.AmazonA2S;
 import com.amazonaws.a2s.AmazonA2SClient;
@@ -95,12 +97,20 @@ public class Test {
 					}else {
 						CallableStatement cs = con.prepareCall("{call insertBook(?,?,?,?,?,?,?,?,?,?,?)}");
 						cs = result.prepareCS(cs);
+						System.out.println(cs.toString());
 						try{
 							cs.execute();
 							System.out.println("Successfully added");
+
 						}catch(MySQLIntegrityConstraintViolationException e){
 							System.out.println("Already in the database");
 						}
+						Statement addToUser = con.createStatement();
+						String date = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
+						String query = "INSERT INTO lib_entry VALUES(null,'apple','"+result.getISBN()+"',null,'"+date+"',"+
+							"null,null)";
+						addToUser.execute(query);
+						System.out.println("added book to user library");
 					}
 		        }
 		        else System.out.println("no results");
