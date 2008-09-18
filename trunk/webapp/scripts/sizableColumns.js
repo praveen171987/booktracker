@@ -25,13 +25,12 @@
 //// ===================================================================
 document.onmousemove = mouseMove;
 document.onmouseup   = mouseUp;
-window.onresize = resizeContentDiv;
+window.onresize = resizeContainer;
 
 var MIN_WIDTH = 50;
-var dragObject  = null;
+var dragColumn  = null;
 var mouseOffset = null;
 var divs = new Array();
-var previousScroll = 0;
 var height;
 
 var currenttable = null;
@@ -41,22 +40,21 @@ function start(containerId){
 	height = document.getElementById(containerId).clientHeight;
 	while(document.getElementById("cell_0_"+i)){
 		var div = document.getElementById("cell_0_"+i);
-		var grabber = document.createElement("div");
-		grabber.className = "columnGrabber";
-		//alert(getElementOffset(div).x);
-		grabber.xPos = parseInt(getElementOffset(div).x)+parseInt(div.style.width)+6;//
-		grabber.xOffset = parseInt(getElementOffset(div).x);
-		//alert(parseInt(getElementOffset(div).x)+" + "+parseInt(div.style.width));
-		grabber.style.left = grabber.xPos;
-		grabber.style.top = getElementOffset(document.getElementById(containerId)).y;
-		grabber.style.height = height;
-		grabber.index = i;
-		divs[i] = grabber;
-		makeDraggable(grabber);
-		document.getElementById(containerId).appendChild(grabber);
+		var colDivider = document.createElement("div");
+			colDivider.className = "columnDivider";
+			colDivider.xPos = parseInt(getElementOffset(div).x)+parseInt(div.style.width)+6;//
+			colDivider.xOffset = parseInt(getElementOffset(div).x);
+			colDivider.style.left = colDivider.xPos;
+			colDivider.style.top = getElementOffset(document.getElementById(containerId)).y;
+			colDivider.style.height = height;
+			colDivider.index = i;
+		divs[i] = colDivider;
+		makeDraggable(colDivider);
+		document.getElementById(containerId).appendChild(colDivider);
 		
 		i++
 	}
+	resizeContainer();
 }
 
 function makeDraggable(item){
@@ -69,7 +67,7 @@ function makeDraggable(item){
 		else {
 			this.minX = divs[this.index-1].xPos+MIN_WIDTH;
 		}
-		dragObject  = this;
+		dragColumn  = this;
 		mouseOffset = getMouseOffset(this, ev);
 		return false;
 	}
@@ -78,61 +76,51 @@ function mouseMove(ev){
 	ev           = ev || window.event;
 	var mousePos = mouseCoords(ev);
 
-	if(dragObject){
-
+	if(dragColumn){
 		var newPos = mousePos.x - mouseOffset.x
-		//dragObject.style.left = newPos;
-		dragObject.xPos = (newPos>dragObject.minX)?newPos:dragObject.minX;
-		dragObject.style.left = dragObject.xPos;
+		dragColumn.xPos = (newPos>dragColumn.minX)?newPos:dragColumn.minX;
+		dragColumn.style.left = dragColumn.xPos;
 		return false;
 	}
-	var i=0;
-	if(previousScroll != parseInt(document.body.scrollLeft)){
-		while(divs[i]){
-			divs[i].xPos += previousScroll-parseInt(document.body.scrollLeft);
-			divs[i].style.left = divs[i].xPos;
-			i++
-		}
-		previousScroll = document.body.scrollLeft;
-	}
 	
-	if (currenttable && currenttable.dragObject) {
-        ev   = ev || window.event;
-        var mousePos = currenttable.mouseCoords(ev);
+	if (currenttable && currenttable.dragRow) {
+
         var y = mousePos.y - currenttable.mouseOffset.y;
 		var x = mousePos.x - currenttable.mouseOffset.x;
-		if (x != currenttable.oldX) {
-			if(!currenttable.playlistDragObject){
-				var obj = document.createElement("div");
-				var text = document.createElement("p");
-				text.innerHTML = "Matt was here"; 
-				obj.appendChild(text);
-				obj.style.position = "absolute";
-				obj.style.display = "block";
-				currenttable.playlistDragObject = obj;
-				document.body.appendChild(obj);
-			}else {
-				currenttable.playlistDragObject.style.top = mousePos.y;
-				currenttable.playlistDragObject.style.left = mousePos.x;
-			}
-			currenttable.oldX = x;
-			currenttable.dragToPlaylist = x < 170;
-		}
+//		if (x != currenttable.oldX) {
+//			if(!currenttable.playlistDragRow){
+//				var obj = document.createElement("div");
+//				var text = document.createElement("p");
+//				text.innerHTML = "Matt was here"; 
+//				obj.appendChild(text);
+//				obj.style.position = "absolute";
+	//			obj.style.display = "block";
+	//			currenttable.playlistDragRow = obj;
+	//			document.body.appendChild(obj);
+	//		}
+//
+//			currenttable.playlistDragRow.style.top = mousePos.y;
+//			currenttable.playlistDragRow.style.left = mousePos.x;
+//
+//			currenttable.oldX = x;
+//			currenttable.dragToPlaylist = x < 170;
+//		}
+		//VERTICAL DRAGGING
         if (y != currenttable.oldY && !currenttable.dragToPlaylist) {
             // work out if we're going up or down...
             var movingDown = y > currenttable.oldY;
             // update the old value
             currenttable.oldY = y;
             // update the style to show we're dragging
-            currenttable.dragObject.style.backgroundColor = "#eee";
+            currenttable.dragRow.style.backgroundColor = "#eee";
             // If we're over a row then move the dragged row to there so that the user sees the
             // effect dynamically
             var currentRow = currenttable.findDropTargetRow(y);
             if (currentRow) {
-                if (movingDown && currenttable.dragObject != currentRow) {
-                    currenttable.dragObject.parentNode.insertBefore(currenttable.dragObject, currentRow.nextSibling);
-                } else if (! movingDown && currenttable.dragObject != currentRow) {
-                    currenttable.dragObject.parentNode.insertBefore(currenttable.dragObject, currentRow);
+                if (movingDown && currenttable.dragRow != currentRow) {
+                    currenttable.dragRow.parentNode.insertBefore(currenttable.dragRow, currentRow.nextSibling);
+                } else if (! movingDown && currenttable.dragRow != currentRow) {
+                    currenttable.dragRow.parentNode.insertBefore(currenttable.dragRow, currentRow);
                 }
             }
         }
@@ -140,45 +128,45 @@ function mouseMove(ev){
     }
 }
 function mouseUp(ev){
-	if(dragObject){
-		var stringWidth = document.getElementById("cell_0_"+dragObject.index).style.width;
+	if(dragColumn){
+		var stringWidth = document.getElementById("cell_0_"+dragColumn.index).style.width;
 		var width = parseInt(stringWidth.substring(0,stringWidth.length-2));
 		var i=0;
-		while(document.getElementById("cell_"+i+"_"+dragObject.index)){
-			document.getElementById("cell_"+i+"_"+dragObject.index).style.width = width+dragObject.xPos-dragObject.origX;
+		while(document.getElementById("cell_"+i+"_"+dragColumn.index)){
+			document.getElementById("cell_"+i+"_"+dragColumn.index).style.width = width+dragColumn.xPos-dragColumn.origX;
 			i++;
 		}
-		var i = dragObject.index+1;
+		var i = dragColumn.index+1;
 		while(divs[i]){
-			divs[i].xPos += dragObject.xPos-dragObject.origX;
+			divs[i].xPos += dragColumn.xPos-dragColumn.origX;
 			divs[i].style.left = divs[i].xPos;
 			i++;
 		}
 	}
-	dragObject = null;
-	if(currenttable && currenttable.playlistDragObject) {
-		ev   = ev || window.event;
-        var mousePos = currenttable.mouseCoords(ev);
-		document.body.removeChild(currenttable.playlistDragObject);
-		currenttable.playlistDragObject = null;
-		var playlists = document.getElementById("playlists");
-		if(playlists){
-			for(var i=0;i<playlists.rows.length;i++){
-				var rowPos = getElementOffset(playlists.rows[i]);
-				if(mousePos.x > rowPos.x && mousePos.x < rowPos.x+playlists.rows[i].clientWidth){
-					if(mousePos.y > rowPos.y && mousePos.y < rowPos.y+playlists.rows[i].clientHeight){
-						alert("added to "+playlists.rows[i].innerHTML);
-					}
-				}
-			}
-		}
-	}
-	if (currenttable && currenttable.dragObject) {
-        var droppedRow = currenttable.dragObject;
-        // If we have a dragObject, then we need to release it,
+	dragColumn = null;
+//	if(currenttable && currenttable.playlistDragRow) {
+//		ev   = ev || window.event;
+//        var mousePos = currenttable.mouseCoords(ev);
+//		document.body.removeChild(currenttable.playlistDragRow);
+//		currenttable.playlistDragRow = null;
+//		var playlists = document.getElementById("playlists");
+//		if(playlists){
+//			for(var i=0;i<playlists.rows.length;i++){
+//				var rowPos = getElementOffset(playlists.rows[i]);
+//				if(mousePos.x > rowPos.x && mousePos.x < rowPos.x+playlists.rows[i].clientWidth){
+//					if(mousePos.y > rowPos.y && mousePos.y < rowPos.y+playlists.rows[i].clientHeight){
+//						alert("added to "+playlists.rows[i].innerHTML);
+//					}
+//				}
+//			}
+//		}
+//	}
+	if (currenttable && currenttable.dragRow) {
+        var droppedRow = currenttable.dragRow;
+        // If we have a dragColumn, then we need to release it,
         // The row will already have been moved to the right place so we just reset stuff
         droppedRow.style.backgroundColor = 'transparent';
-        currenttable.dragObject   = null;
+        currenttable.dragRow   = null;
         // And then call the onDrop method in case anyone wants to do any post processing
         currenttable.onDrop(currenttable.table, droppedRow);
         currenttable = null; // let go of the table too
@@ -237,13 +225,29 @@ function getEventSource(evt) {
         return evt.target; // For Firefox
     }
 }
-function resizeContentDiv() {
-	document.getElementById("content").style.height = document.body.clientHeight-16-51-71;
+
+function resizeContainer() {
+	var winW;
+	var winH;
+	 if (navigator.appName=="Netscape") {
+	  winW = window.innerWidth;
+	  winH = window.innerHeight;
+	 }
+	 if (navigator.appName.indexOf("Microsoft")!=-1) {
+	  winW = document.body.offsetWidth;
+	  winH = document.body.offsetHeight;
+	 }
+	 document.getElementById("container").style.height = winH-141;
+	 var i=0;
+	 while(divs[i]){
+		divs[i].style.height = winH-141;
+		i++;
+	 }
 }
 
 function TableDnD() {
     /** Keep hold of the current drag object if any */
-    this.dragObject = null;
+    this.dragRow = null;
     /** The current mouse offset */
     this.mouseOffset = null;
     /** The current table */
@@ -330,7 +334,7 @@ function TableDnD() {
             var target = getEventSource(ev);
             if (target.tagName == 'INPUT' || target.tagName == 'SELECT') return true;
             currenttable = self;
-            self.dragObject  = this.parentNode;
+            self.dragRow  = this.parentNode;
             self.mouseOffset = self.getMouseOffset(this.parentNode, ev);
             return false;
         }

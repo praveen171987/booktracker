@@ -3,6 +3,7 @@
 		<title>BookTracker - Table View</title>
 		<link rel="stylesheet" href="scripts/twoColumn.css">
 		<script type="text/javascript" src="scripts/sizableColumns.js"></script>
+		<script type="text/javascript" src="scripts/tableSort.js"></script>
 		<style type="text/css">
 			body
 			{
@@ -10,7 +11,7 @@
 				padding: 0;
 			}
 
-			.columnGrabber
+			.columnDivider
 			{
 				position: fixed;
 				position: expression("absolute");
@@ -36,30 +37,27 @@
 		</style>
 		<script type="text/javascript">
 			function load(){
-				start('content');
+				start('container');
 				var table = document.getElementById("sizable");
 				var tableDnD = new TableDnD();
 				tableDnD.init(table);
-				resizeContentDiv();
 			}
 		</script>
 	</head>
 	<body onLoad="load();">
+		<div id="banner">
+			<%@ include file="pieces/header.jsp"%>
+		</div>
 		<div id="container">
-			<div id="banner">
-				<%@ include file="pieces/header.jsp"%>
-			</div>
 			<div id="nav">
 				<%@ include file="pieces/leftNav.jsp"%>
 			</div>
-			<div id="content">
-				<jsp:include page="views/tableView.jsp" >
-			        <jsp:param name="playlist" value="library" />
-			    </jsp:include>
-			</div>
-			<div id="footer">
-				<%@ include file="pieces/footer.jsp"%>
-			</div>
+			<jsp:include page="views/tableView.jsp" >
+				<jsp:param name="playlist" value="library" />
+			</jsp:include>
+		</div>
+		<div id="footer">
+			<%@ include file="pieces/footer.jsp"%>
 		</div>
 	</body>
 </html>

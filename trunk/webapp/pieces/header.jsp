@@ -1,3 +1,25 @@
 <h1>Site name</h1>
-<input id="xval" value="">
-<input id="yval" value="">
+<div class="login">
+	<%
+		if(session.getAttribute("username") == null)
+		{
+	%>
+			<!--<div class="register"><a href="newuser.jsp">register a new user</a></div>-->
+			<form class="login" method="post" action="HandleUser">
+				username? <input type="text" name="username">
+				password? <input type="password" name="password">
+				<input type="hidden" name="link" value="<%=request.getRequestURI() %>">
+				<input type="submit" value="=">
+			</form>
+	<%
+		}
+		else
+		{
+	%>
+		<span>
+		Hello, <%=session.getAttribute("username")%>, <a href="HandleUser">logout</a>?
+		</span>
+	<%
+		}
+	%>
+</div>

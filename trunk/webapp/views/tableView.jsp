@@ -1,48 +1,54 @@
-<%@page import="org.apache.lucene.index.*"%>
-<%@page import="org.apache.lucene.search.*"%>
-<%@page import="org.apache.lucene.queryParser.*"%>
-<%@page import="org.apache.lucene.analysis.*"%>
-<%@page import="org.apache.lucene.analysis.standard.StandardAnalyzer"%>
+<%@page import="java.sql.CallableStatement"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.Statement"%>
 <table id="sizable">
-	<tr NoDrag = "true" NoDrop="true">
-		<td>&nbsp;</td>
-		<td><div  style="width:330px;" id="cell_0_0">Title</div></td>
-		<td><div  style="width:192px;" id="cell_0_1">Author</div></td>
-		<td><div  style="width:134px;" id="cell_0_2">Publication Date</div></td>
-		<td><div  style="width:96px;" id="cell_0_3">ISBN</div></td>
-		<td><div  style="width:157px;" id="cell_0_4">Num Pages</div></td>
-	</tr>
+	<thead>
+		<tr NoDrag = "true" NoDrop="true">
+			<td>&nbsp;</td>
+			<td><div  style="width:330px;" id="cell_0_0"><a href="javascript: doSort('sizable',1);">Title</a></div></td>
+			<td><div  style="width:192px;" id="cell_0_1"><a href="javascript: doSort('sizable',2);">Author</a></div></td>
+			<td><div  style="width:134px;" id="cell_0_2"><a href="javascript: doSort('sizable',3);">Publication Date</a></div></td>
+			<td><div  style="width:96px;" id="cell_0_3"><a href="javascript: doSort('sizable',4);">ISBN</a></div></td>
+			<td><div  style="width:157px;" id="cell_0_4"><a href="javascript: doSort('sizable',5);">Num Pages</a></div></td>
+		</tr>
+	</thead>
+	<tbody>
 	<%
-	out.println("DATASOURCE: "+request.getParameter("playlist"));
-	String[] isbns = {"0765319209","1416555870","1416555919","159102594X","0765315459","159554089X"};
-	//IndexReader reader = IndexReader.open("D:\\Documents and Settings\\szy4zq\\My Documents\\BookTracker\\src\\index");
-	IndexReader reader = IndexReader.open("F:\\Users\\Matt\\BookTracker\\src\\index");
-	IndexSearcher searcher = new IndexSearcher(reader);
-	
-	String field = "ISBN";
-	Analyzer analyzer = new StandardAnalyzer();
-	
-	QueryParser parser = new QueryParser(field, analyzer);
-	int val = 1;
-	for(int i=0;i<isbns.length;i++){
-		Term term = new Term("ISBN",isbns[i]);
-		TermQuery tq = new TermQuery(term);
+	Connection con = null;
+	try{
+		Class.forName("com.mysql.jdbc.Driver").newInstance();
+		con = DriverManager.getConnection("jdbc:mysql://localhost:3306/booktracker","root", "mdl3128");
+		Statement query = con.createStatement();
+		query.execute("select title, (select GROUP_CONCAT(author SEPARATOR ', ') "+
+			"from booktracker.authors where authors.isbn=book.isbn) as author, pub_date, isbn, pages from booktracker.book where isbn in "+
+				"(select isbn from lib_entry where username = '"+request.getSession().getAttribute("username")+"')");
 		
-		Hits hits = searcher.search(tq);
-		if(hits.length()>0){%>
-			<tr>
-				<td>&nbsp;</td>
-				<td><div id="cell_<%=val%>_0" style="width:330px;" ><%=hits.doc(0).getFields("title")[0].stringValue()%></div></td>
-				<td><div id="cell_<%=val%>_1" style="width:192px;" ><%=hits.doc(0).getFields("author")[0].stringValue()%></div></td>
-				<td><div id="cell_<%=val%>_2" style="width:134px;" ><%=hits.doc(0).getFields("pubDate")[0].stringValue()%></div></td>
-				<td><div id="cell_<%=val%>_3" style="width:96px;" ><%=hits.doc(0).getFields("ISBN")[0].stringValue()%></div></td>
-				<td><div id="cell_<%=val%>_4" style="width:157px;" ><%=hits.doc(0).getFields("pages")[0].stringValue()%></div></td>
-			</tr>
-		<%
-		val++;
+//		CallableStatement query = con.prepareCall("{call retrievePlaylist(?,?)}");
+//			query.setString(1,(String)request.getSession().getAttribute("username"));
+//			query.setString(2,"read");
+//		query.execute();
+		
+		int val=1;
+		while(query.getResultSet().next()){%>
+				<tr>
+					<td>&nbsp;</td>
+					<td><div id="cell_<%=val%>_0" style="width:330px;" ><%=query.getResultSet().getString("title")%></div></td>
+					<td><div id="cell_<%=val%>_1" style="width:192px;" ><%=query.getResultSet().getString("author")%></div></td>
+					<td><div id="cell_<%=val%>_2" style="width:134px;" ><%=query.getResultSet().getString("pub_date")%></div></td>
+					<td><div id="cell_<%=val%>_3" style="width:96px;" ><%=query.getResultSet().getString("isbn")%></div></td>
+					<td><div id="cell_<%=val%>_4" style="width:157px;" ><%=query.getResultSet().getInt("pages")%></div></td>
+				</tr>
+			<%
+			val++;
 		}
+	}catch(Exception e){
+		e.printStackTrace();
+	}finally{
+		con.close();
 	}
 
 	
 	%>
+	</tbody>
 </table>
