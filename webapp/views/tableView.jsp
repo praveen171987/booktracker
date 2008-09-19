@@ -2,6 +2,7 @@
 <%@page import="java.sql.Connection"%>
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.Statement"%>
+<div id="tableDiv">
 <table id="sizable">
 	<thead>
 		<tr NoDrag = "true" NoDrop="true">
@@ -52,3 +53,4 @@
 	%>
 	</tbody>
 </table>
+</div>

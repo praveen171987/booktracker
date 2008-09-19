@@ -37,7 +37,7 @@ var currenttable = null;
 
 function start(containerId){
 	var i=0;
-	height = document.getElementById(containerId).clientHeight;
+	height = document.getElementById(containerId).clientHeight-2;
 	while(document.getElementById("cell_0_"+i)){
 		var div = document.getElementById("cell_0_"+i);
 		var colDivider = document.createElement("div");
@@ -45,7 +45,7 @@ function start(containerId){
 			colDivider.xPos = parseInt(getElementOffset(div).x)+parseInt(div.style.width)+6;//
 			colDivider.xOffset = parseInt(getElementOffset(div).x);
 			colDivider.style.left = colDivider.xPos;
-			colDivider.style.top = getElementOffset(document.getElementById(containerId)).y;
+			colDivider.style.top = getElementOffset(document.getElementById(containerId)).y+1;
 			colDivider.style.height = height;
 			colDivider.index = i;
 		divs[i] = colDivider;

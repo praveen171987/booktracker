@@ -47,7 +47,7 @@ public class HandleUser extends HttpServlet {
 				String email = req.getParameter("email");
 				String date = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
 				try{
-				newUser.execute("INSERT INTO user VALUES("+
+					newUser.execute("INSERT INTO user VALUES("+
 						"'"+username+"',"+
 						"'"+password+"',"+
 						"'"+email+"',"+

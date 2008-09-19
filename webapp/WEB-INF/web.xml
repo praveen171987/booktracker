@@ -26,4 +26,13 @@
     <servlet-name>AmazonQuery</servlet-name>
     <url-pattern>/AmazonQuery</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>HandleUser</servlet-name>
+    <servlet-class>com.softwaresmithy.web.HandleUser</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>HandleUser</servlet-name>
+    <url-pattern>/HandleUser</url-pattern>
+  </servlet-mapping>
 </web-app>
