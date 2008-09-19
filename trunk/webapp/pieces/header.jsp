@@ -1,4 +1,4 @@
-<h1>Site name</h1>
+<h1>Book Tracker</h1>
 <div class="login">
 	<%
 		if(session.getAttribute("username") == null)
@@ -23,3 +23,4 @@
 		}
 	%>
 </div>
+<input style="float:right;" type="button" value="search" onClick="javascript:alert('beep')">

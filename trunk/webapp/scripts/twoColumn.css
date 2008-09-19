@@ -1,5 +1,4 @@
-body
-{
+body{
 	margin: 0;
 	padding: 0;
 	font-family: georgia, times, "times new roman", serif;
@@ -7,45 +6,61 @@ body
 	background-color: #ddd;
 	overflow: hidden;
 }
-
-#container
-{
+.columnDivider{
+	position: fixed;
+	position: expression("absolute");
+	top: 0;
+	top: expression(eval(document.body.scrollTop));
+	width: 8px;
+	height: 100%;
+	margin-left: -4px;
+	cursor: col-resize;
+	background-color: #BBBBBB;
+}
+div{
+	overflow: hidden;
+	white-space: nowrap;
+}
+td{
+	padding-left: 4px;
+	padding-right: 5px;
+}
+#container{
 	background-color: #FFF;
-	background-image:  url(/BookTracker/images/background.jpg);
-	background-repeat: repeat-y;
 	border: 1px solid #333;
 	overflow: auto;
+	float: left;
 }
 
-#banner
-{
+#banner{
 	background-color: #666;
 	border-bottom: 1px solid #333;
 }
 
-#banner h1
-{
+#banner h1{
 	margin: 0;
 	padding: .5em;
 }
 
-#nav
-{
+#nav{
 	float: left;
 	width: 160px;
-	margin-left: 10px;
+	padding-left: 10px;
 	padding-top: 1em;
 	position: absolute;
+	background-color: #999999;
+	height: 100%;
 }
-
+#tableDiv {
+	margin-left: 180px;
+}
 #nav p { margin-top: 0; }
 
 #sizable {
-	margin-left: 180px;
+	float: left;
 }
 
-#content
-{
+#content{
 	padding-top: 1em;
 	margin-left: 180px;
 	position: absolute;
@@ -53,8 +68,7 @@ body
 
 #content h2 { margin-top: 0; }
 
-#footer
-{
+#footer{
 	clear: both;
 	background-color: #666;
 	padding: 1em 1em 1em 0;
@@ -64,8 +78,14 @@ body
 	position: absolute;
 	width: 100%;
 }
-
+#right {
+	background-color: #AAAAAA;
+	float: right;
+	height: 100%;
+	right: 0px;
+	width: 400px;
+}
 .login {
-	float:right;
+	float:left;
 	margin: 0 4px 0 0;
 }

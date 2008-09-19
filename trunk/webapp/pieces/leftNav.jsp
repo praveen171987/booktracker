@@ -22,4 +22,6 @@
 	}
 	
 	%>
+	<tr></tr>
+	<tr><td>New Playlist</td></tr>
 </table>
