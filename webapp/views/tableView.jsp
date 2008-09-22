@@ -7,11 +7,11 @@
 	<thead>
 		<tr NoDrag = "true" NoDrop="true">
 			<td>&nbsp;</td>
-			<td><div  style="width:330px;" id="cell_0_0"><a href="javascript: doSort('sizable',1);">Title</a></div></td>
-			<td><div  style="width:192px;" id="cell_0_1"><a href="javascript: doSort('sizable',2);">Author</a></div></td>
-			<td><div  style="width:134px;" id="cell_0_2"><a href="javascript: doSort('sizable',3);">Publication Date</a></div></td>
-			<td><div  style="width:96px;" id="cell_0_3"><a href="javascript: doSort('sizable',4);">ISBN</a></div></td>
-			<td><div  style="width:157px;" id="cell_0_4"><a href="javascript: doSort('sizable',5);">Num Pages</a></div></td>
+			<td><div  style="width:330px;" id="cell_0_0" onClick="doSort('sizable',1);">Title</div></td>
+			<td><div  style="width:192px;" id="cell_0_1" onClick="doSort('sizable',2, true);">Author</div></a></td>
+			<td><div  style="width:134px;" id="cell_0_2" onClick="doSort('sizable',3);">Publication Date</div></a></td>
+			<td><div  style="width:96px;" id="cell_0_3" onClick="doSort('sizable',4);">ISBN</div></a></td>
+			<td><div  style="width:157px;" id="cell_0_4" onClick="doSort('sizable',5);">Num Pages</div></a></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -20,15 +20,15 @@
 	try{
 		Class.forName("com.mysql.jdbc.Driver").newInstance();
 		con = DriverManager.getConnection("jdbc:mysql://localhost:3306/booktracker","root", "mdl3128");
-		Statement query = con.createStatement();
-		query.execute("select title, (select GROUP_CONCAT(author SEPARATOR ', ') "+
-			"from booktracker.authors where authors.isbn=book.isbn) as author, pub_date, isbn, pages from booktracker.book where isbn in "+
-				"(select isbn from lib_entry where username = '"+request.getSession().getAttribute("username")+"')");
+//		Statement query = con.createStatement();
+//		query.execute("select title, (select GROUP_CONCAT(author SEPARATOR ', ') "+
+//			"from booktracker.authors where authors.isbn=book.isbn) as author, pub_date, isbn, pages from booktracker.book where isbn in "+
+//				"(select isbn from lib_entry where username = '"+request.getSession().getAttribute("username")+"')");
 		
-//		CallableStatement query = con.prepareCall("{call retrievePlaylist(?,?)}");
-//			query.setString(1,(String)request.getSession().getAttribute("username"));
-//			query.setString(2,"read");
-//		query.execute();
+		CallableStatement query = con.prepareCall("{call retrievePlaylist(?,?)}");
+			query.setString(1,(String)request.getSession().getAttribute("username"));
+			query.setString(2,"read");
+		query.execute();
 		
 		int val=1;
 		while(query.getResultSet().next()){%>

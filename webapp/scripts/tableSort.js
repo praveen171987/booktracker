@@ -3,11 +3,20 @@ var col = 0;
 var parent = null; 
 var items = new Array();
 var N = 0; 
+var author = true;
 
 function get(i) {
 	var node = items[i].getElementsByTagName("TD")[col];    
 	if(node.childNodes.length == 0) return "";
 	var retval = node.firstChild.firstChild.nodeValue;
+	if(author){
+		var comma = retval.indexOf(",");
+		if(comma != -1)
+			retval = retval.substring(0,comma);
+		var space = retval.lastIndexOf(" ");
+		if(space != -1)
+			retval = retval.substring(space+1);
+	}
 	if(retval.substring(0,4) == "The ")
 		retval = retval.substring(4);
 	
@@ -30,7 +39,7 @@ function isort(m, k, asc) {
 	} 
 } 
 
-function sortTable(tableid, n, asc) { 
+function sortColumn(tableid, n, asc) { 
 	parent = document.getElementById(tableid); 
 	col = n; 
 	if(parent.nodeName != "TBODY") 
@@ -54,14 +63,19 @@ function sortTable(tableid, n, asc) {
 			isort(m, k, asc); 
 		} 
 }
-function doSort(tableid, col){
+function doSort(tableid, col, isAuthor){
 	var parent = document.getElementById(tableid);
+	if(isAuthor){
+		author = true;
+	}else{
+		author = false;
+	}
 	if(!parent || !parent.col){
 		parent.col = true;
 	} else {
 		parent.col = false;
 	}
-	sortTable(tableid, col, parent.col);
+	sortColumn(tableid, col, parent.col);
 }
 
 function exchange(i, j) {
