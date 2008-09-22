@@ -1,19 +1,14 @@
 body{
 	margin: 0;
 	padding: 0;
-	font-family: georgia, times, "times new roman", serif;
 	color: #000;
 	background-color: #ddd;
 	overflow: hidden;
 }
 .columnDivider{
 	position: fixed;
-	position: expression("absolute");
-	top: 0;
-	top: expression(eval(document.body.scrollTop));
-	width: 8px;
-	height: 100%;
-	margin-left: -4px;
+	width: 2px;
+	margin-left: -2px;
 	cursor: col-resize;
 	background-color: #BBBBBB;
 }
@@ -23,23 +18,30 @@ div{
 }
 td{
 	padding-left: 4px;
-	padding-right: 5px;
+	padding-right: 4px;
 }
+thead tr td{
+	background-color: #888888;
+	font-weight: bold;
+	cursor: pointer;
+}
+
 #container{
 	background-color: #FFF;
-	border: 1px solid #333;
 	overflow: auto;
 	float: left;
 }
 
 #banner{
-	background-color: #666;
+	background-image: url(/BookTracker/images/books.jpg);
+	background-repeat: repeat;
 	border-bottom: 1px solid #333;
 }
 
 #banner h1{
 	margin: 0;
 	padding: .5em;
+	color: #FFFFFF;
 }
 
 #nav{
@@ -48,6 +50,7 @@ td{
 	padding-left: 10px;
 	padding-top: 1em;
 	position: absolute;
+	left:0px;
 	background-color: #999999;
 	height: 100%;
 }
@@ -65,8 +68,6 @@ td{
 	margin-left: 180px;
 	position: absolute;
 }
-
-#content h2 { margin-top: 0; }
 
 #footer{
 	clear: both;

@@ -237,10 +237,10 @@ function resizeContainer() {
 	  winW = document.body.offsetWidth;
 	  winH = document.body.offsetHeight;
 	 }
-	 document.getElementById("container").style.height = winH-141;
+	 document.getElementById("container").style.height = winH-147;
 	 var i=0;
 	 while(divs[i]){
-		divs[i].style.height = winH-141;
+		divs[i].style.height = winH-147;
 		i++;
 	 }
 }
