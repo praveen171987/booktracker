@@ -4,6 +4,7 @@
 		<link rel="stylesheet" href="scripts/twoColumn.css">
 		<script type="text/javascript" src="scripts/sizableColumns.js"></script>
 		<script type="text/javascript" src="scripts/tableSort.js"></script>
+		<script type="text/javascript" src="scripts/jx_compressed.js"></script>
 
 		<script type="text/javascript">
 			function load(){
@@ -27,7 +28,9 @@
 					<jsp:param name="playlist" value="library" />
 				</jsp:include>
 			</div>
-			<div id="right">Matt was Here</div>
+			<div id="right">
+				<%@ include file="pieces/tagCloud.jsp"%>
+			</div>
 		</div>
 		<div id="footer">
 			<%@ include file="pieces/footer.jsp"%>

@@ -1,8 +1,7 @@
 <%@page import="java.sql.Connection"%>
 <%@page import="java.sql.DriverManager"%>
-<%@page import="java.sql.Statement"%>
-<html>
-	<head>
+<%@page import="java.sql.CallableStatement"%>
+
 		<style type="text/css">
 			.tag0{
 				font-size: .58em;
@@ -26,29 +25,34 @@
 				font-size: 4.0em
 			}
 		</style>
-	</head>
-	<body>
+
 
 <%
-	Connection con = null;
+	//Connection con = null;
 	try{
 		Class.forName("com.mysql.jdbc.Driver").newInstance();
 		con = DriverManager.getConnection("jdbc:mysql://localhost:3306/booktracker","root", "mdl3128");
-		Statement query = con.createStatement();
-		query.execute("select tag, count(*) as num from booktracker.tags group by tag");
+		CallableStatement query2 = con.prepareCall("{call getLibraryTags(?,?)}");
+			//query2.setString(1,(String)request.getSession().getAttribute("username"));
+			query2.setString(1,"apple");
+			//query2.setString(2,"read");
+			query2.setNull(2, java.sql.Types.VARCHAR);
+		query2.execute();
 		
 		int max=0;
-		while(query.getResultSet().next()){
-			max = (max>query.getResultSet().getInt("num"))?max:query.getResultSet().getInt("num");
+		int min=1;
+		while(query2.getResultSet().next()){
+			max = (max>query2.getResultSet().getInt("num"))?max:query2.getResultSet().getInt("num");
+			min = (min<query2.getResultSet().getInt("num"))?min:query2.getResultSet().getInt("num");
 		}
-		query.getResultSet().beforeFirst();
+		query2.getResultSet().beforeFirst();
 		
-		while(query.getResultSet().next()){
-			double classNum = Math.floor(query.getResultSet().getInt("num")*6/max);
+		while(query2.getResultSet().next()){
+			double classNum = Math.floor(query2.getResultSet().getInt("num")*6/(max-(min-1)));
 		%>
 			
 			
-			<span style="margin-left:2px; margin-right:2px;" class="tag<%=(int)classNum%>"><%=query.getResultSet().getString("tag")%></span>
+			<span style="margin-left:2px; margin-right:2px;" class="tag<%=(int)classNum%>"><%=query2.getResultSet().getString("tag")%></span>
 		<%}
 		}catch(Exception e){
 			e.printStackTrace();
@@ -57,5 +61,3 @@
 		}
 	
 	%>
-	</body>
-</html>

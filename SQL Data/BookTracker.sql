@@ -557,6 +557,239 @@ INSERT INTO `user` (`username`,`password`,`email`,`date_joined`) VALUES
 
 
 --
+-- Definition of procedure `addToPlaylist`
+--
+
+DROP PROCEDURE IF EXISTS `addToPlaylist`;
+
+DELIMITER $$
+
+/*!50003 SET @TEMP_SQL_MODE=@@SQL_MODE, SQL_MODE='STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER' */ $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `addToPlaylist`(entryId INT UNSIGNED, playlistName VARCHAR(30))
+BEGIN
+   DECLARE newOrderNum INT UNSIGNED;
+   DECLARE curUserName VARCHAR(30);
+   SELECT username INTO curUserName FROM lib_entry WHERE lib_id = entryId;
+   SELECT count(*) INTO newOrderNum FROM playlist_entry WHERE playlist_name = playlistName AND username = curUserName;
+   SET newOrderNum = newOrderNum+1;
+   INSERT INTO playlist_entry VALUES(null, entryId, playlistName, newOrderNum, curUserName);
+END $$
+/*!50003 SET SESSION SQL_MODE=@TEMP_SQL_MODE */  $$
+
+DELIMITER ;
+
+--
+-- Definition of procedure `deletePlaylistEntry`
+--
+
+DROP PROCEDURE IF EXISTS `deletePlaylistEntry`;
+
+DELIMITER $$
+
+/*!50003 SET @TEMP_SQL_MODE=@@SQL_MODE, SQL_MODE='STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER' */ $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `deletePlaylistEntry`(playlistId INT UNSIGNED)
+BEGIN
+   DECLARE playlistName VARCHAR(30);
+   SELECT playlist_name INTO playlistName FROM playlist_entry WHERE playlist_id = playlistId;
+   CALL movePlaylistEntry(playlistId,(SELECT COUNT(*) from playlist_entry WHERE playlist_name = playlistName));
+   DELETE FROM playlist_entry WHERE playlist_id = playlistId;
+END $$
+/*!50003 SET SESSION SQL_MODE=@TEMP_SQL_MODE */  $$
+
+DELIMITER ;
+
+--
+-- Definition of procedure `getData`
+--
+
+DROP PROCEDURE IF EXISTS `getData`;
+
+DELIMITER $$
+
+/*!50003 SET @TEMP_SQL_MODE=@@SQL_MODE, SQL_MODE='STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER' */ $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getData`(userName VARCHAR(30), playlistName VARCHAR(30), taglist TEXT)
+BEGIN
+   DECLARE i INT;
+   DECLARE temp TEXT;
+   DECLARE done BOOLEAN;
+
+   CREATE TEMPORARY TABLE hasTags(
+      tag VARCHAR(30)
+   );
+
+   IF NOT taglist IS NULL THEN
+      SET i = LOCATE(',',taglist)+1;
+      SET temp = taglist;
+      SET done = false;
+
+      WHILE NOT done DO
+         INSERT INTO hasTags VALUES(SUBSTRING_INDEX(temp,',',1));
+         SET i = LOCATE(',',temp)+1;
+         IF i=1 THEN SET done = true; END IF;
+         SET temp = SUBSTRING(temp, i);
+      END WHILE;
+
+      IF playlistName IS NULL THEN      /*library search with limiting tags*/
+         SELECT DISTINCT a.isbn, title, amaz_rating, pub_date, pages, small_url, medium_url, large_url
+            FROM book a, lib_entry b, tags c
+               WHERE a.isbn = b.isbn
+               AND b.username = userName
+               AND c.isbn = a.isbn
+               AND c.isbn IN (SELECT DISTINCT isbn
+                     FROM booktracker.tags AS PS1
+                        WHERE NOT EXISTS
+                          (SELECT * FROM booktracker.hasTags AS ht
+                             WHERE NOT EXISTS
+                                (SELECT *
+                                   FROM booktracker.tags AS PS2
+                                      WHERE (PS1.isbn = PS2.isbn)
+                                      AND (PS2.tag = ht.tag)
+                                )
+                          )
+                  );
+      ELSE                             /*playlist search with limiting tags*/
+         SELECT DISTINCT a.isbn, title, amaz_rating, pub_date, pages, small_url, medium_url, large_url
+            FROM book a, lib_entry b, tags c
+               WHERE a.isbn = b.isbn
+               AND b.lib_id = c.entry_id
+               AND c.playlist_name = playlistName
+               AND b.username = userName
+               AND c.isbn = a.isbn
+               AND c.isbn IN (SELECT DISTINCT isbn
+                     FROM booktracker.tags AS PS1
+                        WHERE NOT EXISTS
+                          (SELECT * FROM booktracker.hasTags AS ht
+                             WHERE NOT EXISTS
+                                (SELECT *
+                                   FROM booktracker.tags AS PS2
+                                      WHERE (PS1.isbn = PS2.isbn)
+                                      AND (PS2.tag = ht.tag)
+                                )
+                          )
+                  );
+      END IF;
+   ELSE                              /*library search, no limiting tags*/
+      IF playlistName IS NULL THEN
+         SELECT DISTINCT a.isbn, title, amaz_rating, pub_date, pages, small_url, medium_url, large_url
+            FROM book a, lib_entry b
+               WHERE a.isbn = b.isbn
+               AND b.username = userName;
+      ELSE                        /*playlist search, no limiting tags*/
+         SELECT DISTINCT a.isbn, title, amaz_rating, pub_date, pages, small_url, medium_url, large_url
+            FROM book a, lib_entry b, playlist_entry c
+               WHERE a.isbn = b.isbn
+               AND b.lib_id = c.entry_id
+               AND c.playlist_name = playlistName
+               AND b.username = userName;
+      END IF;
+   END IF;
+
+   DROP TABLE hasTags;
+END $$
+/*!50003 SET SESSION SQL_MODE=@TEMP_SQL_MODE */  $$
+
+DELIMITER ;
+
+--
+-- Definition of procedure `getTags`
+--
+
+DROP PROCEDURE IF EXISTS `getTags`;
+
+DELIMITER $$
+
+/*!50003 SET @TEMP_SQL_MODE=@@SQL_MODE, SQL_MODE='STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER' */ $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getTags`(userName VARCHAR(30), playlistName VARCHAR(30), taglist TEXT)
+BEGIN
+   DECLARE i INT;
+   DECLARE temp TEXT;
+   DECLARE done BOOLEAN;
+
+   CREATE TEMPORARY TABLE hasTags(
+      tag VARCHAR(30)
+   );
+
+   IF NOT taglist IS NULL THEN
+      SET i = LOCATE(',',taglist)+1;
+      SET temp = taglist;
+      SET done = false;
+
+      WHILE NOT done DO
+         INSERT INTO hasTags VALUES(SUBSTRING_INDEX(temp,',',1));
+         SET i = LOCATE(',',temp)+1;
+         IF i=1 THEN SET done = true; END IF;
+         SET temp = SUBSTRING(temp, i);
+      END WHILE;
+
+      IF playlistName IS NULL THEN      /*library search with limiting tags*/
+         SELECT tag, num FROM
+            (SELECT tag, count(*) as num FROM booktracker.tags WHERE isbn IN
+               (SELECT isbn FROM booktracker.lib_entry WHERE username = userName AND isbn IN
+                  (SELECT DISTINCT isbn
+                     FROM booktracker.tags AS PS1
+                        WHERE NOT EXISTS
+                          (SELECT * FROM booktracker.hasTags AS ht
+                             WHERE NOT EXISTS
+                                (SELECT *
+                                   FROM booktracker.tags AS PS2
+                                      WHERE (PS1.isbn = PS2.isbn)
+                                      AND (PS2.tag = ht.tag)
+                                )
+                          )
+                  )
+               )
+            GROUP BY tag ORDER BY num DESC LIMIT 50) as tab
+         ORDER BY tag ASC;
+      ELSE                             /*playlist search with limiting tags*/
+         SELECT tag, num FROM
+            (SELECT tag, count(*) as num FROM booktracker.tags WHERE isbn IN
+               (SELECT isbn from booktracker.lib_entry a, booktracker.playlist_entry b
+               WHERE a.lib_id = b.entry_id
+               AND a.username = userName
+               AND b.playlist_name = playlistName
+               AND isbn IN
+                  (SELECT DISTINCT isbn
+                     FROM booktracker.tags AS PS1
+                        WHERE NOT EXISTS
+                          (SELECT * FROM booktracker.hasTags AS ht
+                             WHERE NOT EXISTS
+                                (SELECT *
+                                   FROM booktracker.tags AS PS2
+                                      WHERE (PS1.isbn = PS2.isbn)
+                                      AND (PS2.tag = ht.tag)
+                                )
+                          )
+                  )
+               )
+            GROUP BY tag ORDER BY num DESC LIMIT 50) as tab
+         ORDER BY tag ASC;
+      END IF;
+   ELSE                              /*library search, no limiting tags*/
+      IF playlistName IS NULL THEN
+         SELECT tag, num FROM
+            (SELECT tag, count(*) as num FROM booktracker.tags WHERE isbn IN
+               (SELECT isbn FROM booktracker.lib_entry WHERE username = userName)
+               GROUP BY tag ORDER BY num DESC LIMIT 50) as tab
+            ORDER BY tag ASC;
+      ELSE                        /*playlist search, no limiting tags*/
+         SELECT tag, num FROM
+            (SELECT tag, count(*) as num FROM booktracker.tags WHERE isbn IN
+               (SELECT isbn from booktracker.lib_entry a, booktracker.playlist_entry b
+               WHERE a.lib_id = b.entry_id
+               AND a.username = userName
+               AND b.playlist_name = playlistName)
+               GROUP BY tag ORDER BY num DESC LIMIT 50) as tab
+            ORDER BY tag ASC;
+      END IF;
+   END IF;
+
+   DROP TABLE hasTags;
+END $$
+/*!50003 SET SESSION SQL_MODE=@TEMP_SQL_MODE */  $$
+
+DELIMITER ;
+
+--
 -- Definition of procedure `insertAltVers`
 --
 
@@ -672,6 +905,68 @@ BEGIN
          SET temp = SUBSTRING(temp, i);
      END WHILE;
    END IF;
+END $$
+/*!50003 SET SESSION SQL_MODE=@TEMP_SQL_MODE */  $$
+
+DELIMITER ;
+
+--
+-- Definition of procedure `movePlaylistEntry`
+--
+
+DROP PROCEDURE IF EXISTS `movePlaylistEntry`;
+
+DELIMITER $$
+
+/*!50003 SET @TEMP_SQL_MODE=@@SQL_MODE, SQL_MODE='STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER' */ $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `movePlaylistEntry`(playlistId INT UNSIGNED, newIndex INT UNSIGNED)
+BEGIN
+
+   DECLARE oldIndex INT UNSIGNED;
+   DECLARE temp INT UNSIGNED;
+   DECLARE playlistName VARCHAR(30);
+
+   SELECT order_num INTO oldIndex FROM playlist_entry WHERE playlist_id = playlistId;
+   SELECT playlist_name INTO playlistName FROM playlist_entry WHERE playlist_id = playlistId;
+
+   IF newIndex > oldIndex THEN
+      WHILE newIndex > oldIndex DO
+         SET temp = oldIndex;
+         UPDATE playlist_entry SET order_num = oldIndex WHERE order_num = oldIndex+1 AND playlist_name = playlistName;
+         SET oldIndex = oldIndex+1;
+      END WHILE;
+      UPDATE playlist_entry SET order_num = newIndex WHERE playlist_id = playlistId;
+   ELSEIF newIndex <= oldIndex THEN
+      WHILE newIndex < oldIndex DO
+         SET temp = oldIndex;
+         UPDATE playlist_entry SET order_num = oldIndex+1 WHERE order_num = oldIndex AND playlist_name = playlistName;
+         SET oldIndex = oldIndex-1;
+      END WHILE;
+      UPDATE playlist_entry SET order_num = newIndex WHERE playlist_id = playlistId;
+   END IF;
+END $$
+/*!50003 SET SESSION SQL_MODE=@TEMP_SQL_MODE */  $$
+
+DELIMITER ;
+
+--
+-- Definition of procedure `retrievePlaylist`
+--
+
+DROP PROCEDURE IF EXISTS `retrievePlaylist`;
+
+DELIMITER $$
+
+/*!50003 SET @TEMP_SQL_MODE=@@SQL_MODE, SQL_MODE='STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER' */ $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `retrievePlaylist`(username varchar(30), playlist varchar(30))
+BEGIN
+   SELECT *,
+      (select GROUP_CONCAT(author SEPARATOR ', ') from booktracker.authors where authors.isbn=book.isbn) as author
+    FROM book where isbn in
+      (SELECT isbn FROM `booktracker`.`lib_entry` a
+         inner join booktracker.playlist_entry b on a.lib_id = b.entry_id
+            where a.username = username
+               AND b.playlist_name=playlist);
 END $$
 /*!50003 SET SESSION SQL_MODE=@TEMP_SQL_MODE */  $$
 

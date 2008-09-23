@@ -21,18 +21,26 @@
     <servlet-name>AmazonQuery</servlet-name>
     <servlet-class>com.softwaresmithy.amazon.AmazonQuery</servlet-class>
   </servlet>
-
   <servlet-mapping>
     <servlet-name>AmazonQuery</servlet-name>
     <url-pattern>/AmazonQuery</url-pattern>
   </servlet-mapping>
+  
   <servlet>
     <servlet-name>HandleUser</servlet-name>
     <servlet-class>com.softwaresmithy.web.HandleUser</servlet-class>
   </servlet>
-
   <servlet-mapping>
     <servlet-name>HandleUser</servlet-name>
     <url-pattern>/HandleUser</url-pattern>
+  </servlet-mapping>
+  
+    <servlet>
+    <servlet-name>HandleData</servlet-name>
+    <servlet-class>com.softwaresmithy.web.HandleData</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>HandleData</servlet-name>
+    <url-pattern>/HandleData</url-pattern>
   </servlet-mapping>
 </web-app>
