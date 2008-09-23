@@ -185,4 +185,4 @@ BEGIN
          inner join booktracker.playlist_entry b on a.lib_id = b.entry_id
             where a.username = username
                AND b.playlist_name=playlist);
-ENDd
+END
