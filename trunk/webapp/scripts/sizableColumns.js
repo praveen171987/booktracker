@@ -38,8 +38,8 @@ var currenttable = null;
 function start(containerId){
 	var i=0;
 	height = document.getElementById(containerId).clientHeight-2;
-	while(document.getElementById("cell_0_"+i)){
-		var div = document.getElementById("cell_0_"+i);
+	while(document.getElementById("sizable").rows[0].cells[i+1]){
+		var div = document.getElementById("sizable").rows[0].cells[i+1].firstChild;
 		var colDivider = document.createElement("div");
 			colDivider.className = "columnDivider";
 			colDivider.xPos = parseInt(getElementOffset(div).x)+parseInt(div.style.width)+6;//
@@ -129,11 +129,11 @@ function mouseMove(ev){
 }
 function mouseUp(ev){
 	if(dragColumn){
-		var stringWidth = document.getElementById("cell_0_"+dragColumn.index).style.width;
+		var stringWidth = document.getElementById("sizable").rows[0].cells[dragColumn.index+1].firstChild.style.width;
 		var width = parseInt(stringWidth.substring(0,stringWidth.length-2));
 		var i=0;
-		while(document.getElementById("cell_"+i+"_"+dragColumn.index)){
-			document.getElementById("cell_"+i+"_"+dragColumn.index).style.width = width+dragColumn.xPos-dragColumn.origX;
+		while(document.getElementById("sizable").rows[i]){
+			document.getElementById("sizable").rows[i].cells[dragColumn.index+1].firstChild.style.width = width+dragColumn.xPos-dragColumn.origX;
 			i++;
 		}
 		var i = dragColumn.index+1;
