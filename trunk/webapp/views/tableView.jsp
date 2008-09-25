@@ -7,7 +7,13 @@
 		eval(responseText);
 		var i = 0;
 		while(json.data && json.data[i]){
-			var row = document.createElement("tr");
+			var row = document.getElementById("sizable").tBodies[0].insertRow(-1);
+				row.insertCell(-1).innerHTML = "&nbsp;";
+				row.insertCell(-1).innerHTML = "<div>"+json.data[i].title+"</div>";
+				row.insertCell(-1).innerHTML = "<div>"+json.data[i].author+"</div>";
+				row.insertCell(-1).innerHTML = "<div>"+json.data[i].pub_date+"</div>";
+				row.insertCell(-1).innerHTML = "<div>"+json.data[i].isbn+"</div>";
+				row.insertCell(-1).innerHTML = "<div>"+json.data[i].pages+"</div>";
 			i++;
 		}
 	}
@@ -25,42 +31,6 @@
 		</tr>
 	</thead>
 	<tbody>
-	<%
-	Connection con = null;
-	try{
-		Class.forName("com.mysql.jdbc.Driver").newInstance();
-		con = DriverManager.getConnection("jdbc:mysql://localhost:3306/booktracker","root", "mdl3128");
-//		Statement query = con.createStatement();
-//		query.execute("select title, (select GROUP_CONCAT(author SEPARATOR ', ') "+
-//			"from booktracker.authors where authors.isbn=book.isbn) as author, pub_date, isbn, pages from booktracker.book where isbn in "+
-//				"(select isbn from lib_entry where username = '"+request.getSession().getAttribute("username")+"')");
-		
-		CallableStatement query = con.prepareCall("{call retrievePlaylist(?,?)}");
-			query.setString(1,(String)request.getSession().getAttribute("username"));
-			query.setString(2,"read");
-		query.execute();
-		
-		int val=1;
-		while(query.getResultSet().next()){%>
-				<tr>
-					<td>&nbsp;</td>
-					<td><div style="width:330px;" ><%=query.getResultSet().getString("title")%></div></td>
-					<td><div style="width:192px;" ><%=query.getResultSet().getString("author")%></div></td>
-					<td><div style="width:134px;" ><%=query.getResultSet().getString("pub_date")%></div></td>
-					<td><div style="width:96px;" ><%=query.getResultSet().getString("isbn")%></div></td>
-					<td><div style="width:157px;" ><%=query.getResultSet().getInt("pages")%></div></td>
-				</tr>
-			<%
-			val++;
-		}
-	}catch(Exception e){
-		e.printStackTrace();
-	}finally{
-		con.close();
-	}
-
-	
-	%>
 	</tbody>
 </table>
 </div>

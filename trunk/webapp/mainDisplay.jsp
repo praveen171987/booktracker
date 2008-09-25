@@ -4,7 +4,7 @@
 		<link rel="stylesheet" href="scripts/twoColumn.css">
 		<script type="text/javascript" src="scripts/sizableColumns.js"></script>
 		<script type="text/javascript" src="scripts/tableSort.js"></script>
-		<script type="text/javascript" src="scripts/jx_compressed.js"></script>
+		<script type="text/javascript" src="scripts/ajaxlib.js"></script>
 
 		<script type="text/javascript">
 			function load(){
@@ -12,6 +12,9 @@
 				var table = document.getElementById("sizable");
 				var tableDnD = new TableDnD();
 				tableDnD.init(table);
+				<%if(session.getAttribute("username") != null){%>
+					getData(null,null);
+				<%}%>
 			}
 		</script>
 	</head>

@@ -64,9 +64,9 @@ public class HandleData extends HttpServlet{
 				json += "{"; //Object Start
 				int i=0;
 				for(i=0;i<rs.getMetaData().getColumnCount()-1;i++){
-					json += "'"+rs.getMetaData().getColumnName(i+1)+"'"+" : "+"'"+rs.getString(i+1)+"',";
+					json += "'"+rs.getMetaData().getColumnName(i+1)+"'"+" : "+"'"+((rs.getString(i+1)==null)?"":rs.getString(i+1).replace("'", "\\'"))+"',";
 				}
-				json += "'"+rs.getMetaData().getColumnName(i+1)+"'"+" : "+"'"+rs.getString(i+1)+"'";
+				json += "'"+rs.getMetaData().getColumnName(i+1)+"'"+" : "+"'"+((rs.getString(i+1)==null)?"":rs.getString(i+1).replace("'", "\\'"))+"'";
 				json += "},"; //Ojbect End
 			}
 			json = json.substring(0,json.length()-1);//Subtract last comma

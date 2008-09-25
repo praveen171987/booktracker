@@ -12,17 +12,14 @@ function getHTTPObject() {
 	return false; 
 }
 
-function tryRequest() {
-	var http = getHTTPObject(); 
-	http.open("GET", "/BookTracker/HandleData?playlist=read", true); 
+function getData(playlist, tags) {
+	var http = getHTTPObject();
+	if(playlist == null) playlist = "";
+	if(tags == null) tags = "";
+	http.open("GET", "/BookTracker/HandleData?playlist="+playlist+"&tags="+tags, true); 
 	http.onreadystatechange = function() { 
 		if (http.readyState == 4) {
-			eval(http.responseText);
-			var i=0;
-			while(json.data && json.data[i]){
-				alert(json.data[i].title);
-				i++;
-			}
+			loadData(http.responseText);
 		} 
 	} 
 	http.send(null);
