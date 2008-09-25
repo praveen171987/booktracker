@@ -32,23 +32,25 @@
 	try{
 		Class.forName("com.mysql.jdbc.Driver").newInstance();
 		con = DriverManager.getConnection("jdbc:mysql://localhost:3306/booktracker","root", "mdl3128");
-		CallableStatement query2 = con.prepareCall("{call getLibraryTags(?,?)}");
-			//query2.setString(1,(String)request.getSession().getAttribute("username"));
-			query2.setString(1,"apple");
-			//query2.setString(2,"read");
-			query2.setNull(2, java.sql.Types.VARCHAR);
+		CallableStatement query2 = con.prepareCall("{call getTags(?,?,?)}");
+			query2.setString(1,(String)request.getSession().getAttribute("username"));
+			query2.setNull(2,java.sql.Types.VARCHAR);
+			query2.setNull(3, java.sql.Types.VARCHAR);
 		query2.execute();
 		
 		int max=0;
 		int min=1;
+		int spread = 6;
 		while(query2.getResultSet().next()){
 			max = (max>query2.getResultSet().getInt("num"))?max:query2.getResultSet().getInt("num");
 			min = (min<query2.getResultSet().getInt("num"))?min:query2.getResultSet().getInt("num");
 		}
 		query2.getResultSet().beforeFirst();
 		
+		spread = (spread>(max-min))?(max-min):spread;
+		
 		while(query2.getResultSet().next()){
-			double classNum = Math.floor(query2.getResultSet().getInt("num")*6/(max-(min-1)));
+			double classNum = Math.floor(query2.getResultSet().getInt("num")*spread/(max-(min-1)));
 		%>
 			
 			
