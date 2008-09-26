@@ -2,6 +2,7 @@
 	<head>
 		<title>BookTracker - Table View</title>
 		<link rel="stylesheet" href="scripts/twoColumn.css">
+		<link rel="stylesheet" href="scripts/tagCloud.css">
 		<script type="text/javascript" src="scripts/sizableColumns.js"></script>
 		<script type="text/javascript" src="scripts/tableSort.js"></script>
 		<script type="text/javascript" src="scripts/ajaxlib.js"></script>

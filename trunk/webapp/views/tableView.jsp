@@ -3,9 +3,9 @@
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.Statement"%>
 <script type="text/javascript">
-	function loadData(responseText){
-		eval(responseText);
+	function loadData(data){
 		var i = 0;
+		document.getElementById("sizable").tBodies[0].innerHTML="";
 		while(json.data && json.data[i]){
 			var row = document.getElementById("sizable").tBodies[0].insertRow(-1);
 				row.insertCell(-1).innerHTML = "&nbsp;";

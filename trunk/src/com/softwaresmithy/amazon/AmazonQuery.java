@@ -19,9 +19,7 @@ import com.softwaresmithy.acornweb.AcornWebQueryEngine;
 
 public class AmazonQuery extends HttpServlet {
 
-    /**
-     * 
-     */
+	private static final long serialVersionUID = -7890657707280443585L;
     /************************************************************************
      * Access Key ID obtained from:
      * http://aws.amazon.com

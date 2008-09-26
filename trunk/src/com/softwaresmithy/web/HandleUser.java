@@ -3,7 +3,6 @@ package com.softwaresmithy.web;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -16,6 +15,10 @@ import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
 
 public class HandleUser extends HttpServlet {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5462676803029127653L;
 	Connection con = null;
 
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) {

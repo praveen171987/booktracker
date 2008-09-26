@@ -1,65 +1,68 @@
 <%@page import="java.sql.Connection"%>
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.CallableStatement"%>
-
-		<style type="text/css">
-			.tag0{
-				font-size: .58em;
-			}
-			.tag1{
-				font-size: 1.2em;
-			}
-			.tag2{
-				font-size: 1.7em;
-			}
-			.tag3{
-				font-size: 2.3em;
-			}
-			.tag4{
-				font-size: 2.9em;
-			}
-			.tag5{
-				font-size: 3.5em;
-			}
-			.tag6{
-				font-size: 4.0em
-			}
-		</style>
-
-
-<%
-	//Connection con = null;
-	try{
-		Class.forName("com.mysql.jdbc.Driver").newInstance();
-		con = DriverManager.getConnection("jdbc:mysql://localhost:3306/booktracker","root", "mdl3128");
-		CallableStatement query2 = con.prepareCall("{call getTags(?,?,?)}");
-			query2.setString(1,(String)request.getSession().getAttribute("username"));
-			query2.setNull(2,java.sql.Types.VARCHAR);
-			query2.setNull(3, java.sql.Types.VARCHAR);
-		query2.execute();
+<script type="text/javascript">
+	function loadTags(data){
+		var i=0;
 		
-		int max=0;
-		int min=1;
-		int spread = 6;
-		while(query2.getResultSet().next()){
-			max = (max>query2.getResultSet().getInt("num"))?max:query2.getResultSet().getInt("num");
-			min = (min<query2.getResultSet().getInt("num"))?min:query2.getResultSet().getInt("num");
+		document.getElementById("limits").innerHTML = "";
+		if(taglimits){
+			var limits = taglimits.split(",");
+			while(limits[i]){
+				var a = document.createElement("a");
+				a.innerHTML = limits[i];
+				a.index = i;
+				a.onclick = function() {
+					var newLimits = "";
+					var i=0;
+					while(limits[i]){
+						if(i != this.index){
+							newLimits += limits[i]+",";
+						}
+						i++;
+					}
+					newLimits = newLimits.substring(0,newLimits.length-1);
+					getData(playlistName,newLimits);
+				};
+				document.getElementById("limits").appendChild(a);
+				i++;
+			}
 		}
-		query2.getResultSet().beforeFirst();
 		
+		i=0;
+		var max=0;
+		var min=1;
+		var spread = 6;
+		while(data && data[i]){
+			max = (max>data[i].num)?max:data[i].num;
+			min = (min<data[i].num)?min:data[i].num;
+			i++;
+		}
 		spread = (spread>(max-min))?(max-min):spread;
-		
-		while(query2.getResultSet().next()){
-			double classNum = Math.floor(query2.getResultSet().getInt("num")*spread/(max-(min-1)));
-		%>
-			
-			
-			<span style="margin-left:2px; margin-right:2px;" class="tag<%=(int)classNum%>"><%=query2.getResultSet().getString("tag")%></span>
-		<%}
-		}catch(Exception e){
-			e.printStackTrace();
-		}finally{
-			con.close();
+		if(spread==0)spread = 1;
+		i=0;
+		document.getElementById("tagCloud").innerHTML = "";
+		while(data && data[i]){
+			var classNum = Math.floor(data[i].num*spread/(max-(min-1)));
+			var span = document.createElement("span");
+			span.className = "tag"+classNum;
+			span.innerHTML = data[i].tag;
+			span.onclick = function() {
+				var i=0;
+				if(taglimits) {
+					var limits = taglimits.split(",");
+					while(limits[i]){
+						if(this.textContent == limits[i]) return;
+						i++;
+					}
+					getData(playlistName,taglimits+","+this.textContent);
+				}
+				else getData(playlistName,this.textContent);
+			};
+			document.getElementById("tagCloud").appendChild(span);
+			i++;
 		}
-	
-	%>
+	}
+</script>
+<div id="limits"></div>
+<div id="tagCloud"></div>
