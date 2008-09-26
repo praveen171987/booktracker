@@ -11,9 +11,9 @@
 
 %>
 <table id="playlists">
-	<tr><td>Library</td></tr><%
+	<tr><td onClick="getData(null,null)">Library</td></tr><%
 	while(query.getResultSet().next()){%>
-		<tr><td><%=query.getResultSet().getString(1)%></td></tr>
+		<tr><td onClick="getData('<%=query.getResultSet().getString(1)%>',null)"><%=query.getResultSet().getString(1)%></td></tr>
 	<%}
 	}catch(Exception e){
 		e.printStackTrace();

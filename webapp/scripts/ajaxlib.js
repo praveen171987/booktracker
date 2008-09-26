@@ -12,14 +12,25 @@ function getHTTPObject() {
 	return false; 
 }
 
+var taglimits;
+var playlistName = "";
 function getData(playlist, tags) {
+	taglimits = tags;
+	playlistName = playlist;
+	
 	var http = getHTTPObject();
 	if(playlist == null) playlist = "";
 	if(tags == null) tags = "";
 	http.open("GET", "/BookTracker/HandleData?playlist="+playlist+"&tags="+tags, true); 
-	http.onreadystatechange = function() { 
+	http.onreadystatechange = function() {
 		if (http.readyState == 4) {
-			loadData(http.responseText);
+			eval(http.responseText);
+			if(json && json.data){
+				loadData(json.data);
+			}
+			if(json && json.tags){
+				loadTags(json.tags);
+			}
 		} 
 	} 
 	http.send(null);
