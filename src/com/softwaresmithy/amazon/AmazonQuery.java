@@ -10,10 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.amazonaws.a2s.AmazonA2S;
 import com.amazonaws.a2s.AmazonA2SClient;
 
-import com.amazonaws.a2s.model.Item;
-import com.amazonaws.a2s.model.ItemSearchRequest;
-import com.amazonaws.a2s.model.ItemSearchResponse;
-import com.amazonaws.a2s.model.Items;
+import com.amazonaws.a2s.model.*;
 
 import com.softwaresmithy.acornweb.AcornWebQueryEngine;
 
@@ -73,8 +70,8 @@ public class AmazonQuery extends HttpServlet {
             }
             return;
         }
-        if (keyword != null) {
-            request.setKeywords("Hood Stephen Lawhead");
+        if (keyword != null && !keyword.equals("")) {
+            request.setKeywords(keyword);
             try {
                 //AcornWebQueryEngine query = new AcornWebQueryEngine();
 
