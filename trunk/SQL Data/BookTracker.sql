@@ -630,7 +630,7 @@ BEGIN
       END WHILE;
 
       IF playlistName IS NULL THEN      /*library search with limiting tags*/
-         SELECT DISTINCT a.isbn, title, amaz_rating, pub_date, pages, small_url, medium_url, large_url
+         SELECT DISTINCT a.isbn, title, (select GROUP_CONCAT(author SEPARATOR ', ') from booktracker.authors where authors.isbn=a.isbn) as author, amaz_rating, pub_date, pages, small_url, medium_url, large_url
             FROM book a, lib_entry b, tags c
                WHERE a.isbn = b.isbn
                AND b.username = userName
@@ -648,11 +648,11 @@ BEGIN
                           )
                   );
       ELSE                             /*playlist search with limiting tags*/
-         SELECT DISTINCT a.isbn, title, amaz_rating, pub_date, pages, small_url, medium_url, large_url
-            FROM book a, lib_entry b, tags c
+         SELECT DISTINCT a.isbn, title, (select GROUP_CONCAT(author SEPARATOR ', ') from booktracker.authors where authors.isbn=a.isbn) as author, amaz_rating, pub_date, pages, small_url, medium_url, large_url
+            FROM book a, lib_entry b, tags c, playlist_entry d
                WHERE a.isbn = b.isbn
-               AND b.lib_id = c.entry_id
-               AND c.playlist_name = playlistName
+               AND b.lib_id = d.entry_id
+               AND d.playlist_name = playlistName
                AND b.username = userName
                AND c.isbn = a.isbn
                AND c.isbn IN (SELECT DISTINCT isbn
@@ -670,12 +670,12 @@ BEGIN
       END IF;
    ELSE                              /*library search, no limiting tags*/
       IF playlistName IS NULL THEN
-         SELECT DISTINCT a.isbn, title, amaz_rating, pub_date, pages, small_url, medium_url, large_url
+         SELECT DISTINCT a.isbn, title, (select GROUP_CONCAT(author SEPARATOR ', ') from booktracker.authors where authors.isbn=a.isbn) as author, amaz_rating, pub_date, pages, small_url, medium_url, large_url
             FROM book a, lib_entry b
                WHERE a.isbn = b.isbn
                AND b.username = userName;
       ELSE                        /*playlist search, no limiting tags*/
-         SELECT DISTINCT a.isbn, title, amaz_rating, pub_date, pages, small_url, medium_url, large_url
+         SELECT DISTINCT a.isbn, title, (select GROUP_CONCAT(author SEPARATOR ', ') from booktracker.authors where authors.isbn=a.isbn) as author, amaz_rating, pub_date, pages, small_url, medium_url, large_url
             FROM book a, lib_entry b, playlist_entry c
                WHERE a.isbn = b.isbn
                AND b.lib_id = c.entry_id
@@ -944,29 +944,6 @@ BEGIN
       END WHILE;
       UPDATE playlist_entry SET order_num = newIndex WHERE playlist_id = playlistId;
    END IF;
-END $$
-/*!50003 SET SESSION SQL_MODE=@TEMP_SQL_MODE */  $$
-
-DELIMITER ;
-
---
--- Definition of procedure `retrievePlaylist`
---
-
-DROP PROCEDURE IF EXISTS `retrievePlaylist`;
-
-DELIMITER $$
-
-/*!50003 SET @TEMP_SQL_MODE=@@SQL_MODE, SQL_MODE='STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER' */ $$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `retrievePlaylist`(username varchar(30), playlist varchar(30))
-BEGIN
-   SELECT *,
-      (select GROUP_CONCAT(author SEPARATOR ', ') from booktracker.authors where authors.isbn=book.isbn) as author
-    FROM book where isbn in
-      (SELECT isbn FROM `booktracker`.`lib_entry` a
-         inner join booktracker.playlist_entry b on a.lib_id = b.entry_id
-            where a.username = username
-               AND b.playlist_name=playlist);
 END $$
 /*!50003 SET SESSION SQL_MODE=@TEMP_SQL_MODE */  $$
 
