@@ -23,13 +23,20 @@
 		}
 		.mooTable {
 			width: 100%;
-			
 		}
 		.mooTable .tHead {
 			position: relative;
 		}
 		.mooTable .tHead .tr {
-			width: 1000px;
+			width: 1000%;
+		}
+		.mooTable .tHead .tr .resize {
+			width: 2px;
+			right: 0;
+			height: 1.2em;
+			position: absolute;
+			background-color: black;
+			cursor: col-resize;
 		}
 		.mooTable .tHead .tr .td {
 			padding: 0 2px;
@@ -37,10 +44,21 @@
 			white-space: nowrap;
 			float: left;
 			border-bottom: 1px solid;
+			border-right: 1px solid;
+			position: relative;
+		}
+		.mooTable .tHead .tr .td .cell {
+			float: left;
+		}
+		.mooTable .tBody table {
+			border-spacing: 0px;
+			empty-cells: show;
 		}
 		.mooTable .tBody table tbody tr td {
 			white-space: nowrap;
 			overflow: hidden;
+			border-right: 1px solid;
+			padding-left: 3px;
 		}
 	</style>
 	<script type="text/javascript">
@@ -60,6 +78,8 @@
 					this.divTHead.setStyle('left', this.divTBody.scrollLeft*-1);
 				}.bind(this));
 				this.divTBody.wraps(this.element);
+				
+				this.numColumns = this.element.tHead.getElements('td').length;
 				
 				this._createHeader($(this.element.tHead));
 				this.mooTable.wraps(this.divTBody);
@@ -84,13 +104,53 @@
 				var headerTr = new Element('div');
 				headerTr.set('class','tr');
 				divTHead.set('class','tHead');
-				tHead.getElements('td').each( function(cell, ind){
-					if($type(this.options.width) == 'numeric') {
-						headerTr.appendChild(new Element('div').set('class','td').set('html',cell.innerHTML).set('style','width:'+this.options.width));
+				resizeLeft = null;
+				tHead.getElements('td').each( function(cell, ind, arr){
+					var headerTd = new Element('div').set('class','td').set('col',ind).set('style','width:'+($type(this.options.width) == 'numeric'?this.options.width:this.options.width[ind]));
+					var divCell = new Element('div').set('class','cell').set('html',cell.innerHTML);
+					var divResizeLeft = new Element('div').set('class','resize');
+					var divResizeRight = new Element('div').set('class','resize');
+					
+					new Drag(headerTd,{
+						handle: divResizeRight,
+						limit: {y:false},
+						modifiers: {x:'width', y:false},
+						onComplete: function(el){
+							this.element.getElements('tr').each( function(row,ind){
+								row.cells[headerTd.get('col')].getElement('div').setStyle('width',headerTd.getStyle('width'));
+							});
+						}.bind(this),
+						onDrag: function(el){
+							//headerTr.width
+						}
+					});
+					
+					if(resizeLeft){//The previous header is resizable
+						headerTd.appendChild(divResizeLeft.setStyle('left','0px'));
+						
+						new Drag(resizeLeft,{
+						handle: divResizeLeft,
+						limit: {y:false},
+						modifiers: {x:'width', y:false},
+						onComplete: function(el){
+							this.element.getElements('tr').each( function(row,ind){
+								row.cells[headerTd.get('col')-1].getElement('div').setStyle('width',headerTd.previousSibling.getStyle('width'));
+							});
+						}.bind(this),
+						onDrag: function(el){
+							headerTr.width
+						}
+					});
 					}
-					else if($type(this.options.width) == 'array') {
-						headerTr.appendChild(new Element('div').set('class','td').set('html',cell.innerHTML).set('style','width:'+this.options.width[ind]));
-					}
+					resizeLeft = headerTd;
+
+					headerTd.appendChild(divCell);
+					if(ind == arr.length-1)//Last Element
+						headerTd.appendChild(divResizeRight.setStyle('width','4px'));
+					else
+						headerTd.appendChild(divResizeRight);
+					headerTr.appendChild(headerTd);
+					
 				},this);
 				divTHead.appendChild(headerTr);
 				tHead.destroy();
