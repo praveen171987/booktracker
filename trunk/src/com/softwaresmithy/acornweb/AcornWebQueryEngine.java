@@ -48,27 +48,27 @@ public class AcornWebQueryEngine {
         client = new HttpClient();
     }
     public String atLibrary(List<String> isbns){
-        //http://visual.acornweb.org/staging/result.ashx?q=isbn:1595540865%20OR%20isbn:1595540857&output=xml
+        //http://visual.acornweb.org/rss.asp?q=isbn:1595540865%20OR%20isbn:1595540857
         System.out.println("Executing atLibrary");
         int responseCode = -1;
-        int numRecords = 0;
+        int numItems = 0;
         GetMethod get = new GetMethod("http://visual.acornweb.org");
         
         get.setRequestHeader("Proxy-Authorization", "Basic c3p5NHpxOnNjdW1CS1QxOQ==");
         get.setRequestHeader("Proxy-Connection", "Keep-Alive");
         
-        get.setPath("/staging/result.ashx");
-        get.setQueryString("q="+listToOrString(isbns)+"&output=xml");
+        get.setPath("rss.asp");
+        get.setQueryString("q="+listToOrString(isbns));
         try{
             responseCode = client.executeMethod(get);            
             //System.out.println(get.getResponseBodyAsString());
-            numRecords = get.getResponseBodyAsString().split("<record").length-1;
-            if(numRecords>0){
-	            String firstRecord = get.getResponseBodyAsString().split("<record")[1];
-	            int idStart = firstRecord.indexOf("<id>")+4;
-	            int idEnd = firstRecord.indexOf("</id>")-1;
+            numItems = get.getResponseBodyAsString().split("<item").length-1;
+            if(numItems>0){
+	            String firstRecord = get.getResponseBodyAsString().split("<item")[1];
+	            int idStart = firstRecord.indexOf("<link>")+6;
+	            int idEnd = firstRecord.indexOf("</link>")-1;
 	            String carlId = firstRecord.substring(idStart,idEnd);
-	            return carlId.substring(carlId.length()-6);
+	            return carlId.substring(carlId.length()-9);
             }
             
         }catch(Exception e){
