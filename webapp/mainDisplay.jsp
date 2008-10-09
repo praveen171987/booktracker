@@ -3,23 +3,59 @@
 		<title>BookTracker - Table View</title>
 		<link rel="stylesheet" href="scripts/twoColumn.css">
 		<link rel="stylesheet" href="scripts/tagCloud.css">
-		<script type="text/javascript" src="scripts/sizableColumns.js"></script>
-		<script type="text/javascript" src="scripts/tableSort.js"></script>
-		<script type="text/javascript" src="scripts/ajaxlib.js"></script>
-
+		<link rel="stylesheet" href="scripts/matttable.css">
+		<script src="scripts/mootools-core.js"></script>
+		<script src="scripts/mootools-more.js"></script>
+		<script src="scripts/matttable.js"></script>
+	
 		<script type="text/javascript">
-			function load(){
-				start('container');
-				var table = document.getElementById("sizable");
-				var tableDnD = new TableDnD();
-				tableDnD.init(table);
+			var dataTable;
+			window.addEvent('domready', function(){
+				dataTable = new MooTable('dataTable',{width: [202,192,134,96,157], rowDef: ['title','author','pub_date','isbn','pages']});
 				<%if(session.getAttribute("username") != null){%>
 					getData(null,null);
 				<%}%>
+			});
+			function getHTTPObject() { 
+				if (typeof XMLHttpRequest != 'undefined') { 
+					return new XMLHttpRequest(); 
+				}
+				try { 
+					return new ActiveXObject("Msxml2.XMLHTTP"); 
+				} catch (e) { 
+					try { 
+						return new ActiveXObject("Microsoft.XMLHTTP"); 
+					} catch (e) {} 
+				} 
+				return false; 
 			}
+
+			var taglimits;
+			var playlistName = "";
+			function getData(playlist, tags) {
+				taglimits = tags;
+				playlistName = playlist;
+				
+				var http = getHTTPObject();
+				if(playlist == null) playlist = "";
+				if(tags == null) tags = "";
+				http.open("GET", "/BookTracker/HandleData?playlist="+playlist+"&tags="+tags, true); 
+				http.onreadystatechange = function() {
+					if (http.readyState == 4) {
+						eval(http.responseText);
+						if(json && json.data){
+							dataTable.loadData(json.data);
+						}
+						if(json && json.tags){
+							loadTags(json.tags);
+						}
+					} 
+				} 
+				http.send(null);
+}
 		</script>
 	</head>
-	<body onLoad="load();">
+	<body>
 		<div id="banner">
 			<%@ include file="pieces/header.jsp"%>
 		</div>
@@ -28,9 +64,18 @@
 				<div id="nav">
 					<%@ include file="pieces/leftNav.jsp"%>
 				</div>
-				<jsp:include page="views/tableView.jsp" >
-					<jsp:param name="playlist" value="library" />
-				</jsp:include>
+				<table id="dataTable">
+					<thead>
+						<tr>
+							<td>Title</td>
+							<td>Author</td>
+							<td>Publication Date</td>
+							<td>ISBN</td>
+							<td>Num Pages</td>
+						</tr>
+					</thead>
+					<tbody/>
+				</table>
 			</div>
 			<div id="right">
 				<%@ include file="pieces/tagCloud.jsp"%>

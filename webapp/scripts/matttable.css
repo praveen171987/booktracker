@@ -1,0 +1,56 @@
+.td {
+	float: left;
+}
+.tBody {
+	top: 1.2em;
+	position: absolute;
+	overflow: auto;
+	height: 476px;
+	width: 100%;
+}
+.mootableContainer {
+	border:1px solid #CCCCCC;
+	height: 500px;
+	width: 800px;
+	overflow: hidden;
+	position: relative;
+}
+.mooTable {
+	width: 100%;
+}
+.mooTable .tHead {
+	position: relative;
+}
+.mooTable .tHead .tr {
+	width: 1000%;
+}
+.mooTable .tHead .tr .resize {
+	width: 2px;
+	right: 0;
+	height: 1.2em;
+	position: absolute;
+	background-color: black;
+	cursor: col-resize;
+}
+.mooTable .tHead .tr .td {
+	padding: 0 2px;
+	overflow: hidden;
+	white-space: nowrap;
+	float: left;
+	border-bottom: 1px solid;
+	border-right: 1px solid;
+	position: relative;
+}
+.mooTable .tHead .tr .td .cell {
+	float: left;
+}
+.mooTable .tBody table {
+	border-spacing: 0px;
+	empty-cells: show;
+}
+.mooTable .tBody table tbody tr td {
+	white-space: nowrap;
+	overflow: hidden;
+	border-right: 1px solid;
+	padding-left: 3px;
+}
