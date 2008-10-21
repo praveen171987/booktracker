@@ -23,4 +23,4 @@
 		}
 	%>
 </div>
-<input style="float:right;" type="button" value="search" onClick="javascript:alert('beep')">
+<input style="float:right;" type="button" value="search" onClick="javascript:getQuery('ralph levan');">

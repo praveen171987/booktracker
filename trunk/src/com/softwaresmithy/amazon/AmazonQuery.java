@@ -53,14 +53,14 @@ public class AmazonQuery extends HttpServlet {
         responseGroup.add("Images");
         responseGroup.add("Tags");
         responseGroup.add("Reviews");
-    //request.setResponseGroup(responseGroup);
+    request.setResponseGroup(responseGroup);
     }
 
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) {
         String keyword = (String) req.getParameter("keyword");
         String dummy = (String) req.getParameter("dummy");
-        if (dummy.equals("true")) {
+        if (dummy != null && dummy.equals("true")) {
             for (int i = 0; i < 3; i++) {
                 try {
                     resp.getWriter().write(dummyResponse());
@@ -78,15 +78,20 @@ public class AmazonQuery extends HttpServlet {
                 ItemSearchResponse response = service.itemSearch(request);
 
                 java.util.List<Items> items = response.getItems();
-                System.out.println("List<Items> size: " + items.size());
                 List<Item> item = items.get(0).getItem();
+//                for(int i=0;i<item.get(0).getEditorialReviews().getEditorialReview().size();i++) {
+//                	System.out.println(item.get(0).getEditorialReviews().getEditorialReview().get(i).getContent());
+//                }
+                resp.getWriter().write("json = {data:[");	//Start JSON array
                 for (int j = 0; j < item.size(); j++) {
                     AmazonResult temp = new AmazonResult(item.get(j));
                     req.getSession().setAttribute(temp.getISBN(), temp);
-                    resp.getWriter().write(formatHttpResult(temp));
+                    resp.getWriter().write(formatJsonResult(temp));
+                    if(j<item.size()-1) resp.getWriter().write(",");
                 //System.out.println(temp.getTitle()+": "+temp.getISBN());
                 //System.out.println("at library: "+query.atLibrary(isbns));
                 }
+                resp.getWriter().write("]}");
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -98,7 +103,15 @@ public class AmazonQuery extends HttpServlet {
             }
         }
     }
-
+    private String formatJsonResult(AmazonResult book) {
+    	String temp = "{"+
+			"'medium_url': '"+book.getMediumImageUrl()+"',"+
+			"'title': '"+book.getTitle()+"',"+
+			"'author': '"+book.getAuthorAsString()+"',"+
+			"'amaz_rating': '"+book.getRating()+"',"+
+			"'tags': '"+book.getTagsAsString()+"'";
+		return temp+"}";
+    }
     private String formatHttpResult(AmazonResult book) {
         String temp = "";
         temp += "<div class='round'>" +

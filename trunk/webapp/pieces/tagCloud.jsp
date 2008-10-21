@@ -1,30 +1,28 @@
-<%@page import="java.sql.Connection"%>
-<%@page import="java.sql.DriverManager"%>
-<%@page import="java.sql.CallableStatement"%>
 <script type="text/javascript">
+	window.addEvent('resize', function() {
+		$('tagCloud').setStyle('height',$('tagCloud').getParent().getParent().getStyle('height').toInt()-$('limits').clientHeight);
+	});
 	function loadTags(data){
 		var i=0;
 		
-		document.getElementById("limits").innerHTML = "";
+		$("limits").innerHTML = "";
 		if(taglimits){
 			var limits = taglimits.split(",");
 			while(limits[i]){
-				var a = document.createElement("a");
-				a.innerHTML = limits[i];
-				a.index = i;
-				a.onclick = function() {
+				var a = new Element("a").set('html',limits[i]).set('ind',i);
+				a.addEvent('click', function() {
 					var newLimits = "";
 					var i=0;
 					while(limits[i]){
-						if(i != this.index){
+						if(i != this.get('ind')){
 							newLimits += limits[i]+",";
 						}
 						i++;
 					}
 					newLimits = newLimits.substring(0,newLimits.length-1);
 					getData(playlistName,newLimits);
-				};
-				document.getElementById("limits").appendChild(a);
+				});
+				$("limits").appendChild(a);
 				i++;
 			}
 		}
@@ -41,13 +39,11 @@
 		spread = (spread>(max-min))?(max-min):spread;
 		if(spread==0)spread = 1;
 		i=0;
-		document.getElementById("tagCloud").innerHTML = "";
+		$("tagCloud").innerHTML = "";
 		while(data && data[i]){
 			var classNum = Math.floor(data[i].num*spread/(max-(min-1)));
-			var span = document.createElement("span");
-			span.className = "tag"+classNum;
-			span.innerHTML = data[i].tag;
-			span.onclick = function() {
+			var span = new Element("span").addClass("tag"+classNum).set('html',data[i].tag);
+			span.addEvent('click',function() {
 				var i=0;
 				if(taglimits) {
 					var limits = taglimits.split(",");
@@ -58,10 +54,11 @@
 					getData(playlistName,taglimits+","+this.textContent);
 				}
 				else getData(playlistName,this.textContent);
-			};
-			document.getElementById("tagCloud").appendChild(span);
+			});
+			$("tagCloud").appendChild(span);
 			i++;
 		}
+		window.fireEvent('resize');
 	}
 </script>
 <div id="limits"></div>

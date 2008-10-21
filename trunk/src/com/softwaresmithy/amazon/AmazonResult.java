@@ -111,6 +111,9 @@ public class AmazonResult {
 	public List<String> getAuthor() {
 		return author;
 	}
+	public String getAuthorAsString() {
+		return listToCSV(author);
+	}
 	public void setAuthor(List<String> author) {
 		this.author = author;
 	}
@@ -122,6 +125,9 @@ public class AmazonResult {
 	}
 	public List<Tag> getTags() {
 		return tags;
+	}
+	public String getTagsAsString() {
+		return taglistToCSV(tags);
 	}
 	public void setTags(List<Tag> tags) {
 		this.tags = tags;
