@@ -5,22 +5,9 @@ body{
 	background-color: #ddd;
 	overflow: hidden;
 }
-.columnDivider{
-	position: fixed;
-	width: 2px;
-	margin-left: -2px;
-	cursor: col-resize;
-	background-color: #BBBBBB;
-}
 div{
 	overflow: hidden;
 	white-space: nowrap;
-}
-
-#container{
-	background-color: #FFF;
-	overflow: auto;
-	float: left;
 }
 
 #banner{
@@ -38,44 +25,27 @@ div{
 #nav{
 	float: left;
 	width: 160px;
-	padding-left: 10px;
-	padding-top: 1em;
-	position: absolute;
-	left:0px;
 	background-color: #999999;
 	height: 100%;
 }
-.mootableContainer {
-	margin-left: 180px;
-}
-#nav p { margin-top: 0; }
-
-#sizable {
-	float: left;
-}
 
 #content{
-	padding-top: 1em;
-	margin-left: 180px;
-	position: absolute;
+	height: 100%;
 }
 
 #footer{
-	clear: both;
 	background-color: #666;
 	padding: 1em 1em 1em 0;
 	text-align: right;
 	border-top: 1px solid #333;
 	bottom: 0px;
-	position: absolute;
 	width: 100%;
 }
-#right {
-	background-color: #AAAAAA;
-	float: right;
-	height: 100%;
-	right: 0px;
-	width: 400px;
+#results {
+	display: none;
+}
+#tags {
+	display: none;
 }
 .login {
 	float:left;

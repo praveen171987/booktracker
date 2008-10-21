@@ -6,6 +6,8 @@ var MooTable = new Class({
 		contHeight: false,
 		contWidth: false
 	},
+	//class variables;
+	divHeaders: [],
 	initialize: function(el, options){
 		this.setOptions(options);
 		this.element = $(el);	//The table
@@ -24,7 +26,7 @@ var MooTable = new Class({
 		this.mooTable.wraps(this.divTBody);
 		this.divTHead.inject(this.divTBody,'before');
 		this.divMooCont = new Element('div').set('class','mootableContainer').wraps(this.mooTable);
-		if(this.options.contHeight) this.divMooCont.setStyle('height',this.options.contHeight);
+		if(this.options.contHeight) this.setHeight(this.options.contHeight);
 		if(this.options.contWidth) this.divMooCont.setStyle('width',this.options.contWidth);
 		
 		this.element.getElements('tr').each( function(row){
@@ -34,6 +36,8 @@ var MooTable = new Class({
 				new Element('div').setStyle('width',($type(this.options.width) == 'numeric'?this.options.width:this.options.width[ind])).set('html',html).inject($(cell), 'bottom');
 			},this);
 		},this);
+		
+		
 	},
 	_createHeader: function(tHead) {
 		var divTHead = new Element('div');
@@ -42,7 +46,8 @@ var MooTable = new Class({
 		divTHead.set('class','tHead');
 		resizeLeft = null;
 		tHead.getElements('td').each( function(cell, ind, arr){
-			var headerTd = new Element('div').set('class','td').set('col',ind).set('style','width:'+($type(this.options.width) == 'numeric'?this.options.width:this.options.width[ind]));
+			var headerTd = new Element('div').set('class','td').set('col',ind).setStyle('width',($type(this.options.width) == 'numeric'?this.options.width:this.options.width[ind]));
+			this.divHeaders[ind] = headerTd;
 			var divCell = new Element('div').set('class','cell').set('html',cell.innerHTML);
 			var divResizeLeft = new Element('div').set('class','resize');
 			var divResizeRight = new Element('div').set('class','resize');
@@ -93,7 +98,6 @@ var MooTable = new Class({
 		this.divTHead = divTHead;
 	},
 	loadData: function(data){
-		alert('loading data');
 		var i = 0;
 		this.element.tBodies[0].set('html','');
 		while(data && data[i]){
@@ -106,9 +110,13 @@ var MooTable = new Class({
 		var tr = new Element('tr');
 		var i=0;
 		while(this.options.rowDef[i]){
-			new Element('td').set('html', '<div style="width:'+($type(this.options.width) == 'numeric'?this.options.width:this.options.width[i])+'">'+rowObj[this.options.rowDef[i]]+'</div>').inject(tr,'bottom');
+			new Element('td').set('html', '<div style="width:'+this.divHeaders[i].getStyle('width')+'">'+rowObj[this.options.rowDef[i]]+'</div>').inject(tr,'bottom');
 			i++;
 		}
 		tbody.appendChild(tr);
+	},
+	setHeight: function(contHeight) {
+		this.divMooCont.setStyle('height',contHeight);
+		this.divTBody.setStyle('height',contHeight.toInt()-24);
 	}
   });

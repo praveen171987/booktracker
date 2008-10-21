@@ -26,6 +26,7 @@ span {
 }
 #tagCloud {
 	white-space: normal;
+	overflow-y: auto;
 }
 #limits {
 	border-bottom: 2px solid;

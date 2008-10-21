@@ -10,10 +10,9 @@
 }
 .mootableContainer {
 	border:1px solid #CCCCCC;
-	height: 500px;
-	width: 800px;
 	overflow: hidden;
 	position: relative;
+	float:	left;
 }
 .mooTable {
 	width: 100%;
@@ -23,13 +22,14 @@
 }
 .mooTable .tHead .tr {
 	width: 1000%;
+	background-color: darkGray;
 }
 .mooTable .tHead .tr .resize {
 	width: 2px;
 	right: 0;
 	height: 1.2em;
 	position: absolute;
-	background-color: black;
+	/*background-color: black;*/
 	cursor: col-resize;
 }
 .mooTable .tHead .tr .td {
