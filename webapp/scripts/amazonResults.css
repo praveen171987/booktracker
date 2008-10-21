@@ -1,0 +1,25 @@
+	#amazon{
+		width: 478px;
+		background-color: beige;
+		overflow-y: auto;
+	}
+	.entry {
+		height: 166px;
+		border-bottom: 1px solid black;
+	}
+	.entry div {
+		white-space: normal;
+	}
+	img {
+		padding: 3px;
+		float: left;
+	}
+	.title {
+		font-size: x-large;
+		font-weight: bold;
+		height: 75px;
+		overflow: hidden;
+	}
+	.tags {
+		font-size: smaller;
+	}
