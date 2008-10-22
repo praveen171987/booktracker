@@ -23,6 +23,7 @@ public class AmazonResult {
 	private String mediumImageUrl;
 	private String largeImageUrl;
 	private List<String> alternateVersions;
+	private String detailUrl;
 	public List<String> getAlternateVersions() {
 		return alternateVersions;
 	}
@@ -60,8 +61,13 @@ public class AmazonResult {
 			}
 			this.setAlternateVersions(isbns);
 		}
+		if(item.isSetDetailPageURL()){
+			this.setDetailUrl(item.getDetailPageURL());
+		}
 	}
 	
+	public AmazonResult() {
+	}
 	public CallableStatement prepareCS(CallableStatement cs) throws SQLException {
 		cs.setString(1, this.getISBN());
 		cs.setString(2, this.getTitle());
@@ -172,10 +178,17 @@ public class AmazonResult {
 	}
 	public String taglistToCSV(List<Tag> list){
 		String temp = "";
+		if(list == null) return temp;
 		for(int i=0;i<list.size();i++){
 			temp += list.get(i).getName();
 			if(i<list.size()-1)temp+=",";
 		}
 		return temp;
+	}
+	public void setDetailUrl(String detailUrl) {
+		this.detailUrl = detailUrl;
+	}
+	public String getDetailUrl() {
+		return detailUrl;
 	}
 }

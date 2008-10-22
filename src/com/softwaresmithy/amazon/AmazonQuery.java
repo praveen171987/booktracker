@@ -1,6 +1,8 @@
 package com.softwaresmithy.amazon;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServlet;
@@ -60,13 +62,18 @@ public class AmazonQuery extends HttpServlet {
     public void doGet(HttpServletRequest req, HttpServletResponse resp) {
         String keyword = (String) req.getParameter("keyword");
         String dummy = (String) req.getParameter("dummy");
+        AmazonResult book = new AmazonResult();
+        List<String> auth = new ArrayList<String>();
+        auth.add("Terry Pratchett");
+        book.setAuthor(auth);
+        book.setDetailUrl("#");
+        book.setTitle("Nation");
+        book.setSmallImageUrl("");
         if (dummy != null && dummy.equals("true")) {
-            for (int i = 0; i < 3; i++) {
-                try {
-                    resp.getWriter().write(dummyResponse());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+            try {
+                resp.getWriter().write("{data:["+formatJsonResult(book)+"]}");
+            } catch (IOException e) {
+                e.printStackTrace();
             }
             return;
         }
@@ -82,7 +89,7 @@ public class AmazonQuery extends HttpServlet {
 //                for(int i=0;i<item.get(0).getEditorialReviews().getEditorialReview().size();i++) {
 //                	System.out.println(item.get(0).getEditorialReviews().getEditorialReview().get(i).getContent());
 //                }
-                resp.getWriter().write("json = {data:[");	//Start JSON array
+                resp.getWriter().write("{data:[");	//Start JSON array
                 for (int j = 0; j < item.size(); j++) {
                     AmazonResult temp = new AmazonResult(item.get(j));
                     req.getSession().setAttribute(temp.getISBN(), temp);
@@ -105,55 +112,13 @@ public class AmazonQuery extends HttpServlet {
     }
     private String formatJsonResult(AmazonResult book) {
     	String temp = "{"+
-			"'medium_url': '"+book.getMediumImageUrl()+"',"+
+			"'small_url': '"+(book.getSmallImageUrl().equals("")?"images/blank_medium.jpg":book.getSmallImageUrl())+"',"+
 			"'title': '"+book.getTitle()+"',"+
 			"'author': '"+book.getAuthorAsString()+"',"+
 			"'amaz_rating': '"+book.getRating()+"',"+
-			"'tags': '"+book.getTagsAsString()+"'";
+			"'tags': '"+book.getTagsAsString()+"',"+
+			"'detailUrl': '"+book.getDetailUrl()+"'";
+    		
 		return temp+"}";
-    }
-    private String formatHttpResult(AmazonResult book) {
-        String temp = "";
-        temp += "<div class='round'>" +
-                "<img class='cover' src='" + book.getSmallImageUrl() + "'></img>" +
-                "<div class='info'>" +
-                "<div class='bio'>" +
-                "<div class='title'>" + book.getTitle() + "</div>" +
-                "<div class='author'>by " + book.getAuthor().get(0) + "</div>" + // TODO Handle multiple authors 
-                "<div class='tags'><%= 'apple, banana, cranberry, author, title'%></div>" +
-                "</div>" +
-                "<div class='right'>" +
-                "<div class='rating'>* * * * *</div>" +
-                "<div class='links'>" +
-                "<div class='library'>Reserve from Library</div>" +
-                "<div class='amazon'>Buy at Amazon</div>" +
-                "</div>" +
-                "</div>" +
-                "</div>" +
-                "</div>";
-
-        return temp;
-    }
-
-    private String dummyResponse() {
-        String temp = "";
-        temp += "<div class='round'>" +
-                "<img class='cover' src='" + "http://ecx.images-amazon.com/images/I/51yYy6tjdlL._SL75_.jpg" + "'></img>" +
-                "<div class='info'>" +
-                "<div class='bio'>" +
-                "<div class='title'>" + "Scarlet" + "</div>" +
-                "<div class='author'>by Stephen Lawhead</div><!--Handle multiple authors!-->" +
-                "<div class='tags'><%= 'apple, banana, cranberry, author, title'%></div>" +
-                "</div>" +
-                "<div class='right'>" +
-                "<div class='rating'>* * * * *</div>" +
-                "<div class='links'>" +
-                "<div class='library'>Reserve from Library</div>" +
-                "<div class='amazon'>Buy at Amazon</div>" +
-                "</div>" +
-                "</div>" +
-                "</div>" +
-                "</div>";
-        return temp;
     }
 }

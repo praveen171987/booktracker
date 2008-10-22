@@ -11,7 +11,7 @@
 		white-space: normal;
 	}
 	img {
-		padding: 3px;
+		padding: 3px 3px 3px 10px;
 		float: left;
 	}
 	.title {
@@ -23,4 +23,16 @@
 	.tags {
 		font-size: smaller;
 		height: 42px;
+	}
+	.data {
+		float: right;
+		width: 408px;
+	}
+	.left {
+		width: 70px;
+		float: left;
+	}
+	.left a {
+		float: left;
+		padding-left: 7px;
 	}

@@ -1,27 +1,45 @@
+<script src="/BookTracker/scripts/mootools-core.js"></script>
+<script src="/BookTracker/scripts/mootools-more.js"></script>
+<html>
+<head>
+<link rel="stylesheet" href="/BookTracker/scripts/amazonResults.css">
 <script type="text/javascript">
-	window.addEvent('resize', function() {
-		$('amazon').setStyle('height',$('amazon').getParent().getParent().getStyle('height').toInt());
-	});
+	//window.addEvent('resize', function() {
+	//	$('amazon').setStyle('height',$('amazon').getParent().getParent().getStyle('height').toInt());
+	//});
 	window.addEvent('domready',function() {
-		//var json = eval("json = {data:[{'small_url': 'http://ecx.images-amazon.com/images/I/51saresqz4L._SL75_.jpg','title': 'Nation','author': '[Terry Pratchett]','amaz_rating': '4.5','tags': '[com.amazonaws.a2s.model.Tag@b65a68, com.amazonaws.a2s.model.Tag@1e99db4, com.amazonaws.a2s.model.Tag@70cdd2, com.amazonaws.a2s.model.Tag@1d8c046, com.amazonaws.a2s.model.Tag@1376afa]'},{'small_url': 'http://ecx.images-amazon.com/images/I/51P3HmQhLML._SL75_.jpg','title': 'Making Money (Discworld Novels)','author': '[Terry Pratchett]','amaz_rating': '4.0','tags': '[com.amazonaws.a2s.model.Tag@15075f9, com.amazonaws.a2s.model.Tag@1715510, com.amazonaws.a2s.model.Tag@187955b]'},{'small_url': 'http://ecx.images-amazon.com/images/I/513kMW0lJZL._SL75_.jpg','title': 'Good Omens: The Nice and Accurate Prophecies of Agnes Nutter, Witch (Discworld)','author': '[Neil Gaiman, Terry Pratchett]','amaz_rating': '4.5','tags': '[com.amazonaws.a2s.model.Tag@5eb748, com.amazonaws.a2s.model.Tag@53033e, com.amazonaws.a2s.model.Tag@1f9e6e5, com.amazonaws.a2s.model.Tag@1a5d6d6, com.amazonaws.a2s.model.Tag@bbb2d0]'},{'small_url': 'http://ecx.images-amazon.com/images/I/516ZSBZBJXL._SL75_.jpg','title': 'Wyrd Sisters','author': '[Terry Pratchett]','amaz_rating': '4.5','tags': '[com.amazonaws.a2s.model.Tag@d8a125, com.amazonaws.a2s.model.Tag@3bbcfd, com.amazonaws.a2s.model.Tag@1f4af32, com.amazonaws.a2s.model.Tag@119fc9e, com.amazonaws.a2s.model.Tag@1181df3]'},{'small_url': 'http://ecx.images-amazon.com/images/I/51L5EyAK7PL._SL75_.jpg','title': 'The Discworld Graphic Novels: The Colour of Magic and The Light Fantastic','author': '[Terry Pratchett]','amaz_rating': '5.0','tags': '[com.amazonaws.a2s.model.Tag@566b3e, com.amazonaws.a2s.model.Tag@19ab9c5, com.amazonaws.a2s.model.Tag@11a74ef, com.amazonaws.a2s.model.Tag@1f31432, com.amazonaws.a2s.model.Tag@1b31c23]'},{'small_url': 'http://ecx.images-amazon.com/images/I/51DiYfZTEfL._SL75_.jpg','title': 'The Color of Magic','author': '[Terry Pratchett]','amaz_rating': '4.0','tags': '[com.amazonaws.a2s.model.Tag@1fc7b3a, com.amazonaws.a2s.model.Tag@fe2509, com.amazonaws.a2s.model.Tag@131767b, com.amazonaws.a2s.model.Tag@59b924, com.amazonaws.a2s.model.Tag@89f3e5]'},{'small_url': 'http://ecx.images-amazon.com/images/I/510QJ579O1L._SL75_.jpg','title': 'The Light Fantastic','author': '[Terry Pratchett]','amaz_rating': '4.5','tags': '[com.amazonaws.a2s.model.Tag@eb607d, com.amazonaws.a2s.model.Tag@10bbf6d, com.amazonaws.a2s.model.Tag@44ac6a, com.amazonaws.a2s.model.Tag@938b4a, com.amazonaws.a2s.model.Tag@9de832]'},{'small_url': 'http://ecx.images-amazon.com/images/I/51WB3FK96YL._SL75_.jpg','title': 'The Wee Free Men (Discworld)','author': '[Terry Pratchett]','amaz_rating': '4.5','tags': '[com.amazonaws.a2s.model.Tag@f72f09, com.amazonaws.a2s.model.Tag@311410, com.amazonaws.a2s.model.Tag@1c35ec, com.amazonaws.a2s.model.Tag@182d86, com.amazonaws.a2s.model.Tag@154e38b]'},{'small_url': 'http://ecx.images-amazon.com/images/I/51HHZ2YYRJL._SL75_.jpg','title': 'Guards! Guards!','author': '[Terry Pratchett]','amaz_rating': '4.5','tags': '[com.amazonaws.a2s.model.Tag@26fbfc, com.amazonaws.a2s.model.Tag@1696cdb, com.amazonaws.a2s.model.Tag@69a6cb, com.amazonaws.a2s.model.Tag@456a0c, com.amazonaws.a2s.model.Tag@1357784]'},{'small_url': 'http://ecx.images-amazon.com/images/I/41BBMTG9ESL._SL75_.jpg','title': 'Mort','author': '[Terry Pratchett]','amaz_rating': '4.5','tags': '[com.amazonaws.a2s.model.Tag@13985fc, com.amazonaws.a2s.model.Tag@18b995c, com.amazonaws.a2s.model.Tag@1879b, com.amazonaws.a2s.model.Tag@6e056e, com.amazonaws.a2s.model.Tag@126b165]'}]}");
-		var json = eval("json = {data:[{'medium_url': 'http://ecx.images-amazon.com/images/I/51saresqz4L._SL160_.jpg','title': 'Nation','author': 'Terry Pratchett','amaz_rating': '4.5','tags': 'terry pratchett,pratchett,fantasy,young adult,fiction'},{'medium_url': 'http://ecx.images-amazon.com/images/I/51P3HmQhLML._SL160_.jpg','title': 'Making Money (Discworld Novels)','author': 'Terry Pratchett','amaz_rating': '4.0','tags': 'discworld,terry pratchett,fantasy'},{'medium_url': 'http://ecx.images-amazon.com/images/I/513kMW0lJZL._SL160_.jpg','title': 'Good Omens: The Nice and Accurate Prophecies of Agnes Nutter, Witch (Discworld)','author': '[Neil Gaiman, Terry Pratchett]','amaz_rating': '4.5','tags': 'terry pratchett,neil gaiman,angels,comic,demons'},{'medium_url': 'http://ecx.images-amazon.com/images/I/516ZSBZBJXL._SL160_.jpg','title': 'Wyrd Sisters','author': '[Terry Pratchett]','amaz_rating': '4.5','tags': 'discworld,terry pratchett,fantasy,humor,satire'},{'medium_url': 'http://ecx.images-amazon.com/images/I/51L5EyAK7PL._SL160_.jpg','title': 'The Discworld Graphic Novels: The Colour of Magic and The Light Fantastic','author': '[Terry Pratchett]','amaz_rating': '5.0','tags': 'discworld,terry pratchett,the luggage,rincewind,twoflower'},{'medium_url': 'http://ecx.images-amazon.com/images/I/51DiYfZTEfL._SL160_.jpg','title': 'The Color of Magic','author': '[Terry Pratchett]','amaz_rating': '4.0','tags': 'discworld,fantasy,terry pratchett,humor,pratchett'},{'medium_url': 'http://ecx.images-amazon.com/images/I/510QJ579O1L._SL160_.jpg','title': 'The Light Fantastic','author': '[Terry Pratchett]','amaz_rating': '4.5','tags': 'discworld,fantasy,terry pratchett,humor,book'},{'medium_url': 'http://ecx.images-amazon.com/images/I/51WB3FK96YL._SL160_.jpg','title': 'The Wee Free Men (Discworld)','author': '[Terry Pratchett]','amaz_rating': '4.5','tags': 'discworld,fantasy,terry pratchett,humor,pratchett'},{'medium_url': 'http://ecx.images-amazon.com/images/I/51HHZ2YYRJL._SL160_.jpg','title': 'Guards! Guards!','author': '[Terry Pratchett]','amaz_rating': '4.5','tags': 'discworld,fantasy,terry pratchett,humor,satirical fantasy'},{'medium_url': 'http://ecx.images-amazon.com/images/I/41BBMTG9ESL._SL160_.jpg','title': 'Mort','author': '[Terry Pratchett]','amaz_rating': '4.5','tags': 'discworld,terry pratchett,fantasy,pratchett,book'}]}");
-		loadQuery(json.data);
+	var jsonRequest = new Request({url: "/BookTracker/AmazonQuery",  onSuccess: function(text){
+		var json = eval("("+text+")");
+		if(json && json.data) loadQuery(json.data);
+	}}).get({'keyword': 'Terry Pratchett'});
 	});
+	
 	function loadQuery(data){
 		var i=0;
+		$('amazon').set('html','');
 		while(data[i]){
 			var div = new Element('div', {id: 'result'+i, class: 'entry'});
-			var img = new Element('img', {src: data[i].medium_url});
+			var dataDiv = new Element('div', {class: 'data'});
+			var leftDiv = new Element('div', {class: 'left'});
+			var img = new Element('img', {src: data[i].small_url});
+			var libLink = new Element('a',{'href':'#'}).set('html','library');
+			var amazLink = new Element('a',{'href':data[i].detailUrl}).set('html','amazon');
 			var title = new Element('div').set('html',data[i].title).set('class','title');
 			var author = new Element('div').set('html','by: '+data[i].author);
 			var rating = new Element('div').set('html',data[i].amaz_rating);
 			var tags = new Element('div').set('html',data[i].tags.replace(/,/g,", ")).set('class','tags');
-			div.grab(img).grab(title).grab(author).grab(rating).grab(tags);
+			dataDiv.grab(title).grab(author).grab(rating).grab(tags);
+			leftDiv.grab(img).grab(libLink).grab(amazLink);
+			div.grab(leftDiv).grab(dataDiv);
 			$('amazon').grab(div);
 			i++;
 		}
 		//window.fireEvent('resize');
 	}
 </script>
+</head>
+<body>
 <div id="amazon">
 </div>
+</body>
+</html>
