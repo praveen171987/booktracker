@@ -33,57 +33,27 @@
 					$$('.mootableContainer').setStyle('width',$('content').getStyle('width').toInt()-480);
 				}
 			});
-			function getHTTPObject() { 
-				if (typeof XMLHttpRequest != 'undefined') { 
-					return new XMLHttpRequest(); 
-				}
-				try { 
-					return new ActiveXObject("Msxml2.XMLHTTP"); 
-				} catch (e) { 
-					try { 
-						return new ActiveXObject("Microsoft.XMLHTTP"); 
-					} catch (e) {} 
-				} 
-				return false; 
-			}
 
 			var taglimits;
 			var playlistName = "";
 			function getData(playlist, tags) {
 				taglimits = tags;
 				playlistName = playlist;
-				
-				var http = getHTTPObject();
+
 				if(playlist == null) playlist = "";
 				if(tags == null) tags = "";
-				http.open("GET", "/BookTracker/HandleData?playlist="+playlist+"&tags="+tags, true); 
-				http.onreadystatechange = function() {
-					if (http.readyState == 4) {
-						eval(http.responseText);
-						if(json && json.data){
-							dataTable.loadData(json.data);
-						}
-						if(json && json.tags){
-							loadTags(json.tags);
-						}
-					} 
-				} 
-				http.send(null);
+				var jsonRequest = new Request({url: "/BookTracker/HandleData",  onSuccess: function(text){
+					var json = eval("("+text+")");
+					if(json && json.data) dataTable.loadData(json.data);
+					if(json && json.tags) loadTags(json.tags);
+				}}).get({'playlist': playlist, 'tags':tags});
+
 			}
 			function getQuery(keywords) {
-				var http = getHTTPObject();
-				if(keywords) {
-					http.open("GET", "/BookTracker/AmazonQuery?keyword="+keywords, true);
-					http.onreadystatechange = function() {
-					if (http.readyState == 4) {
-						eval(http.responseText);
-						if(json && json.data){
-							loadQuery(json.data);
-						}
-					} 
-				} 
-				http.send(null);
-				}
+				var jsonRequest = new Request({url: "/BookTracker/AmazonQuery",  onSuccess: function(text){
+					var json = eval("("+text+")");
+					if(json && json.data) loadQuery(json.data);
+				}}).get({'keyword': keywords});
 			}
 		</script>
 	</head>
