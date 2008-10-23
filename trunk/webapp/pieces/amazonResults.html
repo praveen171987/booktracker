@@ -1,18 +1,20 @@
-<script src="/BookTracker/scripts/mootools-core.js"></script>
-<script src="/BookTracker/scripts/mootools-more.js"></script>
+<!--
 <html>
 <head>
 <link rel="stylesheet" href="/BookTracker/scripts/amazonResults.css">
+<script src="/BookTracker/scripts/mootools-core.js"></script>
+<script src="/BookTracker/scripts/mootools-more.js"></script>
+-->
 <script type="text/javascript">
-	//window.addEvent('resize', function() {
-	//	$('amazon').setStyle('height',$('amazon').getParent().getParent().getStyle('height').toInt());
-	//});
-	window.addEvent('domready',function() {
-	var jsonRequest = new Request({url: "/BookTracker/AmazonQuery",  onSuccess: function(text){
-		var json = eval("("+text+")");
-		if(json && json.data) loadQuery(json.data);
-	}}).get({'keyword': 'Terry Pratchett'});
+	window.addEvent('resize', function() {
+		$('amazon').setStyle('height',$('amazon').getParent().getParent().getStyle('height').toInt());
 	});
+	//window.addEvent('domready',function() {
+	//var jsonRequest = new Request({url: "/BookTracker/AmazonQuery",  onSuccess: function(text){
+	//	var json = eval("("+text+")");
+	//	if(json && json.data) loadQuery(json.data);
+	//}}).get({'keyword': 'Terry Pratchett'});
+	//});
 	
 	function loadQuery(data){
 		var i=0;
@@ -27,7 +29,9 @@
 			var title = new Element('div').set('html',data[i].title).set('class','title');
 			var author = new Element('div').set('html','by: '+data[i].author);
 			var rating = new Element('div').set('html',data[i].amaz_rating);
-			var tags = new Element('div').set('html',data[i].tags.replace(/,/g,", ")).set('class','tags');
+			var tags = new Element('div').set('class','tags');
+			if(data[i].tags)
+				tags.set('html',data[i].tags.replace(/,/g,", "));
 			dataDiv.grab(title).grab(author).grab(rating).grab(tags);
 			leftDiv.grab(img).grab(libLink).grab(amazLink);
 			div.grab(leftDiv).grab(dataDiv);
@@ -37,9 +41,13 @@
 		//window.fireEvent('resize');
 	}
 </script>
+<!--
 </head>
 <body>
+-->
 <div id="amazon">
 </div>
+<!--
 </body>
 </html>
+-->

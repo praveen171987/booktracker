@@ -42,7 +42,7 @@ div{
 	width: 100%;
 }
 #results {
-	display: none;
+	display: block;
 }
 #tags {
 	display: none;
