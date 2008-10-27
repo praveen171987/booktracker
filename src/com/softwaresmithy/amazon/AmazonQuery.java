@@ -2,12 +2,15 @@ package com.softwaresmithy.amazon;
 
 import java.io.IOException;
 import java.lang.reflect.Array;
+import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.amazonaws.a2s.AmazonA2S;
 import com.amazonaws.a2s.AmazonA2SClient;
@@ -60,55 +63,73 @@ public class AmazonQuery extends HttpServlet {
 
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) {
-        String keyword = (String) req.getParameter("keyword");
-        String dummy = (String) req.getParameter("dummy");
-        AmazonResult book = new AmazonResult();
-        List<String> auth = new ArrayList<String>();
-        auth.add("Terry Pratchett");
-        book.setAuthor(auth);
-        book.setDetailUrl("#");
-        book.setTitle("Nation");
-        book.setSmallImageUrl("");
-        if (dummy != null && dummy.equals("true")) {
-            try {
-                resp.getWriter().write("{data:["+formatJsonResult(book)+"]}");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return;
-        }
+        String keyword = req.getParameter("keyword");
+        String dummy = req.getParameter("dummy");
+        boolean nextPage = false, prevPage = false; 
+        if(req.getParameter("nextPage")!= null && req.getParameter("nextPage").equals("true"))
+        	nextPage = true; 
+        if(req.getParameter("prevPage")!= null && req.getParameter("prevPage").equals("true"))
+        	prevPage = true; 
+        
+        HttpSession sess = req.getSession();
+
         if (keyword != null && !keyword.equals("")) {
             request.setKeywords(keyword);
-            try {
-                //AcornWebQueryEngine query = new AcornWebQueryEngine();
+            sess.setAttribute("keywords", keyword);
+            sess.setAttribute("amazCurrPage", 1);
+            /*
+            //remove existing session isbns
+            Enumeration<String> names = sess.getAttributeNames();
+            while(names.hasMoreElements()){
+            	String temp = names.nextElement(); 
+            	if(temp.startsWith("isbn:")){
+            		sess.removeAttribute(temp);
+            	}
+            }*/
 
-                ItemSearchResponse response = service.itemSearch(request);
-
-                java.util.List<Items> items = response.getItems();
-                List<Item> item = items.get(0).getItem();
-//                for(int i=0;i<item.get(0).getEditorialReviews().getEditorialReview().size();i++) {
-//                	System.out.println(item.get(0).getEditorialReviews().getEditorialReview().get(i).getContent());
-//                }
-                resp.getWriter().write("{data:[");	//Start JSON array
-                for (int j = 0; j < item.size(); j++) {
-                    AmazonResult temp = new AmazonResult(item.get(j));
-                    req.getSession().setAttribute(temp.getISBN(), temp);
-                    resp.getWriter().write(formatJsonResult(temp));
-                    if(j<item.size()-1) resp.getWriter().write(",");
-                //System.out.println(temp.getTitle()+": "+temp.getISBN());
-                //System.out.println("at library: "+query.atLibrary(isbns));
-                }
-                resp.getWriter().write("]}");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } else {
+        } else if(keyword == null && nextPage){
+        	int currPage = Integer.parseInt(sess.getAttribute("amazCurrPage").toString());
+        	request.setKeywords((String)sess.getAttribute("keywords"));
+        	request.setItemPage(new BigInteger(Integer.toString(currPage+1)));
+        	sess.setAttribute("amazCurrPage", currPage+1);
+        } else if(keyword == null && prevPage){
+        	int currPage = Integer.parseInt(sess.getAttribute("amazCurrPage").toString());
+        	request.setKeywords((String)sess.getAttribute("keywords"));
+        	request.setItemPage(new BigInteger(Integer.toString(currPage-1)));
+        	sess.setAttribute("amazCurrPage", currPage-1);
+        }else {
             try {
                 resp.getWriter().write("error!");
+                return;
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
+        try {
+            //AcornWebQueryEngine query = new AcornWebQueryEngine();
+
+            ItemSearchResponse response = service.itemSearch(request);
+            BigInteger totPages = response.getItems().get(0).getTotalPages();
+            java.util.List<Items> items = response.getItems();
+            List<Item> item = items.get(0).getItem();
+//            for(int i=0;i<item.get(0).getEditorialReviews().getEditorialReview().size();i++) {
+//            	System.out.println(item.get(0).getEditorialReviews().getEditorialReview().get(i).getContent());
+//            }
+            resp.getWriter().write("{data:[");	//Start JSON array
+            for (int j = 0; j < item.size(); j++) {
+                AmazonResult temp = new AmazonResult(item.get(j));
+                sess.setAttribute("isbn:"+temp.getISBN(), temp);
+                resp.getWriter().write(formatJsonResult(temp));
+                if(j<item.size()-1) resp.getWriter().write(",");
+            //System.out.println(temp.getTitle()+": "+temp.getISBN());
+            //System.out.println("at library: "+query.atLibrary(isbns));
+            }
+            resp.getWriter().write("],");
+            resp.getWriter().write("totPages: "+totPages.intValue()+"}");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
     }
     private String formatJsonResult(AmazonResult book) {
     	String temp = "{"+
@@ -117,6 +138,7 @@ public class AmazonQuery extends HttpServlet {
 			"'author': '"+book.getAuthorAsString()+"',"+
 			"'amaz_rating': '"+book.getRating()+"',"+
 			"'tags': '"+book.getTagsAsString()+"',"+
+			"'isbn': '"+book.getISBN()+"',"+
 			"'detailUrl': '"+book.getDetailUrl()+"'";
     		
 		return temp+"}";

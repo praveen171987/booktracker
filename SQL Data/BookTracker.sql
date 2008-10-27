@@ -140,7 +140,13 @@ INSERT INTO `alt_vers` (`isbn`,`alt_ver`) VALUES
  ('159554089X','B001ECQGM4'),
  ('159554089X','1904233732'),
  ('1930846452','0441016715'),
- ('1595540873','1598594885');
+ ('1595540873','1598594885'),
+ ('0061161659','0061161640'),
+ ('0061161659','0061363928'),
+ ('0061161659','0552154903'),
+ ('0061161659','B000SEHLE6'),
+ ('0061161659','0385611013'),
+ ('0061161659','B000W7E5CU');
 /*!40000 ALTER TABLE `alt_vers` ENABLE KEYS */;
 
 
@@ -196,7 +202,8 @@ INSERT INTO `authors` (`isbn`,`author`) VALUES
  ('1595540857','Stephen R. Lawhead'),
  ('159554089X','Stephen R. Lawhead'),
  ('1930846452','Charles Stross'),
- ('1595540873','Stephen R. Lawhead');
+ ('1595540873','Stephen R. Lawhead'),
+ ('0061161659','Terry Pratchett');
 /*!40000 ALTER TABLE `authors` ENABLE KEYS */;
 
 
@@ -223,6 +230,7 @@ CREATE TABLE `book` (
 
 /*!40000 ALTER TABLE `book` DISABLE KEYS */;
 INSERT INTO `book` (`isbn`,`title`,`amaz_rating`,`pub_date`,`pages`,`small_url`,`medium_url`,`large_url`) VALUES 
+ ('0061161659','Making Money (Discworld Novels)','4.000','2008-10-01',432,'http://ecx.images-amazon.com/images/I/51P3HmQhLML._SL75_.jpg','http://ecx.images-amazon.com/images/I/51P3HmQhLML._SL160_.jpg','http://ecx.images-amazon.com/images/I/51P3HmQhLML._SL500_.jpg'),
  ('0061433012','Nation','4.500','2008-10-01',384,'http://ecx.images-amazon.com/images/I/51saresqz4L._SL75_.jpg','http://ecx.images-amazon.com/images/I/51saresqz4L._SL160_.jpg','http://ecx.images-amazon.com/images/I/51saresqz4L._SL500_.jpg'),
  ('0061474096','Anathem','4.500','2008-09-01',960,'http://ecx.images-amazon.com/images/I/51PpF7ZgT5L._SL75_.jpg','http://ecx.images-amazon.com/images/I/51PpF7ZgT5L._SL160_.jpg','http://ecx.images-amazon.com/images/I/51PpF7ZgT5L._SL500_.jpg'),
  ('0316143472','When You Are Engulfed in Flames','4.000','2008-06-03',336,'http://ecx.images-amazon.com/images/I/51rI%2BNF4VwL._SL75_.jpg','http://ecx.images-amazon.com/images/I/51rI%2BNF4VwL._SL160_.jpg','http://ecx.images-amazon.com/images/I/51rI%2BNF4VwL._SL500_.jpg'),
@@ -292,11 +300,12 @@ CREATE TABLE `lib_entry` (
   `date_started` date default NULL,
   `date_finished` date default NULL,
   PRIMARY KEY  (`lib_id`),
+  UNIQUE KEY `username_2` (`username`,`isbn`),
   KEY `isbn` (`isbn`),
   KEY `username` (`username`),
   CONSTRAINT `lib_entry_ibfk_1` FOREIGN KEY (`isbn`) REFERENCES `book` (`isbn`),
   CONSTRAINT `lib_entry_ibfk_2` FOREIGN KEY (`username`) REFERENCES `user` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `lib_entry`
@@ -326,7 +335,6 @@ INSERT INTO `lib_entry` (`lib_id`,`username`,`isbn`,`user_rating`,`date_added`,`
  (20,'apple','0765320428',NULL,'2008-09-17',NULL,NULL),
  (21,'apple','0765358549',NULL,'2008-09-17',NULL,NULL),
  (22,'apple','0809572354',NULL,'2008-09-17',NULL,NULL),
- (23,'apple','1416555870',NULL,'2008-09-17',NULL,NULL),
  (24,'apple','1416555919',NULL,'2008-09-17',NULL,NULL),
  (25,'apple','1555839878',NULL,'2008-09-17',NULL,NULL),
  (26,'apple','1590200152',NULL,'2008-09-17',NULL,NULL),
@@ -336,7 +344,8 @@ INSERT INTO `lib_entry` (`lib_id`,`username`,`isbn`,`user_rating`,`date_added`,`
  (30,'apple','1595540857',NULL,'2008-09-17',NULL,NULL),
  (31,'apple','159554089X',NULL,'2008-09-17',NULL,NULL),
  (32,'apple','1930846452',NULL,'2008-09-17',NULL,NULL),
- (33,'apple','1595540873',NULL,'2008-09-17',NULL,NULL);
+ (33,'apple','1595540873',NULL,'2008-09-17',NULL,NULL),
+ (34,'apple','0061161659',NULL,'2008-10-27',NULL,NULL);
 /*!40000 ALTER TABLE `lib_entry` ENABLE KEYS */;
 
 
@@ -529,7 +538,10 @@ INSERT INTO `tags` (`isbn`,`tag`) VALUES
  ('1930846452','contemporary fantasy'),
  ('1595540873','stephen r lawhead'),
  ('1595540873','christian fantasy'),
- ('1595540873','historical fiction');
+ ('1595540873','historical fiction'),
+ ('0061161659','discworld'),
+ ('0061161659','terry pratchett'),
+ ('0061161659','fantasy');
 /*!40000 ALTER TABLE `tags` ENABLE KEYS */;
 
 
@@ -557,6 +569,46 @@ INSERT INTO `user` (`username`,`password`,`email`,`date_joined`) VALUES
 
 
 --
+-- Definition of procedure `addBook`
+--
+
+DROP PROCEDURE IF EXISTS `addBook`;
+
+DELIMITER $$
+
+/*!50003 SET @TEMP_SQL_MODE=@@SQL_MODE, SQL_MODE='STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER' */ $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `addBook`(
+        isbn VARCHAR(10), title TEXT, amaz_rating DECIMAL(4,3), pub_date VARCHAR(10),
+        pages INTEGER, small_url TEXT, medium_url TEXT, large_url TEXT,
+        authors TEXT, altVers TEXT, tags TEXT)
+BEGIN
+   INSERT INTO book VALUES(isbn, title, amaz_rating, pub_date, pages, small_url, medium_url, large_url);
+   CALL insertAltVers(isbn, altVers);
+   CALL insertAuthors(isbn, authors);
+   CALL insertTags(isbn, tags);
+END $$
+/*!50003 SET SESSION SQL_MODE=@TEMP_SQL_MODE */  $$
+
+DELIMITER ;
+
+--
+-- Definition of procedure `addToLibrary`
+--
+
+DROP PROCEDURE IF EXISTS `addToLibrary`;
+
+DELIMITER $$
+
+/*!50003 SET @TEMP_SQL_MODE=@@SQL_MODE, SQL_MODE='STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER' */ $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `addToLibrary`(username VARCHAR(30), isbn VARCHAR(10))
+BEGIN
+   INSERT INTO lib_entry VALUES(null, username, isbn, null, CURDATE(), null, null);
+END $$
+/*!50003 SET SESSION SQL_MODE=@TEMP_SQL_MODE */  $$
+
+DELIMITER ;
+
+--
 -- Definition of procedure `addToPlaylist`
 --
 
@@ -565,14 +617,14 @@ DROP PROCEDURE IF EXISTS `addToPlaylist`;
 DELIMITER $$
 
 /*!50003 SET @TEMP_SQL_MODE=@@SQL_MODE, SQL_MODE='STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER' */ $$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `addToPlaylist`(entryId INT UNSIGNED, playlistName VARCHAR(30))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `addToPlaylist`(qUsername VARCHAR(30), qIsbn VARCHAR(10), playlistName VARCHAR(30))
 BEGIN
-   DECLARE newOrderNum INT UNSIGNED;
-   DECLARE curUserName VARCHAR(30);
-   SELECT username INTO curUserName FROM lib_entry WHERE lib_id = entryId;
-   SELECT count(*) INTO newOrderNum FROM playlist_entry WHERE playlist_name = playlistName AND username = curUserName;
-   SET newOrderNum = newOrderNum+1;
-   INSERT INTO playlist_entry VALUES(null, entryId, playlistName, newOrderNum, curUserName);
+   DECLARE entryId INT;
+   DECLARE newNumber INT;
+   SELECT entry_id INTO entryId FROM lib_entry WHERE isbn = qIsbn AND username = qUsername;
+   SELECT count(*) INTO newNumber FROM playlist_entry WHERE username = qUsername AND playlist_name = playlistName;
+
+   INSERT INTO playlist_entry VALUES(null, entryId, playlistName, newNumber+1, qUsername);
 END $$
 /*!50003 SET SESSION SQL_MODE=@TEMP_SQL_MODE */  $$
 
@@ -850,29 +902,6 @@ BEGIN
          SET temp = SUBSTRING(temp, i);
       END WHILE;
    END IF;
-END $$
-/*!50003 SET SESSION SQL_MODE=@TEMP_SQL_MODE */  $$
-
-DELIMITER ;
-
---
--- Definition of procedure `insertBook`
---
-
-DROP PROCEDURE IF EXISTS `insertBook`;
-
-DELIMITER $$
-
-/*!50003 SET @TEMP_SQL_MODE=@@SQL_MODE, SQL_MODE='STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER' */ $$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insertBook`(
-        isbn VARCHAR(10), title TEXT, amaz_rating DECIMAL(4,3), pub_date VARCHAR(10),
-        pages INTEGER, small_url TEXT, medium_url TEXT, large_url TEXT,
-        authors TEXT, altVers TEXT, tags TEXT)
-BEGIN
-   INSERT INTO book VALUES(isbn, title, amaz_rating, pub_date, pages, small_url, medium_url, large_url);
-   CALL insertAltVers(isbn, altVers);
-   CALL insertAuthors(isbn, authors);
-   CALL insertTags(isbn, tags);
 END $$
 /*!50003 SET SESSION SQL_MODE=@TEMP_SQL_MODE */  $$
 

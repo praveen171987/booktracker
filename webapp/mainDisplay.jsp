@@ -49,11 +49,25 @@
 				}}).get({'playlist': playlist, 'tags':tags});
 
 			}
-			function getQuery(keywords) {
-				var jsonRequest = new Request({url: "/BookTracker/AmazonQuery",  onSuccess: function(text){
-					var json = eval("("+text+")");
-					if(json && json.data) loadQuery(json.data);
-				}}).get({'keyword': keywords});
+			function getQuery(keywords, newPage) {
+				if(keywords) {
+					var jsonRequest = new Request({url: "/BookTracker/AmazonQuery",  onSuccess: function(text){
+						var json = eval("("+text+")");
+						if(json) loadQuery(json);
+					}}).get({'keyword': keywords});
+				}
+				else if(newPage == 1){
+					var jsonRequest = new Request({url: "/BookTracker/AmazonQuery",  onSuccess: function(text){
+						var json = eval("("+text+")");
+						if(json) loadQuery(json);
+					}}).get({'nextPage': 'true'});
+				}
+				else if(newPage == -1){
+					var jsonRequest = new Request({url: "/BookTracker/AmazonQuery",  onSuccess: function(text){
+						var json = eval("("+text+")");
+						if(json) loadQuery(json);
+					}}).get({'prevPage': 'true'});
+				}
 			}
 		</script>
 	</head>

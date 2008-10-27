@@ -15,11 +15,21 @@ div{
 	background-repeat: repeat;
 	border-bottom: 1px solid #333;
 }
-
+#banner #amazSearch {
+	float: right;
+	margin-top: 1.5em;
+}
+#banner #amazSearch #text{
+	float: left;
+}
+#banner #amazSearch #button{
+	float: right;
+}
 #banner h1{
 	margin: 0;
 	padding: .5em;
 	color: #FFFFFF;
+	float: left;
 }
 
 #nav{
@@ -27,6 +37,7 @@ div{
 	width: 160px;
 	background-color: #999999;
 	height: 100%;
+	border-top: 2px solid black;
 }
 
 #content{
@@ -35,7 +46,7 @@ div{
 
 #footer{
 	background-color: #666;
-	padding: 1em 1em 1em 0;
+	padding: 1px 1px 1px 0;
 	text-align: right;
 	border-top: 1px solid #333;
 	bottom: 0px;
@@ -48,6 +59,9 @@ div{
 	display: none;
 }
 .login {
-	float:left;
-	margin: 0 4px 0 0;
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	background-color: brown;
+	overflow: visible;
 }

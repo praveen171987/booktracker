@@ -27,6 +27,9 @@ public class AmazonResult {
 	public List<String> getAlternateVersions() {
 		return alternateVersions;
 	}
+	public String getAlternateVersionsAsString() {
+		return listToCSV(alternateVersions);
+	}
 	public void setAlternateVersions(List<String> alternateVersions) {
 		this.alternateVersions = alternateVersions;
 	}
@@ -109,7 +112,7 @@ public class AmazonResult {
 		ISBN = isbn;
 	}
 	public String getTitle() {
-		return title;
+		return title.replace("'", "\\'");
 	}
 	public void setTitle(String title) {
 		this.title = title;
@@ -171,7 +174,7 @@ public class AmazonResult {
 	public String listToCSV(List<String> list){
 		String temp = "";
 		for(int i=0;i<list.size();i++){
-			temp += list.get(i);
+			temp += list.get(i).replace("'", "\\'");
 			if(i<list.size()-1)temp+=",";
 		}
 		return temp;
@@ -180,7 +183,7 @@ public class AmazonResult {
 		String temp = "";
 		if(list == null) return temp;
 		for(int i=0;i<list.size();i++){
-			temp += list.get(i).getName();
+			temp += list.get(i).getName().replace("'", "\\'");
 			if(i<list.size()-1)temp+=",";
 		}
 		return temp;

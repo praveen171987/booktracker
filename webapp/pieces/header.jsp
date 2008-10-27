@@ -23,4 +23,6 @@
 		}
 	%>
 </div>
-<input id="amazSearch" type="text"><input style="float:right;" type="button" value="search" onClick="javascript:getQuery($('amazSearch').value);">
+<div id="amazSearch">
+<input id="text" type="text"><input id="button" style="float:right;" type="button" value="search" onClick="javascript:getQuery($('text').value);">
+</div>

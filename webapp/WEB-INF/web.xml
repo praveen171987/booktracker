@@ -35,12 +35,21 @@
     <url-pattern>/HandleUser</url-pattern>
   </servlet-mapping>
   
-    <servlet>
+   <servlet>
     <servlet-name>HandleData</servlet-name>
     <servlet-class>com.softwaresmithy.web.HandleData</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>HandleData</servlet-name>
     <url-pattern>/HandleData</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>AddBook</servlet-name>
+    <servlet-class>com.softwaresmithy.sql.AddBook</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddBook</servlet-name>
+    <url-pattern>/AddBook</url-pattern>
   </servlet-mapping>
 </web-app>
