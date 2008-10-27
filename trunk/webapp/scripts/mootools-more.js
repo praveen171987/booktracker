@@ -520,56 +520,445 @@ Element.implement({
 
 
 /*
-Script: Scroller.js
-	Class which scrolls the contents of any Element (including the window) when the mouse reaches the Element's boundaries.
+Script: Sortables.js
+	Class for creating a drag and drop sorting interface for lists of items.
 
 License:
 	MIT-style license.
 */
 
-var Scroller = new Class({
+var Sortables = new Class({
+
+	Implements: [Events, Options],
+
+	options: {/*
+		onSort: $empty,
+		onStart: $empty,
+		onComplete: $empty,*/
+		snap: 4,
+		opacity: 1,
+		clone: false,
+		revert: false,
+		handle: false,
+		constrain: false
+	},
+
+	initialize: function(lists, options){
+		this.setOptions(options);
+		this.elements = [];
+		this.lists = [];
+		this.idle = true;
+		
+		this.addLists($$($(lists) || lists));
+		if (!this.options.clone) this.options.revert = false;
+		if (this.options.revert) this.effect = new Fx.Morph(null, $merge({duration: 250, link: 'cancel'}, this.options.revert));
+	},
+
+	attach: function(){
+		this.addLists(this.lists);
+		return this;
+	},
+
+	detach: function(){
+		this.lists = this.removeLists(this.lists);
+		return this;
+	},
+
+	addItems: function(){
+		Array.flatten(arguments).each(function(element){
+			this.elements.push(element);
+			var start = element.retrieve('sortables:start', this.start.bindWithEvent(this, element));
+			(this.options.handle ? element.getElement(this.options.handle) || element : element).addEvent('mousedown', start);
+		}, this);
+		return this;
+	},
+
+	addLists: function(){
+		Array.flatten(arguments).each(function(list){
+			this.lists.push(list);
+			this.addItems(list.getChildren());
+		}, this);
+		return this;
+	},
+
+	removeItems: function(){
+		var elements = [];
+		Array.flatten(arguments).each(function(element){
+			elements.push(element);
+			this.elements.erase(element);
+			var start = element.retrieve('sortables:start');
+			(this.options.handle ? element.getElement(this.options.handle) || element : element).removeEvent('mousedown', start);
+		}, this);
+		return $$(elements);
+	},
+
+	removeLists: function(){
+		var lists = [];
+		Array.flatten(arguments).each(function(list){
+			lists.push(list);
+			this.lists.erase(list);
+			this.removeItems(list.getChildren());
+		}, this);
+		return $$(lists);
+	},
+
+	getClone: function(event, element){
+		if (!this.options.clone) return new Element('div').inject(document.body);
+		if ($type(this.options.clone) == 'function') return this.options.clone.call(this, event, element, this.list);
+		return element.clone(true).setStyles({
+			'margin': '0px',
+			'position': 'absolute',
+			'visibility': 'hidden',
+			'width': element.getStyle('width')
+		}).inject(this.list).position(element.getPosition(element.getOffsetParent()));
+	},
+
+	getDroppables: function(){
+		var droppables = this.list.getChildren();
+		if (!this.options.constrain) droppables = this.lists.concat(droppables).erase(this.list);
+		return droppables.erase(this.clone).erase(this.element);
+	},
+
+	insert: function(dragging, element){
+		var where = 'inside';
+		if (this.lists.contains(element)){
+			this.list = element;
+			this.drag.droppables = this.getDroppables();
+		} else {
+			where = this.element.getAllPrevious().contains(element) ? 'before' : 'after';
+		}
+		this.element.inject(element, where);
+		this.fireEvent('sort', [this.element, this.clone]);
+	},
+
+	start: function(event, element){
+		if (!this.idle) return;
+		this.idle = false;
+		this.element = element;
+		this.opacity = element.get('opacity');
+		this.list = element.getParent();
+		this.clone = this.getClone(event, element);
+		
+		this.drag = new Drag.Move(this.clone, {
+			snap: this.options.snap,
+			container: this.options.constrain && this.element.getParent(),
+			droppables: this.getDroppables(),
+			onSnap: function(){
+				event.stop();
+				this.clone.setStyle('visibility', 'visible');
+				this.element.set('opacity', this.options.opacity || 0);
+				this.fireEvent('start', [this.element, this.clone]);
+			}.bind(this),
+			onEnter: this.insert.bind(this),
+			onCancel: this.reset.bind(this),
+			onComplete: this.end.bind(this)
+		});
+		
+		this.clone.inject(this.element, 'before');
+		this.drag.start(event);
+	},
+
+	end: function(){
+		this.drag.detach();
+		this.element.set('opacity', this.opacity);
+		if (this.effect){
+			var dim = this.element.getStyles('width', 'height');
+			var pos = this.clone.computePosition(this.element.getPosition(this.clone.offsetParent));
+			this.effect.element = this.clone;
+			this.effect.start({
+				top: pos.top,
+				left: pos.left,
+				width: dim.width,
+				height: dim.height,
+				opacity: 0.25
+			}).chain(this.reset.bind(this));
+		} else {
+			this.reset();
+		}
+	},
+
+	reset: function(){
+		this.idle = true;
+		this.clone.destroy();
+		this.fireEvent('complete', this.element);
+	},
+
+	serialize: function(){
+		var params = Array.link(arguments, {modifier: Function.type, index: $defined});
+		var serial = this.lists.map(function(list){
+			return list.getChildren().map(params.modifier || function(element){
+				return element.get('id');
+			}, this);
+		}, this);
+		
+		var index = params.index;
+		if (this.lists.length == 1) index = 0;
+		return $chk(index) && index >= 0 && index < this.lists.length ? serial[index] : serial;
+	}
+
+});
+
+/*
+Script: Tips.js
+	Class for creating nice tips that follow the mouse cursor when hovering an element.
+
+License:
+	MIT-style license.
+*/
+
+var Tips = new Class({
 
 	Implements: [Events, Options],
 
 	options: {
-		area: 20,
-		velocity: 1,
-		onChange: function(x, y){
-			this.element.scrollTo(x, y);
-		}
+		onShow: function(tip){
+			tip.setStyle('visibility', 'visible');
+		},
+		onHide: function(tip){
+			tip.setStyle('visibility', 'hidden');
+		},
+		showDelay: 100,
+		hideDelay: 100,
+		className: null,
+		offsets: {x: 16, y: 16},
+		fixed: false
 	},
 
-	initialize: function(element, options){
+	initialize: function(){
+		var params = Array.link(arguments, {options: Object.type, elements: $defined});
+		this.setOptions(params.options || null);
+		
+		this.tip = new Element('div').inject(document.body);
+		
+		if (this.options.className) this.tip.addClass(this.options.className);
+		
+		var top = new Element('div', {'class': 'tip-top'}).inject(this.tip);
+		this.container = new Element('div', {'class': 'tip'}).inject(this.tip);
+		var bottom = new Element('div', {'class': 'tip-bottom'}).inject(this.tip);
+
+		this.tip.setStyles({position: 'absolute', top: 0, left: 0, visibility: 'hidden'});
+		
+		if (params.elements) this.attach(params.elements);
+	},
+	
+	attach: function(elements){
+		$$(elements).each(function(element){
+			var title = element.retrieve('tip:title', element.get('title'));
+			var text = element.retrieve('tip:text', element.get('rel') || element.get('href'));
+			var enter = element.retrieve('tip:enter', this.elementEnter.bindWithEvent(this, element));
+			var leave = element.retrieve('tip:leave', this.elementLeave.bindWithEvent(this, element));
+			element.addEvents({mouseenter: enter, mouseleave: leave});
+			if (!this.options.fixed){
+				var move = element.retrieve('tip:move', this.elementMove.bindWithEvent(this, element));
+				element.addEvent('mousemove', move);
+			}
+			element.store('tip:native', element.get('title'));
+			element.erase('title');
+		}, this);
+		return this;
+	},
+	
+	detach: function(elements){
+		$$(elements).each(function(element){
+			element.removeEvent('mouseenter', element.retrieve('tip:enter') || $empty);
+			element.removeEvent('mouseleave', element.retrieve('tip:leave') || $empty);
+			element.removeEvent('mousemove', element.retrieve('tip:move') || $empty);
+			element.eliminate('tip:enter').eliminate('tip:leave').eliminate('tip:move');
+			var original = element.retrieve('tip:native');
+			if (original) element.set('title', original);
+		});
+		return this;
+	},
+	
+	elementEnter: function(event, element){
+		
+		$A(this.container.childNodes).each(Element.dispose);
+		
+		var title = element.retrieve('tip:title');
+		
+		if (title){
+			this.titleElement = new Element('div', {'class': 'tip-title'}).inject(this.container);
+			this.fill(this.titleElement, title);
+		}
+		
+		var text = element.retrieve('tip:text');
+		if (text){
+			this.textElement = new Element('div', {'class': 'tip-text'}).inject(this.container);
+			this.fill(this.textElement, text);
+		}
+		
+		this.timer = $clear(this.timer);
+		this.timer = this.show.delay(this.options.showDelay, this);
+
+		this.position((!this.options.fixed) ? event : {page: element.getPosition()});
+	},
+	
+	elementLeave: function(event){
+		$clear(this.timer);
+		this.timer = this.hide.delay(this.options.hideDelay, this);
+	},
+	
+	elementMove: function(event){
+		this.position(event);
+	},
+	
+	position: function(event){
+		var size = window.getSize(), scroll = window.getScroll();
+		var tip = {x: this.tip.offsetWidth, y: this.tip.offsetHeight};
+		var props = {x: 'left', y: 'top'};
+		for (var z in props){
+			var pos = event.page[z] + this.options.offsets[z];
+			if ((pos + tip[z] - scroll[z]) > size[z]) pos = event.page[z] - this.options.offsets[z] - tip[z];
+			this.tip.setStyle(props[z], pos);
+		}
+	},
+	
+	fill: function(element, contents){
+		(typeof contents == 'string') ? element.set('html', contents) : element.adopt(contents);
+	},
+
+	show: function(){
+		this.fireEvent('show', this.tip);
+	},
+
+	hide: function(){
+		this.fireEvent('hide', this.tip);
+	}
+
+});
+
+/*
+Script: Slider.js
+	Class for creating horizontal and vertical slider controls.
+
+License:
+	MIT-style license.
+*/
+
+var Slider = new Class({
+
+	Implements: [Events, Options],
+
+	options: {/*
+		onChange: $empty,
+		onComplete: $empty,*/
+		onTick: function(position){
+			if(this.options.snap) position = this.toPosition(this.step);
+			this.knob.setStyle(this.property, position);
+		},
+		snap: false,
+		offset: 0,
+		range: false,
+		wheel: false,
+		steps: 100,
+		mode: 'horizontal'
+	},
+
+	initialize: function(element, knob, options){
 		this.setOptions(options);
 		this.element = $(element);
-		this.listener = ($type(this.element) != 'element') ? $(this.element.getDocument().body) : this.element;
-		this.timer = null;
-		this.coord = this.getCoords.bind(this);
-	},
-
-	start: function(){
-		this.listener.addEvent('mousemove', this.coord);
-	},
-
-	stop: function(){
-		this.listener.removeEvent('mousemove', this.coord);
-		this.timer = $clear(this.timer);
-	},
-
-	getCoords: function(event){
-		this.page = (this.listener.get('tag') == 'body') ? event.client : event.page;
-		if (!this.timer) this.timer = this.scroll.periodical(50, this);
-	},
-
-	scroll: function(){
-		var size = this.element.getSize(), scroll = this.element.getScroll(), pos = this.element.getPosition(), change = {'x': 0, 'y': 0};
-		for (var z in this.page){
-			if (this.page[z] < (this.options.area + pos[z]) && scroll[z] != 0)
-				change[z] = (this.page[z] - this.options.area - pos[z]) * this.options.velocity;
-			else if (this.page[z] + this.options.area > (size[z] + pos[z]) && size[z] + size[z] != scroll[z])
-				change[z] = (this.page[z] - size[z] + this.options.area - pos[z]) * this.options.velocity;
+		this.knob = $(knob);
+		this.previousChange = this.previousEnd = this.step = -1;
+		this.element.addEvent('mousedown', this.clickedElement.bind(this));
+		if (this.options.wheel) this.element.addEvent('mousewheel', this.scrolledElement.bindWithEvent(this));
+		var offset, limit = {}, modifiers = {'x': false, 'y': false};
+		switch (this.options.mode){
+			case 'vertical':
+				this.axis = 'y';
+				this.property = 'top';
+				offset = 'offsetHeight';
+				break;
+			case 'horizontal':
+				this.axis = 'x';
+				this.property = 'left';
+				offset = 'offsetWidth';
 		}
-		if (change.y || change.x) this.fireEvent('change', [scroll.x + change.x, scroll.y + change.y]);
+		this.half = this.knob[offset] / 2;
+		this.full = this.element[offset] - this.knob[offset] + (this.options.offset * 2);
+		this.min = $chk(this.options.range[0]) ? this.options.range[0] : 0;
+		this.max = $chk(this.options.range[1]) ? this.options.range[1] : this.options.steps;
+		this.range = this.max - this.min;
+		this.steps = this.options.steps || this.full;
+		this.stepSize = Math.abs(this.range) / this.steps;
+		this.stepWidth = this.stepSize * this.full / Math.abs(this.range) ;
+		
+		this.knob.setStyle('position', 'relative').setStyle(this.property, - this.options.offset);
+		modifiers[this.axis] = this.property;
+		limit[this.axis] = [- this.options.offset, this.full - this.options.offset];
+		this.drag = new Drag(this.knob, {
+			snap: 0,
+			limit: limit,
+			modifiers: modifiers,
+			onDrag: this.draggedKnob.bind(this),
+			onStart: this.draggedKnob.bind(this),
+			onComplete: function(){
+				this.draggedKnob();
+				this.end();
+			}.bind(this)
+		});
+		if (this.options.snap) {
+			this.drag.options.grid = Math.ceil(this.stepWidth);
+			this.drag.options.limit[this.axis][1] = this.full;
+		}
+	},
+
+	set: function(step){
+		if (!((this.range > 0) ^ (step < this.min))) step = this.min;
+		if (!((this.range > 0) ^ (step > this.max))) step = this.max;
+		
+		this.step = Math.round(step);
+		this.checkStep();
+		this.end();
+		this.fireEvent('tick', this.toPosition(this.step));
+		return this;
+	},
+
+	clickedElement: function(event){
+		var dir = this.range < 0 ? -1 : 1;
+		var position = event.page[this.axis] - this.element.getPosition()[this.axis] - this.half;
+		position = position.limit(-this.options.offset, this.full -this.options.offset);
+		
+		this.step = Math.round(this.min + dir * this.toStep(position));
+		this.checkStep();
+		this.end();
+		this.fireEvent('tick', position);
+	},
+	
+	scrolledElement: function(event){
+		var mode = (this.options.mode == 'horizontal') ? (event.wheel < 0) : (event.wheel > 0);
+		this.set(mode ? this.step - this.stepSize : this.step + this.stepSize);
+		event.stop();
+	},
+
+	draggedKnob: function(){
+		var dir = this.range < 0 ? -1 : 1;
+		var position = this.drag.value.now[this.axis];
+		position = position.limit(-this.options.offset, this.full -this.options.offset);
+		this.step = Math.round(this.min + dir * this.toStep(position));
+		this.checkStep();
+	},
+
+	checkStep: function(){
+		if (this.previousChange != this.step){
+			this.previousChange = this.step;
+			this.fireEvent('change', this.step);
+		}
+	},
+
+	end: function(){
+		if (this.previousEnd !== this.step){
+			this.previousEnd = this.step;
+			this.fireEvent('complete', this.step + '');
+		}
+	},
+
+	toStep: function(position){
+		var step = (position + this.options.offset) * this.stepSize / this.full * this.steps;
+		return this.options.steps ? Math.round(step -= step % this.stepSize) : step;
+	},
+
+	toPosition: function(step){
+		return (this.full * Math.abs(this.min - step)) / (this.steps * this.stepSize) - this.options.offset;
 	}
 
 });
