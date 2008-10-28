@@ -486,7 +486,9 @@ Drag.Move = new Class({
 	checkDroppables: function(){
 		var overed = this.droppables.filter(this.checkAgainst, this).getLast();
 		if (this.overed != overed){
-			if (this.overed) this.fireEvent('leave', [this.element, this.overed]);
+			if (this.overed) {
+				this.fireEvent('leave', [this.element, this.overed])
+			};
 			if (overed){
 				this.overed = overed;
 				this.fireEvent('enter', [this.element, overed]);
@@ -615,6 +617,7 @@ var Sortables = new Class({
 
 	getDroppables: function(){
 		var droppables = this.list.getChildren();
+		droppables.include($('dataTable'));
 		if (!this.options.constrain) droppables = this.lists.concat(droppables).erase(this.list);
 		return droppables.erase(this.clone).erase(this.element);
 	},
@@ -627,7 +630,7 @@ var Sortables = new Class({
 		} else {
 			where = this.element.getAllPrevious().contains(element) ? 'before' : 'after';
 		}
-		this.element.inject(element, where);
+		//this.element.inject(element, where);
 		this.fireEvent('sort', [this.element, this.clone]);
 	},
 
@@ -659,6 +662,7 @@ var Sortables = new Class({
 	},
 
 	end: function(){
+		alert('end');
 		this.drag.detach();
 		this.element.set('opacity', this.opacity);
 		if (this.effect){
@@ -678,6 +682,7 @@ var Sortables = new Class({
 	},
 
 	reset: function(){
+		alert('reset');
 		this.idle = true;
 		this.clone.destroy();
 		this.fireEvent('complete', this.element);

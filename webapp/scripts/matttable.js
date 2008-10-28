@@ -25,7 +25,7 @@ var MooTable = new Class({
 		this._createHeader($(this.element.tHead));
 		this.mooTable.wraps(this.divTBody);
 		this.divTHead.inject(this.divTBody,'before');
-		this.divMooCont = new Element('div').set('class','mootableContainer').wraps(this.mooTable);
+		this.divMooCont = new Element('div').set('class','mootableContainer').set('id',el).wraps(this.mooTable);
 		if(this.options.contHeight) this.setHeight(this.options.contHeight);
 		if(this.options.contWidth) this.divMooCont.setStyle('width',this.options.contWidth);
 		
@@ -36,6 +36,7 @@ var MooTable = new Class({
 				new Element('div').setStyle('width',($type(this.options.width) == 'numeric'?this.options.width:this.options.width[ind])).set('html',html).inject($(cell), 'bottom');
 			},this);
 		},this);
+		this.element.removeProperty('id');
 		
 		
 	},

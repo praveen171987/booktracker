@@ -6,6 +6,7 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.Stack;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -64,7 +65,6 @@ public class AmazonQuery extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) {
         String keyword = req.getParameter("keyword");
-        String dummy = req.getParameter("dummy");
         boolean nextPage = false, prevPage = false; 
         if(req.getParameter("nextPage")!= null && req.getParameter("nextPage").equals("true"))
         	nextPage = true; 
@@ -77,15 +77,19 @@ public class AmazonQuery extends HttpServlet {
             request.setKeywords(keyword);
             sess.setAttribute("keywords", keyword);
             sess.setAttribute("amazCurrPage", 1);
-            /*
             //remove existing session isbns
             Enumeration<String> names = sess.getAttributeNames();
+            Stack<String> deleteMe = new Stack<String>();
+            String temp = "";
             while(names.hasMoreElements()){
-            	String temp = names.nextElement(); 
+            	temp = names.nextElement();
             	if(temp.startsWith("isbn:")){
-            		sess.removeAttribute(temp);
+            		deleteMe.push(temp);
             	}
-            }*/
+            }
+            while(!deleteMe.empty()){
+            	sess.removeAttribute(deleteMe.pop());
+            }
 
         } else if(keyword == null && nextPage){
         	int currPage = Integer.parseInt(sess.getAttribute("amazCurrPage").toString());
@@ -131,14 +135,19 @@ public class AmazonQuery extends HttpServlet {
         }
         
     }
+
     private String formatJsonResult(AmazonResult book) {
     	String temp = "{"+
-			"'small_url': '"+(book.getSmallImageUrl().equals("")?"images/blank_medium.jpg":book.getSmallImageUrl())+"',"+
-			"'title': '"+book.getTitle()+"',"+
+    		"'isbn': '"+book.getISBN()+"',"+
+    		"'title': '"+book.getTitle()+"',"+
 			"'author': '"+book.getAuthorAsString()+"',"+
 			"'amaz_rating': '"+book.getRating()+"',"+
+			"'pub_date': '"+book.getPubDate()+"',"+
+			"'pages': '"+book.getPages()+"',"+
+			"'small_url': '"+(book.getSmallImageUrl().equals("")?"images/blank_small.jpg":book.getSmallImageUrl())+"',"+
+			"'medium_url': '"+(book.getMediumImageUrl().equals("")?"images/blank_medium.jpg":book.getMediumImageUrl())+"',"+
+			"'large_url': '"+(book.getLargeImageUrl().equals("")?"images/blank_large.jpg":book.getLargeImageUrl())+"',"+
 			"'tags': '"+book.getTagsAsString()+"',"+
-			"'isbn': '"+book.getISBN()+"',"+
 			"'detailUrl': '"+book.getDetailUrl()+"'";
     		
 		return temp+"}";

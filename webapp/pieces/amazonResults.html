@@ -7,7 +7,7 @@
 -->
 <script type="text/javascript">
 	window.addEvent('resize', function() {
-		$('amazon').setStyle('height',$('amazon').getParent().getParent().getStyle('height').toInt());
+		$('amazon').setStyle('height',$('amazon').getParent().getParent().getStyle('height').toInt()-$('pages').clientHeight);
 	});
 	//window.addEvent('domready',function() {
 	//var jsonRequest = new Request({url: "/BookTracker/AmazonQuery",  onSuccess: function(text){
@@ -16,6 +16,7 @@
 	//}}).get({'keyword': 'Terry Pratchett'});
 	//});
 	var amazCurrPage = 1;
+	var resultObj = new Array();
 	function loadQuery(json){
 		var i=0;
 		if(json.totPages && json.totPages > 1){
@@ -27,6 +28,9 @@
 		$('amazon').set('html','');
 		if(json.data) {
 			while(json.data[i]){
+				resultObj.empty();
+				resultObj[json.data[i].isbn] = json.data[i];
+			
 				var div = new Element('div', {id: 'result'+i, class: 'entry'});
 				var dataDiv = new Element('div', {class: 'json.data'});
 				var leftDiv = new Element('div', {class: 'left'});
@@ -35,7 +39,6 @@
 				addLib.isbn = json.data[i].isbn;
 				addLib.addEvent('click', function(){
 					submitRequest(this.isbn, null)
-					//alert(this.isbn);
 				});
 				var addPlay = new Element('a',{'href':'#'}).set('html','add Ply');
 				
@@ -54,12 +57,13 @@
 				i++;
 			}
 		}
-		var mySortables = new Sortables('amazon',{clone: true});
+		new Sortables($('amazon'),{clone:true});
 		//window.fireEvent('resize');
 	}
 	function submitRequest(isbn, playlist) {
 		var request = new Request({url: "/BookTracker/AddBook",  onSuccess: function(text){
 			alert('success!');
+			dataTable._addRow(resultObj[isbn]);
 		}});
 		alert(isbn);
 		if(playlist)
