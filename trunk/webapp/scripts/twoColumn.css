@@ -40,6 +40,9 @@ div{
 	border-top: 2px solid black;
 }
 
+#nav img {
+	width: 25px;
+}
 #content{
 	height: 100%;
 }
