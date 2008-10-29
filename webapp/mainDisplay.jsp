@@ -9,16 +9,29 @@
 		<script src="scripts/mootools-core.js"></script>
 		<script src="scripts/mootools-more.js"></script>
 		<script src="scripts/matttable.js"></script>
+		<script src="pieces/tagCloud.js"></script>
+		<script src="pieces/amazonResults.js"></script>
+		<script src="pieces/bookInfo.js"></script>
 	
 		<script type="text/javascript">
 			var dataTable;
+			var tagPane;
+			var resultsPane;
+			var bookInfoPane;
 			var sidebar = true;
+			var tabs = ['tags','results','bookInfo'];
 			window.addEvent('domready', function(){
+				tagPane = new TagCloud('tags',{});
+				resultsPane = new AmazonResult('results',{});
+				bookInfoPane = new BookInfo('bookInfo',{});
 				dataTable = new MooTable('dataTable',
 					{width: [202,192,134,96,157], 
 					rowDef: ['title','author','pub_date','isbn','pages'],
 					contHeight: 500,
-					contWidth: 1000
+					contWidth: 1000,
+					rowClick: function() {
+						alert(this.data.isbn);
+					}
 					});
 				<%if(session.getAttribute("username") != null){%>
 					getData(null,null);
@@ -45,28 +58,40 @@
 				var jsonRequest = new Request({url: "/BookTracker/HandleData",  onSuccess: function(text){
 					var json = eval("("+text+")");
 					if(json && json.data) dataTable.loadData(json.data);
-					if(json && json.tags) loadTags(json.tags);
+					if(json && json.tags) tagPane.loadTags(json.tags);
 				}}).get({'playlist': playlist, 'tags':tags});
 
 			}
 			function getQuery(keywords, newPage) {
-				if(keywords) {
-					var jsonRequest = new Request({url: "/BookTracker/AmazonQuery",  onSuccess: function(text){
+				var jsonRequest = new Request({url: "/BookTracker/AmazonQuery",  onSuccess: function(text){
 						var json = eval("("+text+")");
-						if(json) loadQuery(json);
-					}}).get({'keyword': keywords});
+						if(json) resultsPane.loadQuery(json);
+						showSearch();
+				}});
+				if(keywords) {
+					jsonRequest.get({'keyword': keywords});
 				}
 				else if(newPage == 1){
-					var jsonRequest = new Request({url: "/BookTracker/AmazonQuery",  onSuccess: function(text){
-						var json = eval("("+text+")");
-						if(json) loadQuery(json);
-					}}).get({'nextPage': 'true'});
+					jsonRequest.get({'nextPage': 'true'});
 				}
 				else if(newPage == -1){
-					var jsonRequest = new Request({url: "/BookTracker/AmazonQuery",  onSuccess: function(text){
-						var json = eval("("+text+")");
-						if(json) loadQuery(json);
-					}}).get({'prevPage': 'true'});
+					jsonRequest.get({'prevPage': 'true'});
+				}
+			}
+			function submitRequest(data, playlist) {
+				var request = new Request({url: "/BookTracker/AddBook",  onSuccess: function(text){
+					dataTable._addRow(data);
+				}});
+				if(playlistName && playlistName != "")
+					request.get({'playlist': playlistName, 'isbn':data.isbn});
+				else request.get({'isbn':data.isbn});
+			}
+			function showTab(j) {
+				var i=0;
+				while(tabs[i]){
+					if(i!=j) $(tabs[i]).setStyle('display','none');
+					else $(tabs[i]).setStyle('display','block');
+					i++;
 				}
 			}
 		</script>
@@ -93,12 +118,9 @@
 					<tbody/>
 				</table>
 				<div id="right">
-					<div id="tags">
-						<%@ include file="pieces/tagCloud.jsp"%>
-					</div>
-					<div id="results">
-						<%@ include file="pieces/amazonResults.html"%>
-					</div>
+					<div id="tags"></div>
+					<div id="results"></div>
+					<div id="bookInfo"></div>
 				</div>
 			</div>
 

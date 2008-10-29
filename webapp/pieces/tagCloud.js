@@ -1,45 +1,39 @@
-<script type="text/javascript">
 var TagCloud = new Class({	
 	Implements: [Options, Events],
 	options: {
-		width: 100,
-		rowDef: false,		//Row object  definition (array)
-		contHeight: false,
-		contWidth: false,
-		rowClick: $lambda(false)
 	},
 	initialize: function(el, options){
 		this.setOptions(options);
-		var limits = new Element('div');
-		var tagCloud = new Element('div');
-		el.appendChild(limits).appendChild(tagCloud);
+		this.limits = new Element('div').set('id','limits');
+		this.tagCloud = new Element('div').set('id','tagCloud');
+		$(el).appendChild(this.limits);
+		$(el).appendChild(this.tagCloud);
 		
 		window.addEvent('resize', function() {
-			$('tagCloud').setStyle('height',$('tagCloud').getParent().getParent().getStyle('height').toInt()-$('limits').clientHeight);
-		});
+			this.tagCloud.setStyle('height',this.tagCloud.getParent().getParent().getStyle('height').toInt()-this.limits.clientHeight);
+		}.bind(this));
 	},
 	
-	function loadTags(data){
+	loadTags: function(data){
 		var i=0;
-		
-		$("limits").innerHTML = "";
+		this.limits.set('html',"");
 		if(taglimits){
-			var limits = taglimits.split(",");
-			while(limits[i]){
-				var a = new Element("a").set('html',limits[i]).set('ind',i);
+			var limit = taglimits.split(",");
+			while(limit[i]){
+				var a = new Element("a").set('html',limit[i]).set('ind',i);
 				a.addEvent('click', function() {
-					var newLimits = "";
+					var newlimit = "";
 					var i=0;
-					while(limits[i]){
+					while(limit[i]){
 						if(i != this.get('ind')){
-							newLimits += limits[i]+",";
+							newlimit += limit[i]+",";
 						}
 						i++;
 					}
-					newLimits = newLimits.substring(0,newLimits.length-1);
-					getData(playlistName,newLimits);
+					newlimit = newlimit.substring(0,newlimit.length-1);
+					getData(playlistName,newlimit);
 				});
-				$("limits").appendChild(a);
+				this.limits.appendChild(a);
 				i++;
 			}
 		}
@@ -56,7 +50,7 @@ var TagCloud = new Class({
 		spread = (spread>(max-min))?(max-min):spread;
 		if(spread==0)spread = 1;
 		i=0;
-		$("tagCloud").innerHTML = "";
+		this.tagCloud.set('html',"");
 		while(data && data[i]){
 			var classNum = Math.floor(data[i].num*spread/(max-(min-1)));
 			var span = new Element("span").addClass("tag"+classNum).set('html',data[i].tag);
@@ -72,14 +66,9 @@ var TagCloud = new Class({
 				}
 				else getData(playlistName,this.textContent);
 			});
-			$("tagCloud").appendChild(span);
+			this.tagCloud.appendChild(span);
 			i++;
 		}
 		window.fireEvent('resize');
 	}
 });
-</script>
-<!--
-<div id="limits"></div>
-<div id="tagCloud"></div>
--->

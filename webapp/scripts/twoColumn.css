@@ -37,7 +37,7 @@ div{
 	width: 160px;
 	background-color: #999999;
 	height: 100%;
-	border-top: 2px solid black;
+	border-top: 0px solid black;
 }
 
 #nav img {
@@ -55,11 +55,14 @@ div{
 	bottom: 0px;
 	width: 100%;
 }
+#footer a {
+	cursor: pointer;
+}
 #results {
-	display: block;
+	display: none;
 }
 #tags {
-	display: none;
+	display: block;
 }
 .login {
 	position: absolute;

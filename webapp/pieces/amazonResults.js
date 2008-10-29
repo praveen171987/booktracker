@@ -1,4 +1,4 @@
-var TagCloud = new Class({	
+var AmazonResult = new Class({	
 	Implements: [Options, Events],
 	options: {
 	},
@@ -6,32 +6,32 @@ var TagCloud = new Class({
 		window.addEvent('resize', function() {
 			$('amazon').setStyle('height',$('amazon').getParent().getParent().getStyle('height').toInt()-$('pages').clientHeight-$('footer').clientHeight);
 		});
+		this.amazCurrPage = 1;
+		var pages = new Element('div').set('id','pages');
+		var amazon = new Element('div').set('id','amazon');
+		$(el).appendChild(pages);
+		$(el).appendChild(amazon);
 	},
-	var amazCurrPage = 1;
-	var resultObj = new Array();
 	loadQuery: function(json){
 		var i=0;
 		if(json.totPages && json.totPages > 1){
-			var back = amazCurrPage==1?'&nbsp;':'<a href="#" onClick="javascript:getQuery(null, -1);amazCurrPage--;"><</a>';
-			var fore = amazCurrPage==json.totPages?'&nbsp;':'<a href="#" onClick="javascript:getQuery(null, 1);amazCurrPage++;">></a>';
-			$('pages').set('html', back+' page '+amazCurrPage+' of '+json.totPages+' '+fore);
+			var back = this.amazCurrPage==1?'&nbsp;':'<a href="#" onClick="resultsPane.wrapGetQuery(null, -1)"><</a>';
+			var fore = this.amazCurrPage==json.totPages?'&nbsp;':'<a href="#" onClick="resultsPane.wrapGetQuery(null, -1)">></a>';
+			$('pages').set('html', back+' page '+this.amazCurrPage+' of '+json.totPages+' '+fore);
 		}
 		
 		$('amazon').set('html','');
 		if(json.data) {
 			while(json.data[i]){
-				resultObj.empty();
-				resultObj[json.data[i].isbn] = json.data[i];
-			
 				var div = new Element('div', {id: 'result'+i, class: 'entry'});
+				div.data = json.data[i];
 				var dataDiv = new Element('div', {class: 'json.data'});
 				var leftDiv = new Element('div', {class: 'left'});
 				var img = new Element('img', {src: json.data[i].small_url});
 				var addLib = new Element('a',{'href':'#'}).set('html','add Lib')
-				addLib.isbn = json.data[i].isbn;
 				addLib.addEvent('click', function(){
-					submitRequest(this.isbn, null)
-				});
+					submitRequest(this.data, null)
+				}.bind(div));
 				var addPlay = new Element('a',{'href':'#'}).set('html','add Ply');
 				
 				var libLink = new Element('a',{'href':'#'}).set('html','library');
@@ -51,15 +51,9 @@ var TagCloud = new Class({
 		}
 		new Sortables($('amazon'),{clone:true});
 		//window.fireEvent('resize');
-	}
-	submitRequest: function(isbn, playlist) {
-		var request = new Request({url: "/BookTracker/AddBook",  onSuccess: function(text){
-			dataTable._addRow(resultObj[isbn]);
-		}});
-		if(playlist)
-			request.get({'playlist': playlist, 'isbn':isbn});
-		else request.get({'isbn':isbn});
+	},
+	wrapGetQuery: function(a, b) {
+		getQuery(null, b);
+		this.amazCurrPage += b;
 	}
 });
-<div id="pages"></div>
-<div id="amazon"></div>

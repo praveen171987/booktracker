@@ -133,13 +133,12 @@ public class AmazonQuery extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
     }
 
     private String formatJsonResult(AmazonResult book) {
     	String temp = "{"+
     		"'isbn': '"+book.getISBN()+"',"+
-    		"'title': '"+book.getTitle()+"',"+
+    		"'title': '"+book.getTitle().replace("'", "\\'")+"',"+
 			"'author': '"+book.getAuthorAsString()+"',"+
 			"'amaz_rating': '"+book.getRating()+"',"+
 			"'pub_date': '"+book.getPubDate()+"',"+
