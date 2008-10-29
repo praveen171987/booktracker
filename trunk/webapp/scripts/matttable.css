@@ -11,7 +11,7 @@
 .mootableContainer {
 	border-color:black #CCCCCC #CCCCCC;
 	border-style:solid;
-	border-width:2px 0 1px;
+	border-width:0px 0 1px;
 	overflow: hidden;
 	position: relative;
 	float:	left;
@@ -49,6 +49,7 @@
 .mooTable .tBody table {
 	border-spacing: 0px;
 	empty-cells: show;
+	cursor: pointer;
 }
 .mooTable .tBody table tbody tr td {
 	white-space: nowrap;

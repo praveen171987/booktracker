@@ -4,7 +4,8 @@ var MooTable = new Class({
 		width: 100,
 		rowDef: false,		//Row object  definition (array)
 		contHeight: false,
-		contWidth: false
+		contWidth: false,
+		rowClick: $lambda(false)
 	},
 	//class variables;
 	divHeaders: [],
@@ -108,7 +109,8 @@ var MooTable = new Class({
 	},
 	_addRow: function(rowObj) {
 		var tbody = this.element.tBodies[0];
-		var tr = new Element('tr');
+		var tr = new Element('tr').addEvent('click',this.options.rowClick);
+		tr.data = rowObj;
 		var i=0;
 		while(this.options.rowDef[i]){
 			new Element('td').set('html', '<div style="width:'+this.divHeaders[i].getStyle('width')+'">'+rowObj[this.options.rowDef[i]]+'</div>').inject(tr,'bottom');

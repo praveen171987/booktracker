@@ -662,7 +662,6 @@ var Sortables = new Class({
 	},
 
 	end: function(){
-		alert('end');
 		this.drag.detach();
 		this.element.set('opacity', this.opacity);
 		if (this.effect){
@@ -682,7 +681,6 @@ var Sortables = new Class({
 	},
 
 	reset: function(){
-		alert('reset');
 		this.idle = true;
 		this.clone.destroy();
 		this.fireEvent('complete', this.element);

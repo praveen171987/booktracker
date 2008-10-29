@@ -10,11 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class HandleData extends HttpServlet{
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 2941698075480033286L;
 	Connection con = null;
+	
 	public void init(){
 		
 	}
@@ -25,17 +23,15 @@ public class HandleData extends HttpServlet{
 					"jdbc:mysql://localhost:3306/booktracker", "root",
 					"mdl3128");
 			JSONObject json = new JSONObject("json");
-			
 			CallableStatement bookData = con.prepareCall("{call getData(?,?,?)}");
 			bookData = setParams(bookData, req);
 			bookData.execute();
 			json.addAttribute(bookData.getResultSet(), "data");
-			
-			CallableStatement tagData = con.prepareCall("{call getTags(?,?,?)}");
-			tagData = setParams(tagData, req);
-			tagData.execute();
-			json.addAttribute(tagData.getResultSet(), "tags");
-			
+			if(bookData.getMoreResults()){
+				json.addAttribute(bookData.getResultSet(),"tags");
+			}
+
+
 			resp.getWriter().write(json.getJSONObject());
 			//resp.getWriter().write("json = { data: [{'firstName' : 'John','lastName'  : 'Doe','age'       : 23 }]}");
 			
@@ -65,4 +61,5 @@ public class HandleData extends HttpServlet{
 		}
 		return cs;
 	}
+
 }
