@@ -111,7 +111,7 @@ public class AmazonQuery extends HttpServlet {
         }
         try {
             //AcornWebQueryEngine query = new AcornWebQueryEngine();
-
+        	System.out.println("currPage: "+sess.getAttribute("amazCurrPage"));
             ItemSearchResponse response = service.itemSearch(request);
             BigInteger totPages = response.getItems().get(0).getTotalPages();
             java.util.List<Items> items = response.getItems();
