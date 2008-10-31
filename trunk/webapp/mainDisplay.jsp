@@ -5,10 +5,14 @@
 		<link rel="stylesheet" href="scripts/twoColumn.css">
 		<link rel="stylesheet" href="scripts/tagCloud.css">
 		<link rel="stylesheet" href="scripts/matttable.css">
+		<link rel="stylesheet" href="scripts/bookInfo.css">
+		<!--<link rel="stylesheet" href="scripts/mootable.css">-->
 		<link rel="stylesheet" href="scripts/amazonResults.css">
 		<script src="scripts/mootools-core.js"></script>
 		<script src="scripts/mootools-more.js"></script>
 		<script src="scripts/matttable.js"></script>
+		<!--<script src="scripts/mootable.js"></script>-->
+		<!--<script src="scripts/sorting_table.js"></script>-->
 		<script src="pieces/tagCloud.js"></script>
 		<script src="pieces/amazonResults.js"></script>
 		<script src="pieces/bookInfo.js"></script>
@@ -25,13 +29,10 @@
 				resultsPane = new AmazonResult('results',{});
 				bookInfoPane = new BookInfo('bookInfo',{});
 				dataTable = new MooTable('dataTable',
-					{width: [202,192,134,96,157], 
+					{width: [202,192,100,108,33], 
 					rowDef: ['title','author','pub_date','isbn','pages'],
 					contHeight: 500,
 					contWidth: 1000,
-					rowClick: function() {
-						alert(this.data.isbn);
-					}
 					});
 				<%if(session.getAttribute("username") != null){%>
 					getData(null,null);

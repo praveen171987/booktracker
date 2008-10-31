@@ -1,0 +1,26 @@
+<html>
+	<head>
+		<link rel="stylesheet" href="scripts/bookInfo.css">
+		<script src="scripts/mootools-core.js"></script>
+		<script src="scripts/mootools-more.js"></script>		
+		<script src="pieces/bookInfo.js"></script>
+		<script type="text/javascript">
+			window.addEvent('domready', function() {
+				var bookInfo = new BookInfo('bookInfo');
+				var tempBook = {'isbn' : '0061433012',
+				   'title' : 'Nation',
+				   'author' : 'Terry Pratchett',
+				   'amaz_rating' : '4.500',
+				   'pub_date' : '2008-10-01',
+				   'pages' : '384',
+				   'small_url' : 'http://ecx.images-amazon.com/images/I/51saresqz4L._SL75_.jpg',
+				   'medium_url' : 'http://ecx.images-amazon.com/images/I/51saresqz4L._SL160_.jpg',
+				   'large_url' : 'http://ecx.images-amazon.com/images/I/51saresqz4L._SL500_.jpg'};
+				bookInfo.showInfo(tempBook);
+			});
+		</script>
+	</head>
+	<body>
+		<div id='bookInfo'></div>
+	</body>
+</html>
