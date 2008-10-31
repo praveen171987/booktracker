@@ -67,7 +67,7 @@
 				var jsonRequest = new Request({url: "/BookTracker/AmazonQuery",  onSuccess: function(text){
 						var json = eval("("+text+")");
 						if(json) resultsPane.loadQuery(json);
-						showSearch();
+						showTab(1);
 				}});
 				if(keywords) {
 					jsonRequest.get({'keyword': keywords});
@@ -81,6 +81,8 @@
 			}
 			function submitRequest(data, playlist) {
 				var request = new Request({url: "/BookTracker/AddBook",  onSuccess: function(text){
+					data.origOrder = dataTable.rowData.length;
+					dataTable.rowData[dataTable.rowData.length] = data;
 					dataTable._addRow(data);
 				}});
 				if(playlistName && playlistName != "")
@@ -91,7 +93,7 @@
 				var i=0;
 				while(tabs[i]){
 					if(i!=j) $(tabs[i]).setStyle('display','none');
-					else $(tabs[i]).setStyle('display','block');
+					else $(tabs[i]).getStyle('display')=='block'?$(tabs[i]).setStyle('display','none'):$(tabs[i]).setStyle('display','block');
 					i++;
 				}
 			}

@@ -16,7 +16,7 @@ var AmazonResult = new Class({
 		var i=0;
 		if(json.totPages && json.totPages > 1){
 			var back = this.amazCurrPage==1?'&nbsp;':'<a href="#" onClick="resultsPane.wrapGetQuery(null, -1)"><</a>';
-			var fore = this.amazCurrPage==json.totPages?'&nbsp;':'<a href="#" onClick="resultsPane.wrapGetQuery(null, -1)">></a>';
+			var fore = this.amazCurrPage==json.totPages?'&nbsp;':'<a href="#" onClick="resultsPane.wrapGetQuery(null, 1)">></a>';
 			$('pages').set('html', back+' page '+this.amazCurrPage+' of '+json.totPages+' '+fore);
 		}
 		
