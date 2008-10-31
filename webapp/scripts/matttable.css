@@ -42,6 +42,10 @@
 	border-bottom: 1px solid;
 	border-right: 1px solid;
 	position: relative;
+	
+}
+.mooTable .tHead .tr .td img {
+	display: none;
 }
 .mooTable .tHead .tr .td .cell {
 	float: left;
@@ -56,4 +60,17 @@
 	overflow: hidden;
 	border-right: 1px solid;
 	padding-left: 3px;
+}
+.sort_asc {
+	background-image: url(img/arrow_down.gif);
+	background-repeat: no-repeat;
+	background-position: right center;
+}
+.sort_desc {
+	background-image: url(img/arrow_up.gif);
+	background-repeat: no-repeat;
+	background-position: right center;
+}
+.selected {
+	background-color: lightBlue;
 }

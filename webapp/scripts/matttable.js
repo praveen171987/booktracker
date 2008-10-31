@@ -8,7 +8,11 @@ var MooTable = new Class({
 		rowClick: $lambda(false)
 	},
 	//class variables;
+	sortIndex: 0,
+	rowData: [],
 	divHeaders: [],
+	sortOrder: null,
+	selectedRow: null,
 	initialize: function(el, options){
 		this.setOptions(options);
 		this.element = $(el);	//The table
@@ -48,11 +52,33 @@ var MooTable = new Class({
 		divTHead.set('class','tHead');
 		resizeLeft = null;
 		tHead.getElements('td').each( function(cell, ind, arr){
-			var headerTd = new Element('div').set('class','td').set('col',ind).setStyle('width',($type(this.options.width) == 'numeric'?this.options.width:this.options.width[ind]));
-			this.divHeaders[ind] = headerTd;
 			var divCell = new Element('div').set('class','cell').set('html',cell.innerHTML);
 			var divResizeLeft = new Element('div').set('class','resize');
 			var divResizeRight = new Element('div').set('class','resize');
+			
+			var headerTd = new Element('div').set('class','td').set('col',ind).setStyle('width',($type(this.options.width) == 'numeric'?this.options.width:this.options.width[ind]));
+			headerTd.addEvent('click', function() {
+				if(this.sortIndex != ind) {
+					if(this.sortOrder) this.divHeaders[this.sortIndex].removeClass('sort_'+this.sortOrder);
+					this.sortOrder = null; //reset sort upon clicking a new column
+					
+				}
+				this.sortIndex = ind;
+
+				if(headerTd.hasClass('sort_asc')) {
+					headerTd.removeClass('sort_asc').addClass('sort_desc');
+					this.sortOrder = 'desc';
+				}else if(headerTd.hasClass('sort_desc')) {
+					headerTd.removeClass('sort_desc');
+					this.sortOrder = null;
+				}else {
+					headerTd.addClass('sort_asc');
+					this.sortOrder = 'asc';
+				}
+				this.sort();
+			}.bind(this));
+			this.divHeaders[ind] = headerTd;
+
 			
 			new Drag(headerTd,{
 				handle: divResizeRight,
@@ -100,17 +126,30 @@ var MooTable = new Class({
 		this.divTHead = divTHead;
 	},
 	loadData: function(data){
+		this.rowData.empty();
+		if(this.sortOrder) this.divHeaders[this.sortIndex].removeClass('sort_'+this.sortOrder); //remove ordering
+		this.sortOrder = null;
 		var i = 0;
 		this.element.tBodies[0].set('html','');
 		while(data && data[i]){
+			this.rowData[i] = data[i];
+			this.rowData[i].origOrder = i;
 			this._addRow(data[i]);
 			i++;
 		}
 	},
 	_addRow: function(rowObj) {
 		var tbody = this.element.tBodies[0];
-		var tr = new Element('tr').addEvent('click',this.options.rowClick);
-		tr.data = rowObj;
+		var tr = new Element('tr').addEvent('click', function() {
+			if(this.selectedRow && this.selectedRow == tr) {
+				if(tr.toggleClass('selected').hasClass('selected')) bookInfoPane.showInfo(rowObj);;
+			}else {
+				if(this.selectedRow) this.selectedRow.removeClass('selected');
+				tr.addClass('selected');
+				this.selectedRow = tr;
+				bookInfoPane.showInfo(rowObj);
+			}
+		}.bind(this));
 		var i=0;
 		while(this.options.rowDef[i]){
 			new Element('td').set('html', '<div style="width:'+this.divHeaders[i].getStyle('width')+'">'+rowObj[this.options.rowDef[i]]+'</div>').inject(tr,'bottom');
@@ -118,8 +157,67 @@ var MooTable = new Class({
 		}
 		tbody.appendChild(tr);
 	},
+	showRows: function() {
+		this.element.tBodies[0].set('html','');
+		var i = 0;
+		while(this.rowData[i]){
+			this._addRow(this.rowData[i]);
+			i++;
+		}
+	},
 	setHeight: function(contHeight) {
 		this.divMooCont.setStyle('height',contHeight);
 		this.divTBody.setStyle('height',contHeight.toInt()-24);
+	},
+
+	sort: function() {
+		this.msort(this.rowData, 0, this.rowData.length);
+		this.showRows();
+	},
+	msort: function(arr, begin, end){
+		var size = end - begin;
+		if(size<2) return;
+		var beginRight = begin+Math.floor(size/2);
+		this.msort(arr, begin, beginRight);
+		this.msort(arr, beginRight, end);
+		this.merge(arr, begin, beginRight, end);
+	},
+	merge: function(arr, begin, beginRight, end) {
+		for(;begin<beginRight;++begin) {
+			if(this.compare(arr[begin],arr[beginRight])) {
+				var temp = arr[begin];
+				arr[begin] = arr[beginRight];
+				this.insert(arr, beginRight, end, temp);
+			}
+		}
+	},
+	insert: function(arr, begin, end, temp){
+		while(begin+1 < end && this.compare(temp, arr[begin+1])) {
+			this.swap(arr, begin, begin+1);
+			begin++;
+		}
+		arr[begin] = temp;
+	},
+	swap: function(arr, a,b){
+		var temp = arr[a];
+		arr[a] = arr[b];
+		arr[b] = temp;
+	},
+	compare: function(a, b){
+		var valA = a[this.options.rowDef[this.sortIndex]];
+		if(valA.indexOf('The ') == 0) valA = valA.substring(4);
+		else if(valA.indexOf('A ') == 0) valA = valA.substring(2);
+		var valB = b[this.options.rowDef[this.sortIndex]];
+		if(valB.indexOf('The ') == 0) valB = valB.substring(4);
+		else if(valB.indexOf('A ') == 0) valB = valB.substring(2);
+		if(this.sortOrder){
+			if(this.sortOrder == "asc"){
+				return valA > valB;
+			}else {
+				return valA < valB;
+			}
+		}else {
+			return a.origOrder > b.origOrder;
+		}
 	}
   });
