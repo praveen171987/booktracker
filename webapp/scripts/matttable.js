@@ -23,6 +23,17 @@ var MooTable = new Class({
 		this.divTBody.addEvent('scroll', function(ev) {
 			this.divTHead.setStyle('left', this.divTBody.scrollLeft*-1);
 		}.bind(this));
+		window.addEvent('keydown', function(ev) {
+			if(this.selectedRow) {
+				if(ev.key == "up"){
+					if(this.selectedRow.previousSibling)
+						this.selectedRow.previousSibling.fireEvent('click');
+				}else if(ev.key == "down"){
+					if(this.selectedRow.nextSibling)
+						this.selectedRow.nextSibling.fireEvent('click');
+				}
+			}
+		}.bind(this));
 		this.divTBody.wraps(this.element);
 		
 		this.numColumns = this.element.tHead.getElements('td').length;
@@ -43,7 +54,7 @@ var MooTable = new Class({
 		},this);
 		this.element.removeProperty('id');
 		
-		
+		this.sortables = null;
 	},
 	_createHeader: function(tHead) {
 		var divTHead = new Element('div');
@@ -54,10 +65,12 @@ var MooTable = new Class({
 		tHead.getElements('td').each( function(cell, ind, arr){
 			var divCell = new Element('div').set('class','cell').set('html',cell.innerHTML);
 			var divResizeLeft = new Element('div').set('class','resize');
+			divResizeLeft.addEvent('click',function(el) { return false;}); //Stops a resize click from sorting the column
 			var divResizeRight = new Element('div').set('class','resize');
+			divResizeRight.addEvent('click',function(el) { return false;}); //Stops a resize click from sorting the column
 			
 			var headerTd = new Element('div').set('class','td').set('col',ind).setStyle('width',($type(this.options.width) == 'numeric'?this.options.width:this.options.width[ind]));
-			headerTd.addEvent('click', function() {
+			headerTd.addEvent('click', function(ev) {
 				if(this.sortIndex != ind) {
 					if(this.sortOrder) this.divHeaders[this.sortIndex].removeClass('sort_'+this.sortOrder);
 					this.sortOrder = null; //reset sort upon clicking a new column
@@ -96,7 +109,6 @@ var MooTable = new Class({
 			
 			if(resizeLeft){//The previous header is resizable
 				headerTd.appendChild(divResizeLeft.setStyle('left','0px'));
-				
 				new Drag(resizeLeft,{
 				handle: divResizeLeft,
 				limit: {y:false},
@@ -148,6 +160,7 @@ var MooTable = new Class({
 				tr.addClass('selected');
 				this.selectedRow = tr;
 				bookInfoPane.showInfo(rowObj);
+				showTab(2, true);
 			}
 		}.bind(this));
 		var i=0;
@@ -156,6 +169,13 @@ var MooTable = new Class({
 			i++;
 		}
 		tbody.appendChild(tr);
+		if(!this.sortables) {
+			this.sortables = new Sortables(tbody, {clone: true});
+			this.sortables.addEvent('complete',function(elem) {
+				alert('hi');
+			});
+		}
+		else this.sortables.addItems(tr);
 	},
 	showRows: function() {
 		this.element.tBodies[0].set('html','');

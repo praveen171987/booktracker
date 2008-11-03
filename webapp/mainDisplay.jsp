@@ -45,6 +45,8 @@
 				$('right').setStyle('height',$('main').getStyle('height'));
 				if(sidebar){
 					$$('.mootableContainer').setStyle('width',$('content').getStyle('width').toInt()-480);
+				} else {
+					$$('.mootableContainer').setStyle('width','100%');
 				}
 			});
 
@@ -67,7 +69,8 @@
 				var jsonRequest = new Request({url: "/BookTracker/AmazonQuery",  onSuccess: function(text){
 						var json = eval("("+text+")");
 						if(json) resultsPane.loadQuery(json);
-						showTab(1);
+						showTab(1, true);
+						$('amazon').scrollTop = 0;
 				}});
 				if(keywords) {
 					jsonRequest.get({'keyword': keywords});
@@ -89,13 +92,24 @@
 					request.get({'playlist': playlistName, 'isbn':data.isbn});
 				else request.get({'isbn':data.isbn});
 			}
-			function showTab(j) {
+			function showTab(j, really) {
 				var i=0;
+				sidebar = true;
 				while(tabs[i]){
 					if(i!=j) $(tabs[i]).setStyle('display','none');
-					else $(tabs[i]).getStyle('display')=='block'?$(tabs[i]).setStyle('display','none'):$(tabs[i]).setStyle('display','block');
+					else if(really) {
+						$(tabs[i]).setStyle('display','block');
+					}else{
+						if($(tabs[i]).getStyle('display')=='block') {
+							sidebar = false;
+							$(tabs[i]).setStyle('display','none')
+						}
+						else
+							$(tabs[i]).setStyle('display','block');
+					}
 					i++;
 				}
+				window.fireEvent('resize');
 			}
 		</script>
 	</head>

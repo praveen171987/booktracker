@@ -148,7 +148,6 @@ public class AmazonQuery extends HttpServlet {
 			"'large_url': '"+(book.getLargeImageUrl().equals("")?"images/blank_large.jpg":book.getLargeImageUrl())+"',"+
 			"'tags': '"+book.getTagsAsString()+"',"+
 			"'detailUrl': '"+book.getDetailUrl()+"'";
-    		
 		return temp+"}";
     }
 }

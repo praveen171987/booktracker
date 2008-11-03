@@ -607,12 +607,13 @@ var Sortables = new Class({
 	getClone: function(event, element){
 		if (!this.options.clone) return new Element('div').inject(document.body);
 		if ($type(this.options.clone) == 'function') return this.options.clone.call(this, event, element, this.list);
+		$('debug').set('value',element.getPosition().x+", "+element.getPosition().y);
 		return element.clone(true).setStyles({
 			'margin': '0px',
 			'position': 'absolute',
 			'visibility': 'hidden',
 			'width': element.getStyle('width')
-		}).inject(this.list).position(element.getPosition(element.getOffsetParent()));
+		}).inject(this.list).position(element.getPosition());
 	},
 
 	getDroppables: function(){
@@ -630,7 +631,6 @@ var Sortables = new Class({
 		} else {
 			where = this.element.getAllPrevious().contains(element) ? 'before' : 'after';
 		}
-		//this.element.inject(element, where);
 		this.fireEvent('sort', [this.element, this.clone]);
 	},
 
@@ -657,7 +657,8 @@ var Sortables = new Class({
 			onComplete: this.end.bind(this)
 		});
 		
-		this.clone.inject(this.element, 'before');
+		//this.clone.inject(this.element, 'before');
+		this.clone.inject(document.body, 'top');
 		this.drag.start(event);
 	},
 

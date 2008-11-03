@@ -10,7 +10,7 @@ var TagCloud = new Class({
 		$(el).appendChild(this.tagCloud);
 		
 		window.addEvent('resize', function() {
-			this.tagCloud.setStyle('height',this.tagCloud.getParent().getParent().getStyle('height').toInt()-this.limits.clientHeight);
+			this.tagCloud.setStyle('height',this.tagCloud.getParent().getParent().getStyle('height').toInt()-this.limits.clientHeight-2);
 		}.bind(this));
 	},
 	
