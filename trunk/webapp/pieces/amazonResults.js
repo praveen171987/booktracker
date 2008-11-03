@@ -4,7 +4,7 @@ var AmazonResult = new Class({
 	},
 	initialize: function(el, options){
 		window.addEvent('resize', function() {
-			$('amazon').setStyle('height',$('amazon').getParent().getParent().getStyle('height').toInt()-$('pages').clientHeight-$('footer').clientHeight);
+			$('amazon').setStyle('height',$('amazon').getParent().getParent().getStyle('height').toInt()-$('pages').clientHeight-2);
 		});
 		this.amazCurrPage = 1;
 		var pages = new Element('div').set('id','pages');
@@ -49,8 +49,6 @@ var AmazonResult = new Class({
 				i++;
 			}
 		}
-		new Sortables($('amazon'),{clone:true});
-		//window.fireEvent('resize');
 	},
 	wrapGetQuery: function(a, b) {
 		getQuery(null, b);

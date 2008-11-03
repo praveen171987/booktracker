@@ -831,7 +831,108 @@ INSERT INTO `alt_vers` (`isbn`,`alt_ver`) VALUES
  ('1416555218','1416591656'),
  ('1416521054','064181853X'),
  ('1416521054','0743498801'),
- ('1416521054','B000MKYKFY');
+ ('1416521054','B000MKYKFY'),
+ ('0812568834','0312890621'),
+ ('0812568834','B000776JG0'),
+ ('0765345579','0765306387'),
+ ('0765345579','B0009WLSQY'),
+ ('0812550234','0312857640'),
+ ('0812550234','0786118687'),
+ ('0812550234','B000776JHO'),
+ ('0812551028','0312860439'),
+ ('0812551028','B0001MC046'),
+ ('0446579823','0446541206'),
+ ('0446579823','B001FAZGEE'),
+ ('0446579823','B001ANUQYG'),
+ ('0446579823','1600243746'),
+ ('1573223328','140500035X'),
+ ('1573223328','1565117107'),
+ ('1573223328','1565117115'),
+ ('1573223328','B000OCXG4Q'),
+ ('1573223328','B00008MNVG'),
+ ('1573223328','B0000DE6TU'),
+ ('1573223328','1573222259'),
+ ('0765355558','0765316439'),
+ ('0553293354','0246118318'),
+ ('0553293354','0345308999'),
+ ('0553293354','034531798X'),
+ ('0553293354','0345336275'),
+ ('0553293354','B000K0YN0I'),
+ ('0553293354','0553803719'),
+ ('0553293354','0808520784'),
+ ('0553293354','0893402095'),
+ ('0553293354','B000FC1PWA'),
+ ('0553293354','0553451146'),
+ ('0553293354','0345334787'),
+ ('0553293354','5553673224'),
+ ('0553293354','5557076654'),
+ ('0553587579','0246130474'),
+ ('0553587579','B0006DF43Y'),
+ ('0553587579','0385233124'),
+ ('0553587579','0586071105'),
+ ('0553587579','1439507228'),
+ ('0553587579','5551711110'),
+ ('0553587579','5557107002'),
+ ('0553587579','0345339967'),
+ ('0553587579','0345351428'),
+ ('0553587579','038523709X'),
+ ('0553587579','B00010AC5W'),
+ ('0553293370','0345317998'),
+ ('0553293370','0380007746'),
+ ('0553293370','0553382586'),
+ ('0553293370','0553452614'),
+ ('0553293370','0553803727'),
+ ('0553293370','0586013555'),
+ ('0553293370','0586135553'),
+ ('0553293370','0606018441'),
+ ('0553293370','0808520792'),
+ ('0553293370','0893402109'),
+ ('0553293370','1439507201'),
+ ('0553293370','5553679753'),
+ ('0553293370','5557022708'),
+ ('0553293370','B0007ECFV6'),
+ ('0553293370','B0007HK7E0'),
+ ('0553293370','B000FC1PWK'),
+ ('0553293370','0345309006'),
+ ('0553293370','0246118326'),
+ ('0553293370','0345336283'),
+ ('0553293370','0380426897'),
+ ('0553293370','0385050453'),
+ ('0553293370','0606192743'),
+ ('0553293362','0345318005'),
+ ('0553293362','0246118334'),
+ ('0553293362','0345335503'),
+ ('0553293362','0345336291'),
+ ('0553293362','0380008238'),
+ ('0553293362','0380231840'),
+ ('0553293362','0380292807'),
+ ('0553293362','0385050445'),
+ ('0553293362','0553470159'),
+ ('0553293362','0553803735'),
+ ('0553293362','0586017135'),
+ ('0553293362','0606275800'),
+ ('0553293362','5557024387'),
+ ('0553293362','9993068802'),
+ ('0553293362','B000FC1PWU'),
+ ('0553293362','B000O72S5E'),
+ ('0553293362','0345309014'),
+ ('0553293362','0385423020'),
+ ('0553293362','0553382594'),
+ ('0553293362','0785773444'),
+ ('0553293362','0893402117'),
+ ('0553293362','1439504555'),
+ ('0553293362','5553680166'),
+ ('0553278398','5557108823'),
+ ('0553278398','0385245858'),
+ ('0553278398','0563366168'),
+ ('0553278398','0586071113'),
+ ('0553278398','0606275746'),
+ ('0553278398','083353307X'),
+ ('0553278398','5552677145'),
+ ('0553278398','0385233132'),
+ ('0553278398','0246130482'),
+ ('0553278398','0553451626'),
+ ('0553278398','1439507171');
 /*!40000 ALTER TABLE `alt_vers` ENABLE KEYS */;
 
 
@@ -951,7 +1052,19 @@ INSERT INTO `authors` (`isbn`,`author`) VALUES
  ('1416555714','Tom Kratman'),
  ('1416555218','John Ringo'),
  ('1416555218','Travis Taylor'),
- ('1416521054','John Ringo');
+ ('1416521054','John Ringo'),
+ ('0812568834','Catherine Asaro'),
+ ('0765345579','Catherine Asaro'),
+ ('0812550234','Catherine Asaro'),
+ ('0812551028','Catherine Asaro'),
+ ('0446579823','Christopher Buckley'),
+ ('1573223328','Lian Hearn'),
+ ('0765355558','Sandra McDonald'),
+ ('0553293354','Isaac Asimov'),
+ ('0553587579','Isaac Asimov'),
+ ('0553293370','Isaac Asimov'),
+ ('0553293362','Isaac Asimov'),
+ ('0553278398','Isaac Asimov');
 /*!40000 ALTER TABLE `authors` ENABLE KEYS */;
 
 
@@ -1036,6 +1149,7 @@ INSERT INTO `book` (`isbn`,`title`,`amaz_rating`,`pub_date`,`pages`,`small_url`,
  ('0441783589','Starship Troopers','4.500','1987-05-15',272,'http://ecx.images-amazon.com/images/I/51SpfZgt-DL._SL75_.jpg','http://ecx.images-amazon.com/images/I/51SpfZgt-DL._SL160_.jpg','http://ecx.images-amazon.com/images/I/51SpfZgt-DL._SL500_.jpg'),
  ('0441788386','Stranger in a Strange Land','4.000','1991-10-01',528,'http://ecx.images-amazon.com/images/I/517JGARWSKL._SL75_.jpg','http://ecx.images-amazon.com/images/I/517JGARWSKL._SL160_.jpg','http://ecx.images-amazon.com/images/I/517JGARWSKL._SL500_.jpg'),
  ('0441810764','Time Enough for Love','4.000','1987-08-15',608,'http://ecx.images-amazon.com/images/I/21PJiTn6FbL._SL75_.jpg','http://ecx.images-amazon.com/images/I/21PJiTn6FbL._SL160_.jpg','http://ecx.images-amazon.com/images/I/21PJiTn6FbL._SL500_.jpg'),
+ ('0446579823','Supreme Courtship','4.000','2008-09-03',285,'http://ecx.images-amazon.com/images/I/5196hMuPZPL._SL75_.jpg','http://ecx.images-amazon.com/images/I/5196hMuPZPL._SL160_.jpg','http://ecx.images-amazon.com/images/I/5196hMuPZPL._SL500_.jpg'),
  ('0451460413','Dies the Fire: A Novel of the Change','3.500','2005-09-06',592,'http://ecx.images-amazon.com/images/I/51S9E7BR81L._SL75_.jpg','http://ecx.images-amazon.com/images/I/51S9E7BR81L._SL160_.jpg','http://ecx.images-amazon.com/images/I/51S9E7BR81L._SL500_.jpg'),
  ('0451460774','The Protector\'s War: A Novel of the Change (Protector)','3.000','2006-09-05',608,'http://ecx.images-amazon.com/images/I/21M5GBS07SL._SL75_.jpg','http://ecx.images-amazon.com/images/I/21M5GBS07SL._SL160_.jpg','http://ecx.images-amazon.com/images/I/21M5GBS07SL._SL500_.jpg'),
  ('0451461665','A Meeting at Corvallis: A Novel of the Change (Dies the Fire)','4.000','2007-09-04',640,'http://ecx.images-amazon.com/images/I/51PRmB8It3L._SL75_.jpg','http://ecx.images-amazon.com/images/I/51PRmB8It3L._SL160_.jpg','http://ecx.images-amazon.com/images/I/51PRmB8It3L._SL500_.jpg'),
@@ -1043,15 +1157,25 @@ INSERT INTO `book` (`isbn`,`title`,`amaz_rating`,`pub_date`,`pages`,`small_url`,
  ('0451462289','The Scourge of God: A Novel of the Change','4.500','2008-09-02',464,'http://ecx.images-amazon.com/images/I/51aecAcqCvL._SL75_.jpg','http://ecx.images-amazon.com/images/I/51aecAcqCvL._SL160_.jpg','http://ecx.images-amazon.com/images/I/51aecAcqCvL._SL500_.jpg'),
  ('0451462564','Turn Coat (The Dresden Files, Book 11)',NULL,'2009-04-07',432,NULL,NULL,NULL),
  ('0552133256','Strata','4.000','2005-07-06',288,'http://ecx.images-amazon.com/images/I/515BXPNX7YL._SL75_.jpg','http://ecx.images-amazon.com/images/I/515BXPNX7YL._SL160_.jpg','http://ecx.images-amazon.com/images/I/515BXPNX7YL._SL500_.jpg'),
+ ('0553278398','Prelude to Foundation (Foundation Novels)','4.500','1989-03-01',528,'http://ecx.images-amazon.com/images/I/51X0KKE30AL._SL75_.jpg','http://ecx.images-amazon.com/images/I/51X0KKE30AL._SL160_.jpg','http://ecx.images-amazon.com/images/I/51X0KKE30AL._SL500_.jpg'),
+ ('0553293354','Foundation (Foundation Novels)','4.500','1991-10-01',320,'http://ecx.images-amazon.com/images/I/41VTYD0QZBL._SL75_.jpg','http://ecx.images-amazon.com/images/I/41VTYD0QZBL._SL160_.jpg','http://ecx.images-amazon.com/images/I/41VTYD0QZBL._SL500_.jpg'),
+ ('0553293362','Second Foundation (Foundation Novels)','4.500','1991-10-01',304,'http://ecx.images-amazon.com/images/I/41SGWPCKQ7L._SL75_.jpg','http://ecx.images-amazon.com/images/I/41SGWPCKQ7L._SL160_.jpg','http://ecx.images-amazon.com/images/I/41SGWPCKQ7L._SL500_.jpg'),
+ ('0553293370','Foundation and Empire (Foundation Novels)','4.500','1991-11-01',320,'http://ecx.images-amazon.com/images/I/513PXRQNQNL._SL75_.jpg','http://ecx.images-amazon.com/images/I/513PXRQNQNL._SL160_.jpg','http://ecx.images-amazon.com/images/I/513PXRQNQNL._SL500_.jpg'),
  ('0553345923','Aegypt','4.500','1989-02-01',NULL,'http://ecx.images-amazon.com/images/I/514roxYi%2BVL._SL75_.jpg','http://ecx.images-amazon.com/images/I/514roxYi%2BVL._SL160_.jpg','http://ecx.images-amazon.com/images/I/514roxYi%2BVL._SL500_.jpg'),
+ ('0553587579','Foundation and Earth','4.000','2004-08-31',528,'http://ecx.images-amazon.com/images/I/511H56VJP4L._SL75_.jpg','http://ecx.images-amazon.com/images/I/511H56VJP4L._SL160_.jpg','http://ecx.images-amazon.com/images/I/511H56VJP4L._SL500_.jpg'),
  ('0575075414','Polystom: Two Universes in One Reality (Gollancz S.F.)','3.500','2004-07-01',352,'http://ecx.images-amazon.com/images/I/41uq2zH5K7L._SL75_.jpg','http://ecx.images-amazon.com/images/I/41uq2zH5K7L._SL160_.jpg','http://ecx.images-amazon.com/images/I/41uq2zH5K7L._SL500_.jpg'),
  ('0765304961','Ender in Exile (Ender)',NULL,'2008-11-11',384,'http://ecx.images-amazon.com/images/I/5183vhsemJL._SL75_.jpg','http://ecx.images-amazon.com/images/I/5183vhsemJL._SL160_.jpg','http://ecx.images-amazon.com/images/I/5183vhsemJL._SL500_.jpg'),
  ('0765315459','Pirate Sun: Book Three of Virga','5.000','2008-08-05',320,'http://ecx.images-amazon.com/images/I/51%2BFmz9kVGL._SL75_.jpg','http://ecx.images-amazon.com/images/I/51%2BFmz9kVGL._SL160_.jpg','http://ecx.images-amazon.com/images/I/51%2BFmz9kVGL._SL500_.jpg'),
  ('0765318679','The Wanderer\'s Tale (Annals of Lindormyn)','3.000','2007-07-10',448,'http://ecx.images-amazon.com/images/I/4143INVMhOL._SL75_.jpg','http://ecx.images-amazon.com/images/I/4143INVMhOL._SL160_.jpg','http://ecx.images-amazon.com/images/I/4143INVMhOL._SL500_.jpg'),
  ('0765319209','Sly Mongoose','5.000','2008-08-19',320,'http://ecx.images-amazon.com/images/I/51GyCv0d9-L._SL75_.jpg','http://ecx.images-amazon.com/images/I/51GyCv0d9-L._SL160_.jpg','http://ecx.images-amazon.com/images/I/51GyCv0d9-L._SL500_.jpg'),
  ('0765320428','The Court of the Air','5.000','2008-06-10',592,'http://ecx.images-amazon.com/images/I/51VI-JI1fWL._SL75_.jpg','http://ecx.images-amazon.com/images/I/51VI-JI1fWL._SL160_.jpg','http://ecx.images-amazon.com/images/I/51VI-JI1fWL._SL500_.jpg'),
+ ('0765345579','Skyfall (Saga of the Skolian Empire)','3.500','2004-10-01',336,'http://ecx.images-amazon.com/images/I/51GA67B65HL._SL75_.jpg','http://ecx.images-amazon.com/images/I/51GA67B65HL._SL160_.jpg','http://ecx.images-amazon.com/images/I/51GA67B65HL._SL500_.jpg'),
+ ('0765355558','The Outback Stars (Tor Science Fiction)','4.000','2008-02-05',400,'http://ecx.images-amazon.com/images/I/51LYJauJUnL._SL75_.jpg','http://ecx.images-amazon.com/images/I/51LYJauJUnL._SL160_.jpg','http://ecx.images-amazon.com/images/I/51LYJauJUnL._SL500_.jpg'),
  ('0765358549','The Good Fairies of New York','4.000','2008-06-03',288,'http://ecx.images-amazon.com/images/I/510VDzht9xL._SL75_.jpg','http://ecx.images-amazon.com/images/I/510VDzht9xL._SL160_.jpg','http://ecx.images-amazon.com/images/I/510VDzht9xL._SL500_.jpg'),
  ('0809572354','The Traitor','3.500','2007-08-01',152,'http://ecx.images-amazon.com/images/I/51QuRdAgyzL._SL75_.jpg','http://ecx.images-amazon.com/images/I/51QuRdAgyzL._SL160_.jpg','http://ecx.images-amazon.com/images/I/51QuRdAgyzL._SL500_.jpg'),
+ ('0812550234','Primary Inversion (The Saga of the Skolian Empire)','4.500','1996-05-15',384,'http://ecx.images-amazon.com/images/I/51ZBDZS7C6L._SL75_.jpg','http://ecx.images-amazon.com/images/I/51ZBDZS7C6L._SL160_.jpg','http://ecx.images-amazon.com/images/I/51ZBDZS7C6L._SL500_.jpg'),
+ ('0812551028','Catch The Lightning (The Saga of the Skolian Empire)','3.500','1997-10-15',320,'http://ecx.images-amazon.com/images/I/51XWn2jMKUL._SL75_.jpg','http://ecx.images-amazon.com/images/I/51XWn2jMKUL._SL160_.jpg','http://ecx.images-amazon.com/images/I/51XWn2jMKUL._SL500_.jpg'),
+ ('0812568834','The Quantum Rose (The Saga of the Skolian Empire)','4.000','2002-02-18',432,'http://ecx.images-amazon.com/images/I/5100BRQ4S8L._SL75_.jpg','http://ecx.images-amazon.com/images/I/5100BRQ4S8L._SL160_.jpg','http://ecx.images-amazon.com/images/I/5100BRQ4S8L._SL500_.jpg'),
  ('1416505490','Have Spacesuit, Will Travel','4.500','2005-02-08',256,'http://ecx.images-amazon.com/images/I/51yLQm8M4NL._SL75_.jpg','http://ecx.images-amazon.com/images/I/51yLQm8M4NL._SL160_.jpg','http://ecx.images-amazon.com/images/I/51yLQm8M4NL._SL500_.jpg'),
  ('1416521054','Into the Looking Glass (Looking Glass, Book 1)','3.500','2007-03-27',400,'http://ecx.images-amazon.com/images/I/51sANDiq-gL._SL75_.jpg','http://ecx.images-amazon.com/images/I/51sANDiq-gL._SL160_.jpg','http://ecx.images-amazon.com/images/I/51sANDiq-gL._SL500_.jpg'),
  ('1416555218','Manxome Foe (Looking Glass, Book 3)','4.500','2008-02-05',352,'http://ecx.images-amazon.com/images/I/516bxZd8hbL._SL75_.jpg','http://ecx.images-amazon.com/images/I/516bxZd8hbL._SL160_.jpg','http://ecx.images-amazon.com/images/I/516bxZd8hbL._SL500_.jpg'),
@@ -1060,6 +1184,7 @@ INSERT INTO `book` (`isbn`,`title`,`amaz_rating`,`pub_date`,`pages`,`small_url`,
  ('1416555870','Claws that Catch (Looking Glass, Book 4)',NULL,'2008-11-04',416,'http://ecx.images-amazon.com/images/I/51nV1%2BgHkdL._SL75_.jpg','http://ecx.images-amazon.com/images/I/51nV1%2BgHkdL._SL160_.jpg','http://ecx.images-amazon.com/images/I/51nV1%2BgHkdL._SL500_.jpg'),
  ('1416555919','Honor of the Clan (The Posleen War)',NULL,'2009-01-08',448,'http://ecx.images-amazon.com/images/I/51yhVBras0L._SL75_.jpg','http://ecx.images-amazon.com/images/I/51yhVBras0L._SL160_.jpg','http://ecx.images-amazon.com/images/I/51yhVBras0L._SL500_.jpg'),
  ('1555839878','Mordred, Bastard Son (Mordred Trilogy)','4.500','2007-02-01',260,'http://ecx.images-amazon.com/images/I/41apb-X%2BJWL._SL75_.jpg','http://ecx.images-amazon.com/images/I/41apb-X%2BJWL._SL160_.jpg','http://ecx.images-amazon.com/images/I/41apb-X%2BJWL._SL500_.jpg'),
+ ('1573223328','Across the Nightingale Floor (Tales of the Otori, Book 1)','4.000','2003-06-03',320,'http://ecx.images-amazon.com/images/I/41EV0MDQ8FL._SL75_.jpg','http://ecx.images-amazon.com/images/I/41EV0MDQ8FL._SL160_.jpg','http://ecx.images-amazon.com/images/I/41EV0MDQ8FL._SL500_.jpg'),
  ('1590200152','Love  &  Sleep (Aegypt)','4.000','2008-01-29',512,'http://ecx.images-amazon.com/images/I/515235X1r7L._SL75_.jpg','http://ecx.images-amazon.com/images/I/515235X1r7L._SL160_.jpg','http://ecx.images-amazon.com/images/I/515235X1r7L._SL500_.jpg'),
  ('159102594X','The Blade Itself (The First Law: Book One)','4.500','2007-09-06',531,'http://ecx.images-amazon.com/images/I/51JQxyyzNNL._SL75_.jpg','http://ecx.images-amazon.com/images/I/51JQxyyzNNL._SL160_.jpg','http://ecx.images-amazon.com/images/I/51JQxyyzNNL._SL500_.jpg'),
  ('1591026415','Before They Are Hanged (The First Law: Book Two)','4.500','2008-03-25',543,'http://ecx.images-amazon.com/images/I/51FkKpfEZAL._SL75_.jpg','http://ecx.images-amazon.com/images/I/51FkKpfEZAL._SL160_.jpg','http://ecx.images-amazon.com/images/I/51FkKpfEZAL._SL500_.jpg'),
@@ -1111,7 +1236,7 @@ CREATE TABLE `lib_entry` (
   KEY `username` (`username`),
   CONSTRAINT `lib_entry_ibfk_1` FOREIGN KEY (`isbn`) REFERENCES `book` (`isbn`),
   CONSTRAINT `lib_entry_ibfk_2` FOREIGN KEY (`username`) REFERENCES `user` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=93 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=105 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `lib_entry`
@@ -1209,7 +1334,19 @@ INSERT INTO `lib_entry` (`lib_id`,`username`,`isbn`,`user_rating`,`date_added`,`
  (89,'apple','1416555862',NULL,'2008-10-29',NULL,NULL),
  (90,'apple','1416555714',NULL,'2008-10-29',NULL,NULL),
  (91,'apple','1416555218',NULL,'2008-10-29',NULL,NULL),
- (92,'apple','1416521054',NULL,'2008-10-29',NULL,NULL);
+ (92,'apple','1416521054',NULL,'2008-10-29',NULL,NULL),
+ (93,'apple','0812568834',NULL,'2008-10-31',NULL,NULL),
+ (94,'apple','0765345579',NULL,'2008-10-31',NULL,NULL),
+ (95,'apple','0812550234',NULL,'2008-10-31',NULL,NULL),
+ (96,'apple','0812551028',NULL,'2008-10-31',NULL,NULL),
+ (97,'apple','0446579823',NULL,'2008-11-03',NULL,NULL),
+ (98,'apple','1573223328',NULL,'2008-11-03',NULL,NULL),
+ (99,'apple','0765355558',NULL,'2008-11-03',NULL,NULL),
+ (100,'apple','0553293354',NULL,'2008-11-03',NULL,NULL),
+ (101,'apple','0553587579',NULL,'2008-11-03',NULL,NULL),
+ (102,'apple','0553293370',NULL,'2008-11-03',NULL,NULL),
+ (103,'apple','0553293362',NULL,'2008-11-03',NULL,NULL),
+ (104,'apple','0553278398',NULL,'2008-11-03',NULL,NULL);
 /*!40000 ALTER TABLE `lib_entry` ENABLE KEYS */;
 
 
@@ -1687,7 +1824,67 @@ INSERT INTO `tags` (`isbn`,`tag`) VALUES
  ('1416521054','john ringo'),
  ('1416521054','alien invasion'),
  ('1416521054','science fiction'),
- ('1416521054','adventure scifi');
+ ('1416521054','adventure scifi'),
+ ('0812568834','catherine asaro'),
+ ('0812568834','alternate universe'),
+ ('0812568834','military science fiction'),
+ ('0812568834','nebula winner'),
+ ('0812568834','intrigue'),
+ ('0765345579','catherine asaro'),
+ ('0765345579','science fiction'),
+ ('0765345579','military space opera'),
+ ('0765345579','dyhianna'),
+ ('0765345579','eldrinson'),
+ ('0812550234','catherine asaro'),
+ ('0812550234','fantasy sci-fi women'),
+ ('0812550234','romantic space opera'),
+ ('0812550234','galactic warrior women'),
+ ('0812550234','read-fantasy'),
+ ('0812551028','catherine asaro'),
+ ('0812551028','scifi romance'),
+ ('0812551028','series'),
+ ('0812551028','space opera'),
+ ('0812551028','contemporary romance'),
+ ('0446579823','satire'),
+ ('0446579823','supreme court'),
+ ('0446579823','political'),
+ ('0446579823','humor'),
+ ('0446579823','politics'),
+ ('1573223328','feudal japan'),
+ ('1573223328','fantasy'),
+ ('1573223328','fantasy adventure'),
+ ('1573223328','fantasy japanese fiction'),
+ ('1573223328','historical fiction'),
+ ('0765355558','epic space opera'),
+ ('0765355558','science fiction'),
+ ('0765355558','magic'),
+ ('0765355558','military science fiction'),
+ ('0765355558','aborigine mythology'),
+ ('0553293354','science fiction'),
+ ('0553293354','foundation series'),
+ ('0553293354','asimov'),
+ ('0553293354','isaac asimov'),
+ ('0553293354','foundation'),
+ ('0553587579','science fiction'),
+ ('0553587579','foundation series'),
+ ('0553587579','isaac asimov'),
+ ('0553587579','asimov'),
+ ('0553587579','foundation'),
+ ('0553293370','science fiction'),
+ ('0553293370','isaac asimov'),
+ ('0553293370','foundation series'),
+ ('0553293370','asimov'),
+ ('0553293370','space opera'),
+ ('0553293362','science fiction'),
+ ('0553293362','isaac asimov'),
+ ('0553293362','asimov'),
+ ('0553293362','foundation series'),
+ ('0553293362','foundation'),
+ ('0553278398','science fiction'),
+ ('0553278398','foundation series'),
+ ('0553278398','isaac asimov'),
+ ('0553278398','asimov'),
+ ('0553278398','space opera');
 /*!40000 ALTER TABLE `tags` ENABLE KEYS */;
 
 
@@ -1833,7 +2030,9 @@ BEGIN
       END WHILE;
 
       IF playlistName IS NULL THEN      /*library search with limiting tags*/
-         SELECT DISTINCT a.isbn, title, (select GROUP_CONCAT(author SEPARATOR ', ') from booktracker.authors where authors.isbn=a.isbn) as author, amaz_rating, pub_date, pages, small_url, medium_url, large_url
+         SELECT DISTINCT a.isbn, title, (select GROUP_CONCAT(author SEPARATOR ', ') from booktracker.authors where authors.isbn=a.isbn) as author,
+            amaz_rating, pub_date, pages, small_url, medium_url, large_url,
+            user_rating, date_added, date_started, date_finished
             FROM book a, lib_entry b, tags c
                WHERE a.isbn = b.isbn
                AND b.username = userName
@@ -1872,7 +2071,9 @@ BEGIN
             GROUP BY tag ORDER BY num DESC LIMIT 50) as tab
          ORDER BY tag ASC;
       ELSE                             /*playlist search with limiting tags*/
-         SELECT DISTINCT a.isbn, title, (select GROUP_CONCAT(author SEPARATOR ', ') from booktracker.authors where authors.isbn=a.isbn) as author, amaz_rating, pub_date, pages, small_url, medium_url, large_url
+         SELECT DISTINCT a.isbn, title, (select GROUP_CONCAT(author SEPARATOR ', ') from booktracker.authors where authors.isbn=a.isbn) as author,
+            amaz_rating, pub_date, pages, small_url, medium_url, large_url,
+            user_rating, date_added, date_started, date_finished
             FROM book a, lib_entry b, tags c, playlist_entry d
                WHERE a.isbn = b.isbn
                AND b.lib_id = d.entry_id
@@ -1916,7 +2117,9 @@ BEGIN
       END IF;
    ELSE                              /*library search, no limiting tags*/
       IF playlistName IS NULL THEN
-         SELECT DISTINCT a.isbn, title, (select GROUP_CONCAT(author SEPARATOR ', ') from booktracker.authors where authors.isbn=a.isbn) as author, amaz_rating, pub_date, pages, small_url, medium_url, large_url
+         SELECT DISTINCT a.isbn, title, (select GROUP_CONCAT(author SEPARATOR ', ') from booktracker.authors where authors.isbn=a.isbn) as author,
+            amaz_rating, pub_date, pages, small_url, medium_url, large_url,
+            user_rating, date_added, date_started, date_finished
             FROM book a, lib_entry b
                WHERE a.isbn = b.isbn
                AND b.username = userName
@@ -1932,7 +2135,9 @@ BEGIN
                GROUP BY tag ORDER BY num DESC LIMIT 50) as tab
             ORDER BY tag ASC;
       ELSE                        /*playlist search, no limiting tags*/
-         SELECT DISTINCT a.isbn, title, (select GROUP_CONCAT(author SEPARATOR ', ') from booktracker.authors where authors.isbn=a.isbn) as author, amaz_rating, pub_date, pages, small_url, medium_url, large_url
+         SELECT DISTINCT a.isbn, title, (select GROUP_CONCAT(author SEPARATOR ', ') from booktracker.authors where authors.isbn=a.isbn) as author,
+            amaz_rating, pub_date, pages, small_url, medium_url, large_url,
+            user_rating, date_added, date_started, date_finished
             FROM book a, lib_entry b, playlist_entry c
                WHERE a.isbn = b.isbn
                AND b.lib_id = c.entry_id

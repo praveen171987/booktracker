@@ -24,5 +24,7 @@
 	%>
 </div>
 <div id="amazSearch">
-<input id="text" type="text"><input id="button" style="float:right;" type="button" value="search" onClick="javascript:getQuery($('text').value);">
+<input id="text" type="text">
+<input id="button" style="float:right;" type="button" value="search" onClick="getQuery($('text').value);">
 </div>
+<input id="debug">

@@ -154,25 +154,26 @@ public class AmazonResult {
 		this.pages = pages;
 	}
 	public String getSmallImageUrl() {
-		return smallImageUrl;
+		return smallImageUrl==null?"":smallImageUrl;
 	}
 	public void setSmallImageUrl(String smallImageUrl) {
 		this.smallImageUrl = smallImageUrl;
 	}
 	public String getMediumImageUrl() {
-		return mediumImageUrl;
+		return mediumImageUrl==null?"":mediumImageUrl;
 	}
 	public void setMediumImageUrl(String mediumImageUrl) {
 		this.mediumImageUrl = mediumImageUrl;
 	}
 	public String getLargeImageUrl() {
-		return largeImageUrl;
+		return largeImageUrl==null?"":largeImageUrl;
 	}
 	public void setLargeImageUrl(String largeImageUrl) {
 		this.largeImageUrl = largeImageUrl;
 	}
 	public String listToCSV(List<String> list){
 		String temp = "";
+		if(list == null) return temp;
 		for(int i=0;i<list.size();i++){
 			temp += list.get(i).replace("'", "\\'");
 			if(i<list.size()-1)temp+=",";
