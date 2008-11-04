@@ -71,3 +71,10 @@ div{
 	background-color: brown;
 	overflow: visible;
 }
+#divider {
+	background-color:black;
+	cursor:col-resize;
+	float:left;
+	height:100%;
+	width:3px;
+}

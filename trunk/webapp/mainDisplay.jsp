@@ -23,6 +23,7 @@
 			var resultsPane;
 			var bookInfoPane;
 			var sidebar = true;
+			var curWidth;
 			var tabs = ['tags','results','bookInfo'];
 			window.addEvent('domready', function(){
 				tagPane = new TagCloud('tags',{});
@@ -34,6 +35,10 @@
 					contHeight: 500,
 					contWidth: 1000,
 					});
+				$('dataTable').makeResizable({
+					handle: $('divider'),
+					modifiers: {x: 'width', y: false}
+				});
 				<%if(session.getAttribute("username") != null){%>
 					getData(null,null);
 				<%}%>
@@ -44,9 +49,14 @@
 				dataTable.setHeight($('main').getStyle('height'));
 				$('right').setStyle('height',$('main').getStyle('height'));
 				if(sidebar){
-					$$('.mootableContainer').setStyle('width',$('content').getStyle('width').toInt()-480);
+					if(curWidth)
+						$('dataTable').setStyle('width', curWidth)
+					else
+						curWidth = $('content').getStyle('width').toInt()-480
+						$('dataTable').setStyle('width',curWidth);
 				} else {
-					$$('.mootableContainer').setStyle('width','100%');
+					curWidth = $('dataTable').getStyle('width');
+					$('dataTable').setStyle('width','100%');
 				}
 			});
 
@@ -134,6 +144,7 @@
 					</thead>
 					<tbody/>
 				</table>
+				<div id="divider"></div>
 				<div id="right">
 					<div id="tags"></div>
 					<div id="results"></div>
