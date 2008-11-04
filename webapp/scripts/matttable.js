@@ -171,8 +171,9 @@ var MooTable = new Class({
 		tbody.appendChild(tr);
 		if(!this.sortables) {
 			this.sortables = new Sortables(tbody, {clone: true});
-			this.sortables.addEvent('complete',function(elem) {
-				alert('hi');
+			this.sortables.addEvent('complete',function(ev, elem) {
+				alert(ev.client.x);
+				//alert(elem.id);
 			});
 		}
 		else this.sortables.addItems(tr);
