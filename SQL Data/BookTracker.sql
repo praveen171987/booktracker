@@ -932,7 +932,8 @@ INSERT INTO `alt_vers` (`isbn`,`alt_ver`) VALUES
  ('0553278398','0385233132'),
  ('0553278398','0246130482'),
  ('0553278398','0553451626'),
- ('0553278398','1439507171');
+ ('0553278398','1439507171'),
+ ('0061629243','0007263384');
 /*!40000 ALTER TABLE `alt_vers` ENABLE KEYS */;
 
 
@@ -1064,7 +1065,8 @@ INSERT INTO `authors` (`isbn`,`author`) VALUES
  ('0553587579','Isaac Asimov'),
  ('0553293370','Isaac Asimov'),
  ('0553293362','Isaac Asimov'),
- ('0553278398','Isaac Asimov');
+ ('0553278398','Isaac Asimov'),
+ ('0061629243','Graham Tattersall');
 /*!40000 ALTER TABLE `authors` ENABLE KEYS */;
 
 
@@ -1132,6 +1134,7 @@ INSERT INTO `book` (`isbn`,`title`,`amaz_rating`,`pub_date`,`pages`,`small_url`,
  ('0061161659','Making Money (Discworld Novels)','4.000','2008-10-01',432,'http://ecx.images-amazon.com/images/I/51P3HmQhLML._SL75_.jpg','http://ecx.images-amazon.com/images/I/51P3HmQhLML._SL160_.jpg','http://ecx.images-amazon.com/images/I/51P3HmQhLML._SL500_.jpg'),
  ('0061433012','Nation','4.500','2008-10-01',384,'http://ecx.images-amazon.com/images/I/51saresqz4L._SL75_.jpg','http://ecx.images-amazon.com/images/I/51saresqz4L._SL160_.jpg','http://ecx.images-amazon.com/images/I/51saresqz4L._SL500_.jpg'),
  ('0061474096','Anathem','4.500','2008-09-01',960,'http://ecx.images-amazon.com/images/I/51PpF7ZgT5L._SL75_.jpg','http://ecx.images-amazon.com/images/I/51PpF7ZgT5L._SL160_.jpg','http://ecx.images-amazon.com/images/I/51PpF7ZgT5L._SL500_.jpg'),
+ ('0061629243','Geekspeak: How Life + Mathematics = Happiness','3.500','2008-10-01',256,'http://ecx.images-amazon.com/images/I/51cryUQUhAL._SL75_.jpg','http://ecx.images-amazon.com/images/I/51cryUQUhAL._SL160_.jpg','http://ecx.images-amazon.com/images/I/51cryUQUhAL._SL500_.jpg'),
  ('0312863551','The Moon Is a Harsh Mistress','4.500','1997-06-15',384,'http://ecx.images-amazon.com/images/I/41S1DHKJPZL._SL75_.jpg','http://ecx.images-amazon.com/images/I/41S1DHKJPZL._SL160_.jpg','http://ecx.images-amazon.com/images/I/41S1DHKJPZL._SL500_.jpg'),
  ('0316143472','When You Are Engulfed in Flames','4.000','2008-06-03',336,'http://ecx.images-amazon.com/images/I/51rI%2BNF4VwL._SL75_.jpg','http://ecx.images-amazon.com/images/I/51rI%2BNF4VwL._SL160_.jpg','http://ecx.images-amazon.com/images/I/51rI%2BNF4VwL._SL500_.jpg'),
  ('0345316509','Job: A Comedy of Justice','4.500','1985-10-12',448,'http://ecx.images-amazon.com/images/I/5105XEWFCFL._SL75_.jpg','http://ecx.images-amazon.com/images/I/5105XEWFCFL._SL160_.jpg','http://ecx.images-amazon.com/images/I/5105XEWFCFL._SL500_.jpg'),
@@ -1236,7 +1239,7 @@ CREATE TABLE `lib_entry` (
   KEY `username` (`username`),
   CONSTRAINT `lib_entry_ibfk_1` FOREIGN KEY (`isbn`) REFERENCES `book` (`isbn`),
   CONSTRAINT `lib_entry_ibfk_2` FOREIGN KEY (`username`) REFERENCES `user` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=105 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=106 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `lib_entry`
@@ -1346,7 +1349,8 @@ INSERT INTO `lib_entry` (`lib_id`,`username`,`isbn`,`user_rating`,`date_added`,`
  (101,'apple','0553587579',NULL,'2008-11-03',NULL,NULL),
  (102,'apple','0553293370',NULL,'2008-11-03',NULL,NULL),
  (103,'apple','0553293362',NULL,'2008-11-03',NULL,NULL),
- (104,'apple','0553278398',NULL,'2008-11-03',NULL,NULL);
+ (104,'apple','0553278398',NULL,'2008-11-03',NULL,NULL),
+ (105,'apple','0061629243',NULL,'2008-11-04',NULL,NULL);
 /*!40000 ALTER TABLE `lib_entry` ENABLE KEYS */;
 
 
@@ -1366,7 +1370,7 @@ CREATE TABLE `playlist_entry` (
   KEY `FK_playlist_entry_2` (`username`),
   CONSTRAINT `FK_playlist_entry_2` FOREIGN KEY (`username`) REFERENCES `user` (`username`),
   CONSTRAINT `playlist_entry_ibfk_1` FOREIGN KEY (`entry_id`) REFERENCES `lib_entry` (`lib_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `playlist_entry`
@@ -1377,7 +1381,9 @@ INSERT INTO `playlist_entry` (`playlist_id`,`entry_id`,`playlist_name`,`order_nu
  (2,2,'read',1,'apple'),
  (3,3,'read',2,'apple'),
  (4,4,'read',3,'apple'),
- (5,7,'read',4,'apple');
+ (5,7,'read',4,'apple'),
+ (6,38,'read',5,'apple'),
+ (7,19,'read',6,'apple');
 /*!40000 ALTER TABLE `playlist_entry` ENABLE KEYS */;
 
 
@@ -1884,7 +1890,12 @@ INSERT INTO `tags` (`isbn`,`tag`) VALUES
  ('0553278398','foundation series'),
  ('0553278398','isaac asimov'),
  ('0553278398','asimov'),
- ('0553278398','space opera');
+ ('0553278398','space opera'),
+ ('0061629243','mathematics'),
+ ('0061629243','estimation'),
+ ('0061629243','geek'),
+ ('0061629243','trivia'),
+ ('0061629243','renewable energy');
 /*!40000 ALTER TABLE `tags` ENABLE KEYS */;
 
 
@@ -1964,7 +1975,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `addToPlaylist`(qUsername VARCHAR(30
 BEGIN
    DECLARE entryId INT;
    DECLARE newNumber INT;
-   SELECT entry_id INTO entryId FROM lib_entry WHERE isbn = qIsbn AND username = qUsername;
+   SELECT lib_id INTO entryId FROM lib_entry WHERE isbn = qIsbn AND username = qUsername;
    SELECT count(*) INTO newNumber FROM playlist_entry WHERE username = qUsername AND playlist_name = playlistName;
 
    INSERT INTO playlist_entry VALUES(null, entryId, playlistName, newNumber+1, qUsername);
