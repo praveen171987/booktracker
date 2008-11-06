@@ -31,21 +31,17 @@ public class AddBook extends HttpServlet {
 			return;
 		}
 		String addIsbn = req.getParameter("isbn").toString();
-		String targetPlaylist = null;
-		if(req.getParameter("playlist") != null)
-			targetPlaylist = req.getParameter("playlist").toString();
+		String targetPlaylist = (req.getParameter("playlist") != null)?req.getParameter("playlist").toString():null;
 		
 		if (addIsbn != null && !addIsbn.equals("")) {
-			AmazonResult match = (AmazonResult) sess.getAttribute("isbn:"+addIsbn);
-			if (match != null) { // Information from current search, ie, add to library (~and playlist)
-				
-				Connection con = null;
-
-				try {
-					Class.forName("com.mysql.jdbc.Driver").newInstance();
-					con = DriverManager.getConnection(
-							"jdbc:mysql://localhost:3306/booktracker", "root", "mdl3128");
+			Connection con = null;
+			try {
+				Class.forName("com.mysql.jdbc.Driver").newInstance();
+				con = DriverManager.getConnection(
+						"jdbc:mysql://localhost:3306/booktracker", "root", "mdl3128");
 					
+				AmazonResult match = (AmazonResult) sess.getAttribute("isbn:"+addIsbn);
+				if (match != null) { // Information from current search, ie, add to library (~and playlist)	
 					// Add book info to database
 					try{
 						CallableStatement addBook = prepareAddBook(con, match);
@@ -64,23 +60,31 @@ public class AddBook extends HttpServlet {
 					if(targetPlaylist != null && !targetPlaylist.equals("")) {
 						CallableStatement addToPlaylist = prepareAddToPlay(con, 
 								sess.getAttribute("username").toString(),
-								match.getISBN(),targetPlaylist);
+								addIsbn,targetPlaylist);
 						addToPlaylist.execute();
 					}
-					
-				} catch (Exception e) {
-					e.printStackTrace();
-				} finally {
-					try {
-						if (con != null)
-							con.close();
-					} catch (SQLException e) {
+				} else { // For now, assume it's assignment to a playlist
+					System.out.println("adding to playlist?");
+					if(targetPlaylist != null && !targetPlaylist.equals("")) {
+						System.out.println("adding to playlist! "+targetPlaylist+", "+addIsbn);
+						try{
+							CallableStatement addToPlaylist = prepareAddToPlay(con, 
+									sess.getAttribute("username").toString(),
+									addIsbn,targetPlaylist);
+							addToPlaylist.execute();
+						}catch(SQLException e){
+							e.printStackTrace();
+						}
 					}
 				}
-				
-				
-			} else { // For now, assume it's assignment to a playlist
-
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					if (con != null)
+						con.close();
+				} catch (SQLException e) {
+				}
 			}
 		}
 	}

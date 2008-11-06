@@ -74,3 +74,18 @@
 .selected {
 	background-color: lightBlue;
 }
+#playlists {
+	border: 1px solid black;
+	z-index: 1;
+}
+#playlists div {
+	cursor: pointer;
+	padding: 0 3px;
+	background-color: white;
+}
+#playlists div:hover {
+	background-color: lightGrey;
+}
+#playlists input {
+	color: lightGrey;
+}
