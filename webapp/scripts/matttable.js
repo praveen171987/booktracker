@@ -5,7 +5,8 @@ var MooTable = new Class({
 		rowDef: false,		//Row object  definition (array)
 		contHeight: false,
 		contWidth: false,
-		rowClick: $lambda(false)
+		rowClick: $lambda(false),
+		reservedPlaylistNames: []
 	},
 	//class variables;
 	sortIndex: 0,
@@ -13,6 +14,7 @@ var MooTable = new Class({
 	divHeaders: [],
 	sortOrder: null,
 	selectedRow: null,
+	playlists: [],
 	initialize: function(el, options){
 		this.setOptions(options);
 		this.element = $(el);	//The table
@@ -54,7 +56,14 @@ var MooTable = new Class({
 		},this);
 		this.element.removeProperty('id');
 		
-		this.sortables = null;
+		this.plDiv = new Element('div',{id:'playlists'}).setStyle('display','none').setStyle('position','absolute');
+		this.plDiv.addEvent('mouseleave', function(ev) {
+			this.isbn = null;
+			this.setStyle('display','none');
+		});
+		this.plDiv.inject(document.body, 'top');
+		
+		this.plArrow = new Element('img', {id: 'arrow', src: 'images/downArrow.jpg', title: 'Add to Playlist'});
 	},
 	_createHeader: function(tHead) {
 		var divTHead = new Element('div');
@@ -126,10 +135,13 @@ var MooTable = new Class({
 			resizeLeft = headerTd;
 
 			headerTd.appendChild(divCell);
-			if(ind == arr.length-1)//Last Element
+			if(cell.hasClass('lock')){
+				resizeLeft = null;
+			}else if(ind == arr.length-1)//Last Element or locked
 				headerTd.appendChild(divResizeRight.setStyle('width','4px'));
 			else
 				headerTd.appendChild(divResizeRight);
+				
 			headerTr.appendChild(headerTd);
 			
 		},this);
@@ -144,13 +156,54 @@ var MooTable = new Class({
 		var i = 0;
 		this.element.tBodies[0].set('html','');
 		while(data && data[i]){
+			data[i].origOrder = i;
 			this.rowData[i] = data[i];
-			this.rowData[i].origOrder = i;
 			this._addRow(data[i]);
 			i++;
 		}
 	},
-	_addRow: function(rowObj) {
+	loadPlaylists: function(plsts) {
+		var newPlaylist = new Element('div').grab(
+			new Element('input', {type: 'text', value: 'New Playlist', size: '15', maxlength: '30'}).addEvents({
+				'click': function(ev) {
+					this.setStyle('color','black');
+					this.select();
+				},
+				'keydown': function(ev) {
+					if(ev.key == 'enter') {
+						if(this.uniquePlaylistName(ev.target.value)){
+							addToPlaylist(this.plDiv.isbn, ev.target.get('value'));
+							navPane.addPlaylist(ev.target.value);
+							this._addPlaylist(ev.target.value);
+							this.plDiv.fireEvent('mouseleave');
+						}
+						else alert('must be a unique name');
+					}
+					
+				}.bind(this),
+				'blur': function(ev) {
+					this.set('value','New Playlist');
+					this.setStyle('color','');
+				}
+			})
+		).inject(this.plDiv, 'bottom');
+		
+		this.playlists = plsts;
+		plsts.each(function(obj) {
+			this._addPlaylist(obj.playlist_name);
+		}, this);
+	},
+	_addPlaylist: function(name) {
+		new Element('div').set('html',name).inject(this.plDiv.lastChild, 'before').addEvent('click', function(ev) {
+			addToPlaylist(this.plDiv.isbn,ev.target.get('html'));
+		}.bind(this));
+	},
+	uniquePlaylistName: function(str) {
+		if(this.options.reservedPlaylistNames.extend(this.playlists).indexOf(str) != -1)
+			return false;
+		return true;
+	},
+	_addRow: function(rowObj, location) {
 		var tbody = this.element.tBodies[0];
 		var tr = new Element('tr').addEvent('click', function() {
 			if(this.selectedRow && this.selectedRow == tr) {
@@ -163,20 +216,36 @@ var MooTable = new Class({
 				showTab(2, true);
 			}
 		}.bind(this));
+		
 		var i=0;
 		while(this.options.rowDef[i]){
-			new Element('td').set('html', '<div style="width:'+this.divHeaders[i].getStyle('width')+'">'+rowObj[this.options.rowDef[i]]+'</div>').inject(tr,'bottom');
+			if(i==0){
+				new Element('td').setStyle('width',this.divHeaders[i].getStyle('width')).grab(this.plArrow.clone().addEvents({
+					'click': function(ev) {
+						this.plDiv.setStyle('left',ev.target.getPosition().x).setStyle('top',ev.target.getPosition().y+ev.target.clientHeight);
+						this.plDiv.setStyle('display','block');
+						this.plDiv.isbn = rowObj.isbn;
+						return false;
+					}.bind(this),
+					'mouseleave': function(ev) {
+						var pos = this.plDiv.getPosition();
+						if(pos.x <= ev.client.x && pos.x+this.plDiv.clientWidth > ev.client.x
+							&& pos.y <= ev.client.y && pos.y+this.plDiv.clientHeight > ev.client.y) {
+							
+						}else
+							this.plDiv.fireEvent('mouseleave');
+					}.bind(this)
+				})).inject(tr,'bottom');
+			}else
+				new Element('td').set('html', '<div style="width:'+this.divHeaders[i].getStyle('width')+'">'+rowObj[this.options.rowDef[i]]+'</div>').inject(tr,'bottom');
 			i++;
 		}
-		tbody.appendChild(tr);
-		if(!this.sortables) {
-			this.sortables = new Sortables(tbody, {clone: true});
-			this.sortables.addEvent('complete',function(ev, elem) {
-				alert(ev.client.x);
-				//alert(elem.id);
-			});
+		if(location == null)
+			tbody.appendChild(tr);
+		else {
+			tr.inject(tbody.rows[location], 'before');
 		}
-		else this.sortables.addItems(tr);
+
 	},
 	showRows: function() {
 		this.element.tBodies[0].set('html','');

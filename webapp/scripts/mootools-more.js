@@ -452,7 +452,7 @@ Drag.Move = new Class({
 		var position = (current != 'static') ? current : 'absolute';
 		if (element.getStyle('left') == 'auto' || element.getStyle('top') == 'auto') element.position(element.getPosition(element.offsetParent));
 		
-		element.setStyle('position', position);
+		//element.setStyle('position', position);
 		
 		this.addEvent('start', function(){
 			this.checkDroppables();
@@ -460,6 +460,7 @@ Drag.Move = new Class({
 	},
 
 	start: function(event){
+		this.element.setStyle('position', 'absolute');
 		if (this.container){
 			var el = this.element, cont = this.container, ccoo = cont.getCoordinates(el.offsetParent), cps = {}, ems = {};
 
@@ -607,7 +608,6 @@ var Sortables = new Class({
 	getClone: function(event, element){
 		if (!this.options.clone) return new Element('div').inject(document.body);
 		if ($type(this.options.clone) == 'function') return this.options.clone.call(this, event, element, this.list);
-		$('debug').set('value',element.getPosition().x+", "+element.getPosition().y);
 		return element.clone(true).setStyles({
 			'margin': '0px',
 			'position': 'absolute',
@@ -684,6 +684,7 @@ var Sortables = new Class({
 	reset: function(){
 		this.idle = true;
 		this.clone.destroy();
+		alert('destroyed');
 		this.fireEvent('complete', this.element);
 	},
 

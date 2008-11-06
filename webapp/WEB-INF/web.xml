@@ -52,4 +52,13 @@
     <servlet-name>AddBook</servlet-name>
     <url-pattern>/AddBook</url-pattern>
   </servlet-mapping>
+  
+   <servlet>
+    <servlet-name>HandlePlaylists</servlet-name>
+    <servlet-class>com.softwaresmithy.web.HandlePlaylists</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>HandlePlaylists</servlet-name>
+    <url-pattern>/HandlePlaylists</url-pattern>
+  </servlet-mapping>  
 </web-app>

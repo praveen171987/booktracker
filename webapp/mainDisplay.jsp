@@ -22,6 +22,7 @@
 			var tagPane;
 			var resultsPane;
 			var bookInfoPane;
+			var navPane;
 			var sidebar = true;
 			var curWidth;
 			var tabs = ['tags','results','bookInfo'];
@@ -29,11 +30,13 @@
 				tagPane = new TagCloud('tags',{});
 				resultsPane = new AmazonResult('results',{});
 				bookInfoPane = new BookInfo('bookInfo',{});
+				navPane = new NavPlaylists();
 				dataTable = new MooTable('dataTable',
-					{width: [202,192,100,108,33], 
-					rowDef: ['title','author','pub_date','isbn','pages'],
+					{width: [17,202,192,100,108,33], 
+					rowDef: ['   ','title','author','pub_date','isbn','pages'],
 					contHeight: 500,
 					contWidth: 1000,
+					reservedPlaylistNames: ['Library','Unreleased', 'New Playlist']
 					});
 				$('dataTable').makeResizable({
 					handle: $('divider'),
@@ -42,7 +45,7 @@
 				<%if(session.getAttribute("username") != null){%>
 					getData(null,null);
 				<%}%>
-					window.fireEvent('resize');
+				window.fireEvent('resize');
 			});
 			window.addEvent('resize', function(){
 				$('main').setStyle('height', window.innerHeight-($('banner').clientHeight+$('footer').clientHeight));
@@ -102,6 +105,13 @@
 					request.get({'playlist': playlistName, 'isbn':data.isbn});
 				else request.get({'isbn':data.isbn});
 			}
+			function addToPlaylist(isbn, playlist) {
+				var request = new Request({url: "/BookTracker/AddBook",  onSuccess: function(text){
+					alert('success!');
+				}});
+				if(playlist && playlist != "")
+					request.get({'playlist': playlist, 'isbn':isbn});
+			}			
 			function showTab(j, really) {
 				var i=0;
 				sidebar = true;
@@ -135,6 +145,7 @@
 				<table id="dataTable">
 					<thead>
 						<tr>
+							<td class="lock">&nbsp;</td>
 							<td>Title</td>
 							<td>Author</td>
 							<td>Publication Date</td>
