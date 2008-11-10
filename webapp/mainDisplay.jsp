@@ -17,6 +17,14 @@
 		<script src="pieces/amazonResults.js"></script>
 		<script src="pieces/bookInfo.js"></script>
 	
+		<!-- Calendar Dependencies-->
+		<!-- Loading Theme file(s) -->
+	    <link rel="stylesheet" href="http://www.zapatec.com/website/main/../ajax/zpcal/themes/win2k.css" />
+		<!-- Loading Calendar JavaScript files -->
+	    <script type="text/javascript" src="http://www.zapatec.com/website/main/../ajax/zpcal/../utils/zapatec.js"></script>
+	    <script type="text/javascript" src="http://www.zapatec.com/website/main/../ajax/zpcal/src/calendar.js"></script>
+		<!-- Loading language definition file -->
+	    <script type="text/javascript" src="http://www.zapatec.com/website/main/../ajax/zpcal/lang/calendar-en.js"></script>
 		<script type="text/javascript">
 			var dataTable;
 			var tagPane;
@@ -32,7 +40,7 @@
 				bookInfoPane = new BookInfo('bookInfo',{});
 				navPane = new NavPlaylists();
 				dataTable = new MooTable('dataTable',
-					{width: [17,202,192,100,108,33], 
+					{width: [17,291,192,100,108,33], 
 					rowDef: ['   ','title','author','pub_date','isbn','pages'],
 					contHeight: 500,
 					contWidth: 1000,
@@ -43,8 +51,20 @@
 					modifiers: {x: 'width', y: false}
 				});
 				<%if(session.getAttribute("username") != null){%>
-					getData(null,null);
+					getData(null,null, true);
 				<%}%>
+				
+			    Zapatec.Calendar.setup({
+			        weekNumbers       : false,
+			        showOthers        : true,
+			        step              : 1,
+			        electric          : false,
+			        inputField        : "calendar",
+			        button            : "trigger",
+			        ifFormat          : "%Y-%m-%d",
+			        daFormat          : "%Y/%m/%d"
+			    });
+				
 				window.fireEvent('resize');
 			});
 			window.addEvent('resize', function(){
@@ -65,20 +85,26 @@
 
 			var taglimits;
 			var playlistName = "";
-			function getData(playlist, tags) {
+			function getData(playlist, tags, getPlaylistNames) {
 				taglimits = tags;
 				playlistName = playlist;
 
 				if(playlist == null) playlist = "";
 				if(tags == null) tags = "";
+				
+				var src = "bt";
+				if(getPlaylistNames) src += 'p';
+				
 				var jsonRequest = new Request({url: "/BookTracker/HandleData",  onSuccess: function(text){
 					var json = eval("("+text+")");
 					if(json && json.data) dataTable.loadData(json.data);
 					if(json && json.tags) tagPane.loadTags(json.tags);
-				}}).get({'playlist': playlist, 'tags':tags});
+					if(json && json.playlists) navPane.loadPlaylists(json.playlists);
+				}}).get({'src': src,'plname': playlist, 'reqtags':tags});
 
 			}
 			function getQuery(keywords, newPage) {
+				//TODO: Refactor this code into the amazonResults class, pass in a text field and trigger button that are set in the init
 				var jsonRequest = new Request({url: "/BookTracker/AmazonQuery",  onSuccess: function(text){
 						var json = eval("("+text+")");
 						if(json) resultsPane.loadQuery(json);
@@ -95,22 +121,22 @@
 					jsonRequest.get({'prevPage': 'true'});
 				}
 			}
-			function submitRequest(data, playlist) {
-				var request = new Request({url: "/BookTracker/AddBook",  onSuccess: function(text){
-					data.origOrder = dataTable.rowData.length;
-					dataTable.rowData[dataTable.rowData.length] = data;
-					dataTable._addRow(data);
+			function submitRequest(method, isbns, params) {
+				var request = new Request({url: "/BookTracker/HandleData",  onSuccess: function(text){
+					alert('success');
+					//data.origOrder = dataTable.rowData.length;
+					//dataTable.rowData[dataTable.rowData.length] = data;
+					//dataTable._addRow(data);
 				}});
-				if(playlistName && playlistName != "")
-					request.get({'playlist': playlistName, 'isbn':data.isbn});
-				else request.get({'isbn':data.isbn});
-			}
-			function addToPlaylist(isbn, playlist) {
-				var request = new Request({url: "/BookTracker/AddBook",  onSuccess: function(text){
-					alert('success!');
-				}});
-				if(playlist && playlist != "")
-					request.get({'playlist': playlist, 'isbn':isbn});
+				var paramObject = {'meth': method, 'isbns': isbns};
+				if(method.contains('pl'))
+					paramObject.plname = params.plname;
+				if(method.contains('rd'))
+					paramObject.rddate = params.rddate;
+				if(method.contains('st'))
+					paramObject.stdate = params.stdate;
+				
+				request.post(paramObject);
 			}			
 			function showTab(j, really) {
 				var i=0;

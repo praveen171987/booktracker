@@ -8,27 +8,25 @@ var NavPlaylists = new Class({
 	initialize: function(el, options){
 		var i = 0;
 		var navDrag;
-		var jsonRequest = new Request({url: "/BookTracker/HandlePlaylists",  onSuccess: function(text){
-			var json = eval("("+text+")");
-			//alert('success');
-			if(json && json.playlists) {
-				dataTable.loadPlaylists(json.playlists);
-				while(json.playlists[i]) {
-					var temp = json.playlists[i].playlist_name;
-					this.addPlaylist(temp);
-					i++;
-				}
-			}
-		}.bind(this)}).get();
 	},
 	addPlaylist: function(name) {
 		$('plNav').grab(new Element('li').set('html',name).addClass('playlist').addEvent('click', function() {
-			getData(name, null);
+			getData(name, null, false);
 		}), 'bottom');
+	},
+	loadPlaylists: function(playlists) {
+		//TODO: remove explicit reference to MattTable instance (datatable)
+		dataTable.loadPlaylists(playlists);
+		var i = 0;
+		while(playlists[i]) {
+			var temp = playlists[i].playlist_name;
+			this.addPlaylist(temp);
+			i++;
+		}
 	}
 });		
 </script>
 <ul id="plNav">
-	<li class="playlist" onClick="getData(null,null)"><img src="images/lib.gif">Library</li>
-	<li class="playlist" onClick="getData('unreleased',null)"><img src="images/lib.gif">Unreleased</li>
+	<li class="playlist" onClick="getData(null,null, false)"><img src="images/lib.gif">Library</li>
+	<li class="playlist" onClick="getData('unreleased',null, false)"><img src="images/lib.gif">Unreleased</li>
 </ul>

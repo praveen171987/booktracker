@@ -933,7 +933,15 @@ INSERT INTO `alt_vers` (`isbn`,`alt_ver`) VALUES
  ('0553278398','0246130482'),
  ('0553278398','0553451626'),
  ('0553278398','1439507171'),
- ('0061629243','0007263384');
+ ('0061629243','0007263384'),
+ ('1594480036','0330415263'),
+ ('1594480036','0330427342'),
+ ('1594480036','1405006005'),
+ ('1594480036','1565117980'),
+ ('1594480036','B000OCXG5A'),
+ ('1594480036','1573222518'),
+ ('1594480036','B0000DE6TV'),
+ ('1594480036','1565117999');
 /*!40000 ALTER TABLE `alt_vers` ENABLE KEYS */;
 
 
@@ -1066,7 +1074,8 @@ INSERT INTO `authors` (`isbn`,`author`) VALUES
  ('0553293370','Isaac Asimov'),
  ('0553293362','Isaac Asimov'),
  ('0553278398','Isaac Asimov'),
- ('0061629243','Graham Tattersall');
+ ('0061629243','Graham Tattersall'),
+ ('1594480036','Lian Hearn');
 /*!40000 ALTER TABLE `authors` ENABLE KEYS */;
 
 
@@ -1192,6 +1201,7 @@ INSERT INTO `book` (`isbn`,`title`,`amaz_rating`,`pub_date`,`pages`,`small_url`,
  ('159102594X','The Blade Itself (The First Law: Book One)','4.500','2007-09-06',531,'http://ecx.images-amazon.com/images/I/51JQxyyzNNL._SL75_.jpg','http://ecx.images-amazon.com/images/I/51JQxyyzNNL._SL160_.jpg','http://ecx.images-amazon.com/images/I/51JQxyyzNNL._SL500_.jpg'),
  ('1591026415','Before They Are Hanged (The First Law: Book Two)','4.500','2008-03-25',543,'http://ecx.images-amazon.com/images/I/51FkKpfEZAL._SL75_.jpg','http://ecx.images-amazon.com/images/I/51FkKpfEZAL._SL160_.jpg','http://ecx.images-amazon.com/images/I/51FkKpfEZAL._SL500_.jpg'),
  ('1591026903','Last Argument of Kings (First Law: Book Three)','4.000','2008-09-23',639,'http://ecx.images-amazon.com/images/I/51PX2x67-ZL._SL75_.jpg','http://ecx.images-amazon.com/images/I/51PX2x67-ZL._SL160_.jpg','http://ecx.images-amazon.com/images/I/51PX2x67-ZL._SL500_.jpg'),
+ ('1594480036','Grass for His Pillow (Tales of the Otori, Book 2)','4.000','2004-06-01',368,'http://ecx.images-amazon.com/images/I/51DYA8BPS9L._SL75_.jpg','http://ecx.images-amazon.com/images/I/51DYA8BPS9L._SL160_.jpg','http://ecx.images-amazon.com/images/I/51DYA8BPS9L._SL500_.jpg'),
  ('1595540857','Hood (King Raven Trilogy, Book 1)','4.500','2006-09-05',496,'http://ecx.images-amazon.com/images/I/51yM8cOC4iL._SL75_.jpg','http://ecx.images-amazon.com/images/I/51yM8cOC4iL._SL160_.jpg','http://ecx.images-amazon.com/images/I/51yM8cOC4iL._SL500_.jpg'),
  ('1595540873','Tuck',NULL,'2009-02-10',496,NULL,NULL,NULL),
  ('159554089X','Scarlet (The King Raven, Book 2)','4.500','2008-06-10',464,'http://ecx.images-amazon.com/images/I/51yYy6tjdlL._SL75_.jpg','http://ecx.images-amazon.com/images/I/51yYy6tjdlL._SL160_.jpg','http://ecx.images-amazon.com/images/I/51yYy6tjdlL._SL500_.jpg'),
@@ -1239,7 +1249,7 @@ CREATE TABLE `lib_entry` (
   KEY `username` (`username`),
   CONSTRAINT `lib_entry_ibfk_1` FOREIGN KEY (`isbn`) REFERENCES `book` (`isbn`),
   CONSTRAINT `lib_entry_ibfk_2` FOREIGN KEY (`username`) REFERENCES `user` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=106 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=107 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `lib_entry`
@@ -1350,7 +1360,8 @@ INSERT INTO `lib_entry` (`lib_id`,`username`,`isbn`,`user_rating`,`date_added`,`
  (102,'apple','0553293370',NULL,'2008-11-03',NULL,NULL),
  (103,'apple','0553293362',NULL,'2008-11-03',NULL,NULL),
  (104,'apple','0553278398',NULL,'2008-11-03',NULL,NULL),
- (105,'apple','0061629243',NULL,'2008-11-04',NULL,NULL);
+ (105,'apple','0061629243',NULL,'2008-11-04',NULL,NULL),
+ (106,'apple','1594480036',NULL,'2008-11-10',NULL,NULL);
 /*!40000 ALTER TABLE `lib_entry` ENABLE KEYS */;
 
 
@@ -1895,7 +1906,12 @@ INSERT INTO `tags` (`isbn`,`tag`) VALUES
  ('0061629243','estimation'),
  ('0061629243','geek'),
  ('0061629243','trivia'),
- ('0061629243','renewable energy');
+ ('0061629243','renewable energy'),
+ ('1594480036','fantasy japanese fiction'),
+ ('1594480036','feudal japan'),
+ ('1594480036','fantasy'),
+ ('1594480036','lian hearn'),
+ ('1594480036','historical fantasy');
 /*!40000 ALTER TABLE `tags` ENABLE KEYS */;
 
 

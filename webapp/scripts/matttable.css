@@ -2,7 +2,7 @@
 	float: left;
 }
 .tBody {
-	top: 1.2em;
+	top: 50px;
 	position: absolute;
 	overflow: auto;
 	height: 476px;
@@ -25,6 +25,7 @@
 .mooTable .tHead .tr {
 	width: 1000%;
 	background-color: darkGray;
+	cursor: pointer;
 }
 .mooTable .tHead .tr .resize {
 	width: 2px;
@@ -61,6 +62,9 @@
 	border-right: 1px solid;
 	padding-left: 3px;
 }
+.mooTable .tBody table tbody tr td input{
+	margin: 0;
+}
 .sort_asc {
 	background-image: url(img/arrow_down.gif);
 	background-repeat: no-repeat;
@@ -74,18 +78,19 @@
 .selected {
 	background-color: lightBlue;
 }
-#playlists {
+.plDiv {
 	border: 1px solid black;
 	z-index: 1;
+	position: absolute;
 }
-#playlists div {
+.plDiv div {
 	cursor: pointer;
 	padding: 0 3px;
 	background-color: white;
 }
-#playlists div:hover {
+.plDiv div:hover {
 	background-color: lightGrey;
 }
-#playlists input {
+.plDiv input {
 	color: lightGrey;
 }

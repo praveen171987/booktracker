@@ -31,7 +31,7 @@ var TagCloud = new Class({
 						i++;
 					}
 					newlimit = newlimit.substring(0,newlimit.length-1);
-					getData(playlistName,newlimit);
+					getData(playlistName,newlimit, false);
 				});
 				this.limits.appendChild(a);
 				i++;
@@ -62,9 +62,9 @@ var TagCloud = new Class({
 						if(this.textContent == limits[i]) return;
 						i++;
 					}
-					getData(playlistName,taglimits+","+this.textContent);
+					getData(playlistName,taglimits+","+this.textContent, false);
 				}
-				else getData(playlistName,this.textContent);
+				else getData(playlistName,this.textContent, false);
 			});
 			this.tagCloud.appendChild(span);
 			i++;
