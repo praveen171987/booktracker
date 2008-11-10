@@ -30,7 +30,7 @@ var AmazonResult = new Class({
 				var img = new Element('img', {src: json.data[i].small_url});
 				var addLib = new Element('a',{'href':'#'}).set('html','add Lib')
 				addLib.addEvent('click', function(){
-					submitRequest(this.data, null)
+					submitRequest('bk',this.data.isbn, null)
 				}.bind(div));
 				var addPlay = new Element('a',{'href':'#'}).set('html','add Ply');
 				

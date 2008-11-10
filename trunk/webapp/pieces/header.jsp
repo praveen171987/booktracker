@@ -27,4 +27,4 @@
 <input id="text" type="text">
 <input id="button" style="float:right;" type="button" value="search" onClick="getQuery($('text').value);">
 </div>
-<input id="debug">
+<input id="calendar">

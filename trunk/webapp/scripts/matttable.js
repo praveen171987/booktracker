@@ -43,6 +43,37 @@ var MooTable = new Class({
 		this._createHeader($(this.element.tHead));
 		this.mooTable.wraps(this.divTBody);
 		this.divTHead.inject(this.divTBody,'before');
+		
+		this.plButton = new Element('input', {type: 'button', value: 'Add to Playlist'}).addEvent('click', function(ev) {
+			if(!this.checkSelected()) return;
+			this.plDiv.setStyle('display','block');
+		}.bind(this));
+		
+		this.readButton = new Element('input',{type: 'button', value: 'Mark as Read'}).addEvent('click', function(ev) {
+			if(!this.checkSelected()) return;
+			this.readDiv.setStyle('display','block');
+		}.bind(this));
+		
+		this.buttonDiv = new Element('div').grab(this.readButton).grab(this.plButton).inject(this.divTHead, 'before');
+		
+		this.plDiv = new Element('div',{'class':'plDiv'}).setStyles({display:'none',
+			top:this.plButton.getPosition().y+this.plButton.clientHeight, left: this.plButton.getPosition().x});
+		this.plDiv.addEvent('mouseleave', function(ev) {
+			this.isbn = null;
+			this.setStyle('display','none');
+		});
+		this.plDiv.inject(document.body, 'top');
+		
+		this.readDiv = new Element('div', {'class':'plDiv'}).setStyles({display:'none',
+			top:this.readButton.getPosition().y+this.readButton.clientHeight, left: this.readButton.getPosition().x});
+		this.readDiv.grab(new Element('div').set('html', 'Today'));
+		this.readDiv.grab(new Element('div').set('html', 'The Distant Past'));
+		this.readDiv.grab(new Element('div', {id: 'trigger'}).set('html', 'Other'));
+		this.readDiv.addEvent('mouseleave', function(ev) {
+			this.setStyle('display','none');
+		});
+		this.readDiv.inject(document.body,'top');
+		
 		this.divMooCont = new Element('div').set('class','mootableContainer').set('id',el).wraps(this.mooTable);
 		if(this.options.contHeight) this.setHeight(this.options.contHeight);
 		if(this.options.contWidth) this.divMooCont.setStyle('width',this.options.contWidth);
@@ -56,14 +87,6 @@ var MooTable = new Class({
 		},this);
 		this.element.removeProperty('id');
 		
-		this.plDiv = new Element('div',{id:'playlists'}).setStyle('display','none').setStyle('position','absolute');
-		this.plDiv.addEvent('mouseleave', function(ev) {
-			this.isbn = null;
-			this.setStyle('display','none');
-		});
-		this.plDiv.inject(document.body, 'top');
-		
-		this.plArrow = new Element('img', {id: 'arrow', src: 'images/downArrow.jpg', title: 'Add to Playlist'});
 	},
 	_createHeader: function(tHead) {
 		var divTHead = new Element('div');
@@ -79,26 +102,29 @@ var MooTable = new Class({
 			divResizeRight.addEvent('click',function(el) { return false;}); //Stops a resize click from sorting the column
 			
 			var headerTd = new Element('div').set('class','td').set('col',ind).setStyle('width',($type(this.options.width) == 'numeric'?this.options.width:this.options.width[ind]));
-			headerTd.addEvent('click', function(ev) {
-				if(this.sortIndex != ind) {
-					if(this.sortOrder) this.divHeaders[this.sortIndex].removeClass('sort_'+this.sortOrder);
-					this.sortOrder = null; //reset sort upon clicking a new column
-					
-				}
-				this.sortIndex = ind;
+			
+			if(!cell.hasClass('lock')){
+				headerTd.addEvent('click', function(ev) {
+					if(this.sortIndex != ind) {
+						if(this.sortOrder) this.divHeaders[this.sortIndex].removeClass('sort_'+this.sortOrder);
+						this.sortOrder = null; //reset sort upon clicking a new column
+						
+					}
+					this.sortIndex = ind;
 
-				if(headerTd.hasClass('sort_asc')) {
-					headerTd.removeClass('sort_asc').addClass('sort_desc');
-					this.sortOrder = 'desc';
-				}else if(headerTd.hasClass('sort_desc')) {
-					headerTd.removeClass('sort_desc');
-					this.sortOrder = null;
-				}else {
-					headerTd.addClass('sort_asc');
-					this.sortOrder = 'asc';
-				}
-				this.sort();
-			}.bind(this));
+					if(headerTd.hasClass('sort_asc')) {
+						headerTd.removeClass('sort_asc').addClass('sort_desc');
+						this.sortOrder = 'desc';
+					}else if(headerTd.hasClass('sort_desc')) {
+						headerTd.removeClass('sort_desc');
+						this.sortOrder = null;
+					}else {
+						headerTd.addClass('sort_asc');
+						this.sortOrder = 'asc';
+					}
+					this.sort();
+				}.bind(this));
+			}
 			this.divHeaders[ind] = headerTd;
 
 			
@@ -172,7 +198,7 @@ var MooTable = new Class({
 				'keydown': function(ev) {
 					if(ev.key == 'enter') {
 						if(this.uniquePlaylistName(ev.target.value)){
-							addToPlaylist(this.plDiv.isbn, ev.target.get('value'));
+							submitRequest("pl",this.plDiv.isbn,{plname:ev.target.get('value')})
 							navPane.addPlaylist(ev.target.value);
 							this._addPlaylist(ev.target.value);
 							this.plDiv.fireEvent('mouseleave');
@@ -195,7 +221,16 @@ var MooTable = new Class({
 	},
 	_addPlaylist: function(name) {
 		new Element('div').set('html',name).inject(this.plDiv.lastChild, 'before').addEvent('click', function(ev) {
-			addToPlaylist(this.plDiv.isbn,ev.target.get('html'));
+			var isbns = "";
+			$A(this.element.rows).each( function(row, ind, array) {
+				if(row.cells[0].firstChild.checked) {
+					isbns+=this.rowData[ind].isbn+",";
+					//row.cells[0].firstChild.checked = false;
+				}
+			}, this);
+			if(isbns.charAt(isbns.length-1) == ",") isbns = isbns.substring(0,isbns.length-2);
+			alert(isbns);
+			//submitRequest("pl",this.plDiv.isbn,{plname:ev.target.get('html')});
 		}.bind(this));
 	},
 	uniquePlaylistName: function(str) {
@@ -220,22 +255,17 @@ var MooTable = new Class({
 		var i=0;
 		while(this.options.rowDef[i]){
 			if(i==0){
-				new Element('td').setStyle('width',this.divHeaders[i].getStyle('width')).grab(this.plArrow.clone().addEvents({
-					'click': function(ev) {
-						this.plDiv.setStyle('left',ev.target.getPosition().x).setStyle('top',ev.target.getPosition().y+ev.target.clientHeight);
-						this.plDiv.setStyle('display','block');
-						this.plDiv.isbn = rowObj.isbn;
-						return false;
-					}.bind(this),
-					'mouseleave': function(ev) {
-						var pos = this.plDiv.getPosition();
-						if(pos.x <= ev.client.x && pos.x+this.plDiv.clientWidth > ev.client.x
-							&& pos.y <= ev.client.y && pos.y+this.plDiv.clientHeight > ev.client.y) {
-							
-						}else
-							this.plDiv.fireEvent('mouseleave');
-					}.bind(this)
-				})).inject(tr,'bottom');
+				new Element('td').setStyle('width',this.divHeaders[i].getStyle('width')).grab(
+					new Element('input', {type: 'checkbox'}).addEvent('click', function(ev) {
+						ev.stopPropagation();
+						if(this.checked) {
+							this.parentNode.parentNode.addClass('selected');
+						}
+						else {
+							this.parentNode.parentNode.removeClass('selected');
+						}
+					})
+				).inject(tr,'bottom');
 			}else
 				new Element('td').set('html', '<div style="width:'+this.divHeaders[i].getStyle('width')+'">'+rowObj[this.options.rowDef[i]]+'</div>').inject(tr,'bottom');
 			i++;
@@ -257,7 +287,7 @@ var MooTable = new Class({
 	},
 	setHeight: function(contHeight) {
 		this.divMooCont.setStyle('height',contHeight);
-		this.divTBody.setStyle('height',contHeight.toInt()-24);
+		this.divTBody.setStyle('height',contHeight.toInt()-this.divTBody.getStyle('top').toInt());
 	},
 
 	sort: function() {
@@ -309,5 +339,14 @@ var MooTable = new Class({
 		}else {
 			return a.origOrder > b.origOrder;
 		}
+	},
+	checkSelected: function() {
+		if( !$A(this.element.rows).some( function(item, index, array) {
+			return item.cells[0].firstChild.checked;
+		})) {
+			alert('You must select at least one book.');
+			return false;
+		}
+		return true;
 	}
   });
