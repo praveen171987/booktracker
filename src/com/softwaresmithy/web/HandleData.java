@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 import com.softwaresmithy.amazon.AmazonResult;
 
 public class HandleData extends HttpServlet{
@@ -87,16 +88,18 @@ public class HandleData extends HttpServlet{
 			con = DriverManager.getConnection(
 					"jdbc:mysql://localhost:3306/booktracker", "root", "mdl3128");
 			
+			if((String) req.getParameter("isbns") == null) {
+				System.out.println("no isbns");
+				resp.sendError(300, "You must send at least one isbn");
+				return;
+			}
+			
 			String method = (String) req.getParameter("meth");
 			String[] isbns = ((String) req.getParameter("isbns")).split(",");
 			String plName = (String) req.getParameter("plname");
 			String rdDate = (String) req.getParameter("rddate");
 			String stDate = (String) req.getParameter("stdate");
 			
-			if(isbns == null) {
-				resp.sendError(300, "You must send at least one isbn");
-				return;
-			}
 			for(String isbn : isbns){
 				System.out.println("starting isbn");
 				if(method.contains("bk")){ //Add item to Library
@@ -125,10 +128,15 @@ public class HandleData extends HttpServlet{
 				}
 				if(method.contains("pl")){ //Add item to Playlist
 					if(plName != null && !plName.equals("")) {
-						CallableStatement addToPlaylist = prepareAddToPlay(con, 
-								username,
-								isbn,plName);
-						addToPlaylist.execute();
+						try{
+							CallableStatement addToPlaylist = prepareAddToPlay(con, 
+									username,
+									isbn,plName);
+							addToPlaylist.execute();
+						}catch(com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException e){
+							nonFatalError = true;
+							errString += "isbn: "+isbn+" is already in that playlist|";
+						}
 					}
 				}
 				if(method.contains("rd")){ //Add item's Read Date
@@ -137,6 +145,10 @@ public class HandleData extends HttpServlet{
 				if(method.contains("st")){ //Add item's Start Date
 					
 				}
+			}
+			if(nonFatalError){
+				System.out.println(errString);
+				resp.sendError(300,errString.substring(0,errString.length()-1));
 			}
 		}catch(Exception e){
 			e.printStackTrace();
