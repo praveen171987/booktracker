@@ -1371,30 +1371,24 @@ INSERT INTO `lib_entry` (`lib_id`,`username`,`isbn`,`user_rating`,`date_added`,`
 
 DROP TABLE IF EXISTS `playlist_entry`;
 CREATE TABLE `playlist_entry` (
-  `playlist_id` int(10) unsigned NOT NULL auto_increment,
   `entry_id` int(10) unsigned NOT NULL,
-  `playlist_name` varchar(30) default NULL,
+  `playlist_name` varchar(30) NOT NULL default '',
   `order_num` int(10) unsigned default NULL,
   `username` varchar(30) NOT NULL,
-  PRIMARY KEY  (`playlist_id`),
+  PRIMARY KEY  USING BTREE (`entry_id`,`playlist_name`,`username`),
   KEY `entry_id` (`entry_id`),
   KEY `FK_playlist_entry_2` (`username`),
   CONSTRAINT `FK_playlist_entry_2` FOREIGN KEY (`username`) REFERENCES `user` (`username`),
   CONSTRAINT `playlist_entry_ibfk_1` FOREIGN KEY (`entry_id`) REFERENCES `lib_entry` (`lib_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `playlist_entry`
 --
 
 /*!40000 ALTER TABLE `playlist_entry` DISABLE KEYS */;
-INSERT INTO `playlist_entry` (`playlist_id`,`entry_id`,`playlist_name`,`order_num`,`username`) VALUES 
- (2,2,'read',1,'apple'),
- (3,3,'read',2,'apple'),
- (4,4,'read',3,'apple'),
- (5,7,'read',4,'apple'),
- (6,38,'read',5,'apple'),
- (7,19,'read',6,'apple');
+INSERT INTO `playlist_entry` (`entry_id`,`playlist_name`,`order_num`,`username`) VALUES 
+ (2,'read',1,'apple');
 /*!40000 ALTER TABLE `playlist_entry` ENABLE KEYS */;
 
 
@@ -1994,7 +1988,7 @@ BEGIN
    SELECT lib_id INTO entryId FROM lib_entry WHERE isbn = qIsbn AND username = qUsername;
    SELECT count(*) INTO newNumber FROM playlist_entry WHERE username = qUsername AND playlist_name = playlistName;
 
-   INSERT INTO playlist_entry VALUES(null, entryId, playlistName, newNumber+1, qUsername);
+   INSERT INTO playlist_entry VALUES(entryId, playlistName, newNumber+1, qUsername);
 END $$
 /*!50003 SET SESSION SQL_MODE=@TEMP_SQL_MODE */  $$
 

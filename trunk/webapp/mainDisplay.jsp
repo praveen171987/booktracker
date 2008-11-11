@@ -6,13 +6,11 @@
 		<link rel="stylesheet" href="scripts/tagCloud.css">
 		<link rel="stylesheet" href="scripts/matttable.css">
 		<link rel="stylesheet" href="scripts/bookInfo.css">
-		<!--<link rel="stylesheet" href="scripts/mootable.css">-->
 		<link rel="stylesheet" href="scripts/amazonResults.css">
+		
 		<script src="scripts/mootools-core.js"></script>
 		<script src="scripts/mootools-more.js"></script>
 		<script src="scripts/matttable.js"></script>
-		<!--<script src="scripts/mootable.js"></script>-->
-		<!--<script src="scripts/sorting_table.js"></script>-->
 		<script src="pieces/tagCloud.js"></script>
 		<script src="pieces/amazonResults.js"></script>
 		<script src="pieces/bookInfo.js"></script>
@@ -127,6 +125,8 @@
 					//data.origOrder = dataTable.rowData.length;
 					//dataTable.rowData[dataTable.rowData.length] = data;
 					//dataTable._addRow(data);
+				}, onFailure: function(xhr) {
+					alert(xhr.responseText);
 				}});
 				var paramObject = {'meth': method, 'isbns': isbns};
 				if(method.contains('pl'))
@@ -135,7 +135,7 @@
 					paramObject.rddate = params.rddate;
 				if(method.contains('st'))
 					paramObject.stdate = params.stdate;
-				
+				alert("meth:" +method+", isbns: "+isbns+", plname: "+paramObject.plname+", rdDate: "+paramObject.rddate+", stDate: "+paramObject.rstdate);
 				request.post(paramObject);
 			}			
 			function showTab(j, really) {

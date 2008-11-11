@@ -198,9 +198,18 @@ var MooTable = new Class({
 				'keydown': function(ev) {
 					if(ev.key == 'enter') {
 						if(this.uniquePlaylistName(ev.target.value)){
-							submitRequest("pl",this.plDiv.isbn,{plname:ev.target.get('value')})
-							navPane.addPlaylist(ev.target.value);
-							this._addPlaylist(ev.target.value);
+							var isbns = "";
+							$A(this.element.rows).each( function(row, ind, array) {
+								if(row.cells[0].firstChild.checked) {
+									isbns+=this.rowData[ind].isbn+",";
+									this.unselectRow(row);
+								}
+							}, this);
+							if(isbns.charAt(isbns.length-1) == ",") isbns = isbns.substring(0,isbns.length-1);
+							var plName = ev.target.value;
+							submitRequest("pl",isbns,{plname:ev.target.value});
+							navPane.addPlaylist(plName);
+							this._addPlaylist(plName);
 							this.plDiv.fireEvent('mouseleave');
 						}
 						else alert('must be a unique name');
@@ -225,12 +234,11 @@ var MooTable = new Class({
 			$A(this.element.rows).each( function(row, ind, array) {
 				if(row.cells[0].firstChild.checked) {
 					isbns+=this.rowData[ind].isbn+",";
-					//row.cells[0].firstChild.checked = false;
+					this.unselectRow(row);
 				}
 			}, this);
-			if(isbns.charAt(isbns.length-1) == ",") isbns = isbns.substring(0,isbns.length-2);
-			alert(isbns);
-			//submitRequest("pl",this.plDiv.isbn,{plname:ev.target.get('html')});
+			if(isbns.charAt(isbns.length-1) == ",") isbns = isbns.substring(0,isbns.length-1);
+			submitRequest("pl",isbns,{plname:ev.target.get('html')});
 		}.bind(this));
 	},
 	uniquePlaylistName: function(str) {
@@ -242,10 +250,15 @@ var MooTable = new Class({
 		var tbody = this.element.tBodies[0];
 		var tr = new Element('tr').addEvent('click', function() {
 			if(this.selectedRow && this.selectedRow == tr) {
-				if(tr.toggleClass('selected').hasClass('selected')) bookInfoPane.showInfo(rowObj);;
+				if(tr.hasClass('selected')) this.unselectRow(tr);
+				else {
+					this.selectRow(tr);
+					bookInfoPane.showInfo(rowObj);
+					showTab(2, true);
+				}
 			}else {
-				if(this.selectedRow) this.selectedRow.removeClass('selected');
-				tr.addClass('selected');
+				if(this.selectedRow) this.unselectRow(this.selectedRow);
+				this.selectRow(tr);
 				this.selectedRow = tr;
 				bookInfoPane.showInfo(rowObj);
 				showTab(2, true);
@@ -258,13 +271,13 @@ var MooTable = new Class({
 				new Element('td').setStyle('width',this.divHeaders[i].getStyle('width')).grab(
 					new Element('input', {type: 'checkbox'}).addEvent('click', function(ev) {
 						ev.stopPropagation();
-						if(this.checked) {
-							this.parentNode.parentNode.addClass('selected');
+						if(ev.target.checked) {
+							this.selectRow(ev.target.parentNode.parentNode);
 						}
 						else {
-							this.parentNode.parentNode.removeClass('selected');
+							this.unselectRow(ev.target.parentNode.parentNode);
 						}
-					})
+					}.bind(this))
 				).inject(tr,'bottom');
 			}else
 				new Element('td').set('html', '<div style="width:'+this.divHeaders[i].getStyle('width')+'">'+rowObj[this.options.rowDef[i]]+'</div>').inject(tr,'bottom');
@@ -348,5 +361,13 @@ var MooTable = new Class({
 			return false;
 		}
 		return true;
+	},
+	selectRow: function(tr) {
+		tr.addClass('selected');
+		tr.cells[0].firstChild.checked = true;
+	},
+	unselectRow: function(tr) {
+		tr.removeClass('selected');
+		tr.cells[0].firstChild.checked = false;
 	}
   });
