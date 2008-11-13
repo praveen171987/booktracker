@@ -140,7 +140,13 @@ public class HandleData extends HttpServlet{
 					}
 				}
 				if(method.contains("rd")){ //Add item's Read Date
-					
+					Statement setStRdDates = con.createStatement();
+					if(rdDate.equals("9999-12-31"))
+						setStRdDates.execute("UPDATE lib_entry SET date_started = '"+rdDate+"', date_finished = '"+rdDate+"'"+
+								" WHERE username = '"+username+"' AND isbn = '"+isbn+"'");
+					else
+						setStRdDates.execute("UPDATE lib_entry SET date_finished = '"+rdDate+"'"+
+								" WHERE username = '"+username+"' AND isbn = '"+isbn+"'");
 				}
 				if(method.contains("st")){ //Add item's Start Date
 					

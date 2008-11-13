@@ -81,3 +81,8 @@ div{
 	height:100%;
 	width:3px;
 }
+#error {
+	float: left;
+	color: darkRed;
+	margin-left: 5px;
+}

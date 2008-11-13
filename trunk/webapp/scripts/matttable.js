@@ -5,7 +5,6 @@ var MooTable = new Class({
 		rowDef: false,		//Row object  definition (array)
 		contHeight: false,
 		contWidth: false,
-		rowClick: $lambda(false),
 		reservedPlaylistNames: []
 	},
 	//class variables;
@@ -13,8 +12,10 @@ var MooTable = new Class({
 	rowData: [],
 	divHeaders: [],
 	sortOrder: null,
+	playlistSort: false,
 	selectedRow: null,
 	playlists: [],
+	filter: $lambda(true),
 	initialize: function(el, options){
 		this.setOptions(options);
 		this.element = $(el);	//The table
@@ -66,8 +67,12 @@ var MooTable = new Class({
 		
 		this.readDiv = new Element('div', {'class':'plDiv'}).setStyles({display:'none',
 			top:this.readButton.getPosition().y+this.readButton.clientHeight, left: this.readButton.getPosition().x});
-		this.readDiv.grab(new Element('div').set('html', 'Today'));
-		this.readDiv.grab(new Element('div').set('html', 'The Distant Past'));
+		this.readDiv.grab(new Element('div').set('html', 'Today').addEvent('click', function(ev) {
+			submitRequest('rd',this.selectedIsbns(),{rddate: this.formatCurrentDate()});
+		}.bind(this)));
+		this.readDiv.grab(new Element('div').set('html', 'The Distant Past').addEvent('click', function(ev) {
+			submitRequest('rd',this.selectedIsbns(),{rddate: '9999-12-31'});
+		}.bind(this)));
 		this.readDiv.grab(new Element('div', {id: 'trigger'}).set('html', 'Other'));
 		this.readDiv.addEvent('mouseleave', function(ev) {
 			this.setStyle('display','none');
@@ -182,11 +187,37 @@ var MooTable = new Class({
 		var i = 0;
 		this.element.tBodies[0].set('html','');
 		while(data && data[i]){
-			data[i].origOrder = i;
 			this.rowData[i] = data[i];
-			this._addRow(data[i]);
 			i++;
 		}
+		this.showRows();
+	},
+	loadPlaylist: function(data) {
+		if(this.sortOrder) this.divHeaders[this.sortIndex].removeClass('sort_'+this.sortOrder); //remove ordering
+		this.rowData.each(function(obj, ind, arr) {
+			obj.playlistOrder = null;
+		}, this);
+		this.sortOrder = null
+		var i=0;
+		var j=0;
+		while(data && data[i]) {
+			j=0;
+			while (this.rowData[j]) {
+				if(this.rowData[j].lib_id == data[i].entry_id) {
+					this.rowData[j].playlistOrder = i;
+				}
+				j++;
+			}
+			i++;
+		}
+		this.rowData.each(function(row, ind, arr) {
+			if(this.rowData[ind].playlistOrder == null) {
+				this.rowData[ind].playlistOrder = -1;
+			}
+		}, this);
+		this.playlistSort = true;
+		this.filter = function(obj) { return obj.playlistOrder >= 0};
+		this.sort();
 	},
 	loadPlaylists: function(plsts) {
 		var newPlaylist = new Element('div').grab(
@@ -197,17 +228,9 @@ var MooTable = new Class({
 				},
 				'keydown': function(ev) {
 					if(ev.key == 'enter') {
-						if(this.uniquePlaylistName(ev.target.value)){
-							var isbns = "";
-							$A(this.element.rows).each( function(row, ind, array) {
-								if(row.cells[0].firstChild.checked) {
-									isbns+=this.rowData[ind].isbn+",";
-									this.unselectRow(row);
-								}
-							}, this);
-							if(isbns.charAt(isbns.length-1) == ",") isbns = isbns.substring(0,isbns.length-1);
+						if(this.options.reservedPlaylistNames.extend(this.playlists).indexOf(ev.target.value) != -1){
 							var plName = ev.target.value;
-							submitRequest("pl",isbns,{plname:ev.target.value});
+							submitRequest("pl",this.selectedIsbns(),{plname:ev.target.value});
 							navPane.addPlaylist(plName);
 							this._addPlaylist(plName);
 							this.plDiv.fireEvent('mouseleave');
@@ -230,21 +253,8 @@ var MooTable = new Class({
 	},
 	_addPlaylist: function(name) {
 		new Element('div').set('html',name).inject(this.plDiv.lastChild, 'before').addEvent('click', function(ev) {
-			var isbns = "";
-			$A(this.element.rows).each( function(row, ind, array) {
-				if(row.cells[0].firstChild.checked) {
-					isbns+=this.rowData[ind].isbn+",";
-					this.unselectRow(row);
-				}
-			}, this);
-			if(isbns.charAt(isbns.length-1) == ",") isbns = isbns.substring(0,isbns.length-1);
-			submitRequest("pl",isbns,{plname:ev.target.get('html')});
+			submitRequest("pl",this.selectedIsbns(),{plname:ev.target.get('html')});
 		}.bind(this));
-	},
-	uniquePlaylistName: function(str) {
-		if(this.options.reservedPlaylistNames.extend(this.playlists).indexOf(str) != -1)
-			return false;
-		return true;
 	},
 	_addRow: function(rowObj, location) {
 		var tbody = this.element.tBodies[0];
@@ -290,11 +300,20 @@ var MooTable = new Class({
 		}
 
 	},
+	newFilter: function(newFilter){
+		this.playlistSort = false;
+		if(this.sortOrder) this.divHeaders[this.sortIndex].removeClass('sort_'+this.sortOrder); //remove ordering
+		
+		this.filter = newFilter;
+		this.sort();
+	},	
 	showRows: function() {
 		this.element.tBodies[0].set('html','');
 		var i = 0;
 		while(this.rowData[i]){
-			this._addRow(this.rowData[i]);
+			if(this.filter(this.rowData[i])) {
+				this._addRow(this.rowData[i]);
+			}
 			i++;
 		}
 	},
@@ -337,20 +356,24 @@ var MooTable = new Class({
 		arr[b] = temp;
 	},
 	compare: function(a, b){
-		var valA = a[this.options.rowDef[this.sortIndex]];
-		if(valA.indexOf('The ') == 0) valA = valA.substring(4);
-		else if(valA.indexOf('A ') == 0) valA = valA.substring(2);
-		var valB = b[this.options.rowDef[this.sortIndex]];
-		if(valB.indexOf('The ') == 0) valB = valB.substring(4);
-		else if(valB.indexOf('A ') == 0) valB = valB.substring(2);
 		if(this.sortOrder){
+			var valA = a[this.options.rowDef[this.sortIndex]];
+			if(valA.indexOf('The ') == 0) valA = valA.substring(4);
+			else if(valA.indexOf('A ') == 0) valA = valA.substring(2);
+			var valB = b[this.options.rowDef[this.sortIndex]];
+			if(valB.indexOf('The ') == 0) valB = valB.substring(4);
+			else if(valB.indexOf('A ') == 0) valB = valB.substring(2);
+		
 			if(this.sortOrder == "asc"){
 				return valA > valB;
 			}else {
 				return valA < valB;
 			}
 		}else {
-			return a.origOrder > b.origOrder;
+			if(this.playlistSort)
+					return a.playlistOrder.toInt() > b.playlistOrder.toInt();
+			return a.lib_id.toInt() > b.lib_id.toInt();
+				
 		}
 	},
 	checkSelected: function() {
@@ -369,5 +392,20 @@ var MooTable = new Class({
 	unselectRow: function(tr) {
 		tr.removeClass('selected');
 		tr.cells[0].firstChild.checked = false;
+	},
+	selectedIsbns: function() {
+		var isbns = "";
+		$A(this.element.rows).each( function(row, ind, array) {
+			if(row.cells[0].firstChild.checked) {
+				isbns+=this.rowData[ind].isbn+",";
+				this.unselectRow(row);
+			}
+		}, this);
+		if(isbns.charAt(isbns.length-1) == ",") isbns = isbns.substring(0,isbns.length-1);
+		return isbns;
+	},
+	formatCurrentDate: function() {
+		var date = new Date();
+		return date.getFullYear()+"-"+(date.getMonth().toInt()+1)+"-"+date.getDate();
 	}
   });
