@@ -1258,8 +1258,8 @@ CREATE TABLE `lib_entry` (
 /*!40000 ALTER TABLE `lib_entry` DISABLE KEYS */;
 INSERT INTO `lib_entry` (`lib_id`,`username`,`isbn`,`user_rating`,`date_added`,`date_started`,`date_finished`) VALUES 
  (1,'apple','1416555870',NULL,'2008-09-17',NULL,NULL),
- (2,'apple','0061433012',NULL,'2008-09-17',NULL,NULL),
- (3,'apple','0061474096',NULL,'2008-09-17',NULL,NULL),
+ (2,'apple','0061433012',NULL,'2008-09-17','9999-12-31','9999-12-31'),
+ (3,'apple','0061474096',NULL,'2008-09-17','9999-12-31','9999-12-31'),
  (4,'apple','0316143472',NULL,'2008-09-17',NULL,NULL),
  (5,'apple','0345496884',NULL,'2008-09-17',NULL,NULL),
  (6,'apple','0345501748',NULL,'2008-09-17',NULL,NULL),
@@ -1388,7 +1388,11 @@ CREATE TABLE `playlist_entry` (
 
 /*!40000 ALTER TABLE `playlist_entry` DISABLE KEYS */;
 INSERT INTO `playlist_entry` (`entry_id`,`playlist_name`,`order_num`,`username`) VALUES 
- (2,'read',1,'apple');
+ (1,'wanted',1,'apple'),
+ (2,'read',1,'apple'),
+ (6,'wanted',2,'apple'),
+ (7,'wanted',3,'apple'),
+ (9,'wanted',4,'apple');
 /*!40000 ALTER TABLE `playlist_entry` ENABLE KEYS */;
 
 
@@ -2029,11 +2033,6 @@ BEGIN
    DECLARE temp TEXT;
    DECLARE done BOOLEAN;
 
-   DECLARE unreadDate TEXT DEFAULT '1000-1-1';
-   IF playlistName = 'unreleased' THEN
-      SET unreadDate = CURDATE();
-      SET playlistName = NULL;
-   END IF;
    CREATE TEMPORARY TABLE hasTags(
       tag VARCHAR(30)
    );
@@ -2050,14 +2049,13 @@ BEGIN
          SET temp = SUBSTRING(temp, i);
       END WHILE;
 
-      IF playlistName IS NULL THEN      /*library search with limiting tags*/
-         SELECT DISTINCT a.isbn, title, (select GROUP_CONCAT(author SEPARATOR ', ') from booktracker.authors where authors.isbn=a.isbn) as author,
+      IF playlistName IS NULL THEN
+         SELECT DISTINCT a.isbn, b.lib_id, title, (select GROUP_CONCAT(author SEPARATOR ', ') from booktracker.authors where authors.isbn=a.isbn) as author,
             amaz_rating, pub_date, pages, small_url, medium_url, large_url,
             user_rating, date_added, date_started, date_finished
             FROM book a, lib_entry b, tags c
                WHERE a.isbn = b.isbn
                AND b.username = userName
-               AND a.pub_date > unreadDate /*Conditional statement for reserved Unread playlist*/
                AND c.isbn = a.isbn
                AND c.isbn IN (SELECT DISTINCT isbn
                      FROM booktracker.tags AS PS1
@@ -2074,7 +2072,6 @@ BEGIN
          SELECT tag, num FROM
             (SELECT tag, count(*) as num FROM booktracker.tags WHERE isbn IN
                (SELECT b.isbn FROM booktracker.lib_entry b, book a WHERE username = userName
-                AND a.pub_date > unreadDate /*Conditional statement for reserved Unread playlist*/
                 AND b.isbn IN
                   (SELECT DISTINCT isbn
                      FROM booktracker.tags AS PS1
@@ -2091,10 +2088,8 @@ BEGIN
                )
             GROUP BY tag ORDER BY num DESC LIMIT 50) as tab
          ORDER BY tag ASC;
-      ELSE                             /*playlist search with limiting tags*/
-         SELECT DISTINCT a.isbn, title, (select GROUP_CONCAT(author SEPARATOR ', ') from booktracker.authors where authors.isbn=a.isbn) as author,
-            amaz_rating, pub_date, pages, small_url, medium_url, large_url,
-            user_rating, date_added, date_started, date_finished
+      ELSE                             
+         SELECT d.entry_id AS lib_id
             FROM book a, lib_entry b, tags c, playlist_entry d
                WHERE a.isbn = b.isbn
                AND b.lib_id = d.entry_id
@@ -2136,29 +2131,25 @@ BEGIN
             GROUP BY tag ORDER BY num DESC LIMIT 50) as tab
          ORDER BY tag ASC;
       END IF;
-   ELSE                              /*library search, no limiting tags*/
+   ELSE                              
       IF playlistName IS NULL THEN
-         SELECT DISTINCT a.isbn, title, (select GROUP_CONCAT(author SEPARATOR ', ') from booktracker.authors where authors.isbn=a.isbn) as author,
+         SELECT DISTINCT a.isbn, b.lib_id, title, (select GROUP_CONCAT(author SEPARATOR ', ') from booktracker.authors where authors.isbn=a.isbn) as author,
             amaz_rating, pub_date, pages, small_url, medium_url, large_url,
             user_rating, date_added, date_started, date_finished
             FROM book a, lib_entry b
                WHERE a.isbn = b.isbn
                AND b.username = userName
-               AND a.pub_date > unreadDate /*Conditional statement for reserved Unread playlist*/
                ORDER BY lib_id;
          SELECT tag, num FROM
             (SELECT tag, count(*) as num FROM booktracker.tags WHERE isbn IN
                (SELECT b.isbn FROM booktracker.lib_entry b, book a
                   WHERE username = userName
-                  AND a.pub_date > unreadDate /*Conditional statement for reserved Unread playlist*/
                   AND a.isbn = b.isbn
                )
                GROUP BY tag ORDER BY num DESC LIMIT 50) as tab
             ORDER BY tag ASC;
-      ELSE                        /*playlist search, no limiting tags*/
-         SELECT DISTINCT a.isbn, title, (select GROUP_CONCAT(author SEPARATOR ', ') from booktracker.authors where authors.isbn=a.isbn) as author,
-            amaz_rating, pub_date, pages, small_url, medium_url, large_url,
-            user_rating, date_added, date_started, date_finished
+      ELSE                        
+         SELECT c.entry_id AS lib_id
             FROM book a, lib_entry b, playlist_entry c
                WHERE a.isbn = b.isbn
                AND b.lib_id = c.entry_id

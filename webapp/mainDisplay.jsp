@@ -17,12 +17,12 @@
 	
 		<!-- Calendar Dependencies-->
 		<!-- Loading Theme file(s) -->
-	    <link rel="stylesheet" href="http://www.zapatec.com/website/main/../ajax/zpcal/themes/win2k.css" />
+	    <link rel="stylesheet" href="scripts/win2k.css" />
 		<!-- Loading Calendar JavaScript files -->
-	    <script type="text/javascript" src="http://www.zapatec.com/website/main/../ajax/zpcal/../utils/zapatec.js"></script>
-	    <script type="text/javascript" src="http://www.zapatec.com/website/main/../ajax/zpcal/src/calendar.js"></script>
+	    <script type="text/javascript" src="scripts/zapatec.js"></script>
+	    <script type="text/javascript" src="scripts/calendar.js"></script>
 		<!-- Loading language definition file -->
-	    <script type="text/javascript" src="http://www.zapatec.com/website/main/../ajax/zpcal/lang/calendar-en.js"></script>
+	    <script type="text/javascript" src="scripts/calendar-en.js"></script>
 		<script type="text/javascript">
 			var dataTable;
 			var tagPane;
@@ -95,7 +95,10 @@
 				
 				var jsonRequest = new Request({url: "/BookTracker/HandleData",  onSuccess: function(text){
 					var json = eval("("+text+")");
-					if(json && json.data) dataTable.loadData(json.data);
+					if(!playlist){
+						if(json && json.data) dataTable.loadData(json.data);
+					}
+					else dataTable.loadPlaylist(json.data);
 					if(json && json.tags) tagPane.loadTags(json.tags);
 					if(json && json.playlists) navPane.loadPlaylists(json.playlists);
 				}}).get({'src': src,'plname': playlist, 'reqtags':tags});
@@ -126,8 +129,18 @@
 					//dataTable.rowData[dataTable.rowData.length] = data;
 					//dataTable._addRow(data);
 				}, onFailure: function(xhr) {
-					alert(xhr.responseText);
-				}});
+					$('error').setStyle('margin-top',23);
+					var myFx = new Fx.Tween('error');
+					var count = xhr.statusText.split("\|").length;
+					alert(count);
+					$('error').set('html',xhr.statusText.replace(/\|/g, "<br/>"));
+					for(var i=0; i<count+1; i++) {
+						(function(ind) {
+							myFx.start('margin-top',23*(ind-1)*(-1), 23*ind*(-1));
+							}).pass(i).delay((2000*i));
+					}
+					
+				}});	
 				var paramObject = {'meth': method, 'isbns': isbns};
 				if(method.contains('pl'))
 					paramObject.plname = params.plname;

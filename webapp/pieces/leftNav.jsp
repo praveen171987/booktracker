@@ -27,6 +27,6 @@ var NavPlaylists = new Class({
 });		
 </script>
 <ul id="plNav">
-	<li class="playlist" onClick="getData(null,null, false)"><img src="images/lib.gif">Library</li>
-	<li class="playlist" onClick="getData('unreleased',null, false)"><img src="images/lib.gif">Unreleased</li>
+	<li class="playlist" onClick="dataTable.newFilter($lambda(true))"><img src="images/lib.gif">Library</li>
+	<li class="playlist" onClick="dataTable.newFilter(function(obj) {return obj.pub_date > '2008-11-13'  })"><img src="images/lib.gif">Unreleased</li>
 </ul>
