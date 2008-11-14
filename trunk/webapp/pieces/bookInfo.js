@@ -17,7 +17,7 @@ var BookInfo = new Class({
 	showInfo: function(book) {
 		this.parent.set('html',this.infoString.substitute(book));
 		$('infoWrap').set('html', $('infoWrap').get('html')+
-			"<div><b>Date Started:</b> "+((book.date_started)?date_started:"<input>")+"</div>"+
+			"<div><b>Date Started:</b> "+((book.date_started)?book.date_started:"<input>")+"</div>"+
 			"<div><b>Date Finished:</b> "+((book.date_finished)?book.date_finished:"<input>")+"</div>"+
 			"<div><b>Date Added:</b> "+book.date_added);
 	}

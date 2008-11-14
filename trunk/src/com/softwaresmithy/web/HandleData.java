@@ -83,7 +83,6 @@ public class HandleData extends HttpServlet{
 		Connection con = null;
 		
 		try {
-			System.out.println("in post");
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
 			con = DriverManager.getConnection(
 					"jdbc:mysql://localhost:3306/booktracker", "root", "mdl3128");
@@ -101,7 +100,6 @@ public class HandleData extends HttpServlet{
 			String stDate = (String) req.getParameter("stdate");
 			
 			for(String isbn : isbns){
-				System.out.println("starting isbn");
 				if(method.contains("bk")){ //Add item to Library
 					System.out.println("adding book to lib");
 					AmazonResult match = (AmazonResult) req.getSession().getAttribute("isbn:"+isbn);
@@ -141,9 +139,10 @@ public class HandleData extends HttpServlet{
 				}
 				if(method.contains("rd")){ //Add item's Read Date
 					Statement setStRdDates = con.createStatement();
-					if(rdDate.equals("9999-12-31"))
+					if(rdDate.equals("9999-12-31")){
 						setStRdDates.execute("UPDATE lib_entry SET date_started = '"+rdDate+"', date_finished = '"+rdDate+"'"+
 								" WHERE username = '"+username+"' AND isbn = '"+isbn+"'");
+					}
 					else
 						setStRdDates.execute("UPDATE lib_entry SET date_finished = '"+rdDate+"'"+
 								" WHERE username = '"+username+"' AND isbn = '"+isbn+"'");

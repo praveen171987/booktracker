@@ -32,6 +32,9 @@
 			var sidebar = true;
 			var curWidth;
 			var tabs = ['tags','results','bookInfo'];
+			var taglimits;
+			var playlistName = "";
+			var usingFilter = true; //false means using playlist
 			window.addEvent('domready', function(){
 				tagPane = new TagCloud('tags',{});
 				resultsPane = new AmazonResult('results',{});
@@ -81,8 +84,6 @@
 				}
 			});
 
-			var taglimits;
-			var playlistName = "";
 			function getData(playlist, tags, getPlaylistNames) {
 				taglimits = tags;
 				playlistName = playlist;

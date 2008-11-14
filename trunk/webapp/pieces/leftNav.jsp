@@ -29,4 +29,6 @@ var NavPlaylists = new Class({
 <ul id="plNav">
 	<li class="playlist" onClick="dataTable.newFilter($lambda(true))"><img src="images/lib.gif">Library</li>
 	<li class="playlist" onClick="dataTable.newFilter(function(obj) {return obj.pub_date > '2008-11-13'  })"><img src="images/lib.gif">Unreleased</li>
+	<li class="playlist" onClick="dataTable.newFilter(function(obj) {return obj.date_started == ''  })"><img src="images/lib.gif">Unread</li>
+	<li class="playlist" onClick="dataTable.newFilter(function(obj) {return obj.date_started != '' && obj.date_finished == ''  })"><img src="images/lib.gif">In Progress</li>
 </ul>
