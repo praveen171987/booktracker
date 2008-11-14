@@ -16,6 +16,7 @@ var MooTable = new Class({
 	selectedRow: null,
 	playlists: [],
 	filter: $lambda(true),
+	filteredIsbns: '', //Used for tag queries
 	initialize: function(el, options){
 		this.setOptions(options);
 		this.element = $(el);	//The table
@@ -190,9 +191,10 @@ var MooTable = new Class({
 			this.rowData[i] = data[i];
 			i++;
 		}
-		this.showRows();
+		this.newFilter($lambda(true));//show everything
 	},
 	loadPlaylist: function(data) {
+		usingFilter = false;
 		if(this.sortOrder) this.divHeaders[this.sortIndex].removeClass('sort_'+this.sortOrder); //remove ordering
 		this.rowData.each(function(obj, ind, arr) {
 			obj.playlistOrder = null;
@@ -274,6 +276,7 @@ var MooTable = new Class({
 				showTab(2, true);
 			}
 		}.bind(this));
+		tr.ind = rowObj.ind;
 		
 		var i=0;
 		while(this.options.rowDef[i]){
@@ -301,6 +304,7 @@ var MooTable = new Class({
 
 	},
 	newFilter: function(newFilter){
+		usingFilter = true;
 		this.playlistSort = false;
 		if(this.sortOrder) this.divHeaders[this.sortIndex].removeClass('sort_'+this.sortOrder); //remove ordering
 		
@@ -309,13 +313,17 @@ var MooTable = new Class({
 	},	
 	showRows: function() {
 		this.element.tBodies[0].set('html','');
+		this.filteredIsbns = '';
 		var i = 0;
 		while(this.rowData[i]){
 			if(this.filter(this.rowData[i])) {
+				this.rowData[i].ind = i;
+				this.filteredIsbns+= this.rowData[i].isbn+',';
 				this._addRow(this.rowData[i]);
 			}
 			i++;
 		}
+		if(this.filteredIsbns.length >0) this.filteredIsbns = this.filteredIsbns.substring(0,this.filteredIsbns.length-1);
 	},
 	setHeight: function(contHeight) {
 		this.divMooCont.setStyle('height',contHeight);
@@ -397,7 +405,7 @@ var MooTable = new Class({
 		var isbns = "";
 		$A(this.element.rows).each( function(row, ind, array) {
 			if(row.cells[0].firstChild.checked) {
-				isbns+=this.rowData[ind].isbn+",";
+				isbns+=this.rowData[row.ind].isbn+",";
 				this.unselectRow(row);
 			}
 		}, this);
