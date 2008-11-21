@@ -40,6 +40,7 @@
 				resultsPane = new AmazonResult('results',{});
 				bookInfoPane = new BookInfo('bookInfo',{});
 				navPane = new NavPlaylists();
+				//debugger;
 				dataTable = new MooTable('dataTable',
 					{width: [17,291,192,100,108,33], 
 					rowDef: ['   ','title','author','pub_date','isbn','pages'],
@@ -68,9 +69,11 @@
 				
 				window.fireEvent('resize');
 			});
+			
 			window.addEvent('resize', function(){
 				$('main').setStyle('height', window.innerHeight-($('banner').clientHeight+$('footer').clientHeight));
-				dataTable.setHeight($('main').getStyle('height'));
+				if(dataTable)
+					dataTable.setHeight($('main').getStyle('height'));
 				$('right').setStyle('height',$('main').getStyle('height'));
 				if(sidebar){
 					if(curWidth)
@@ -83,7 +86,7 @@
 					$('dataTable').setStyle('width','100%');
 				}
 			});
-
+			
 			function getData(playlist, tags, getPlaylistNames) {
 				taglimits = tags;
 				playlistName = playlist;
@@ -124,16 +127,20 @@
 				}
 			}
 			function submitRequest(method, isbns, params) {
-				var request = new Request({url: "/BookTracker/HandleData",  onSuccess: function(text){
-					alert('success');
-					//data.origOrder = dataTable.rowData.length;
-					//dataTable.rowData[dataTable.rowData.length] = data;
-					//dataTable._addRow(data);
+	
+	var request = new Request({url: "/BookTracker/HandleData",  onSuccess: function(text){
+					alert('success: '+text);
+					if(params.amazonData){
+						params.amazonData.lib_id = text;
+						params.amazonData.ind = dataTable.rowData.length;
+						dataTable.rowData[dataTable.rowData.length] = params.amazonData;
+						//dataTable._addRow(params.amazonData);
+						dataTable.sort();
+					}
 				}, onFailure: function(xhr) {
 					$('error').setStyle('margin-top',23);
 					var myFx = new Fx.Tween('error');
 					var count = xhr.statusText.split("\|").length;
-					alert(count);
 					$('error').set('html',xhr.statusText.replace(/\|/g, "<br/>"));
 					for(var i=0; i<count+1; i++) {
 						(function(ind) {
@@ -149,7 +156,6 @@
 					paramObject.rddate = params.rddate;
 				if(method.contains('st'))
 					paramObject.stdate = params.stdate;
-				alert("meth:" +method+", isbns: "+isbns+", plname: "+paramObject.plname+", rdDate: "+paramObject.rddate+", stDate: "+paramObject.rstdate);
 				request.post(paramObject);
 			}			
 			function showTab(j, really) {
@@ -202,7 +208,6 @@
 					<div id="bookInfo"></div>
 				</div>
 			</div>
-
 		</div>
 		<div id="footer">
 			<%@ include file="pieces/footer.jsp"%>

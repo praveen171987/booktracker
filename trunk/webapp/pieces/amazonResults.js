@@ -4,7 +4,7 @@ var AmazonResult = new Class({
 	},
 	initialize: function(el, options){
 		window.addEvent('resize', function() {
-			$('amazon').setStyle('height',$('amazon').getParent().getParent().getStyle('height').toInt()-$('pages').clientHeight-2);
+			$('amazon').setStyle('height',$($('amazon').getParent().getParent()).getStyle('height').toInt()-$('pages').clientHeight-2);
 		});
 		this.amazCurrPage = 1;
 		var pages = new Element('div').set('id','pages');
@@ -30,7 +30,7 @@ var AmazonResult = new Class({
 				var img = new Element('img', {src: json.data[i].small_url});
 				var addLib = new Element('a',{'href':'#'}).set('html','add Lib')
 				addLib.addEvent('click', function(){
-					submitRequest('bk',this.data.isbn, null)
+					submitRequest('bk',this.data.isbn, {amazonData:this.data})
 				}.bind(div));
 				var addPlay = new Element('a',{'href':'#'}).set('html','add Ply');
 				

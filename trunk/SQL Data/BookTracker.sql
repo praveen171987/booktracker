@@ -941,7 +941,55 @@ INSERT INTO `alt_vers` (`isbn`,`alt_ver`) VALUES
  ('1594480036','B000OCXG5A'),
  ('1594480036','1573222518'),
  ('1594480036','B0000DE6TV'),
- ('1594480036','1565117999');
+ ('1594480036','1565117999'),
+ ('0765320460','B001IKK8HG'),
+ ('0375848118','0375948112'),
+ ('0375848118','B001FA0L0S'),
+ ('0786948574',''),
+ ('0060530928','0060530936'),
+ ('0060530928','B0011UJM48'),
+ ('0060530928','1596062045'),
+ ('0060530928','0061709123'),
+ ('0060530928','B001H44FP4'),
+ ('0441015948','0441017312'),
+ ('0441015948','B0013A1IYI'),
+ ('0441015948','0748109153'),
+ ('0060558121','0380973650'),
+ ('0060558121','0060010606'),
+ ('0060558121','0060010622'),
+ ('0060558121','0060093641'),
+ ('0060558121','0060836253'),
+ ('0060558121','0380789035'),
+ ('0060558121','0606304940'),
+ ('0060558121','0613913388'),
+ ('0060558121','0694525499'),
+ ('0060558121','2846260338'),
+ ('0060558121','B0000YSH2O'),
+ ('0060558121','B000FC10MU'),
+ ('0060558121','B000HT2P9S'),
+ ('0060558121','0060010614'),
+ ('1563890119','0446393630'),
+ ('1563890119','1417651636'),
+ ('1563890119','1563892278'),
+ ('1563890119','1435237749'),
+ ('0060557818','0060010800'),
+ ('0060557818','B000XSAXXS'),
+ ('0060557818','0061373877'),
+ ('0060557818','0140266518'),
+ ('0060557818','0380789019'),
+ ('0060557818','0380973634'),
+ ('0060557818','0563381701'),
+ ('0060557818','0747266689'),
+ ('0060557818','0755322800'),
+ ('0060557818','1565112318'),
+ ('0060557818','159887036X'),
+ ('0060557818','0563383267'),
+ ('0060557818','0563387467'),
+ ('0060557818','0606216251'),
+ ('0060557818','0613163931'),
+ ('0060557818','B000FC130E'),
+ ('0930289595','1563892251'),
+ ('0930289595','1417652233');
 /*!40000 ALTER TABLE `alt_vers` ENABLE KEYS */;
 
 
@@ -1075,7 +1123,20 @@ INSERT INTO `authors` (`isbn`,`author`) VALUES
  ('0553293362','Isaac Asimov'),
  ('0553278398','Isaac Asimov'),
  ('0061629243','Graham Tattersall'),
- ('1594480036','Lian Hearn');
+ ('1594480036','Lian Hearn'),
+ ('0765320460','Brian Francis Slattery'),
+ ('0375848118','Margo Lanagan'),
+ ('0786948574','J.M. Mcdermott'),
+ ('0060530928','Neil Gaiman'),
+ ('0441015948','Charles Stross'),
+ ('0060558121','Neil Gaiman'),
+ ('1563890119','Neil Gaiman'),
+ ('0060557818','Neil Gaiman'),
+ ('0930289595','Neil Gaiman'),
+ ('0930289595','Malcolm Jones III'),
+ ('0930289595','Mike Dringenberg'),
+ ('0930289595','Michael Zulli'),
+ ('0930289595','Clive Barker');
 /*!40000 ALTER TABLE `authors` ENABLE KEYS */;
 
 
@@ -1109,9 +1170,12 @@ INSERT INTO `book` (`isbn`,`title`,`amaz_rating`,`pub_date`,`pages`,`small_url`,
  ('0060094931','The Bromeliad Trilogy: Truckers, Diggers, and Wings (The Bromeliad Trilogy)','4.500','2003-10-01',512,'http://ecx.images-amazon.com/images/I/5126Xu2yGyL._SL75_.jpg','http://ecx.images-amazon.com/images/I/5126Xu2yGyL._SL160_.jpg','http://ecx.images-amazon.com/images/I/5126Xu2yGyL._SL500_.jpg'),
  ('0060502932','Going Postal','4.500','2005-10-01',416,'http://ecx.images-amazon.com/images/I/51JZRVC3DML._SL75_.jpg','http://ecx.images-amazon.com/images/I/51JZRVC3DML._SL160_.jpg','http://ecx.images-amazon.com/images/I/51JZRVC3DML._SL500_.jpg'),
  ('0060507772','The Last Hero: A Discworld Fable','4.500','2002-09-01',176,'http://ecx.images-amazon.com/images/I/51T5445811L._SL75_.jpg','http://ecx.images-amazon.com/images/I/51T5445811L._SL160_.jpg','http://ecx.images-amazon.com/images/I/51T5445811L._SL500_.jpg'),
+ ('0060530928','The Graveyard Book','5.000','2008-10-01',320,'http://ecx.images-amazon.com/images/I/51pDQMcDGcL._SL75_.jpg','http://ecx.images-amazon.com/images/I/51pDQMcDGcL._SL160_.jpg','http://ecx.images-amazon.com/images/I/51pDQMcDGcL._SL500_.jpg'),
  ('0060541873','Only You Can Save Mankind (The Johnny Maxwell Trilogy)','4.500','2006-08-01',224,'http://ecx.images-amazon.com/images/I/51MXEkoRddL._SL75_.jpg','http://ecx.images-amazon.com/images/I/51MXEkoRddL._SL160_.jpg','http://ecx.images-amazon.com/images/I/51MXEkoRddL._SL500_.jpg'),
  ('0060541903','Johnny and the Dead (The Johnny Maxwell Trilogy)','4.500','2007-04-01',224,'http://ecx.images-amazon.com/images/I/510XX1K108L._SL75_.jpg','http://ecx.images-amazon.com/images/I/510XX1K108L._SL160_.jpg','http://ecx.images-amazon.com/images/I/510XX1K108L._SL500_.jpg'),
  ('0060541938','Johnny and the Bomb (The Johnny Maxwell Trilogy)','4.500','2008-04-01',256,'http://ecx.images-amazon.com/images/I/51TcvQNO3KL._SL75_.jpg','http://ecx.images-amazon.com/images/I/51TcvQNO3KL._SL160_.jpg','http://ecx.images-amazon.com/images/I/51TcvQNO3KL._SL500_.jpg'),
+ ('0060557818','Neverwhere: A Novel','4.500','2003-09-01',400,'http://ecx.images-amazon.com/images/I/41EJ07XP7SL._SL75_.jpg','http://ecx.images-amazon.com/images/I/41EJ07XP7SL._SL160_.jpg','http://ecx.images-amazon.com/images/I/41EJ07XP7SL._SL500_.jpg'),
+ ('0060558121','American Gods: A Novel','4.000','2003-09-01',624,'http://ecx.images-amazon.com/images/I/417QGN93XKL._SL75_.jpg','http://ecx.images-amazon.com/images/I/417QGN93XKL._SL160_.jpg','http://ecx.images-amazon.com/images/I/417QGN93XKL._SL500_.jpg'),
  ('0060586621','A Hat Full of Sky: The Continuing Adventures of Tiffany Aching and the Wee Free Men','4.500','2005-06-01',448,'http://ecx.images-amazon.com/images/I/51RHG66YBYL._SL75_.jpg','http://ecx.images-amazon.com/images/I/51RHG66YBYL._SL160_.jpg','http://ecx.images-amazon.com/images/I/51RHG66YBYL._SL500_.jpg'),
  ('0060815310','Thud!','4.500','2006-09-01',416,'http://ecx.images-amazon.com/images/I/51WHNMNKGTL._SL75_.jpg','http://ecx.images-amazon.com/images/I/51WHNMNKGTL._SL160_.jpg','http://ecx.images-amazon.com/images/I/51WHNMNKGTL._SL500_.jpg'),
  ('0060853972','Good Omens: The Nice and Accurate Prophecies of Agnes Nutter, Witch (Discworld)','4.500','2007-08-01',400,'http://ecx.images-amazon.com/images/I/513kMW0lJZL._SL75_.jpg','http://ecx.images-amazon.com/images/I/513kMW0lJZL._SL160_.jpg','http://ecx.images-amazon.com/images/I/513kMW0lJZL._SL500_.jpg'),
@@ -1151,11 +1215,13 @@ INSERT INTO `book` (`isbn`,`title`,`amaz_rating`,`pub_date`,`pages`,`small_url`,
  ('0345496884','Victory of Eagles (Temeraire, Book 5)','4.000','2008-07-08',342,'http://ecx.images-amazon.com/images/I/51YcHRfZmiL._SL75_.jpg','http://ecx.images-amazon.com/images/I/51YcHRfZmiL._SL160_.jpg','http://ecx.images-amazon.com/images/I/51YcHRfZmiL._SL500_.jpg'),
  ('0345501748','Gentlemen of the Road: A Tale of Adventure','4.000','2007-10-30',224,'http://ecx.images-amazon.com/images/I/51koJqkIVzL._SL75_.jpg','http://ecx.images-amazon.com/images/I/51koJqkIVzL._SL160_.jpg','http://ecx.images-amazon.com/images/I/51koJqkIVzL._SL500_.jpg'),
  ('0345507460','The Dresden Files: Welcome to the Jungle',NULL,'2008-10-14',160,'http://ecx.images-amazon.com/images/I/51BF5JHd4HL._SL75_.jpg','http://ecx.images-amazon.com/images/I/51BF5JHd4HL._SL160_.jpg','http://ecx.images-amazon.com/images/I/51BF5JHd4HL._SL500_.jpg'),
+ ('0375848118','Tender Morsels','4.500','2008-10-14',448,'http://ecx.images-amazon.com/images/I/51xtO8IThCL._SL75_.jpg','http://ecx.images-amazon.com/images/I/51xtO8IThCL._SL160_.jpg','http://ecx.images-amazon.com/images/I/51xtO8IThCL._SL500_.jpg'),
  ('0380798379','Three Days to Never','3.500','2007-12-01',416,'http://ecx.images-amazon.com/images/I/51s63Gv8gCL._SL75_.jpg','http://ecx.images-amazon.com/images/I/51s63Gv8gCL._SL160_.jpg','http://ecx.images-amazon.com/images/I/51s63Gv8gCL._SL500_.jpg'),
  ('0380818191','The Truth','4.500','2001-09-01',368,'http://ecx.images-amazon.com/images/I/51eb6v8p4LL._SL75_.jpg','http://ecx.images-amazon.com/images/I/51eb6v8p4LL._SL160_.jpg','http://ecx.images-amazon.com/images/I/51eb6v8p4LL._SL500_.jpg'),
  ('0380821214','Eric','3.500','2002-02-01',224,'http://ecx.images-amazon.com/images/I/51T-uSWrgoL._SL75_.jpg','http://ecx.images-amazon.com/images/I/51T-uSWrgoL._SL160_.jpg','http://ecx.images-amazon.com/images/I/51T-uSWrgoL._SL500_.jpg'),
  ('0425222330','The Shadow Walker','4.500','2008-08-05',352,'http://ecx.images-amazon.com/images/I/41y-1Kk5SDL._SL75_.jpg','http://ecx.images-amazon.com/images/I/41y-1Kk5SDL._SL160_.jpg','http://ecx.images-amazon.com/images/I/41y-1Kk5SDL._SL500_.jpg'),
  ('0441013651','The Atrocity Archives','4.500','2006-01-03',368,'http://ecx.images-amazon.com/images/I/51JMJ2RAXML._SL75_.jpg','http://ecx.images-amazon.com/images/I/51JMJ2RAXML._SL160_.jpg','http://ecx.images-amazon.com/images/I/51JMJ2RAXML._SL500_.jpg'),
+ ('0441015948','Saturn\'s Children','3.500','2008-07-01',336,'http://ecx.images-amazon.com/images/I/51SdYoZS7KL._SL75_.jpg','http://ecx.images-amazon.com/images/I/51SdYoZS7KL._SL160_.jpg','http://ecx.images-amazon.com/images/I/51SdYoZS7KL._SL500_.jpg'),
  ('0441016197','Valiant (The Lost Fleet, Book 4 of 6)','4.000','2008-06-24',304,'http://ecx.images-amazon.com/images/I/51U1p2Amu5L._SL75_.jpg','http://ecx.images-amazon.com/images/I/51U1p2Amu5L._SL160_.jpg','http://ecx.images-amazon.com/images/I/51U1p2Amu5L._SL500_.jpg'),
  ('0441016383','Princeps\' Fury (Codex Alera, Book 5)',NULL,'2008-11-25',384,NULL,NULL,NULL),
  ('0441783589','Starship Troopers','4.500','1987-05-15',272,'http://ecx.images-amazon.com/images/I/51SpfZgt-DL._SL75_.jpg','http://ecx.images-amazon.com/images/I/51SpfZgt-DL._SL160_.jpg','http://ecx.images-amazon.com/images/I/51SpfZgt-DL._SL500_.jpg'),
@@ -1181,13 +1247,16 @@ INSERT INTO `book` (`isbn`,`title`,`amaz_rating`,`pub_date`,`pages`,`small_url`,
  ('0765318679','The Wanderer\'s Tale (Annals of Lindormyn)','3.000','2007-07-10',448,'http://ecx.images-amazon.com/images/I/4143INVMhOL._SL75_.jpg','http://ecx.images-amazon.com/images/I/4143INVMhOL._SL160_.jpg','http://ecx.images-amazon.com/images/I/4143INVMhOL._SL500_.jpg'),
  ('0765319209','Sly Mongoose','5.000','2008-08-19',320,'http://ecx.images-amazon.com/images/I/51GyCv0d9-L._SL75_.jpg','http://ecx.images-amazon.com/images/I/51GyCv0d9-L._SL160_.jpg','http://ecx.images-amazon.com/images/I/51GyCv0d9-L._SL500_.jpg'),
  ('0765320428','The Court of the Air','5.000','2008-06-10',592,'http://ecx.images-amazon.com/images/I/51VI-JI1fWL._SL75_.jpg','http://ecx.images-amazon.com/images/I/51VI-JI1fWL._SL160_.jpg','http://ecx.images-amazon.com/images/I/51VI-JI1fWL._SL500_.jpg'),
+ ('0765320460','Liberation: Being the Adventures of the Slick Six After the Collapse of the United States of America','4.500','2008-10-14',304,'http://ecx.images-amazon.com/images/I/51ywUpID4PL._SL75_.jpg','http://ecx.images-amazon.com/images/I/51ywUpID4PL._SL160_.jpg','http://ecx.images-amazon.com/images/I/51ywUpID4PL._SL500_.jpg'),
  ('0765345579','Skyfall (Saga of the Skolian Empire)','3.500','2004-10-01',336,'http://ecx.images-amazon.com/images/I/51GA67B65HL._SL75_.jpg','http://ecx.images-amazon.com/images/I/51GA67B65HL._SL160_.jpg','http://ecx.images-amazon.com/images/I/51GA67B65HL._SL500_.jpg'),
  ('0765355558','The Outback Stars (Tor Science Fiction)','4.000','2008-02-05',400,'http://ecx.images-amazon.com/images/I/51LYJauJUnL._SL75_.jpg','http://ecx.images-amazon.com/images/I/51LYJauJUnL._SL160_.jpg','http://ecx.images-amazon.com/images/I/51LYJauJUnL._SL500_.jpg'),
  ('0765358549','The Good Fairies of New York','4.000','2008-06-03',288,'http://ecx.images-amazon.com/images/I/510VDzht9xL._SL75_.jpg','http://ecx.images-amazon.com/images/I/510VDzht9xL._SL160_.jpg','http://ecx.images-amazon.com/images/I/510VDzht9xL._SL500_.jpg'),
+ ('0786948574','Last Dragon (Discoveries)','4.000','2008-02-05',400,'http://ecx.images-amazon.com/images/I/41jn8zmoS6L._SL75_.jpg','http://ecx.images-amazon.com/images/I/41jn8zmoS6L._SL160_.jpg','http://ecx.images-amazon.com/images/I/41jn8zmoS6L._SL500_.jpg'),
  ('0809572354','The Traitor','3.500','2007-08-01',152,'http://ecx.images-amazon.com/images/I/51QuRdAgyzL._SL75_.jpg','http://ecx.images-amazon.com/images/I/51QuRdAgyzL._SL160_.jpg','http://ecx.images-amazon.com/images/I/51QuRdAgyzL._SL500_.jpg'),
  ('0812550234','Primary Inversion (The Saga of the Skolian Empire)','4.500','1996-05-15',384,'http://ecx.images-amazon.com/images/I/51ZBDZS7C6L._SL75_.jpg','http://ecx.images-amazon.com/images/I/51ZBDZS7C6L._SL160_.jpg','http://ecx.images-amazon.com/images/I/51ZBDZS7C6L._SL500_.jpg'),
  ('0812551028','Catch The Lightning (The Saga of the Skolian Empire)','3.500','1997-10-15',320,'http://ecx.images-amazon.com/images/I/51XWn2jMKUL._SL75_.jpg','http://ecx.images-amazon.com/images/I/51XWn2jMKUL._SL160_.jpg','http://ecx.images-amazon.com/images/I/51XWn2jMKUL._SL500_.jpg'),
  ('0812568834','The Quantum Rose (The Saga of the Skolian Empire)','4.000','2002-02-18',432,'http://ecx.images-amazon.com/images/I/5100BRQ4S8L._SL75_.jpg','http://ecx.images-amazon.com/images/I/5100BRQ4S8L._SL160_.jpg','http://ecx.images-amazon.com/images/I/5100BRQ4S8L._SL500_.jpg'),
+ ('0930289595','The Sandman Vol. 2: The Doll\'s House','4.500','1991-09-01',256,'http://ecx.images-amazon.com/images/I/51HMGFYTC6L._SL75_.jpg','http://ecx.images-amazon.com/images/I/51HMGFYTC6L._SL160_.jpg','http://ecx.images-amazon.com/images/I/51HMGFYTC6L._SL500_.jpg'),
  ('1416505490','Have Spacesuit, Will Travel','4.500','2005-02-08',256,'http://ecx.images-amazon.com/images/I/51yLQm8M4NL._SL75_.jpg','http://ecx.images-amazon.com/images/I/51yLQm8M4NL._SL160_.jpg','http://ecx.images-amazon.com/images/I/51yLQm8M4NL._SL500_.jpg'),
  ('1416521054','Into the Looking Glass (Looking Glass, Book 1)','3.500','2007-03-27',400,'http://ecx.images-amazon.com/images/I/51sANDiq-gL._SL75_.jpg','http://ecx.images-amazon.com/images/I/51sANDiq-gL._SL160_.jpg','http://ecx.images-amazon.com/images/I/51sANDiq-gL._SL500_.jpg'),
  ('1416555218','Manxome Foe (Looking Glass, Book 3)','4.500','2008-02-05',352,'http://ecx.images-amazon.com/images/I/516bxZd8hbL._SL75_.jpg','http://ecx.images-amazon.com/images/I/516bxZd8hbL._SL160_.jpg','http://ecx.images-amazon.com/images/I/516bxZd8hbL._SL500_.jpg'),
@@ -1196,6 +1265,7 @@ INSERT INTO `book` (`isbn`,`title`,`amaz_rating`,`pub_date`,`pages`,`small_url`,
  ('1416555870','Claws that Catch (Looking Glass, Book 4)',NULL,'2008-11-04',416,'http://ecx.images-amazon.com/images/I/51nV1%2BgHkdL._SL75_.jpg','http://ecx.images-amazon.com/images/I/51nV1%2BgHkdL._SL160_.jpg','http://ecx.images-amazon.com/images/I/51nV1%2BgHkdL._SL500_.jpg'),
  ('1416555919','Honor of the Clan (The Posleen War)',NULL,'2009-01-08',448,'http://ecx.images-amazon.com/images/I/51yhVBras0L._SL75_.jpg','http://ecx.images-amazon.com/images/I/51yhVBras0L._SL160_.jpg','http://ecx.images-amazon.com/images/I/51yhVBras0L._SL500_.jpg'),
  ('1555839878','Mordred, Bastard Son (Mordred Trilogy)','4.500','2007-02-01',260,'http://ecx.images-amazon.com/images/I/41apb-X%2BJWL._SL75_.jpg','http://ecx.images-amazon.com/images/I/41apb-X%2BJWL._SL160_.jpg','http://ecx.images-amazon.com/images/I/41apb-X%2BJWL._SL500_.jpg'),
+ ('1563890119','The Sandman Vol. 1: Preludes and Nocturnes','4.500','1993-12-07',240,'http://ecx.images-amazon.com/images/I/51SJZPYFD1L._SL75_.jpg','http://ecx.images-amazon.com/images/I/51SJZPYFD1L._SL160_.jpg','http://ecx.images-amazon.com/images/I/51SJZPYFD1L._SL500_.jpg'),
  ('1573223328','Across the Nightingale Floor (Tales of the Otori, Book 1)','4.000','2003-06-03',320,'http://ecx.images-amazon.com/images/I/41EV0MDQ8FL._SL75_.jpg','http://ecx.images-amazon.com/images/I/41EV0MDQ8FL._SL160_.jpg','http://ecx.images-amazon.com/images/I/41EV0MDQ8FL._SL500_.jpg'),
  ('1590200152','Love  &  Sleep (Aegypt)','4.000','2008-01-29',512,'http://ecx.images-amazon.com/images/I/515235X1r7L._SL75_.jpg','http://ecx.images-amazon.com/images/I/515235X1r7L._SL160_.jpg','http://ecx.images-amazon.com/images/I/515235X1r7L._SL500_.jpg'),
  ('159102594X','The Blade Itself (The First Law: Book One)','4.500','2007-09-06',531,'http://ecx.images-amazon.com/images/I/51JQxyyzNNL._SL75_.jpg','http://ecx.images-amazon.com/images/I/51JQxyyzNNL._SL160_.jpg','http://ecx.images-amazon.com/images/I/51JQxyyzNNL._SL500_.jpg'),
@@ -1249,7 +1319,7 @@ CREATE TABLE `lib_entry` (
   KEY `username` (`username`),
   CONSTRAINT `lib_entry_ibfk_1` FOREIGN KEY (`isbn`) REFERENCES `book` (`isbn`),
   CONSTRAINT `lib_entry_ibfk_2` FOREIGN KEY (`username`) REFERENCES `user` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=107 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=126 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `lib_entry`
@@ -1260,22 +1330,22 @@ INSERT INTO `lib_entry` (`lib_id`,`username`,`isbn`,`user_rating`,`date_added`,`
  (1,'apple','1416555870',NULL,'2008-09-17',NULL,NULL),
  (2,'apple','0061433012',NULL,'2008-09-17','9999-12-31','9999-12-31'),
  (3,'apple','0061474096',NULL,'2008-09-17','9999-12-31','9999-12-31'),
- (4,'apple','0316143472',NULL,'2008-09-17',NULL,NULL),
- (5,'apple','0345496884',NULL,'2008-09-17',NULL,NULL),
+ (4,'apple','0316143472',NULL,'2008-09-17','9999-12-31','9999-12-31'),
+ (5,'apple','0345496884',NULL,'2008-09-17','9999-12-31','9999-12-31'),
  (6,'apple','0345501748',NULL,'2008-09-17',NULL,NULL),
  (7,'apple','0345507460',NULL,'2008-09-17',NULL,NULL),
- (8,'apple','0380798379',NULL,'2008-09-17',NULL,NULL),
+ (8,'apple','0380798379',NULL,'2008-09-17','9999-12-31','9999-12-31'),
  (9,'apple','0425222330',NULL,'2008-09-17',NULL,NULL),
  (10,'apple','0441013651',NULL,'2008-09-17',NULL,NULL),
- (11,'apple','0441016197',NULL,'2008-09-17',NULL,NULL),
+ (11,'apple','0441016197',NULL,'2008-09-17','9999-12-31','9999-12-31'),
  (12,'apple','0441016383',NULL,'2008-09-17',NULL,NULL),
- (13,'apple','0451462289',NULL,'2008-09-17',NULL,NULL),
+ (13,'apple','0451462289',NULL,'2008-09-17','9999-12-31','9999-12-31'),
  (14,'apple','0451462564',NULL,'2008-09-17',NULL,NULL),
- (15,'apple','0553345923',NULL,'2008-09-17',NULL,NULL),
+ (15,'apple','0553345923',NULL,'2008-09-17','9999-12-31','9999-12-31'),
  (16,'apple','0765304961',NULL,'2008-09-17',NULL,NULL),
- (17,'apple','0765315459',NULL,'2008-09-17',NULL,NULL),
+ (17,'apple','0765315459',NULL,'2008-09-17','9999-12-31','9999-12-31'),
  (18,'apple','0765318679',NULL,'2008-09-17',NULL,NULL),
- (19,'apple','0765319209',NULL,'2008-09-17',NULL,NULL),
+ (19,'apple','0765319209',NULL,'2008-09-17','9999-12-31','9999-12-31'),
  (20,'apple','0765320428',NULL,'2008-09-17',NULL,NULL),
  (21,'apple','0765358549',NULL,'2008-09-17',NULL,NULL),
  (22,'apple','0809572354',NULL,'2008-09-17',NULL,NULL),
@@ -1285,83 +1355,96 @@ INSERT INTO `lib_entry` (`lib_id`,`username`,`isbn`,`user_rating`,`date_added`,`
  (27,'apple','159102594X',NULL,'2008-09-17',NULL,NULL),
  (28,'apple','1591026415',NULL,'2008-09-17',NULL,NULL),
  (29,'apple','1591026903',NULL,'2008-09-17',NULL,NULL),
- (30,'apple','1595540857',NULL,'2008-09-17',NULL,NULL),
- (31,'apple','159554089X',NULL,'2008-09-17',NULL,NULL),
- (32,'apple','1930846452',NULL,'2008-09-17',NULL,NULL),
+ (30,'apple','1595540857',NULL,'2008-09-17','9999-12-31','9999-12-31'),
+ (31,'apple','159554089X',NULL,'2008-09-17','9999-12-31','9999-12-31'),
+ (32,'apple','1930846452',NULL,'2008-09-17','9999-12-31','9999-12-31'),
  (33,'apple','1595540873',NULL,'2008-09-17',NULL,NULL),
- (34,'apple','0061161659',NULL,'2008-10-27',NULL,NULL),
- (35,'apple','0060853972',NULL,'2008-10-28',NULL,NULL),
- (36,'apple','0061020710',NULL,'2008-10-29',NULL,NULL),
- (37,'apple','0061020664',NULL,'2008-10-29',NULL,NULL),
- (38,'apple','0060012358',NULL,'2008-10-29',NULL,NULL),
- (39,'apple','0061020648',NULL,'2008-10-29',NULL,NULL),
- (40,'apple','0060012382',NULL,'2008-10-29',NULL,NULL),
- (41,'apple','0061020702',NULL,'2008-10-29',NULL,NULL),
- (42,'apple','0061020680',NULL,'2008-10-29',NULL,NULL),
- (43,'apple','0060586621',NULL,'2008-10-29',NULL,NULL),
- (44,'apple','0061020656',NULL,'2008-10-29',NULL,NULL),
- (45,'apple','0061020699',NULL,'2008-10-29',NULL,NULL),
- (46,'apple','006105691X',NULL,'2008-10-29',NULL,NULL),
- (47,'apple','0380821214',NULL,'2008-10-29',NULL,NULL),
- (48,'apple','0061020672',NULL,'2008-10-29',NULL,NULL),
- (49,'apple','0061054895',NULL,'2008-10-29',NULL,NULL),
- (50,'apple','0061020397',NULL,'2008-10-29',NULL,NULL),
- (51,'apple','0060502932',NULL,'2008-10-29',NULL,NULL),
- (52,'apple','0061092193',NULL,'2008-10-29',NULL,NULL),
- (53,'apple','0061020613',NULL,'2008-10-29',NULL,NULL),
- (54,'apple','006102063X',NULL,'2008-10-29',NULL,NULL),
- (55,'apple','0061092177',NULL,'2008-10-29',NULL,NULL),
- (56,'apple','0060507772',NULL,'2008-10-29',NULL,NULL),
- (57,'apple','0061056928',NULL,'2008-10-29',NULL,NULL),
- (58,'apple','0061057649',NULL,'2008-10-29',NULL,NULL),
- (59,'apple','0061020621',NULL,'2008-10-29',NULL,NULL),
- (60,'apple','0061059056',NULL,'2008-10-29',NULL,NULL),
- (61,'apple','0060013125',NULL,'2008-10-29',NULL,NULL),
- (62,'apple','B0013L2DXW',NULL,'2008-10-29',NULL,NULL),
- (63,'apple','0061059064',NULL,'2008-10-29',NULL,NULL),
- (64,'apple','0061031321',NULL,'2008-10-29',NULL,NULL),
- (65,'apple','0061059072',NULL,'2008-10-29',NULL,NULL),
- (66,'apple','0380818191',NULL,'2008-10-29',NULL,NULL),
- (67,'apple','0061056901',NULL,'2008-10-29',NULL,NULL),
- (68,'apple','0060872675',NULL,'2008-10-29',NULL,NULL),
- (69,'apple','0060094931',NULL,'2008-10-29',NULL,NULL),
- (70,'apple','0060013168',NULL,'2008-10-29',NULL,NULL),
- (71,'apple','0060541938',NULL,'2008-10-29',NULL,NULL),
- (72,'apple','0061020400',NULL,'2008-10-29',NULL,NULL),
- (73,'apple','0060815310',NULL,'2008-10-29',NULL,NULL),
- (74,'apple','0060541873',NULL,'2008-10-29',NULL,NULL),
- (75,'apple','0060541903',NULL,'2008-10-29',NULL,NULL),
- (76,'apple','0552133256',NULL,'2008-10-29',NULL,NULL),
- (77,'apple','0441783589',NULL,'2008-10-29',NULL,NULL),
- (78,'apple','0441788386',NULL,'2008-10-29',NULL,NULL),
- (79,'apple','0312863551',NULL,'2008-10-29',NULL,NULL),
- (80,'apple','0441810764',NULL,'2008-10-29',NULL,NULL),
- (81,'apple','0345316509',NULL,'2008-10-29',NULL,NULL),
- (82,'apple','0345330129',NULL,'2008-10-29',NULL,NULL),
- (83,'apple','1416505490',NULL,'2008-10-29',NULL,NULL),
- (84,'apple','0575075414',NULL,'2008-10-29',NULL,NULL),
- (85,'apple','0451462254',NULL,'2008-10-29',NULL,NULL),
- (86,'apple','0451460413',NULL,'2008-10-29',NULL,NULL),
- (87,'apple','0451460774',NULL,'2008-10-29',NULL,NULL),
- (88,'apple','0451461665',NULL,'2008-10-29',NULL,NULL),
- (89,'apple','1416555862',NULL,'2008-10-29',NULL,NULL),
- (90,'apple','1416555714',NULL,'2008-10-29',NULL,NULL),
- (91,'apple','1416555218',NULL,'2008-10-29',NULL,NULL),
- (92,'apple','1416521054',NULL,'2008-10-29',NULL,NULL),
- (93,'apple','0812568834',NULL,'2008-10-31',NULL,NULL),
- (94,'apple','0765345579',NULL,'2008-10-31',NULL,NULL),
- (95,'apple','0812550234',NULL,'2008-10-31',NULL,NULL),
- (96,'apple','0812551028',NULL,'2008-10-31',NULL,NULL),
- (97,'apple','0446579823',NULL,'2008-11-03',NULL,NULL),
- (98,'apple','1573223328',NULL,'2008-11-03',NULL,NULL),
- (99,'apple','0765355558',NULL,'2008-11-03',NULL,NULL),
- (100,'apple','0553293354',NULL,'2008-11-03',NULL,NULL),
- (101,'apple','0553587579',NULL,'2008-11-03',NULL,NULL),
- (102,'apple','0553293370',NULL,'2008-11-03',NULL,NULL),
- (103,'apple','0553293362',NULL,'2008-11-03',NULL,NULL),
- (104,'apple','0553278398',NULL,'2008-11-03',NULL,NULL),
+ (34,'apple','0061161659',NULL,'2008-10-27','9999-12-31','9999-12-31'),
+ (35,'apple','0060853972',NULL,'2008-10-28','9999-12-31','9999-12-31'),
+ (36,'apple','0061020710',NULL,'2008-10-29','9999-12-31','9999-12-31'),
+ (37,'apple','0061020664',NULL,'2008-10-29','9999-12-31','9999-12-31'),
+ (38,'apple','0060012358',NULL,'2008-10-29','9999-12-31','9999-12-31'),
+ (39,'apple','0061020648',NULL,'2008-10-29','9999-12-31','9999-12-31'),
+ (40,'apple','0060012382',NULL,'2008-10-29','9999-12-31','9999-12-31'),
+ (41,'apple','0061020702',NULL,'2008-10-29','9999-12-31','9999-12-31'),
+ (42,'apple','0061020680',NULL,'2008-10-29','9999-12-31','9999-12-31'),
+ (43,'apple','0060586621',NULL,'2008-10-29','9999-12-31','9999-12-31'),
+ (44,'apple','0061020656',NULL,'2008-10-29','9999-12-31','9999-12-31'),
+ (45,'apple','0061020699',NULL,'2008-10-29','9999-12-31','9999-12-31'),
+ (46,'apple','006105691X',NULL,'2008-10-29','9999-12-31','9999-12-31'),
+ (47,'apple','0380821214',NULL,'2008-10-29','9999-12-31','9999-12-31'),
+ (48,'apple','0061020672',NULL,'2008-10-29','9999-12-31','9999-12-31'),
+ (49,'apple','0061054895',NULL,'2008-10-29','9999-12-31','9999-12-31'),
+ (50,'apple','0061020397',NULL,'2008-10-29','9999-12-31','9999-12-31'),
+ (51,'apple','0060502932',NULL,'2008-10-29','9999-12-31','9999-12-31'),
+ (52,'apple','0061092193',NULL,'2008-10-29','9999-12-31','9999-12-31'),
+ (53,'apple','0061020613',NULL,'2008-10-29','9999-12-31','9999-12-31'),
+ (54,'apple','006102063X',NULL,'2008-10-29','9999-12-31','9999-12-31'),
+ (55,'apple','0061092177',NULL,'2008-10-29','9999-12-31','9999-12-31'),
+ (56,'apple','0060507772',NULL,'2008-10-29','9999-12-31','9999-12-31'),
+ (57,'apple','0061056928',NULL,'2008-10-29','9999-12-31','9999-12-31'),
+ (58,'apple','0061057649',NULL,'2008-10-29','9999-12-31','9999-12-31'),
+ (59,'apple','0061020621',NULL,'2008-10-29','9999-12-31','9999-12-31'),
+ (60,'apple','0061059056',NULL,'2008-10-29','9999-12-31','9999-12-31'),
+ (61,'apple','0060013125',NULL,'2008-10-29','9999-12-31','9999-12-31'),
+ (62,'apple','B0013L2DXW',NULL,'2008-10-29','9999-12-31','9999-12-31'),
+ (63,'apple','0061059064',NULL,'2008-10-29','9999-12-31','9999-12-31'),
+ (64,'apple','0061031321',NULL,'2008-10-29','9999-12-31','9999-12-31'),
+ (65,'apple','0061059072',NULL,'2008-10-29','9999-12-31','9999-12-31'),
+ (66,'apple','0380818191',NULL,'2008-10-29','9999-12-31','9999-12-31'),
+ (67,'apple','0061056901',NULL,'2008-10-29','9999-12-31','9999-12-31'),
+ (68,'apple','0060872675',NULL,'2008-10-29','9999-12-31','9999-12-31'),
+ (69,'apple','0060094931',NULL,'2008-10-29','9999-12-31','9999-12-31'),
+ (70,'apple','0060013168',NULL,'2008-10-29','9999-12-31','9999-12-31'),
+ (71,'apple','0060541938',NULL,'2008-10-29','9999-12-31','9999-12-31'),
+ (72,'apple','0061020400',NULL,'2008-10-29','9999-12-31','9999-12-31'),
+ (73,'apple','0060815310',NULL,'2008-10-29','9999-12-31','9999-12-31'),
+ (74,'apple','0060541873',NULL,'2008-10-29','9999-12-31','9999-12-31'),
+ (75,'apple','0060541903',NULL,'2008-10-29','9999-12-31','9999-12-31'),
+ (76,'apple','0552133256',NULL,'2008-10-29','9999-12-31','9999-12-31'),
+ (77,'apple','0441783589',NULL,'2008-10-29','9999-12-31','9999-12-31'),
+ (78,'apple','0441788386',NULL,'2008-10-29','9999-12-31','9999-12-31'),
+ (79,'apple','0312863551',NULL,'2008-10-29','9999-12-31','9999-12-31'),
+ (80,'apple','0441810764',NULL,'2008-10-29','9999-12-31','9999-12-31'),
+ (81,'apple','0345316509',NULL,'2008-10-29','9999-12-31','9999-12-31'),
+ (82,'apple','0345330129',NULL,'2008-10-29','9999-12-31','9999-12-31'),
+ (83,'apple','1416505490',NULL,'2008-10-29','9999-12-31','9999-12-31'),
+ (84,'apple','0575075414',NULL,'2008-10-29','9999-12-31','9999-12-31'),
+ (85,'apple','0451462254',NULL,'2008-10-29','9999-12-31','9999-12-31'),
+ (86,'apple','0451460413',NULL,'2008-10-29','9999-12-31','9999-12-31'),
+ (87,'apple','0451460774',NULL,'2008-10-29','9999-12-31','9999-12-31'),
+ (88,'apple','0451461665',NULL,'2008-10-29','9999-12-31','9999-12-31'),
+ (89,'apple','1416555862',NULL,'2008-10-29','9999-12-31','9999-12-31'),
+ (90,'apple','1416555714',NULL,'2008-10-29','9999-12-31','9999-12-31'),
+ (91,'apple','1416555218',NULL,'2008-10-29','9999-12-31','9999-12-31'),
+ (92,'apple','1416521054',NULL,'2008-10-29','9999-12-31','9999-12-31'),
+ (93,'apple','0812568834',NULL,'2008-10-31','9999-12-31','9999-12-31'),
+ (94,'apple','0765345579',NULL,'2008-10-31','9999-12-31','9999-12-31'),
+ (95,'apple','0812550234',NULL,'2008-10-31','9999-12-31','9999-12-31'),
+ (96,'apple','0812551028',NULL,'2008-10-31','9999-12-31','9999-12-31'),
+ (97,'apple','0446579823',NULL,'2008-11-03','9999-12-31','9999-12-31'),
+ (98,'apple','1573223328',NULL,'2008-11-03','9999-12-31','9999-12-31'),
+ (99,'apple','0765355558',NULL,'2008-11-03','9999-12-31','9999-12-31'),
+ (100,'apple','0553293354',NULL,'2008-11-03','9999-12-31','9999-12-31'),
+ (101,'apple','0553587579',NULL,'2008-11-03','9999-12-31','9999-12-31'),
+ (102,'apple','0553293370',NULL,'2008-11-03','9999-12-31','9999-12-31'),
+ (103,'apple','0553293362',NULL,'2008-11-03','9999-12-31','9999-12-31'),
+ (104,'apple','0553278398',NULL,'2008-11-03','9999-12-31','9999-12-31'),
  (105,'apple','0061629243',NULL,'2008-11-04',NULL,NULL),
- (106,'apple','1594480036',NULL,'2008-11-10',NULL,NULL);
+ (106,'apple','1594480036',NULL,'2008-11-10','9999-12-31','9999-12-31'),
+ (107,'apple','0765320460',NULL,'2008-11-21',NULL,NULL),
+ (108,'apple','0375848118',NULL,'2008-11-21',NULL,NULL),
+ (109,'apple','0786948574',NULL,'2008-11-21',NULL,NULL),
+ (110,'apple','0060530928',NULL,'2008-11-21',NULL,NULL),
+ (117,'apple','0441015948',NULL,'2008-11-21',NULL,NULL),
+ (118,'apple','0060558121',NULL,'2008-11-21',NULL,NULL),
+ (119,'apple','1563890119',NULL,'2008-11-21',NULL,NULL),
+ (120,'apple','0060557818',NULL,'2008-11-21',NULL,NULL),
+ (121,'apple','0930289595',NULL,'2008-11-21',NULL,NULL),
+ (122,'scumbkt','0061433012',NULL,'2008-11-21',NULL,NULL),
+ (123,'scumbkt','0061161659',NULL,'2008-11-21',NULL,NULL),
+ (124,'scumbkt','0060853972',NULL,'2008-11-21',NULL,NULL),
+ (125,'scumbkt','0061020680',NULL,'2008-11-21',NULL,NULL);
 /*!40000 ALTER TABLE `lib_entry` ENABLE KEYS */;
 
 
@@ -1909,7 +1992,52 @@ INSERT INTO `tags` (`isbn`,`tag`) VALUES
  ('1594480036','feudal japan'),
  ('1594480036','fantasy'),
  ('1594480036','lian hearn'),
- ('1594480036','historical fantasy');
+ ('1594480036','historical fantasy'),
+ ('0765320460','toread'),
+ ('0765320460','dark fantasy'),
+ ('0765320460','dystopian'),
+ ('0765320460','fantasy'),
+ ('0765320460','future'),
+ ('0375848118','book'),
+ ('0375848118','fairy tale'),
+ ('0375848118','snow white and rose red'),
+ ('0375848118','toread'),
+ ('0375848118','waiting for reviews'),
+ ('0786948574','fantasy'),
+ ('0786948574','dark fantasy'),
+ ('0786948574','epic fantasy'),
+ ('0786948574','literary fantasy'),
+ ('0786948574','ants'),
+ ('0060530928','neil gaiman'),
+ ('0060530928','dave mckean'),
+ ('0060530928','fantasy'),
+ ('0060530928','ghost story'),
+ ('0060530928','ghost'),
+ ('0441015948','science fiction'),
+ ('0441015948','charles stross'),
+ ('0441015948','robots'),
+ ('0441015948','cheesecake cover'),
+ ('0441015948','space opera'),
+ ('0060558121','neil gaiman'),
+ ('0060558121','urban fantasy'),
+ ('0060558121','mythology'),
+ ('0060558121','modern fantasy'),
+ ('0060558121','fantasy'),
+ ('1563890119','graphic novel'),
+ ('1563890119','neil gaiman'),
+ ('1563890119','sandman'),
+ ('1563890119','comics'),
+ ('1563890119','vertigo'),
+ ('0060557818','neil gaiman'),
+ ('0060557818','urban fantasy'),
+ ('0060557818','fantasy'),
+ ('0060557818','fantasy adventure'),
+ ('0060557818','parallel worlds'),
+ ('0930289595','graphic novel'),
+ ('0930289595','neil gaiman'),
+ ('0930289595','sandman'),
+ ('0930289595','comics'),
+ ('0930289595','fantasy');
 /*!40000 ALTER TABLE `tags` ENABLE KEYS */;
 
 
@@ -1932,7 +2060,8 @@ CREATE TABLE `user` (
 
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
 INSERT INTO `user` (`username`,`password`,`email`,`date_joined`) VALUES 
- ('apple','banana','cranberry','2008-09-16');
+ ('apple','banana','cranberry','2008-09-16'),
+ ('scumbkt','mdl3128','levan.matthew@gmail.com','2008-11-21');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 
 
@@ -1971,6 +2100,7 @@ DELIMITER $$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `addToLibrary`(username VARCHAR(30), isbn VARCHAR(10))
 BEGIN
    INSERT INTO lib_entry VALUES(null, username, isbn, null, CURDATE(), null, null);
+   SELECT LAST_INSERT_ID() as id;
 END $$
 /*!50003 SET SESSION SQL_MODE=@TEMP_SQL_MODE */  $$
 
@@ -2027,7 +2157,7 @@ DROP PROCEDURE IF EXISTS `getData`;
 DELIMITER $$
 
 /*!50003 SET @TEMP_SQL_MODE=@@SQL_MODE, SQL_MODE='STRICT_TRANS_TABLES,NO_AUTO_CREATE_USER' */ $$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `getData`(userName VARCHAR(30), playlistName VARCHAR(30), taglist TEXT)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getData`(userNameIn VARCHAR(30), playlistName VARCHAR(30), taglist TEXT)
 BEGIN
    DECLARE i INT;
    DECLARE temp TEXT;
@@ -2055,7 +2185,7 @@ BEGIN
             user_rating, date_added, date_started, date_finished
             FROM book a, lib_entry b, tags c
                WHERE a.isbn = b.isbn
-               AND b.username = userName
+               AND b.username = userNameIn
                AND c.isbn = a.isbn
                AND c.isbn IN (SELECT DISTINCT isbn
                      FROM booktracker.tags AS PS1
@@ -2071,7 +2201,7 @@ BEGIN
                   ) ORDER BY lib_id;
          SELECT tag, num FROM
             (SELECT tag, count(*) as num FROM booktracker.tags WHERE isbn IN
-               (SELECT b.isbn FROM booktracker.lib_entry b, book a WHERE username = userName
+               (SELECT b.isbn FROM booktracker.lib_entry b, book a WHERE username = userNameIn
                 AND b.isbn IN
                   (SELECT DISTINCT isbn
                      FROM booktracker.tags AS PS1
@@ -2094,7 +2224,7 @@ BEGIN
                WHERE a.isbn = b.isbn
                AND b.lib_id = d.entry_id
                AND d.playlist_name = playlistName
-               AND b.username = userName
+               AND b.username = userNameIn
                AND c.isbn = a.isbn
                AND c.isbn IN (SELECT DISTINCT isbn
                      FROM booktracker.tags AS PS1
@@ -2112,7 +2242,7 @@ BEGIN
             (SELECT tag, count(*) as num FROM booktracker.tags WHERE isbn IN
                (SELECT a.isbn from booktracker.lib_entry a, booktracker.playlist_entry b, book c
                WHERE a.lib_id = b.entry_id
-               AND a.username = userName
+               AND a.username = userNameIn
                AND b.playlist_name = playlistName
                AND a.isbn IN
                   (SELECT DISTINCT isbn
@@ -2131,19 +2261,19 @@ BEGIN
             GROUP BY tag ORDER BY num DESC LIMIT 50) as tab
          ORDER BY tag ASC;
       END IF;
-   ELSE                              
+   ELSE
       IF playlistName IS NULL THEN
          SELECT DISTINCT a.isbn, b.lib_id, title, (select GROUP_CONCAT(author SEPARATOR ', ') from booktracker.authors where authors.isbn=a.isbn) as author,
             amaz_rating, pub_date, pages, small_url, medium_url, large_url,
             user_rating, date_added, date_started, date_finished
             FROM book a, lib_entry b
                WHERE a.isbn = b.isbn
-               AND b.username = userName
+               AND b.username = userNameIn
                ORDER BY lib_id;
          SELECT tag, num FROM
             (SELECT tag, count(*) as num FROM booktracker.tags WHERE isbn IN
                (SELECT b.isbn FROM booktracker.lib_entry b, book a
-                  WHERE username = userName
+                  WHERE username = userNameIn
                   AND a.isbn = b.isbn
                )
                GROUP BY tag ORDER BY num DESC LIMIT 50) as tab
@@ -2154,13 +2284,13 @@ BEGIN
                WHERE a.isbn = b.isbn
                AND b.lib_id = c.entry_id
                AND c.playlist_name = playlistName
-               AND b.username = userName
+               AND b.username = userNameIn
                ORDER BY order_num;
          SELECT tag, num FROM
             (SELECT tag, count(*) as num FROM booktracker.tags WHERE isbn IN
                (SELECT a.isbn from booktracker.lib_entry a, booktracker.playlist_entry b, book c
                WHERE a.lib_id = b.entry_id
-               AND a.username = userName
+               AND a.username = userNameIn
                AND b.playlist_name = playlistName)
                GROUP BY tag ORDER BY num DESC LIMIT 50) as tab
             ORDER BY tag ASC;
