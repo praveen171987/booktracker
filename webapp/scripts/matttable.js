@@ -40,7 +40,7 @@ var MooTable = new Class({
 		}.bind(this));
 		this.divTBody.wraps(this.element);
 		
-		this.numColumns = this.element.tHead.getElements('td').length;
+		this.numColumns = $(this.element.tHead).getElements('td').length;
 		
 		this._createHeader($(this.element.tHead));
 		this.mooTable.wraps(this.divTBody);
@@ -301,7 +301,6 @@ var MooTable = new Class({
 		else {
 			tr.inject(tbody.rows[location], 'before');
 		}
-
 	},
 	newFilter: function(newFilter){
 		usingFilter = true;
@@ -312,7 +311,7 @@ var MooTable = new Class({
 		this.sort();
 	},	
 	showRows: function() {
-		this.element.tBodies[0].set('html','');
+		$(this.element.tBodies[0]).set('html','');
 		this.filteredIsbns = '';
 		var i = 0;
 		while(this.rowData[i]){

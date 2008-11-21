@@ -3,6 +3,7 @@ package com.softwaresmithy.web;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -73,6 +74,7 @@ public class HandleData extends HttpServlet{
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) {
 		Boolean nonFatalError = false;
 		String errString = "";
+		String succString = "";
 		String username = (String)req.getSession().getAttribute("username");
 		if(username == null || username.equals("")){
 			try{
@@ -114,6 +116,13 @@ public class HandleData extends HttpServlet{
 						try {
 							CallableStatement addToLib = prepareAddToLib(con, username,match.getISBN());
 							addToLib.execute();
+							ResultSet rs = addToLib.getResultSet();
+							if(rs.next()){
+								int id = rs.getInt("id");
+								//TODO replace with something that works for multiple books
+								resp.getWriter().write(Integer.toString(id));
+								System.out.println("insert id: "+id);
+							}
 						}catch(com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException e){
 							nonFatalError = true;
 							errString += match.getTitle()+" is already in your library|";
@@ -168,6 +177,7 @@ public class HandleData extends HttpServlet{
 	private CallableStatement setParams(CallableStatement cs, String username, String playlist, String tags){
 		try{
 			cs.setString(1, username);
+			System.out.println("username: "+username);
 			
 			if(playlist != null && !playlist.equals("")){
 				cs.setString(2, playlist);
