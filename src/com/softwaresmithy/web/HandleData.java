@@ -177,7 +177,6 @@ public class HandleData extends HttpServlet{
 	private CallableStatement setParams(CallableStatement cs, String username, String playlist, String tags){
 		try{
 			cs.setString(1, username);
-			System.out.println("username: "+username);
 			
 			if(playlist != null && !playlist.equals("")){
 				cs.setString(2, playlist);

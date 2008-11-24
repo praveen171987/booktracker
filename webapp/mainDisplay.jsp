@@ -127,16 +127,23 @@
 				}
 			}
 			function submitRequest(method, isbns, params) {
-	
-	var request = new Request({url: "/BookTracker/HandleData",  onSuccess: function(text){
+				var request = new Request({url: "/BookTracker/HandleData",  onSuccess: function(text){
 					alert('success: '+text);
 					if(params.amazonData){
 						params.amazonData.lib_id = text;
 						params.amazonData.ind = dataTable.rowData.length;
 						dataTable.rowData[dataTable.rowData.length] = params.amazonData;
-						//dataTable._addRow(params.amazonData);
-						dataTable.sort();
 					}
+					if(params.rdDate){
+						dataTable.rowData.each(function(cell, ind, arr) {
+							if(isbns.contains(cell.isbn)) {
+								cell.date_finished = params.rdDate;
+								if(paramds.rdDate == '9999-12-31')
+									cell.date_started = params.rdDate;
+							}
+						},this);
+					}
+					dataTable.sort();
 				}, onFailure: function(xhr) {
 					$('error').setStyle('margin-top',23);
 					var myFx = new Fx.Tween('error');
