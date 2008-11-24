@@ -28,7 +28,7 @@ public class AcornWebQueryEngine {
     public static void main(String[] args) {
     	AcornWebQueryEngine library = new AcornWebQueryEngine();
     	List<String> list = new java.util.ArrayList<String>();
-    	list.add("1595540865");
+    	list.add("0060012358");
     	System.out.println(library.atLibrary(list));
     }
     public AcornWebQueryEngine(){
@@ -57,18 +57,18 @@ public class AcornWebQueryEngine {
         get.setRequestHeader("Proxy-Authorization", "Basic c3p5NHpxOnNjdW1CS1QxOQ==");
         get.setRequestHeader("Proxy-Connection", "Keep-Alive");
         
-        get.setPath("rss.asp");
-        get.setQueryString("q="+listToOrString(isbns));
+        get.setPath("/result.ashx");
+        get.setQueryString("q="+listToOrString(isbns)+"&output=xml");
         try{
             responseCode = client.executeMethod(get);            
             //System.out.println(get.getResponseBodyAsString());
-            numItems = get.getResponseBodyAsString().split("<item").length-1;
+            numItems = get.getResponseBodyAsString().split("<record").length-1;
             if(numItems>0){
-	            String firstRecord = get.getResponseBodyAsString().split("<item")[1];
-	            int idStart = firstRecord.indexOf("<link>")+6;
-	            int idEnd = firstRecord.indexOf("</link>")-1;
+	            String firstRecord = get.getResponseBodyAsString().split("<record")[1];
+	            int idStart = firstRecord.indexOf("<id>")+4;
+	            int idEnd = firstRecord.indexOf("</id>")-1;
 	            String carlId = firstRecord.substring(idStart,idEnd);
-	            return carlId.substring(carlId.length()-9);
+	            return carlId;
             }
             
         }catch(Exception e){
