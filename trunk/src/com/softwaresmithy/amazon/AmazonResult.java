@@ -24,6 +24,22 @@ public class AmazonResult {
 	private String largeImageUrl;
 	private List<String> alternateVersions;
 	private String detailUrl;
+	
+	public static void main(String[] args){
+		String[] isbns = {"0060530936","B0011UJM48","1596062045","0061709123","B001H44FP4","0441017312",
+"B0013A1IYI","0748109153","0380973650","0060010606","0060010622","0060093641","0060836253","0380789035",
+"0606304940","0613913388","0694525499","2846260338","B0000YSH2O","B000FC10MU","B000HT2P9S","0060010614",
+"0446393630","1417651636","1563892278","1435237749","0060010800","B000XSAXXS","0061373877","0140266518",
+"0380789019","0380973634","0563381701","0747266689","0755322800","1565112318","159887036X","0563383267",
+"0563387467","0606216251","0613163931","B000FC130E","1563892251","1417652233","0441010156"};
+		for(int i=0;i<isbns.length;i++){
+			if(isbns[i].matches("^\\d{9}[\\dxX]"))
+				System.out.println(isbns[i]+" works!");
+			else
+				System.out.println(isbns[i]+" fail!");
+		}
+	}
+	
 	public List<String> getAlternateVersions() {
 		return alternateVersions;
 	}
@@ -60,6 +76,7 @@ public class AmazonResult {
 			List<String> isbns = new ArrayList<String>();
 			List<AlternateVersion> temp = item.getAlternateVersions().getAlternateVersion();
 			for(int i=0;i<temp.size();i++){
+				if(temp.get(i).getASIN().matches("^\\d{9}[\\dxX]"))//Filters non-book (non-valid ISBN) alternates
 				isbns.add(temp.get(i).getASIN());
 			}
 			this.setAlternateVersions(isbns);

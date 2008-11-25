@@ -49,7 +49,6 @@ public class AcornWebQueryEngine {
     }
     public String atLibrary(List<String> isbns){
         //http://visual.acornweb.org/rss.asp?q=isbn:1595540865%20OR%20isbn:1595540857
-        System.out.println("Executing atLibrary");
         int responseCode = -1;
         int numItems = 0;
         GetMethod get = new GetMethod("http://visual.acornweb.org");
