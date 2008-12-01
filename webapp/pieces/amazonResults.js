@@ -37,6 +37,31 @@ var AmazonResult = new Class({
 				var libLink = new Element('a',{'href':'#'}).set('html','library');
 				var amazLink = new Element('a',{'href':json.data[i].detailUrl}).set('html','amazon');
 				var title = new Element('div').set('html',json.data[i].title).set('class','title');
+				var openParen = json.data[i].title.indexOf('(');
+				div.data.series = "";
+				var seriesDiv;
+				if(openParen>=0){
+					
+					//Might be part of a series
+					var comma = json.data[i].title.indexOf(',',openParen);
+					var closeParen = json.data[i].title.indexOf(')',openParen);
+					
+					if(comma>=0){
+						div.data.series = json.data[i].title.substring(openParen+1, comma);
+					}
+					else if(openParen>=0){
+						div.data.series = json.data[i].title.substring(openParen+1,closeParen);
+					}
+					//else unmatches parens, ignore them
+					
+					if(div.data.series != null && div.data.series != "") {
+						seriesDiv = new Element('div').set('html','This book might be part of a series, search for it?').addEvent('click', function(ev) {
+							$('text').value = this.data.series;
+							getQuery(this.data.series);
+						}.bind(div)).addClass('series');
+					}
+					
+				}
 				var author = new Element('div').set('html','by: '+json.data[i].author);
 				var rating = new Element('div').set('html',json.data[i].amaz_rating);
 				var tags = new Element('div').set('class','tags');
@@ -44,7 +69,12 @@ var AmazonResult = new Class({
 					tags.set('html',json.data[i].tags.replace(/,/g,", "));
 				dataDiv.grab(title).grab(author).grab(rating).grab(tags);
 				leftDiv.grab(img).grab(addLib).grab(addPlay).grab(libLink).grab(amazLink);
+				if(div.data.series != null && div.data.series != ""){
+					dataDiv.grab(seriesDiv);
+					div.addClass('tall');
+				}
 				div.grab(leftDiv).grab(dataDiv);
+				
 				$('amazon').grab(div);
 				i++;
 			}

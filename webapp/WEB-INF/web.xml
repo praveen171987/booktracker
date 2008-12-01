@@ -44,15 +44,6 @@
     <url-pattern>/HandleData</url-pattern>
   </servlet-mapping>
   
-  <servlet>
-    <servlet-name>AddBook</servlet-name>
-    <servlet-class>com.softwaresmithy.sql.AddBook</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>AddBook</servlet-name>
-    <url-pattern>/AddBook</url-pattern>
-  </servlet-mapping>
-  
    <servlet>
     <servlet-name>HandlePlaylists</servlet-name>
     <servlet-class>com.softwaresmithy.web.HandlePlaylists</servlet-class>
