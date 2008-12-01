@@ -37,6 +37,13 @@
 	padding-left: 7px;
 	font-size: small;
 }
+#amazon .tall {
+	height: 189px;
+}
+#amazon .series {
+	background-color: darkGoldenRod;
+	cursor: pointer;
+}
 #pages {
 	border-bottom:2px solid;
 	text-align: center;

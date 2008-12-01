@@ -50,7 +50,10 @@
 					});
 				$('dataTable').makeResizable({
 					handle: $('divider'),
-					modifiers: {x: 'width', y: false}
+					modifiers: {x: 'width', y: false},
+					onComplete: function() {
+						curWidth = $('dataTable').getStyle('width').toInt();
+					}
 				});
 				<%if(session.getAttribute("username") != null){%>
 					getData(null,null, true);
