@@ -61,7 +61,7 @@
 				
 			    Zapatec.Calendar.setup({
 			        weekNumbers       : false,
-			        showOthers        : true,
+			        showOthers        : false,
 			        step              : 1,
 			        electric          : false,
 			        inputField        : "calendar",

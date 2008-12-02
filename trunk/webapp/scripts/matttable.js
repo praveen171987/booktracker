@@ -1,3 +1,4 @@
+var clickText = "";
 var MooTable = new Class({
 	Implements: [Options, Events],
 	options: {
@@ -56,7 +57,21 @@ var MooTable = new Class({
 			this.readDiv.setStyle('display','block');
 		}.bind(this));
 		
-		this.buttonDiv = new Element('div').grab(this.readButton).grab(this.plButton).inject(this.divTHead, 'before');
+		this.filterText = new Element('input', {type: 'text', id: 'filterText'}).addEvent('keyup', function(ev) {
+			if(this.filterText.value != clickText) {
+				clickText = this.filterText.value;
+				this.newFilter(function(obj) {
+					for(var i in obj){
+						if(obj[i].toString().toLowerCase().indexOf(this.filterText.value.toLowerCase())>=0) {
+							return true;
+						}
+					}
+					return false;
+				}.bind(this))
+			}
+		}.bind(this));
+		
+		this.buttonDiv = new Element('div').adopt(this.readButton, this.plButton, this.filterText).inject(this.divTHead, 'before');
 		
 		this.plDiv = new Element('div',{'class':'plDiv'}).setStyles({display:'none',
 			top:this.plButton.getPosition().y+this.plButton.clientHeight, left: this.plButton.getPosition().x});
