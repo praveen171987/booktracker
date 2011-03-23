@@ -1,0 +1,119 @@
+<html>
+<head>
+	<title>mooTable Construction Page</title>
+	<script src="scripts/mootools-core.js"></script>
+	<script src="scripts/mootools-more.js"></script>
+	<script src="scripts/matttable.js"></script>
+	
+	<style type="text/css">
+		.td {
+			float: left;
+		}
+		.tBody {
+			top: 1.2em;
+			position: absolute;
+			overflow: auto;
+			height: 476px;
+			width: 100%;
+		}
+		.mootableContainer {
+			border:1px solid #CCCCCC;
+			height: 500px;
+			width: 800px;
+			overflow: hidden;
+			position: relative;
+		}
+		.mooTable {
+			width: 100%;
+		}
+		.mooTable .tHead {
+			position: relative;
+		}
+		.mooTable .tHead .tr {
+			width: 1000%;
+		}
+		.mooTable .tHead .tr .resize {
+			width: 2px;
+			right: 0;
+			height: 1.2em;
+			position: absolute;
+			background-color: black;
+			cursor: col-resize;
+		}
+		.mooTable .tHead .tr .td {
+			padding: 0 2px;
+			overflow: hidden;
+			white-space: nowrap;
+			float: left;
+			border-bottom: 1px solid;
+			border-right: 1px solid;
+			position: relative;
+		}
+		.mooTable .tHead .tr .td .cell {
+			float: left;
+		}
+		.mooTable .tBody table {
+			border-spacing: 0px;
+			empty-cells: show;
+		}
+		.mooTable .tBody table tbody tr td {
+			white-space: nowrap;
+			overflow: hidden;
+			border-right: 1px solid;
+			padding-left: 3px;
+		}
+	</style>
+	<script type="text/javascript">
+		window.addEvent('domready', function(){
+			new MooTable('mattTable',{width: [202,192,134,96,157], rowDef: ['title','author','pub_date','isbn','pages']});
+		});
+	</script>
+</head>
+<body>
+<table id="mattTable">
+	<thead>
+		<tr>
+			<td>Title</td>
+			<td>Author</td>
+			<td>Publication Date</td>
+			<td>ISBN</td>
+			<td>Num Pages</td>
+		</tr>
+	</thead>
+	<tbody>
+		<tr><td>Claws that Catch (Looking Glass, Book 4)</td><td>John Ringo, Travis S Taylor</td><td>2008-11-04</td><td>1416555870</td><td>416</td></tr>
+		<tr><td>Nation</td><td>Terry Pratchett</td><td>2008-10-01</td><td>0061433012</td><td>384</td></tr>
+		<tr><td>Anathem</td><td>Neal Stephenson</td><td>2008-09-01</td><td>0061474096</td><td>960</td></tr>
+		<tr><td>When You Are Engulfed in Flames</td><td>David Sedaris</td><td>2008-06-03</td><td>0316143472</td><td>336</td></tr>
+		<tr><td>Victory of Eagles (Temeraire, Book 5)</td><td>Naomi Novik</td><td>2008-07-08</td><td>0345496884</td><td>342</td></tr>
+		<tr><td>Gentlemen of the Road: A Tale of Adventure</td><td>Michael Chabon</td><td>2007-10-30</td><td>0345501748</td><td>224</td></tr>
+		<tr><td>The Dresden Files: Welcome to the Jungle</td><td>Jim Butcher, Ardian Syaf</td><td>2008-10-14</td><td>0345507460</td><td>160</td></tr>
+		<tr><td>Three Days to Never</td><td>Tim Powers</td><td>2007-12-01</td><td>0380798379</td><td>416</td></tr>
+		<tr><td>The Shadow Walker</td><td>Michael Walters</td><td>2008-08-05</td><td>0425222330</td><td>352</td></tr>
+		<tr><td>The Atrocity Archives</td><td>Charles Stross</td><td>2006-01-03</td><td>0441013651</td><td>368</td></tr>
+		<tr><td>Valiant (The Lost Fleet, Book 4 of 6)</td><td>Jack Campbell</td><td>2008-06-24</td><td>0441016197</td><td>304</td></tr>
+		<tr><td>Princeps' Fury (Codex Alera, Book 5)</td><td>Jim Butcher</td><td>2008-11-25</td><td>0441016383</td><td>384</td></tr>
+		<tr><td>The Scourge of God: A Novel of the Change</td><td>S.M. Stirling</td><td>2008-09-02</td><td>0451462289</td><td>464</td></tr>
+		<tr><td>Turn Coat (The Dresden Files, Book 11)</td><td>Jim Butcher</td><td>2009-04-07</td><td>0451462564</td><td>432</td></tr>
+		<tr><td>Aegypt</td><td>John Crowley</td><td>1989-02-01</td><td>0553345923</td><td><div/></td></tr>
+		<tr><td>Ender in Exile (Ender)</td><td>Orson Scott Card</td><td>2008-11-11</td><td>0765304961</td><td>384</td></tr>
+		<tr><td>Pirate Sun: Book Three of Virga</td><td>Karl Schroeder</td><td>2008-08-05</td><td>0765315459</td><td>320</td></tr>
+		<tr><td>The Wanderer's Tale (Annals of Lindormyn)</td><td>David Bilsborough</td><td>2007-07-10</td><td>0765318679</td><td>448</td></tr>
+		<tr><td>Sly Mongoose</td><td>Tobias S. Buckell</td><td>2008-08-19</td><td>0765319209</td><td>320</td></tr>
+		<tr><td>The Court of the Air</td><td>Stephen Hunt</td><td>2008-06-10</td><td>0765320428</td><td>592</td></tr>
+		<tr><td>The Good Fairies of New York</td><td>Martin Millar</td><td>2008-06-03</td><td>0765358549</td><td>288</td></tr>
+		<tr><td>The Traitor</td><td>Michael Cisco</td><td>2007-08-01</td><td>0809572354</td><td>152</td></tr>
+		<tr><td>Honor of the Clan (The Posleen War)</td><td>John Ringo, Julie Cochrane</td><td>2009-01-08</td><td>1416555919</td><td>448</td></tr>
+		<tr><td>Mordred, Bastard Son (Mordred Trilogy)</td><td>Douglas Clegg</td><td>2007-02-01</td><td>1555839878</td><td>260</td></tr>
+		<tr><td>Love  &  Sleep (Aegypt)</td><td>John Crowley</td><td>2008-01-29</td><td>1590200152</td><td>512</td></tr>
+		<tr><td>The Blade Itself (The First Law: Book One)</td><td>Joe Abercrombie</td><td>2007-09-06</td><td>159102594X</td><td>531</td></tr>
+		<tr><td>Before They Are Hanged (The First Law: Book Two)</td><td>Joe Abercrombie</td><td>2008-03-25</td><td>1591026415</td><td>543</td></tr>
+		<tr><td>Last Argument of Kings (First Law: Book Three)</td><td>Joe Abercrombie</td><td>2008-09-23</td><td>1591026903</td><td>639</td></tr>
+		<tr><td>Hood (King Raven Trilogy, Book 1)</td><td>Stephen R. Lawhead</td><td>2006-09-05</td><td>1595540857</td><td>496</td></tr>
+		<tr><td>Scarlet (The King Raven, Book 2)</td><td>Stephen R. Lawhead</td><td>2008-06-10</td><td>159554089X</td><td>464</td></tr>
+		<tr><td>The Jennifer Morgue</td><td>Charles Stross</td><td>2006-11</td><td>1930846452</td><td>340</td></tr>
+		<tr><td>Tuck</td><td>Stephen R. Lawhead</td><td>2009-02-10</td><td>1595540873</td><td>496</td></tr>
+</tbody>
+</table>
+</body>
+</html>
