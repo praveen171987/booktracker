@@ -1,0 +1,66 @@
+<html > 
+	<head>
+		<!-- Screen Title -->                              		
+		
+		<!-- defaultAirPacScreenTitle.jsp -->
+
+<title>
+	Boca Raton Public Library
+</title>
+	</head>  
+	<body bgcolor="#ffffff"> 
+<b>Boca Raton Public Library: AirPAC</b>
+<br>   
+<br>
+Welcome to the mobile online catalog!
+		<br>
+		<br>
+	  	<form method="post" action="http://m.libsys.arlingtonva.us/search">                                
+            <select name="searchtype" title="Search Type" value="i">
+                <option value="X" >KEYWORD
+                <option value="a" >AUTHOR
+                <option value="t" >TITLE
+                <option value="d" >SUBJECT
+                <option value="c" >CALL NO
+
+                <option value="i" selected>ISBN/ISSN
+            </select>
+			<br>
+			<input type="text" name="searchstring" size="30" maxlength="75"
+				value="9780767930765"
+			>
+			<input type="hidden" name="origsearchstring" value="X">
+			<br>
+	            <select name="scope" title="Scope" value="17">
+	                <option value="17" selected>Entire Collection
+	            
+	                <option value="8" >Downtown Collection
+	            
+	                <option value="9" >SRL Collection
+	            
+	                <option value="10" >Adult Collection
+	            
+	                <option value="11" >Youth Collection
+	            
+	                <option value="12" >Teen Collection
+	            
+	                <option value="13" >DVD/VHS/Game/CD-ROM
+	            
+	                <option value="14" >Audio/CD/Cass
+	            
+	                <option value="15" >Audiobooks
+	            </select>
+				<br>	            
+			<input type="submit" value="Search">              
+			<input type="hidden" name="sourcebrowse" value="welcome">
+			<input type="hidden" name="action" value="search">			
+		</form>                                                                        			
+		    <A HREF=/airpac/search?action=LoadAVSSearchPageAction>Advanced Searching</A>
+		<br>
+			<A HREF=/airpac/patron?action=GetPatronInfoAction>View your patron information<A>
+			<br>		                                                                          
+		<br>		
+		<br>
+	</body>  
+</html>
+

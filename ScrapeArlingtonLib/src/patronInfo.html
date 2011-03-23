@@ -1,0 +1,496 @@
+<!-- Rel 2009B Example Set -->
+<!-- This File Last Changed: 21 January 2010 -->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"><html lang="en">
+<head>
+<title>Arlington Public Library                                         /All Locations</title>
+<base target="_self"/>
+<link rel="stylesheet" type="text/css" href="/scripts/ProStyles.css" />
+<link rel="stylesheet" type="text/css" href="/screens/styles.css" />
+<link rel="shortcut icon" type="ximage/icon" href="/screens/favicon.ico" />
+<script language="JavaScript" type="text/javascript" src="/scripts/common.js"></script>
+<script language="JavaScript" type="text/javascript" src="/scripts/features.js"></script>
+<script language="JavaScript" type="text/javascript" src="/scripts/elcontent.js"></script>
+<script language="JavaScript">
+<!-- Hide the JS
+startTimeout(300000, "http://libsys.arlingtonva.us/");
+// -->
+</script>
+<noscript>
+<meta http-equiv="Refresh" content="300;URL=http://libsys.arlingtonva.us/" />
+</noscript>
+
+<meta http-equiv="X-UA-Compatible" content="IE=8;FF=3;OtherUA=4"><meta http-equiv="Content-type" content="text/html;charset=UTF-8" ><link rel="stylesheet" type="text/css" href="/screens/styles_print.css" media="print"><script type="text/javascript" src="/screens/bibdisplay.js"></script>
+</head>
+<body bgcolor="#FFFFFF" >
+<!-- begin toplogo_loggedin.html file -->
+<!-- Rel 2009B Example Set -->
+<!-- Updated: 12 Apr 2010 -->
+
+<div class="minHeight">
+<div class="fullPage">
+
+<div id="skipNav"><a href="#content" tabindex="1">Skip to content</a></div>
+<div class="topLogo loggedin">
+	<!-- START APL BANNER -->
+	<!-- <link href="http://library.arlingtonva.us/presentation/css/LibraryBannerStandAlone.css" rel="stylesheet" media="all" type="text/css" /> -->
+	<!--[if IE]>
+		<link rel="stylesheet" type="text/css" href="/screens/styles_APL-ie.css" />
+	<![endif]-->
+	<div id="headerWrapper">
+		<div id="headerBanner">
+			<a href="http://www.arlingtonva.us" title="Click to visit the Arlington County homepage"><img src="/screens/banner_spacer.gif" alt="Click to visit the Arlington County homepage" /></a>
+		</div><!-- end headerBanner -->
+		<!--Header Navigation starts-->
+		<div id="headerNav">
+			<ul id="topnav">
+			<li>
+			<a class="menu_home" href="http://library.arlingtonva.us/Departments/Libraries/LibrariesMain.aspx">Library Home</a>
+			</li>
+			<li>
+			<a class="menu_catalog" href="http://libsys.arlingtonva.us/search*eng">Catalog</a>
+			</li>
+			<li>
+			<a class="menu_ecollection" href="http://library.arlingtonva.libguides.com/ecollection">eCollection</a>
+			</li>
+			<li>
+			<a class="menu_research" href="http://library.arlingtonva.libguides.com/">Research a Topic</a>
+			</li>
+			<li>
+			<a class="menu_using" href="http://library.arlingtonva.us/Departments/Libraries/LibrariesCollectionsServices.aspx">Using the Library</a>
+			</li>
+			</ul>
+		</div><!--Header Navigation ends-->
+
+		<!--Search Box starts-->
+		<div id="searchBox" class="noSearchBox">
+<p id="patronrecord">
+<a href="/patroninfo~S1/1079675/top/"><img src="/screens/button_ReturnToAcct.gif" alt="Return To Your Record" border="0" /></a>
+</p>
+			<p id="metalinks"><a href="/logout" tabindex="120">Log&#160;Out</a>&#160;&#124;&#160;<a href="http://library.arlingtonva.us/Departments/Libraries/about/LibrariesAboutHours.aspx">Hours&#160;&#38;&#160;Locations</a>&#160;&#124;&#160;<a href="http://library.arlingtonva.us/Departments/Libraries/LibrariesContact.aspx">Contact&#160;Us</a></p>
+
+			<!-- search box FORM element removed, class="noSearchBox" added to div id="searchBox" -->
+		</div><!--Search Box ends-->
+
+	</div><!-- end headerWrapper -->
+	<!-- js not needed? -->
+	<!-- 
+	<script type="text/javascript" src="http://library.arlingtonva.us/js/jquery.js" language="javascript"></script> 
+	<script type="text/javascript" src="http://library.arlingtonva.us/js/jquery.hoverIntent.minified.js" language="javascript"></script> 
+	<script type="text/javascript" src="http://library.arlingtonva.us/js/dropdownmenus.js" language="javascript"></script> 
+	-->
+	<!-- END APL BANNER -->
+</div><!-- end topLogo div -->
+<!--searchNav-->
+<div class="clear"></div>
+<div class="pageContent"><!-- content container -->
+<a name="content" id="content"></a>
+<div id="loggedInMsg">
+<!--end toplogo_loggedin.html-->
+<!--this is customized <screens/toplogo_loggedin.html>-->
+<span class="loggedInMessage">REMEMBER TO LOG OUT OF YOUR ACCOUNT</span><br />
+<br />
+<script type="text/javascript"><!--//--><![CDATA[//><!--
+	<!--
+		function redirectToAdvancedSearch(baseURL) {
+			var searchString = document.getElementById("searchString").value;
+			document.location = baseURL + "&searchString=" + searchString;
+		}
+		function embedFrame(url, id, h, w) {
+			var iframe = document.createElement('iframe');
+			iframe.src = url;
+			iframe.id = id + 'Frame';
+			iframe.name = id + 'Frame';
+			iframe.frameBorder = '0';
+			iframe.height = h.replace(/px/gi, '');
+			iframe.style.height = h;
+			iframe.width = w.replace(/px/gi, '');
+			iframe.style.width = w;
+			iframe.style.borderWidth = '0';
+			iframe.style.border = 'none';
+			iframe.style.overflow = 'auto';
+			if (window.external) {//IE6 only to hide Horizontal scrollbar
+				if (typeof window.XMLHttpRequest == "undefined") {
+					iframe.scrolling = 'yes';
+				}
+			}
+			var frmDiv = document.getElementById(id);
+			//frmDiv.innerHTML = '';
+			frmDiv.appendChild(iframe);
+		}
+		function holdStatusLink() {
+			var frm = document.getElementById('hold_form');
+			var target = frm.parentNode;			
+			var div = document.createElement('div');
+			div.setAttribute('id', 'holdStatusContainer');
+			div.style.position = 'relative';
+			var dv = document.createElement('div');
+			dv.setAttribute('id', 'holdStatus');
+			dv.style.position = 'absolute';
+			dv.style.display = 'none';
+			dv.onclick = function() {
+				this.style.display = 'none';
+				var txt = document.getElementById('holdStatusLink').innerHTML;
+				document.getElementById('holdStatusLink').innerHTML = txt.replace(/hide/i, 'Show');
+			}
+			var a = document.createElement('a');
+			var txt = document.createTextNode('Show explanation of hold status');
+			var statusLinkHref = '/screens/hold-status-codes.html';
+			//http://libsys.arlingtonva.us:2082/screens/hold-status-codes.html
+			a.setAttribute('href', statusLinkHref);
+			a.setAttribute('id', 'holdStatusLink');
+			a.appendChild(txt);
+			a.onclick = function() {
+				var id = 'holdStatus';
+				var e = document.getElementById(id);
+				var txt = this.innerHTML;
+				//var regex = /(show)|(hide)/i
+				var msg = (txt.match(/show/i)) ? 'Hide' : 'Show';
+				this.innerHTML = txt.replace(/(show)|(hide)/i, msg);
+				if (document.getElementById('holdStatusFrame')) {
+					//frame already loaded
+					e.style.display = (e.style.display == 'none') ? 'block' : 'none';
+					return false;
+				}
+				var url = this.href;
+				embedFrame(url, id, '300px', '100%');
+				var cls = document.createElement('div');
+				cls.onclick = function() {
+					this.parentNode.style.display = 'none';
+					var txt = document.getElementById('holdStatusLink').innerHTML;
+					document.getElementById('holdStatusLink').innerHTML = txt.replace(/hide/i, 'Show');
+				}
+				cls.appendChild(document.createTextNode('close [x]'));
+				e.appendChild(cls);
+				e.style.display = 'block';
+				return false;
+			};
+			div.appendChild(a);
+			div.appendChild(dv);
+			target.insertBefore(div,target.firstChild);
+		}
+	//-->
+//--><!]]></script>
+
+<!-- Commented out section provides Encore search. Remove comments to enable. -->
+<!--
+<div id="searchboxopac">
+		<div class="corner1a"><div class="corner2a"><div class="corner3a"><div class="corner4a">
+			<form method="post" action="http://libcat.arlingtonva.us/iii/encore/home" id="searchFormComponent">
+<div style="display:none;" id="searchFormComponenthidden"><input type="hidden" name="formids" value="autoCompleteIfComponentCopy_0,searchString,autoCompleteIfComponent_0,showRelatedSearchesLinkIfComponent_0,articlesPageIfComponent_0,searchImageSumbitComponent" />
+<input type="hidden" name="seedids" value="ZH4sIAAAAAAAAAH1TQU4rMQztAm7CsgvgBmV+v1QJBGpBrN3EbaNm7OBkioZDIA7yr8YdyGTKVzJTWE3mPT/n2Y7/fU7O3yaTs8nZ+9SjHIzCi8upg233UVw7JqSQzhTAEEo8e/TeMHUnd4x+FnAOpcoUfofW5sCadVv8g8c/RlCFmGxB8fqQ0xuIbpiWaKELyCnilRLjwh0GWOJG0O9yesc1PkRTVfQckQoCblnaUyGLTY6CBKMs+tkBjIW1HdDforn1mOMKRDgsSBsFgSW1JAjTI7P1eaA23lloHxJ777qyfH7F1VG4ChAafxfb3FkcdWbNvK+i11tD+1z8jc+p865L87loRm05KX6tLIJ0XKkqqGHdecofzZ6u+ToP6Yue2aj0T07HcZ0wmOhFPZrZUawUNxRueWtozEZ4i/q+CaW0iV6Tomzk5dR24I8VDXIOu/Kf5ibKaGOkvrGs9iea0pc8E4TSWGCXJCN0iaRRRukOYI1OWzKPL1F+ofzfklb9ivjl60eferCjLw1Ku+pXdDAU0AcghXoVX4faDRap4IYdSkmL+aawaK3O0C/ixlF3mwQAAA==" />
+<input type="hidden" name="component" value="queryComponent.searchFormComponent" />
+<input type="hidden" name="lang" value="eng" />
+
+<input type="hidden" name="page" value="HomePage" />
+<input type="hidden" name="service" value="direct" />
+<input type="hidden" name="session" value="T" />
+<input type="hidden" name="suite" value="pearl" />
+<input type="hidden" name="reservedids" value="inst,lang,suite" />
+<input type="hidden" name="submitmode" value="" />
+<input type="hidden" name="submitname" value="" />
+<input type="hidden" name="autoCompleteIfComponentCopy_0" value="F" />
+<input type="hidden" name="autoCompleteIfComponent_0" value="F" />
+<input type="hidden" name="showRelatedSearchesLinkIfComponent_0" value="F" />
+<input type="hidden" name="articlesPageIfComponent_0" value="F" />
+</div>
+				<span class="searchText">
+					
+					
+						<label for="searchString">Search:</label>
+
+					
+				</span>
+				<span class="searchContent">
+					<div class="searchInput">
+						
+						
+							<input type="text" name="searchString" value="" id="searchString" tabindex="1" onfocus="return;" size="40" />
+						
+					</div>
+					<div class="belowSearch">
+						
+						<div class="advSearch">
+							
+							
+								<a id="advancedSearchLinkComponent" tabindex="3" onclick="redirectToAdvancedSearch('http://libcat.arlingtonva.us:80/iii/encore/home?lang=eng&amp;suite=pearl&amp;advancedSearch=true')" href="javascript:;">
+									Advanced Search</a>&nbsp;
+
+							
+						</div>
+					</div>
+				</span>
+				<span class="searchSubmit">
+					<input type="image" name="searchImageSumbitComponent" src="/screens/go_button.png" id="searchImageSumbitComponent" alt="Search" tabindex="2" />
+				</span>
+			</form>
+	</div></div></div></div>
+</div>
+-->
+
+<!--{patron}-->
+<div class="pat">
+<div class="patFloat">
+<div class="patTop">
+<div class="patNameAddress">
+<strong>LEVAN MATTHEW D</strong><br />
+1425 SOUTH EADS STREET #1307<br />
+ARLINGTON VA 22202<br />
+614 354 0057<br />
+Expiration Date:05-20-2011<br />
+</div>  <!--patNameAddress-->
+</div>
+
+<div class="clear"></div>
+
+<div class="patActionsLinks">
+<div id="patActionsLinksList">
+
+
+
+ 
+
+<div class="patActionItem" id="patButChkouts">
+<div class="button2">
+</div>
+</div>
+
+
+
+
+
+<div class="patActionItem">
+<a href="/patroninfo~S1/1079675/mylists" target="_self"><span class="button"><img src="/screens/mylists.png" alt=""><span class="buttonText">My Lists</span></span></a>
+</div>
+
+<div class="patActionItem">
+<a href="/patroninfo~S1/1079675/readinghistory" target="_self"><span class="button"><img src="/screens/ico_clock.gif" alt=""><span class="buttonText">My Checkout History</span></span></a>
+</div>
+
+<div class="patActionItem">
+<a href="/patroninfo~S1/1079675/patrate" target="_self"><span class="button"><img src="/screens/patrate.gif" alt=""><span class="buttonText">My Ratings</span></span></a>
+</div>
+
+
+
+
+
+<div class="patActionItem">
+<a href="#" onClick="return open_new_window( '/patroninfo~S1/1079675/modpinfo' )"><span class="button"><img src="/screens/ico_patron.gif" alt=""><span class="buttonText">Change My Info</span></span></a>
+</div>
+<div class="patActionItem">
+<a href="#" onClick="return open_new_window( '/patroninfo~S1/1079675/newpin' )"><span class="button"><img src="/screens/ico_pin.gif" alt=""><span class="buttonText">Change My PIN</span></span></a>
+</div>
+
+
+<div class="patActionItem">
+</div>
+
+</div>
+</div>
+
+<div class="patFuncArea">
+<form name="checkout_form" method="POST" id="checkout_form" ><input type="HIDDEN" id="checkoutpagecmd" />
+
+<a href="#"  onClick="return submitCheckout( 'sortByDueDate', 'byduedate' )"><div onmousedown="this.className='pressedState';" onmouseout="this.className='';" onmouseup="this.className='';"><div class="buttonSpriteDiv"><span class="buttonSpriteSpan1"><span class="buttonSpriteSpan2">Sort by Due Date</span></span></div></div></a>
+<input type="HIDDEN" name="currentsortorder" value="current_checkout" />
+<div id="renewfailmsg" style="display:none"  class="errormessage">
+<h2>Not all renewals were successful. See details below.</h2></div>
+<a href="#"  onClick="return submitCheckout( 'requestRenewAll', 'requestRenewAll' )"><div onmousedown="this.className='pressedState';" onmouseout="this.className='';" onmouseup="this.className='';"><div class="buttonSpriteDiv"><span class="buttonSpriteSpan1"><span class="buttonSpriteSpan2">Renew All</span></span></div></div></a>
+<a href="#"  onClick="return submitCheckout( 'requestRenewSome', 'requestRenewSome' )"><div onmousedown="this.className='pressedState';" onmouseout="this.className='';" onmouseup="this.className='';"><div class="buttonSpriteDiv"><span class="buttonSpriteSpan1"><span class="buttonSpriteSpan2">Renew Marked</span></span></div></div></a>
+</nobr>
+<table border="0" class="patFunc">
+<tr class="patFuncTitle">
+<th colspan="6"  class="patFuncTitle">
+3 ITEMS CHECKED OUT</th>
+</tr>
+
+<tr class="patFuncHeaders">
+<th class="patFuncHeaders"> RENEW </th><th class="patFuncHeaders"> TITLE </th><th  class="patFuncHeaders"> Ratings </th><th  class="patFuncHeaders"> BARCODE </th><th class="patFuncHeaders"> STATUS </th><th  class="patFuncHeaders"> CALL NUMBER </th>
+<style type="text/css">
+<!--
+#ratemy1    { display: inline }
+#rateneed1  { display: none }
+#ratemy2    { display: inline }
+#rateneed2  { display: none }
+#ratemy3    { display: inline }
+#rateneed3  { display: none }
+-->
+</style>
+<tr class="patFuncEntry"><td align="left" class="patFuncMark"><input type="checkbox" name="renew0" id="renew0" value="i1504762" /></td><td align="left" class="patFuncTitle"><label for="renew0"><a href="/record=b1348086~S1"> Surface detail / Iain M. Banks. </a></label>
+<br />
+
+</td>
+<td nowrap  class="patFuncRating">
+
+<span id="ratemy1" onmouseover="setToolVisibility ('ratemy1', 'none', 'rateneed1', 'inline')"><img src="/screens/rate_pad.gif" border="0" width="15" height="14" alt="Rated 0 stars out of 5 based on 0 ratings" title="Rated 0 stars out of 5 based on 0 ratings"><img src="/screens/rate_pad.gif" border="0" width="15" height="14" alt="Rated 0 stars out of 5 based on 0 ratings" title="Rated 0 stars out of 5 based on 0 ratings"><img src="/screens/rate_pad.gif" border="0" width="15" height="14" alt="Rated 0 stars out of 5 based on 0 ratings" title="Rated 0 stars out of 5 based on 0 ratings"><img src="/screens/rate_pad.gif" border="0" width="15" height="14" alt="Rated 0 stars out of 5 based on 0 ratings" title="Rated 0 stars out of 5 based on 0 ratings"><img src="/screens/rate_pad.gif" border="0" width="15" height="14" alt="Rated 0 stars out of 5 based on 0 ratings" title="Rated 0 stars out of 5 based on 0 ratings">
+</span>
+<span id="rateneed1" onmouseout="setToolVisibility ('ratemy1', 'inline', 'rateneed1', 'none')"><a href="/patroninfo~S1/1079675/items?changerating1=b1348086"><img src="/screens/rate_need.gif" border="0" width="15" height="14" alt="Rate this material!" title="Rate this material!"></a><a href="/patroninfo~S1/1079675/items?changerating2=b1348086"><img src="/screens/rate_need.gif" border="0" width="15" height="14" alt="Rate this material!" title="Rate this material!"></a><a href="/patroninfo~S1/1079675/items?changerating3=b1348086"><img src="/screens/rate_need.gif" border="0" width="15" height="14" alt="Rate this material!" title="Rate this material!"></a><a href="/patroninfo~S1/1079675/items?changerating4=b1348086"><img src="/screens/rate_need.gif" border="0" width="15" height="14" alt="Rate this material!" title="Rate this material!"></a><a href="/patroninfo~S1/1079675/items?changerating5=b1348086"><img src="/screens/rate_need.gif" border="0" width="15" height="14" alt="Rate this material!" title="Rate this material!"></a>
+</span></td>
+<td align="left" class="patFuncBarcode"> 202036224850 </td>
+<td align="left" class="patFuncStatus"> DUE 03-21-11 
+</td>
+<td align="left" class="patFuncCallNo"> SF BANKS  </td>
+</tr>
+<tr class="patFuncEntry"><td align="left" class="patFuncMark"><input type="checkbox" name="renew1" id="renew1" value="i1637481" /></td><td align="left" class="patFuncTitle"><label for="renew1"><a href="/record=b1353183~S1"> The wise man's fear / Patrick Rothfuss. </a></label>
+<br />
+
+</td>
+<td nowrap  class="patFuncRating">
+
+<span id="ratemy2" onmouseover="setToolVisibility ('ratemy2', 'none', 'rateneed2', 'inline')"><img src="/screens/rate_pad.gif" border="0" width="15" height="14" alt="Rated 0 stars out of 5 based on 0 ratings" title="Rated 0 stars out of 5 based on 0 ratings"><img src="/screens/rate_pad.gif" border="0" width="15" height="14" alt="Rated 0 stars out of 5 based on 0 ratings" title="Rated 0 stars out of 5 based on 0 ratings"><img src="/screens/rate_pad.gif" border="0" width="15" height="14" alt="Rated 0 stars out of 5 based on 0 ratings" title="Rated 0 stars out of 5 based on 0 ratings"><img src="/screens/rate_pad.gif" border="0" width="15" height="14" alt="Rated 0 stars out of 5 based on 0 ratings" title="Rated 0 stars out of 5 based on 0 ratings"><img src="/screens/rate_pad.gif" border="0" width="15" height="14" alt="Rated 0 stars out of 5 based on 0 ratings" title="Rated 0 stars out of 5 based on 0 ratings">
+</span>
+<span id="rateneed2" onmouseout="setToolVisibility ('ratemy2', 'inline', 'rateneed2', 'none')"><a href="/patroninfo~S1/1079675/items?changerating1=b1353183"><img src="/screens/rate_need.gif" border="0" width="15" height="14" alt="Rate this material!" title="Rate this material!"></a><a href="/patroninfo~S1/1079675/items?changerating2=b1353183"><img src="/screens/rate_need.gif" border="0" width="15" height="14" alt="Rate this material!" title="Rate this material!"></a><a href="/patroninfo~S1/1079675/items?changerating3=b1353183"><img src="/screens/rate_need.gif" border="0" width="15" height="14" alt="Rate this material!" title="Rate this material!"></a><a href="/patroninfo~S1/1079675/items?changerating4=b1353183"><img src="/screens/rate_need.gif" border="0" width="15" height="14" alt="Rate this material!" title="Rate this material!"></a><a href="/patroninfo~S1/1079675/items?changerating5=b1353183"><img src="/screens/rate_need.gif" border="0" width="15" height="14" alt="Rate this material!" title="Rate this material!"></a>
+</span></td>
+<td align="left" class="patFuncBarcode"> 202033714651 </td>
+<td align="left" class="patFuncStatus"> DUE 04-01-11 
+</td>
+<td align="left" class="patFuncCallNo"> SF ROTHF  </td>
+</tr>
+<tr class="patFuncEntry"><td align="left" class="patFuncMark"><input type="checkbox" name="renew2" id="renew2" value="i1508847" /></td><td align="left" class="patFuncTitle"><label for="renew2"><a href="/record=b1341646~S1"> Under the Poppy : a novel / Kathe Koja. </a></label>
+<br />
+
+</td>
+<td nowrap  class="patFuncRating">
+
+<span id="ratemy3" onmouseover="setToolVisibility ('ratemy3', 'none', 'rateneed3', 'inline')"><img src="/screens/rate_pad.gif" border="0" width="15" height="14" alt="Rated 0 stars out of 5 based on 0 ratings" title="Rated 0 stars out of 5 based on 0 ratings"><img src="/screens/rate_pad.gif" border="0" width="15" height="14" alt="Rated 0 stars out of 5 based on 0 ratings" title="Rated 0 stars out of 5 based on 0 ratings"><img src="/screens/rate_pad.gif" border="0" width="15" height="14" alt="Rated 0 stars out of 5 based on 0 ratings" title="Rated 0 stars out of 5 based on 0 ratings"><img src="/screens/rate_pad.gif" border="0" width="15" height="14" alt="Rated 0 stars out of 5 based on 0 ratings" title="Rated 0 stars out of 5 based on 0 ratings"><img src="/screens/rate_pad.gif" border="0" width="15" height="14" alt="Rated 0 stars out of 5 based on 0 ratings" title="Rated 0 stars out of 5 based on 0 ratings">
+</span>
+<span id="rateneed3" onmouseout="setToolVisibility ('ratemy3', 'inline', 'rateneed3', 'none')"><a href="/patroninfo~S1/1079675/items?changerating1=b1341646"><img src="/screens/rate_need.gif" border="0" width="15" height="14" alt="Rate this material!" title="Rate this material!"></a><a href="/patroninfo~S1/1079675/items?changerating2=b1341646"><img src="/screens/rate_need.gif" border="0" width="15" height="14" alt="Rate this material!" title="Rate this material!"></a><a href="/patroninfo~S1/1079675/items?changerating3=b1341646"><img src="/screens/rate_need.gif" border="0" width="15" height="14" alt="Rate this material!" title="Rate this material!"></a><a href="/patroninfo~S1/1079675/items?changerating4=b1341646"><img src="/screens/rate_need.gif" border="0" width="15" height="14" alt="Rate this material!" title="Rate this material!"></a><a href="/patroninfo~S1/1079675/items?changerating5=b1341646"><img src="/screens/rate_need.gif" border="0" width="15" height="14" alt="Rate this material!" title="Rate this material!"></a>
+</span></td>
+<td align="left" class="patFuncBarcode"> 202035505073 </td>
+<td align="left" class="patFuncStatus"> DUE 04-01-11 
+</td>
+<td align="left" class="patFuncCallNo"> F KOJA  </td>
+</tr>
+</table>
+</dl>
+<a href="#"  onClick="return submitCheckout( 'sortByDueDate', 'byduedate' )"><div onmousedown="this.className='pressedState';" onmouseout="this.className='';" onmouseup="this.className='';"><div class="buttonSpriteDiv"><span class="buttonSpriteSpan1"><span class="buttonSpriteSpan2">Sort by Due Date</span></span></div></div></a>
+<input type="HIDDEN" name="currentsortorder" value="current_checkout" />
+<div id="renewfailmsg" style="display:none"  class="errormessage">
+<h2>Not all renewals were successful. See details below.</h2></div>
+<a href="#"  onClick="return submitCheckout( 'requestRenewAll', 'requestRenewAll' )"><div onmousedown="this.className='pressedState';" onmouseout="this.className='';" onmouseup="this.className='';"><div class="buttonSpriteDiv"><span class="buttonSpriteSpan1"><span class="buttonSpriteSpan2">Renew All</span></span></div></div></a>
+<a href="#"  onClick="return submitCheckout( 'requestRenewSome', 'requestRenewSome' )"><div onmousedown="this.className='pressedState';" onmouseout="this.className='';" onmouseup="this.className='';"><div class="buttonSpriteDiv"><span class="buttonSpriteSpan1"><span class="buttonSpriteSpan2">Renew Marked</span></span></div></div></a>
+</nobr>
+</form></div>
+<div class="clear"></div>
+</div> <!--TopContent-->
+</div> <!--pat-->
+
+<script type="text/javascript"><!--//--><![CDATA[//><!--
+
+if (document.getElementById('hold_form')) {
+	holdStatusLink();
+}
+
+//--><!]]></script>	
+<br />
+<!-- begin botlogo.html file -->
+<!-- Rel 2009B Example Set -->
+<!-- Updated: Sept 2009 -->
+<div id="iiiAcctReassignLinks">
+<!-- http://libcat.arlingtonva.us/iii/encore/record/C|R%s?lang=eng&amp;suite=def -->
+</div>
+
+<script type="text/javascript"><!--//--><![CDATA[//><!--
+
+// Return a value written into a hidden div in the html page. If not found return empty string.
+// strID is a unique identifier for the hidden div.
+// strings should be encoded in the html page in this format, using a unique strID:
+// <div id="strID" class="sourceText"><!--search.example.org--></div>
+function getLocalValue( strID )
+{
+    var localValue="";
+	try{
+		localValue	= document.getElementById(strID).innerHTML;
+		localValue = stripHtmlComments(localValue);
+	}
+	catch (err){
+	}
+	return localValue;
+}
+//Regex to remove HTML comments.
+// "<!--Goodbye cruel world-->" becomes "Goodbye cruel world".
+function stripHtmlComments(srcText)
+{
+	var srcText = srcText.replace(/<!--+\s*/g, "");
+	return srcText.replace(/\s*--+>/g, "");
+};
+
+//Check if we are on one of the pages that needs bib record links rewritten to point to Encore.
+// Export: URL contains '/++export/'
+// My Millennium: URL contains '/patroninfo'
+//If the page matches, replace record links on the page.
+function iiiReassignBibLinks ( ) 
+{
+	//debug. if = 1 show alerts.
+	var debug = 0;
+	//Look on the page for the site-specific Encore URL.
+	if ( ( document.location.href.indexOf("/++export/") > 0 ) | ( document.location.href.indexOf("/patroninfo") > 0 ) ) {
+	
+		var strLinkTarget = getLocalValue("iiiAcctReassignLinks");
+		
+		if( strLinkTarget != "" ) 
+		{
+			var oneLinkText; //The text of one of the links within the page.
+			var recordTextPos; //Position of the record indicator in one link.
+			var endPos; //Position of the end of the record number in one link.
+			var recordID; //A bib or similar record ID extracted from a link.
+			for(i = 0; i < document.links.length; i++) 
+			{
+				//Check for bib links only.
+				oneLinkText = document.links[i].href;
+				recordTextPos = oneLinkText.indexOf("record=");
+				if(debug==1) 
+					alert("oneTextLink: " + oneLinkText + "\nrecordTextPos: " + recordTextPos);
+				if(recordTextPos > 0) 
+				{
+					//Extract the record number from the href. Starts right after the "record="
+					//Ends at tilde or end of string.
+					endPos = oneLinkText.indexOf("~", recordTextPos);
+					if (endPos==-1)
+						endPos = oneLinkText.length;
+					recordID = oneLinkText.substring(recordTextPos+7, endPos);
+					//Replace the subsitution string with the record number.
+					oneLinkText=(strLinkTarget.replace("%s", recordID));
+					if(debug==1) 
+						alert("recordID: " + recordID + "\nnew link: " + oneLinkText);
+					document.links[i].href = oneLinkText;
+				}
+			}
+		}
+	}
+}
+
+try{ iiiReassignBibLinks(); }
+catch (err){}
+//--><!]]></script>
+
+</div><!-- pageContent  -->
+<div style="clear:both"></div>
+</div><!-- fullPage -->
+</div><!-- min-height -->
+<!-- end botlogo.html file -->
+
+
+<!-- Start of Henry's Test
+<div class="encoreLogo floatRight" style="text-align:center;padding-bottom:5px;"><br><a href="http://libcat.arlingtonva.us" style="font-size:x-small;" target="_blank">Test</a><br></div>
+
+<form method="get" action="http://libcat.arlingtonva.us/iii/encore/Home,$Search.form.sdirect" name="form" id="form">	
+<input name="formids" value="target" type="hidden">
+<input name="lang" value="eng" type="hidden">
+<input name="suite" value="def" type="hidden">
+<input name="reservedids" value="lang,suite" type="hidden">
+<input name="submitmode" value="" type="hidden">
+<input name="submitname" value="" type="hidden">
+<table>
+<tr><td>Libcat Search:</td>
+<td><input name="target" value="" id="target" size="20" type="text"></td>
+<td><input type="submit" value="Search"/></td>
+</tr>
+</table>
+</form>	
+
+End of Henry's Test -->
+</body>
+</html>
+<!--this is customized <screens/patronview_web.html>-->
+
