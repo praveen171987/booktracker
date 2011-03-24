@@ -11,8 +11,9 @@ public class Wishlist extends ListActivity {
 	private WishlistDbAdapter mDbHelper;
 	
 	//Same index used to map from database table column to layout ID in item view
-	private String[] mapFrom = WishlistDbAdapter.allColumns;
-	private int[] mapTo = new int[]{};
+//	private String[] mapFrom = WishlistDbAdapter.allColumns;
+	private String[] mapFrom = new String[]{WishlistDbAdapter.allColumns[3]};	
+	private int[] mapTo = new int[]{R.id.text1};
 	
     /** Called when the activity is first created. */
     @Override
