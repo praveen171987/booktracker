@@ -55,9 +55,34 @@ public class Wishlist extends ListActivity {
     }
     
     private void createItem(String isbn){
-    	Toast.makeText(this, isbn, Toast.LENGTH_SHORT).show();
-		isbnInput.setVisibility(View.GONE);
-		isbnInput.setText("");
+    	if(validIsbn(isbn)){
+			isbnInput.setVisibility(View.GONE);
+			isbnInput.setText("");
+    	}else{
+    		Toast.makeText(this, isbn+" is not a valid ISBN", Toast.LENGTH_SHORT).show();
+    	}
+    }
+    
+    public boolean validIsbn(String isbn){
+    	char[] nums = isbn.toCharArray();
+    	if(nums.length == 10){
+    		if(nums[9]=='X' || nums[9]=='x'){
+    			nums[9] = 10+'0'; //So that the subtraction below works out correctly
+    		}
+    		int a=0, b=0;
+    		for(int i=0; i<10; i++){
+    			a += nums[i]-'0';
+    			b += a;
+    		}
+    		return b % 11 == 0;
+    	}else if(nums.length == 13){
+    		int s=0;
+    		for(int i=0; i<12; i++){
+    			s += (nums[i]-'0')*(1+(2*(i%2)));
+    		}
+    		return 10-(s%10) == nums[12]-'0';
+    	}
+    	return false;
     }
     /*Menu related functions*/
     @Override
