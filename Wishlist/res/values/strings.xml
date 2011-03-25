@@ -2,4 +2,6 @@
 <resources>
     <string name="hello">Hello World, Wishlist!</string>
     <string name="app_name">Wishlist</string>
+    <string name="add_text">Add by Typing</string>
+    <string name="add_barcode">Add by Scan</string>
 </resources>
