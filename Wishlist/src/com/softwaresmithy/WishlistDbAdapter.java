@@ -17,15 +17,15 @@ public class WishlistDbAdapter {
 	private static final String DATABASE_NAME="softwaresmithy";
 	private static final String DATABASE_TABLE="wishlist";
 	
-	private static final String COL_ID="_id";
-	private static final String COL_ISBN="isbn";
-	private static final String COL_PIC="pic_url";
-	private static final String COL_TITLE="title";
-	private static final String COL_AUTHOR="author";
-	private static final String COL_STATE="state";
-	private static final String COL_DUE_DATE="due_date";
-	private static final String COL_FOUND="found";
-	private static final String COL_CLOSED="closed_date";
+	public static final String COL_ID="_id";
+	public static final String COL_ISBN="isbn";
+	public static final String COL_PIC="pic_url";
+	public static final String COL_TITLE="title";
+	public static final String COL_AUTHOR="author";
+	public static final String COL_STATE="state";
+	public static final String COL_DUE_DATE="due_date";
+	public static final String COL_FOUND="found";
+	public static final String COL_CLOSED="closed_date";
 	
 	public static final String[] allColumns = new String[]{COL_ID, COL_ISBN, COL_PIC, COL_TITLE, COL_AUTHOR, COL_STATE, COL_DUE_DATE, COL_FOUND, COL_CLOSED};
 	

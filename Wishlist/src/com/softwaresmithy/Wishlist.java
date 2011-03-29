@@ -20,6 +20,7 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 
 import android.app.ListActivity;
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
@@ -33,6 +34,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnKeyListener;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.EditText;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
@@ -43,6 +45,10 @@ public class Wishlist extends ListActivity {
 	private WishlistDbAdapter mDbHelper;
 	private EditText isbnInput;
 	private SimpleCursorAdapter listData;
+	
+	//Intent request states
+	private final int ACTIVITY_CREATE = 0;
+	private final int ACTIVITY_EDIT = 1;
 	
 	//Same index used to map from database table column to layout ID in item view
 //	private String[] mapFrom = WishlistDbAdapter.allColumns;
@@ -81,7 +87,10 @@ public class Wishlist extends ListActivity {
     
     @Override
     public boolean onContextItemSelected(MenuItem item){
-    	Toast.makeText(this, "I've been clicked!", Toast.LENGTH_SHORT).show();
+    	Intent i = new Intent(this,EditItem.class);
+    	AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
+    	i.putExtra(EditItem.ROWID, info.id);
+    	startActivityForResult(i, ACTIVITY_EDIT);
     	return super.onContextItemSelected(item);
     }
     
@@ -99,9 +108,10 @@ public class Wishlist extends ListActivity {
 			isbnInput.setVisibility(View.GONE);
 			isbnInput.setText("");
 			// 1) get basic info from xISBN
+			//TODO: Surround with try/catch, catch net exception, throw to manual edit page with error
 			addItemToDB(isbn);
 			getImages(isbn);
-			listData.notifyDataSetChanged();
+			fillData();
     	}else{
     		Toast.makeText(this, isbn+" is not a valid ISBN", Toast.LENGTH_SHORT).show();
     	}
@@ -153,13 +163,14 @@ public class Wishlist extends ListActivity {
 				String title = null, author = null;
 				if(item.has("title")){
 					title = item.getString("title");
+					title = title.endsWith(".")?title.substring(0,title.length()-1):title;
 				}
 				if(item.has("author")){
 					author = item.getString("author");
+					author = author.endsWith(".")?author.substring(0,author.length()-1):author;
 				}
 				mDbHelper.createItem(isbn, null, title, author, null);
 			}
-			
 		} catch (Exception e) {
 			Log.e(this.getClass().getName(), e.getMessage(), e);
 		} 

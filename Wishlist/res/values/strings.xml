@@ -5,4 +5,9 @@
     <string name="add_text">Add by Typing</string>
     <string name="add_barcode">Add by Scan</string>
     <string name="edit_item">Edit</string>
+    <string name="title_label">Title</string>
+    <string name="author_label">Author</string>
+    <string name="isbn_label">ISBN (required)</string>
+    <string name="duedate_label">Due Date</string>
+    <string name="duedate_hint">YYYY/MM/DD</string>
 </resources>
