@@ -44,5 +44,9 @@
 		a:hint="@string/duedate_hint"
 		a:inputType="date"
 		a:layout_width="fill_parent"
-		a:layout_height="wrap_content"/>						
+		a:layout_height="wrap_content"/>
+	<LinearLayout a:layout_height="wrap_content" a:layout_width="match_parent" a:id="@+id/linearLayout1" a:orientation="horizontal">
+		<Button a:layout_height="wrap_content" a:layout_weight="1" a:layout_width="wrap_content" a:text="@string/save_button" a:id="@+id/save_button" a:onClick="onSaveButtonClick"></Button>
+		<Button a:layout_height="wrap_content" a:layout_weight="1" a:layout_width="wrap_content" a:id="@+id/discard_button" a:text="@string/discard_button" a:onClick="onDiscardButtonClick"></Button>
+	</LinearLayout>						
 </LinearLayout>

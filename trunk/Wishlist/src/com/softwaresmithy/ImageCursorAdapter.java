@@ -28,10 +28,10 @@ public class ImageCursorAdapter extends SimpleCursorAdapter {
 		View retView = super.getView(position, v, parent);
 		
 		c.moveToPosition(position);
-		String isbn = c.getString(1);
+		String volumeId = c.getString(2);
 		
 		ImageView iv = (ImageView) retView.findViewById(R.id.cover);
-		File file = new File(imagePath,isbn+".jpg");
+		File file = new File(imagePath,volumeId+".jpg");
 		Bitmap cover;
 		if(file.exists()){
 			cover = BitmapFactory.decodeFile(file.getAbsolutePath());
