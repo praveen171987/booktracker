@@ -4,4 +4,6 @@
 		a:title="@string/add_text"/>
 	<item a:id="@+id/add_barcode"
 		a:title="@string/add_barcode"/>
+	<item a:id="@+id/add_scratch"
+		a:title="@string/add_scratch"/>
 </menu>

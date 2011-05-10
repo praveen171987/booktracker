@@ -1,13 +1,13 @@
 package com.softwaresmithy;
 
+import java.util.Date;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.os.Parcelable.Creator;
 import android.util.Log;
 
 public class WishlistDbAdapter {
@@ -19,30 +19,32 @@ public class WishlistDbAdapter {
 	
 	public static final String COL_ID="_id";
 	public static final String COL_ISBN="isbn";
-	public static final String COL_PIC="pic_url";
+	public static final String COL_VOLUME_ID="volume_id";
 	public static final String COL_TITLE="title";
 	public static final String COL_AUTHOR="author";
-	public static final String COL_STATE="state";
+	public static final String COL_PUB_DATE="pub_date";
+	public static final String COL_ADD_DATE="add_date";
 	public static final String COL_DUE_DATE="due_date";
-	public static final String COL_FOUND="found";
-	public static final String COL_CLOSED="closed_date";
+	public static final String COL_CLOSED_DATE="closed_date";
+	public static final String COL_STATE="state";
 	
-	public static final String[] allColumns = new String[]{COL_ID, COL_ISBN, COL_PIC, COL_TITLE, COL_AUTHOR, COL_STATE, COL_DUE_DATE, COL_FOUND, COL_CLOSED};
+	public static final String[] allColumns = new String[]{COL_ID, COL_ISBN, COL_VOLUME_ID, COL_TITLE, COL_AUTHOR, COL_PUB_DATE, COL_ADD_DATE, COL_DUE_DATE, COL_CLOSED_DATE, COL_STATE};
 	
 	private final Context mCtx;
 	
 	private static final String DATABASE_CREATE="create table "+DATABASE_TABLE+" (" +
 			COL_ID+ " integer primary key autoincrement, " +
 			COL_ISBN + " text not null, " +
-			COL_PIC + " text, " +
+			COL_VOLUME_ID + " text, " +
 			COL_TITLE + " text, " +
 			COL_AUTHOR + " text, " +
-			COL_STATE + " text, " +
+			COL_PUB_DATE + " integer, " +	//unix time
+			COL_ADD_DATE + " integer, " +	//unix time
 			COL_DUE_DATE + " integer, " +	//unix time
-			COL_FOUND + " integer, " + 	//boolean
-			COL_CLOSED + " integer "+	//unix time
+			COL_CLOSED_DATE + " integer, " +	//unix time
+			COL_STATE + " text " +
 			");";
-	private static final int DATABASE_VERSION = 2;
+	private static final int DATABASE_VERSION = 3;
 	
 	private static class DatabaseHelper extends SQLiteOpenHelper{
 		public DatabaseHelper(Context context){
@@ -67,13 +69,27 @@ public class WishlistDbAdapter {
             onCreate(db);
 		}
 	}
-	public long createItem(String isbn, String pic, String title, String author, String state){
+	public long createItem(BookJB b){
 		ContentValues i = new ContentValues();
-		i.put(COL_ISBN, isbn);
-		i.put(COL_PIC, pic);
-		i.put(COL_TITLE, title);
-		i.put(COL_AUTHOR, author);
-		i.put(COL_STATE, state);
+		i.put(COL_ISBN, b.getIsbn());
+		i.put(COL_VOLUME_ID, b.getVolume_id());
+		i.put(COL_TITLE, b.getTitle());
+		i.put(COL_AUTHOR, b.getAuthor());
+		if(b.getPubDate() != null){
+			i.put(COL_PUB_DATE, b.getPubDate().getTime());
+		}
+		if(b.getAddDate() != null){
+			i.put(COL_ADD_DATE, b.getAddDate().getTime());
+		}else {
+			i.put(COL_ADD_DATE, new Date().getTime());
+		}
+		if(b.getDueDate() != null){
+			i.put(COL_DUE_DATE, b.getDueDate().getTime());
+		}
+		if(b.getClosedDate() != null){
+			i.put(COL_CLOSED_DATE, b.getClosedDate().getTime());
+		}
+		i.put(COL_STATE, b.getState());
 		
 		return mDb.insert(DATABASE_TABLE, null, i);
 	}
@@ -85,18 +101,23 @@ public class WishlistDbAdapter {
 		}
 		return c;
 	}
-	public boolean updateItem(long id, String isbn, String pic, String title, String author, String state, String dueDate, String found, String closed){
+	public boolean updateItem(BookJB b){
 		ContentValues i = new ContentValues();
-		i.put(COL_ISBN, isbn);
-		i.put(COL_PIC, pic);
-		i.put(COL_TITLE, title);
-		i.put(COL_AUTHOR, author);
-		i.put(COL_STATE, state);
-		i.put(COL_DUE_DATE, dueDate);
-		i.put(COL_FOUND, found);
-		i.put(COL_CLOSED, closed);
+		i.put(COL_ISBN, b.getIsbn());
+		i.put(COL_VOLUME_ID, b.getVolume_id());
+		i.put(COL_TITLE, b.getTitle());
+		i.put(COL_AUTHOR, b.getAuthor());
+		i.put(COL_PUB_DATE, b.getPubDate().getTime());
+		if(b.getAddDate() != null){
+			i.put(COL_ADD_DATE, b.getAddDate().getTime());
+		}else {
+			i.put(COL_ADD_DATE, new Date().getTime());
+		}
+		i.put(COL_DUE_DATE, b.getDueDate().getTime());
+		i.put(COL_CLOSED_DATE, b.getClosedDate().getTime());
+		i.put(COL_STATE, b.getState());
 		
-		return mDb.update(DATABASE_TABLE, i, COL_ID + "=?",new String[]{Long.toString(id)}) > 0;
+		return mDb.update(DATABASE_TABLE, i, COL_ID + "=?",new String[]{Long.toString(b.get_id())}) > 0;
 	}
 	
 	public boolean deleteItem(long id){

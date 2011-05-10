@@ -1,45 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- <LinearLayout xmlns:a="http://schemas.android.com/apk/res/android" 
-	a:orientation="horizontal"
-	a:layout_width="fill_parent"
-	a:layout_height="fill_parent">
-	<ImageView
-		a:id="@+id/cover"
-		a:src="@drawable/unknown"
-		a:layout_width="80px"
-		a:layout_height="120px"/>
-	<LinearLayout 
-		a:orientation="vertical"
-		a:layout_height="fill_parent"
-		a:layout_weight="1">
-		<TextView 
-			a:id="@+id/title"
-		    a:layout_width="fill_parent"
-		    a:layout_weight="1"
-		    a:gravity="fill"
-		    a:singleLine="true"
-		    a:ellipsize="marquee"
-		    a:paddingLeft="10dp"
-		    a:paddingTop="10dp"
-		    a:paddingRight="10dp"
-		    a:textSize="16sp" 
-		    
-		    a:text="This is a title"/>
-		<TextView 
-			a:id="@+id/author"
-		    a:layout_width="fill_parent"
-		    a:layout_weight="1"
-		    a:gravity="fill"
-		    a:singleLine="true"
-		    a:ellipsize="marquee"
-		    a:paddingLeft="10dp"
-		    a:paddingTop="10dp"
-		    a:paddingRight="10dp"
-		    a:textSize="16sp" 
-		    
-		    a:text="This is an author"/>
-	</LinearLayout>
-</LinearLayout> -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="120px"
@@ -57,7 +16,12 @@
         android:layout_marginRight="6dip"
 
         android:src="@drawable/icon" />
-
+	<View
+    	android:id="@+id/item_state"
+    	android:layout_alignParentRight="true"
+    	android:layout_width="10dp"
+    	android:layout_height="fill_parent"
+    	android:background="#00FF00"/>
     <TextView
         android:id="@+id/author"
 
@@ -66,11 +30,12 @@
 
         android:layout_toRightOf="@id/cover"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
+        android:layout_alignRight="@id/item_state"
 
         android:singleLine="true"
         android:ellipsize="marquee"
-        android:text="Simple application that shows how to use RelativeLayout" />
+        android:textSize="18sp"
+        android:textStyle="italic"/>
 
     <TextView
     	android:id="@+id/title"
@@ -78,12 +43,12 @@
         android:layout_height="wrap_content"
 
         android:layout_toRightOf="@id/cover"
-        android:layout_alignParentRight="true"
+        android:layout_alignRight="@id/item_state"
         android:layout_alignParentTop="true"
         android:layout_above="@id/author"
         android:layout_alignWithParentIfMissing="true"
+        android:textSize="20sp"
 
-        android:gravity="center_vertical"
-        android:text="My Application" />
+        android:gravity="center_vertical" />
 
 </RelativeLayout>
