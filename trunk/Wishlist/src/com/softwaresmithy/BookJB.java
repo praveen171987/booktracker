@@ -33,6 +33,8 @@ public class BookJB {
 	public BookJB(String isbn, String volume_id, String title, String author){
 		this(null, isbn, volume_id, title, author, null, null, null, null, null);
 	}
+	public BookJB() {
+	}
 	public long get_id() {
 		return _id;
 	}

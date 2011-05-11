@@ -4,17 +4,11 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class SearchInputStream extends InputStream{
+public class SearchInputStream{
 
 	private InputStream is;
-	private static final int WINDOW = 10;
 	public SearchInputStream(InputStream is){
 		this.is = is;
-	}
-	@Override
-	public int read() throws IOException {
-		// TODO Auto-generated method stub
-		return is.read();
 	}
 	
 	public boolean find(String str) throws IOException{
