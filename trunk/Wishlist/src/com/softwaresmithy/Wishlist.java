@@ -2,19 +2,12 @@ package com.softwaresmithy;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.StringWriter;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.regex.MatchResult;
 
-import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathFactory;
@@ -28,7 +21,6 @@ import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.entity.BufferedHttpEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.util.EntityUtils;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
@@ -51,9 +43,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnKeyListener;
+import android.widget.AdapterView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.SimpleCursorAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.zxing.integration.android.IntentIntegrator;
@@ -90,6 +85,15 @@ public class Wishlist extends ListActivity {
         setContentView(R.layout.main);
         registerForContextMenu(getListView());
         
+        getListView().setOnItemClickListener(new OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view,
+                int position, long id) {
+              Intent intent = new Intent(getApplicationContext(), ItemDetails.class);
+              startActivity(intent);
+            }
+          });
+
+        
         mDbHelper = new WishlistDbAdapter(this);
         mDbHelper.open();
         //initialize text input listener
@@ -119,7 +123,7 @@ public class Wishlist extends ListActivity {
     	switch(item.getItemId()){
     	case R.id.edit_item:
 	    	Intent i = new Intent(this,EditItem.class);
-	    	i.putExtra(EditItem.ROWID, info.id);
+	    	i.putExtra(WishlistDbAdapter.COL_ID, info.id);
 	    	startActivityForResult(i, ACTIVITY_EDIT);
     		break;
     	case R.id.delete_item:

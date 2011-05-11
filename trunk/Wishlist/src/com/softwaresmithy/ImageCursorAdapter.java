@@ -31,25 +31,28 @@ public class ImageCursorAdapter extends SimpleCursorAdapter {
 		String volumeId = c.getString(c.getColumnIndexOrThrow(WishlistDbAdapter.COL_VOLUME_ID));
 		
 		View state = retView.findViewById(R.id.item_state);
-		Wishlist.status status = Wishlist.status.valueOf(c.getString(c.getColumnIndexOrThrow(WishlistDbAdapter.COL_STATE)));
-		switch(status){
-		case NO_MATCH:
-			state.setBackgroundColor(0xFF000000);
-			break;
-		case AVAILABLE:
-			state.setBackgroundColor(0xFFFFFFFF);
-			break;
-		case SHORT_WAIT:
-			state.setBackgroundColor(0xFF66CCFF);
-			break;
-		case WAIT:
-			state.setBackgroundColor(0xFF0066FF);
-			break;
-		case LONG_WAIT:
-			state.setBackgroundColor(0xFF0000CC);
-			break;
-		}
 		
+		String statusStr = c.getString(c.getColumnIndexOrThrow(WishlistDbAdapter.COL_STATE));
+		if(statusStr != null){
+			Wishlist.status status = Wishlist.status.valueOf(statusStr);
+			switch(status){
+			case NO_MATCH:
+				state.setBackgroundColor(0xFF000000);
+				break;
+			case AVAILABLE:
+				state.setBackgroundColor(0xFFFFFFFF);
+				break;
+			case SHORT_WAIT:
+				state.setBackgroundColor(0xFF66CCFF);
+				break;
+			case WAIT:
+				state.setBackgroundColor(0xFF0066FF);
+				break;
+			case LONG_WAIT:
+				state.setBackgroundColor(0xFF0000CC);
+				break;
+			}
+		}
 		ImageView iv = (ImageView) retView.findViewById(R.id.cover);
 		File file = new File(imagePath,volumeId+".jpg");
 		Bitmap cover;

@@ -16,7 +16,6 @@ public class EditItem extends Activity {
 	private WishlistDbAdapter dbHelper;
 	private Long rowId;
 	private Cursor item;
-	public static final String ROWID = "row_id";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +26,7 @@ public class EditItem extends Activity {
 		setContentView(R.layout.edit_item);
 		
 		Bundle extras = getIntent().getExtras();
-		rowId = extras != null ? extras.getLong(ROWID) : null;
+		rowId = extras != null ? extras.getLong(WishlistDbAdapter.COL_ID) : null;
 		
 		populateFields();
 	}
