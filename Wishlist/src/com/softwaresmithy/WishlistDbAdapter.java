@@ -101,6 +101,30 @@ public class WishlistDbAdapter {
 		}
 		return c;
 	}
+	
+	public BookJB readItemByIsbn(String isbn){
+		Cursor c= mDb.query(DATABASE_TABLE, allColumns, COL_ISBN + "=?",new String[]{isbn}, null, null, null);
+		if(c != null){
+			c.moveToFirst();
+		}
+		return cursorToBookJB(c);
+	}
+	
+	private BookJB cursorToBookJB(Cursor c){
+		BookJB retVal = new BookJB();
+		retVal.set_id(c.getLong(c.getColumnIndexOrThrow(COL_ID)));
+		retVal.setIsbn(c.getString(c.getColumnIndexOrThrow(COL_ISBN)));
+		retVal.setVolume_id(c.getString(c.getColumnIndexOrThrow(COL_VOLUME_ID)));
+		retVal.setTitle(c.getString(c.getColumnIndexOrThrow(COL_TITLE)));
+		retVal.setAuthor(c.getString(c.getColumnIndexOrThrow(COL_AUTHOR)));
+		retVal.setPubDate(new Date(c.getLong(c.getColumnIndexOrThrow(COL_PUB_DATE))));
+		retVal.setAddDate(new Date(c.getLong(c.getColumnIndexOrThrow(COL_ADD_DATE))));
+		retVal.setDueDate(new Date(c.getLong(c.getColumnIndexOrThrow(COL_DUE_DATE))));
+		retVal.setClosedDate(new Date(c.getLong(c.getColumnIndexOrThrow(COL_CLOSED_DATE))));
+		retVal.setState(c.getString(c.getColumnIndexOrThrow(COL_STATE)));
+		
+		return retVal;
+	}
 	public boolean updateItem(BookJB b){
 		ContentValues i = new ContentValues();
 		i.put(COL_ISBN, b.getIsbn());

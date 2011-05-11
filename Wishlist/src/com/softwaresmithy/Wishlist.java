@@ -6,6 +6,8 @@ import java.io.StringWriter;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
+import java.util.regex.MatchResult;
 
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
@@ -63,6 +65,14 @@ public class Wishlist extends ListActivity {
 	private WishlistDbAdapter mDbHelper;
 	private EditText isbnInput;
 	private SimpleCursorAdapter listData;
+	
+	public enum status {
+		NO_MATCH, //Not available at the library
+		AVAILABLE, //Copies available
+		SHORT_WAIT, //H = #Holds, C = #Copies, H < C
+		WAIT, // C <= H <= 2C
+		LONG_WAIT // H > 2C
+	};
 	
 	//Intent request states
 	private final int ACTIVITY_CREATE = 0;
@@ -228,6 +238,7 @@ public class Wishlist extends ListActivity {
     
     
     private class DownloadDataTask extends AsyncTask<String, Void, NameValuePair> {
+    	private static final String isbnSearchUrl = "http://libsys.arlingtonva.us/search/?searchtype=i&searcharg=%s&searchscope=1";
     	@Override
 		protected void onPostExecute(NameValuePair result) {
 			if(result.getName().equals(GOOD)){
@@ -255,10 +266,17 @@ public class Wishlist extends ListActivity {
 			}else{
 				return status;
 			}
-			if(!status.getName().equals(GOOD)){
-				return status;
+			if(status.getName().equals(GOOD)){
+				status = getAvailability(isbn);
 			}
-    		return new BasicNameValuePair(GOOD,null);
+			if(status.getName().equals(GOOD)){
+				BookJB book = mDbHelper.readItemByIsbn(isbn);
+				if(book != null){
+					book.setState(status.getValue());
+					mDbHelper.updateItem(book);
+				}
+			}
+    		return status;
     	}
         private NameValuePair getImages(String volumeId, String thumbUrl) {
     		HttpClient client = new DefaultHttpClient();
@@ -267,7 +285,7 @@ public class Wishlist extends ListActivity {
 	    		if(thumbUrl != null){
 	    			dest = new URI(thumbUrl);
 	    			String[] args = dest.getQuery().split("&");
-	    			//TODO: remove the 'edge' arg
+	    			//TODO: remove the 'edge' arg (if exists)
 	    		}else {
 	    			//http://bks3.books.google.com/books?id=1abqveXLr1QC&amp;printsec=frontcover&amp;img=1&amp;zoom=5&amp;edge=curl&amp;source=gbs_gdata
 	    			List<NameValuePair> params = new ArrayList<NameValuePair>();
@@ -310,8 +328,6 @@ public class Wishlist extends ListActivity {
         		String entityXpath = "/atom:feed/atom:entry[1]";
         		Node bookNode = (Node)xpath.evaluate(entityXpath, new InputSource(ent.getContent()), XPathConstants.NODE);
         		
-        		printNode(bookNode);
-        		
         		String titleXpath = "/atom:feed/atom:entry[1]/dc:title";
         		NodeList titleNodes = (NodeList) xpath.evaluate(titleXpath, bookNode, XPathConstants.NODESET);
         		String title = concatNodes(titleNodes, ": ");
@@ -335,6 +351,42 @@ public class Wishlist extends ListActivity {
         	}
         }
         
+        private NameValuePair getAvailability(String isbn){
+        	HttpGet get = null;
+        	try{
+	        	HttpClient client = new DefaultHttpClient();
+				get = new HttpGet(String.format(isbnSearchUrl, isbn));
+				HttpResponse resp = client.execute(get);
+				Scanner s = new Scanner(resp.getEntity().getContent());
+				String pattern = s.findWithinHorizon("((\\d*) hold[s]? on first copy returned of (\\d*) )?[cC]opies", 0);
+				
+				if(pattern != null){
+					MatchResult match = s.match();
+					if(match.groupCount() == 3){
+						if(match.group(2) == null){
+							return new BasicNameValuePair(GOOD, status.AVAILABLE.name());
+						}else{
+							int numHolds = Integer.parseInt(match.group(2));
+							int numCopies = Integer.parseInt(match.group(3));
+							if(numHolds < numCopies){
+								return new BasicNameValuePair(GOOD, status.SHORT_WAIT.name());
+							}else if(numHolds >= numCopies && numHolds <= (2*numCopies)){
+								return new BasicNameValuePair(GOOD, status.WAIT.name());
+							}else{
+								return new BasicNameValuePair(GOOD, status.LONG_WAIT.name());
+							}
+						}
+					}
+				}
+				return new BasicNameValuePair(GOOD, status.NO_MATCH.name());
+        	}catch(Exception e){
+    			Log.e(this.getClass().getName(), e.getMessage(), e);
+    			return new BasicNameValuePair(BAD, e.getMessage());       		
+        	}finally{
+        		if(get != null)
+        			get.abort();
+        	}
+        }
         private String concatNodes(NodeList nodes, String sep){
     		StringBuilder str = new StringBuilder("");
     		for(int i=0; i<nodes.getLength(); i++){
@@ -346,67 +398,6 @@ public class Wishlist extends ListActivity {
     		}
     		return str.toString();
         }
-        //Original xisbn version
-//    	private NameValuePair addItemToDB(String isbn) {
-//    		HttpClient client = new DefaultHttpClient();
-//    		List<NameValuePair> params = new ArrayList<NameValuePair>();
-//    		params.add(new BasicNameValuePair("method", "getMetadata"));
-//    		params.add(new BasicNameValuePair("format", "json"));
-//    		params.add(new BasicNameValuePair("ai", "scumbkt19"));
-//    		params.add(new BasicNameValuePair("fl", "title,author"));
-//    		try {
-//    			URI uri  = URIUtils.createURI("http", "xisbn.worldcat.org", -1, "/webservices/xid/isbn/"+isbn, URLEncodedUtils.format(params, "UTF-8"), null);
-//    			HttpGet xIsbn = new HttpGet(uri);
-//    			HttpResponse resp = client.execute(xIsbn);
-//    			String jsonResp = EntityUtils.toString(resp.getEntity());
-//    			Log.d(this.getClass().getName(), "json: "+jsonResp);
-//    			JSONObject obj = (JSONObject) new JSONTokener(jsonResp).nextValue();
-//    			//Parse object
-//    			if(!obj.getString("stat").equals("ok")){
-//    				return new BasicNameValuePair(BAD, "an error occured: "+obj.getString("stat"));
-//    			}else {
-//    				JSONArray list = obj.getJSONArray("list");
-//    				JSONObject item = (JSONObject) list.get(0);
-//    				String title = null, author = null;
-//    				if(item.has("title")){
-//    					title = item.getString("title");
-//    					title = title.endsWith(".")?title.substring(0,title.length()-1):title;
-//    				}
-//    				if(item.has("author")){
-//    					author = item.getString("author");
-//    					author = author.endsWith(".")?author.substring(0,author.length()-1):author;
-//    				}
-//    				mDbHelper.createItem(new BookJB(null, isbn, null, title, author, null, null, null, null));
-//    			}
-//    			return null;
-//    		} catch (Exception e) {
-//    			Log.e(this.getClass().getName(), e.getMessage(), e);
-//    			return new BasicNameValuePair(BAD, e.getMessage());
-//    		} 
-//    	}
-        private void printNode(Node node){
-        	try
-            {
-              // Set up the output transformer
-              TransformerFactory transfac = TransformerFactory.newInstance();
-              Transformer trans = transfac.newTransformer();
-              trans.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
-              trans.setOutputProperty(OutputKeys.INDENT, "yes");
 
-              // Print the DOM node
-
-              StringWriter sw = new StringWriter();
-              StreamResult result = new StreamResult(sw);
-              DOMSource source = new DOMSource(node);
-              trans.transform(source, result);
-              String xmlString = sw.toString();
-
-              System.out.println(xmlString);
-            }
-            catch (TransformerException e)
-            {
-              e.printStackTrace();
-            }
-        }
     }
 }
