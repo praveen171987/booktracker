@@ -1,0 +1,27 @@
+#summary Short, medium, and long term goals
+#labels Featured,Phase-Requirements
+
+= Introduction =
+
+This is my list of objectives, hopefully it won't grow too much faster than they're crossed off.  Feel free to add your own.
+
+= Details =
+
+==Short Term (this month)==
+  * Add periodic polling for status updates from library
+  * XSLT to map google book data to custom format as item details (short click on item) (means it's only available when user is online, is that an issue?)
+  * Notification when an item becomes available/status changes
+  * Define Library interface(s) for future expansion/compatability
+  * Make list filterable by status 
+
+==Medium Term (next month)==
+  * Refactor to Fragments for Android 3.0
+  * Create a Settings page for easy customization
+  * Clean up error handling (network unavailable)
+  * Set up a web presence for advertising/support/feedback
+  * Register as an Android Dev
+  * Further library integration (making and tracking reservations)
+
+==Long Term (next 3 months)==
+  * Publish to Market
+  * Investigate other media (ebooks, dvds, cds, audio books...?)
