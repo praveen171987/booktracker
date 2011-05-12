@@ -33,6 +33,7 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -47,8 +48,8 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.zxing.integration.android.IntentIntegrator;
@@ -88,8 +89,13 @@ public class Wishlist extends ListActivity {
         getListView().setOnItemClickListener(new OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view,
                 int position, long id) {
-              Intent intent = new Intent(getApplicationContext(), ItemDetails.class);
-              startActivity(intent);
+	        	ListView list = ((ListView)parent);
+	        	Cursor c = (Cursor)list.getItemAtPosition(position);
+	        	String volumeId = c.getString(c.getColumnIndexOrThrow(WishlistDbAdapter.COL_VOLUME_ID));
+	        	Uri bookUri =  Uri.parse("http://books.google.com/books?id="+volumeId);
+	        	//Intent intent = new Intent(getApplicationContext(), ItemDetails.class);
+	        	Intent intent = new Intent(Intent.ACTION_VIEW, bookUri);
+	        	startActivity(intent);
             }
           });
 
