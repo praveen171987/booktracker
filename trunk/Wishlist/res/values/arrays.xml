@@ -2,8 +2,12 @@
 <resources>
 	<string-array name="libEntries">
 		<item>Arlington Public Library</item>
+		<!-- Default Value -->
+		<item>None</item>
 	</string-array>
 	<string-array name="libValues">
 		<item>com.softwaresmithy.library.impl.WebPac http://libsys.arlingtonva.us/search/?searchtype=i&amp;searcharg=%s&amp;searchscope=1</item>
+		<!-- Default Value -->
+		<item>com.softwaresmithy.library.impl.Default</item>
 	</string-array>
 </resources>

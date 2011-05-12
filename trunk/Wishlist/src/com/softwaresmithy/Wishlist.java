@@ -5,6 +5,8 @@ import java.io.FileOutputStream;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
@@ -27,6 +29,7 @@ import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
@@ -34,6 +37,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -69,6 +73,7 @@ public class Wishlist extends ListActivity {
 	//Intent request states
 	private final int ACTIVITY_CREATE = 0;
 	private final int ACTIVITY_EDIT = 1;
+	private final int SET_PREFS = 2;
 	
 	//Same index used to map from database table column to layout ID in item view
 //	private String[] mapFrom = WishlistDbAdapter.allColumns;
@@ -83,7 +88,15 @@ public class Wishlist extends ListActivity {
         registerForContextMenu(getListView());
         
         try {
-			library = new LibraryFactory("com.softwaresmithy.library.impl.WebPac http://libsys.arlingtonva.us/search/?searchtype=i&amp;searcharg=%s&amp;searchscope=1").getLibrary();
+        	SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+            String prefVal = prefs.getString("libName", null);
+            if(prefVal == null){
+            	//Show preferences on initial load
+            	Intent i = new Intent(this, Preferences.class);
+            	startActivityForResult(i, SET_PREFS);
+            }else{
+            	library = new LibraryFactory(prefVal).getLibrary();
+            }
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -190,7 +203,7 @@ public class Wishlist extends ListActivity {
     		for(int i=0; i<12; i++){
     			s += (nums[i]-'0')*(1+(2*(i%2)));
     		}
-    		return 10-(s%10) == nums[12]-'0';
+    		return (10-(s%10))%10 == nums[12]-'0';
     	}
     	return false;
     }
@@ -218,6 +231,10 @@ public class Wishlist extends ListActivity {
         	Intent i = new Intent(this,EditItem.class);
         	startActivityForResult(i, ACTIVITY_CREATE);
         	return true;
+    	case R.id.preferences:
+    		Intent j = new Intent(this, Preferences.class);
+    		startActivity(j);
+    		return true;
     	default:
     		return super.onOptionsItemSelected(item);
     	}
@@ -243,7 +260,18 @@ public class Wishlist extends ListActivity {
 	    			new AlertDialog.Builder(this).setMessage(R.string.bad_scan).show();
 	    		}
 	    	}
-	    	break;
+	    	return;
+	    	case SET_PREFS:
+	    		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+	    		String libName = prefs.getString("libName", null);
+	    		if(libName != null){
+	    			try{
+	    				library = new LibraryFactory(libName).getLibrary();
+	    			}catch(Exception e){
+	    				Log.e(this.getClass().getName(), "error setting library from preferences", e);
+	    			}
+	    		}
+	    		return;
 	    	default: //unknown request code
     	}
     }
