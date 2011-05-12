@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.SimpleCursorAdapter;
 
+import com.softwaresmithy.library.LibStatus.STATUS;
+
 public class ImageCursorAdapter extends SimpleCursorAdapter {
 	private Cursor c;
 	private String imagePath;
@@ -34,7 +36,7 @@ public class ImageCursorAdapter extends SimpleCursorAdapter {
 		
 		String statusStr = c.getString(c.getColumnIndexOrThrow(WishlistDbAdapter.COL_STATE));
 		if(statusStr != null){
-			Wishlist.status status = Wishlist.status.valueOf(statusStr);
+			STATUS status = STATUS.valueOf(statusStr);
 			switch(status){
 			case NO_MATCH:
 				state.setBackgroundColor(0xFF000000);

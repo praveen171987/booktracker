@@ -5,8 +5,6 @@ import java.io.FileOutputStream;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
-import java.util.regex.MatchResult;
 
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
@@ -54,6 +52,10 @@ import android.widget.Toast;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
+import com.softwaresmithy.library.LibStatus;
+import com.softwaresmithy.library.LibStatus.STATUS;
+import com.softwaresmithy.library.Library;
+import com.softwaresmithy.library.LibraryFactory;
 
 public class Wishlist extends ListActivity {
 	
@@ -62,13 +64,7 @@ public class Wishlist extends ListActivity {
 	private EditText isbnInput;
 	private SimpleCursorAdapter listData;
 	
-	public enum status {
-		NO_MATCH, //Not available at the library
-		AVAILABLE, //Copies available
-		SHORT_WAIT, //H = #Holds, C = #Copies, H < C
-		WAIT, // C <= H <= 2C
-		LONG_WAIT // H > 2C
-	};
+	private Library library;
 	
 	//Intent request states
 	private final int ACTIVITY_CREATE = 0;
@@ -86,14 +82,20 @@ public class Wishlist extends ListActivity {
         setContentView(R.layout.main);
         registerForContextMenu(getListView());
         
+        try {
+			library = new LibraryFactory("com.softwaresmithy.library.impl.WebPac http://libsys.arlingtonva.us/search/?searchtype=i&amp;searcharg=%s&amp;searchscope=1").getLibrary();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+        
         getListView().setOnItemClickListener(new OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view,
                 int position, long id) {
 	        	ListView list = ((ListView)parent);
 	        	Cursor c = (Cursor)list.getItemAtPosition(position);
 	        	String volumeId = c.getString(c.getColumnIndexOrThrow(WishlistDbAdapter.COL_VOLUME_ID));
+	        	//TODO: Investigate using a custom XSLT to provide tighter integration with the app look and feel
 	        	Uri bookUri =  Uri.parse("http://books.google.com/books?id="+volumeId);
-	        	//Intent intent = new Intent(getApplicationContext(), ItemDetails.class);
 	        	Intent intent = new Intent(Intent.ACTION_VIEW, bookUri);
 	        	startActivity(intent);
             }
@@ -276,13 +278,16 @@ public class Wishlist extends ListActivity {
 			}else{
 				return status;
 			}
+			STATUS retVal = null;
 			if(status.getName().equals(GOOD)){
-				status = getAvailability(isbn);
+				if(library.getClass().isInstance(LibStatus.class)){
+					retVal = ((LibStatus)library).checkAvailability(isbn);
+				}
 			}
-			if(status.getName().equals(GOOD)){
+			if(retVal != null){
 				BookJB book = mDbHelper.readItemByIsbn(isbn);
 				if(book != null){
-					book.setState(status.getValue());
+					book.setState(retVal.name());
 					mDbHelper.updateItem(book);
 				}
 			}
@@ -361,42 +366,6 @@ public class Wishlist extends ListActivity {
         	}
         }
         
-        private NameValuePair getAvailability(String isbn){
-        	HttpGet get = null;
-        	try{
-	        	HttpClient client = new DefaultHttpClient();
-				get = new HttpGet(String.format(isbnSearchUrl, isbn));
-				HttpResponse resp = client.execute(get);
-				Scanner s = new Scanner(resp.getEntity().getContent());
-				String pattern = s.findWithinHorizon("((\\d*) hold[s]? on first copy returned of (\\d*) )?[cC]opies", 0);
-				
-				if(pattern != null){
-					MatchResult match = s.match();
-					if(match.groupCount() == 3){
-						if(match.group(2) == null){
-							return new BasicNameValuePair(GOOD, status.AVAILABLE.name());
-						}else{
-							int numHolds = Integer.parseInt(match.group(2));
-							int numCopies = Integer.parseInt(match.group(3));
-							if(numHolds < numCopies){
-								return new BasicNameValuePair(GOOD, status.SHORT_WAIT.name());
-							}else if(numHolds >= numCopies && numHolds <= (2*numCopies)){
-								return new BasicNameValuePair(GOOD, status.WAIT.name());
-							}else{
-								return new BasicNameValuePair(GOOD, status.LONG_WAIT.name());
-							}
-						}
-					}
-				}
-				return new BasicNameValuePair(GOOD, status.NO_MATCH.name());
-        	}catch(Exception e){
-    			Log.e(this.getClass().getName(), e.getMessage(), e);
-    			return new BasicNameValuePair(BAD, e.getMessage());       		
-        	}finally{
-        		if(get != null)
-        			get.abort();
-        	}
-        }
         private String concatNodes(NodeList nodes, String sep){
     		StringBuilder str = new StringBuilder("");
     		for(int i=0; i<nodes.getLength(); i++){

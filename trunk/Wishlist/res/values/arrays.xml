@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string-array name="libEntries">
+		<item>Arlington Public Library</item>
+	</string-array>
+	<string-array name="libValues">
+		<item>com.softwaresmithy.library.impl.WebPac http://libsys.arlingtonva.us/search/?searchtype=i&amp;searcharg=%s&amp;searchscope=1</item>
+	</string-array>
+</resources>
