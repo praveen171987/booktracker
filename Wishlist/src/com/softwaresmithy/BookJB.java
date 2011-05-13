@@ -13,6 +13,8 @@ public class BookJB {
 	private Date dueDate;
 	private Date closedDate;
 	private String state;
+	//Not stored in DB
+	private String thumbUrl;
 	
 	public BookJB(Long _id, String isbn, String volume_id, String title, String author, Date pubDate, Date addDate, Date dueDate, Date closedDate, String state){
 		if(_id != null){
@@ -94,5 +96,11 @@ public class BookJB {
 	}
 	public Date getDueDate() {
 		return dueDate;
+	}
+	public String getThumbUrl() {
+		return thumbUrl;
+	}
+	public void setThumbUrl(String thumbUrl) {
+		this.thumbUrl = thumbUrl;
 	}
 }

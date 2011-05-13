@@ -21,4 +21,7 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="view_prefs">Preferences</string>
+    
+    <!-- Application specific internal constants -->
+    <string name="perf_libName">libName</string>
 </resources>

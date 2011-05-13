@@ -3,7 +3,7 @@
   xmlns:a="http://schemas.android.com/apk/res/android">
   	<PreferenceCategory a:title="Library Preferences">
   		<ListPreference
-  			a:key="libName"
+  			a:key="@string/perf_libName"
   			a:title="Select your Library"
   			a:summary="select from a list of libraries compatible with this application"
   			a:entries="@array/libEntries"
