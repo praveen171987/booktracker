@@ -1,4 +1,4 @@
-package com.softwaresmithy;
+package com.softwaresmithy.metadata.impl;
 
 import java.util.Iterator;
 
