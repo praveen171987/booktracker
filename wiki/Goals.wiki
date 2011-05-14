@@ -29,4 +29,11 @@ This is my list of objectives, hopefully it won't grow too much faster than they
   *  as initial Beta, with goals to solicit feedback and extend library integration
   * Talk with Arlington library staff
   * Marketing materials (QR code)
+  * Cloud/App Engine integration
+
+==Additional Features, not planned yet==
   * Investigate other media (ebooks, dvds, cds, audio books...?)
+  * A Widget
+  * Integration with google books/nook/kindle apps
+  * Ability to create/share reviews
+  * 'Social'
