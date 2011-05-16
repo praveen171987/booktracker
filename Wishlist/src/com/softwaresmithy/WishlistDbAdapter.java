@@ -54,11 +54,6 @@ public class WishlistDbAdapter {
 		@Override
 		public void onCreate(SQLiteDatabase db) {
 			db.execSQL(DATABASE_CREATE);
-			ContentValues i = new ContentValues();
-			i.put(COL_ISBN, "9780765315151");
-			i.put(COL_TITLE, "Up Against It");
-			i.put(COL_AUTHOR, "M. J. Locke");
-			db.insert(DATABASE_TABLE, null, i);
 		}
 
 		@Override
@@ -131,14 +126,20 @@ public class WishlistDbAdapter {
 		i.put(COL_VOLUME_ID, b.getVolume_id());
 		i.put(COL_TITLE, b.getTitle());
 		i.put(COL_AUTHOR, b.getAuthor());
-		i.put(COL_PUB_DATE, b.getPubDate().getTime());
+		if(b.getPubDate() != null){
+			i.put(COL_PUB_DATE, b.getPubDate().getTime());
+		}
 		if(b.getAddDate() != null){
 			i.put(COL_ADD_DATE, b.getAddDate().getTime());
 		}else {
 			i.put(COL_ADD_DATE, new Date().getTime());
 		}
-		i.put(COL_DUE_DATE, b.getDueDate().getTime());
-		i.put(COL_CLOSED_DATE, b.getClosedDate().getTime());
+		if(b.getDueDate() != null){
+			i.put(COL_DUE_DATE, b.getDueDate().getTime());
+		}
+		if(b.getClosedDate() != null) {
+			i.put(COL_CLOSED_DATE, b.getClosedDate().getTime());
+		}
 		i.put(COL_STATE, b.getState());
 		
 		return mDb.update(DATABASE_TABLE, i, COL_ID + "=?",new String[]{Long.toString(b.get_id())}) > 0;
@@ -162,5 +163,10 @@ public class WishlistDbAdapter {
 	
 	public void close() {
 		mDbHelper.close();
+	}
+
+	public Cursor filterByStatus(CharSequence constraint) {
+		String statuses = "'"+((String)constraint).replace(",","','")+"'";
+		return mDb.query(DATABASE_TABLE, allColumns, COL_STATE + " NOT IN ("+statuses+")", null, null, null, null);
 	}
 }

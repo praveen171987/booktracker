@@ -1,6 +1,9 @@
 package com.softwaresmithy;
 
+import java.util.Arrays;
+
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ListActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -13,6 +16,7 @@ import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,6 +24,7 @@ import android.view.View.OnKeyListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
@@ -37,9 +42,12 @@ public class Wishlist extends ListActivity {
 	private WishlistDbAdapter mDbHelper;
 	private EditText isbnInput;
 	private SimpleCursorAdapter listData;
+	private Cursor listCursor;
 	
 	private Library library;
 	private MetadataProvider data;
+	
+	private long selectedItem;
 	
 	//Intent request states
 	private final int ACTIVITY_CREATE = 0;
@@ -103,7 +111,11 @@ public class Wishlist extends ListActivity {
 				return false;
 			}
         });
-        fillData();
+    	listCursor = mDbHelper.getAll();
+    	startManagingCursor(listCursor);
+    	
+    	listData = new ImageCursorAdapter(this, mDbHelper, R.layout.list_item, listCursor, mapFrom, mapTo,getExternalCacheDir().getAbsolutePath());
+    	setListAdapter(listData);
     }
     
     @Override
@@ -122,31 +134,16 @@ public class Wishlist extends ListActivity {
 	    	startActivityForResult(i, ACTIVITY_EDIT);
     		break;
     	case R.id.delete_item:
-    		new AlertDialog.Builder(this)
-    			.setTitle(R.string.del_title)
-    			.setMessage(R.string.del_message)
-    			.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-					
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						mDbHelper.deleteItem(info.id);
-						fillData();
-					}
-				})
-				.setNegativeButton(R.string.no, null)
-				.show();
+    		selectedItem = info.id;
+			showDialog(DIALOG_DELETE_ITEM);
     		break;
     	}
     	return super.onContextItemSelected(item);
     }
     
     private void fillData(){
-    	//Get all rows from DB
-    	Cursor c = mDbHelper.getAll();
-    	startManagingCursor(c);
-    	
-    	listData = new ImageCursorAdapter(this, R.layout.list_item, c, mapFrom, mapTo,getExternalCacheDir().getAbsolutePath());
-    	setListAdapter(listData);
+    	//Get all rows from DB    	
+    	listCursor.requery();
     }
     
     private void createItem(String isbn){
@@ -195,6 +192,9 @@ public class Wishlist extends ListActivity {
         	Intent i = new Intent(this,EditItem.class);
         	startActivityForResult(i, ACTIVITY_CREATE);
         	return true;
+    	case R.id.filter:
+     		showDialog(DIALOG_FILTER);
+    		return true;
     	case R.id.preferences:
     		Intent j = new Intent(this, Preferences.class);
     		startActivity(j);
@@ -233,7 +233,61 @@ public class Wishlist extends ListActivity {
     	}
     }
     
+    private static final int DIALOG_FILTER = 1;
+    private static final int DIALOG_DELETE_ITEM = 2;
+    
+	@Override
+	protected Dialog onCreateDialog(int id) {
 
+		switch(id){
+		case DIALOG_FILTER:
+    		LayoutInflater factory = LayoutInflater.from(this);
+    		final View filterView = factory.inflate(R.layout.filter, null);
+    		ListView filterList = (ListView) filterView.findViewById(R.id.filter_list);
+    		String[] items = getResources().getStringArray(R.array.status);
+    		boolean[] show = new boolean[items.length];
+    		Arrays.fill(show, true);
+    		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,items);
+    		filterList.setAdapter(adapter);
+			return new AlertDialog.Builder(this)
+    		.setTitle("Show the checked statuses")
+    		//.setView(filterView)
+    		
+    		.setMultiChoiceItems(items, show, new DialogInterface.OnMultiChoiceClickListener() {
+				
+				@Override
+				public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+					listCursor = listData.runQueryOnBackgroundThread("NO_MATCH");
+					listCursor.requery();
+				}
+			})
+    		.create();
+		case DIALOG_DELETE_ITEM:
+    		return new AlertDialog.Builder(this)
+			.setTitle(R.string.del_title)
+			.setMessage(R.string.del_message)
+			.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+				
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					mDbHelper.deleteItem(selectedItem);
+					fillData();
+				}
+			})
+			.setNegativeButton(R.string.no, null)
+			.create();
+		}
+		return null;
+	}    
+
+	@Override
+	protected void onPrepareDialog(int id, Dialog dialog) {
+		switch(id){
+		case DIALOG_FILTER:
+			break;
+		}
+	}
+	
 	public boolean validIsbn(String isbn){
     	char[] nums = isbn.toCharArray();
     	if(nums.length == 10){
@@ -255,4 +309,7 @@ public class Wishlist extends ListActivity {
     	}
     	return false;
     }
+
+
+
 }

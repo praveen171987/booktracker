@@ -15,6 +15,7 @@
     <string name="save_button">Save</string>
     <string name="discard_button">Discard</string>
     <string name="bad_scan">Sorry, I don\'t understand the result</string>
+    <string name="filter">Filter</string>
     <!-- Confirm Item Delete Dialog -->
     <string name="del_title">Confirm Delete</string>
     <string name="del_message">Do you want to delete this item?</string>
