@@ -6,6 +6,8 @@
 		a:title="@string/add_barcode"/>
 	<item a:id="@+id/add_scratch"
 		a:title="@string/add_scratch"/>
+	<item a:id="@+id/filter"
+		a:title="@string/filter"/>
 	<item a:id="@+id/preferences"
 		a:title="@string/view_prefs"/>
 </menu>

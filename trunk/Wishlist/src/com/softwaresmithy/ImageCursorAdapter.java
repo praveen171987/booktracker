@@ -8,21 +8,24 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.SimpleCursorAdapter;
 
 import com.softwaresmithy.library.LibStatus.STATUS;
 
-public class ImageCursorAdapter extends SimpleCursorAdapter {
+public class ImageCursorAdapter extends SimpleCursorAdapter implements Filterable{
 	private Cursor c;
 	private String imagePath;
 	private Context context;
+	private WishlistDbAdapter mDbHelper;
 
-	public ImageCursorAdapter(Context context, int layout, Cursor c, String[] from, int[] to, String imagePath) {
+	public ImageCursorAdapter(Context context, WishlistDbAdapter mDbHelper, int layout, Cursor c, String[] from, int[] to, String imagePath) {
 		super(context, layout, c, from, to);
 		this.c = c;
 		this.imagePath = imagePath;
 		this.context = context;
+		this.mDbHelper = mDbHelper;
 	}
 
 	@Override
@@ -65,6 +68,15 @@ public class ImageCursorAdapter extends SimpleCursorAdapter {
 		}
 		iv.setImageBitmap(cover);
 		return retView;
+	}
+
+	@Override
+	public Cursor runQueryOnBackgroundThread(CharSequence constraint) {
+		if(constraint == null){
+			return mDbHelper.getAll();
+		}else{
+			return mDbHelper.filterByStatus(constraint);
+		}
 	}
 
 }
