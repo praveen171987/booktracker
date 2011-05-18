@@ -1,0 +1,12 @@
+#summary Sidebar Navigation page
+#labels TableofContents
+
+===Overview===
+  * [Goals]
+  * [SupportedInstitutions Supported Libraries]
+  * [freeVsPay]
+
+===Implementation===
+  * [WebPac]
+
+  * *[http://code.google.com/p/booktracker/w/list Full list of pages]*
