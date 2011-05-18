@@ -1,0 +1,23 @@
+Available for request 	
+Checked out--may be recalled 	
+Claims returned
+Flagged for reserve
+Hold expired
+In process
+In transit
+In transit recall/request
+Item being retrieved
+Item not found in ASR
+Missing
+Not checked out
+On hold
+On order
+Recalled
+Recently returned
+Requested by patron
+Overdue
+Overdue recall
+Received
+See call # browse
+
+Being Held

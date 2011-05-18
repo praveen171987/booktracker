@@ -1,0 +1,2118 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<searchresponse>
+  <version>3.20d_75.00</version>
+  <session>1GV55687640Y6.4078</session>
+  <profile>adm</profile>
+  <lang>eng</lang>
+  <expirepage>300</expirepage>
+  <illurl></illurl>
+  <httpserver>
+    <servername>catalog.lcpl.lib.va.us</servername>
+    <host>catalog.lcpl.lib.va.us</host>
+    <port>80</port>
+  </httpserver>
+  <browser>
+    <type>unknown</type>
+    <majorversion></majorversion>
+    <minorversion></minorversion>
+    <os>unknown</os>
+    <addr>10.255.255.107</addr>
+  </browser>
+  <bookbag>
+    <size>0</size>
+  </bookbag>
+  <security>
+    <auth>false</auth>
+    <name></name>
+  </security>
+  <toolbar>
+    <active_tab>search</active_tab>
+    <bgcolor>#1B5790</bgcolor>
+    <bg>null</bg>
+    <userlimits></userlimits>
+    <tab>
+      <name>Catalog;Search</name>
+      <alt>Catalog Search</alt>
+      <value>search</value>
+      <active>true</active>
+    </tab>
+    <tab>
+      <name>My Library;Card</name>
+      <alt>View my account information</alt>
+      <value>account</value>
+      <active>false</active>
+    </tab>
+    <tab>
+      <name>eBooks &amp;;eAudios</name>
+      <alt>eBooks &amp; eAudios</alt>
+      <value>tab19</value>
+      <href>http://library.loudoun.gov/Default.aspx?tabid=43</href>
+      <active>false</active>
+    </tab>
+    <tab>
+      <name>What to; Read Page</name>
+      <alt>What to Read Page</alt>
+      <value>tab38</value>
+      <href>
+      http://library.loudoun.gov/Default.aspx?tabid=269</href>
+      <active>false</active>
+    </tab>
+    <tab>
+      <name>Databases &amp;; Homework</name>
+      <alt>Loudoun County Public Library Databases and Homework
+      Help</alt>
+      <value>home</value>
+      <href>http://library.loudoun.gov/Default.aspx?tabid=41</href>
+      <active>false</active>
+    </tab>
+    <tab>
+      <name>Ask A;Librarian</name>
+      <alt>Ask A Librarian</alt>
+      <value>tab18</value>
+      <href>http://library.loudoun.gov/Default.aspx?tabid=94</href>
+      <active>false</active>
+    </tab>
+    <tab>
+      <name>Suggest; A Title</name>
+      <alt>Suggest A Title</alt>
+      <value>tab22</value>
+      <href>
+      http://library.loudoun.gov/Default.aspx?tabid=226</href>
+      <active>false</active>
+    </tab>
+    <tab>
+      <name>Library;Info</name>
+      <alt>Loudoun County Public Library Information</alt>
+      <value>basic</value>
+      <active>false</active>
+    </tab>
+    <tab>
+      <name>Online;Payment</name>
+      <alt>Online Payment</alt>
+      <value>tab58</value>
+      <href>
+      http://library.loudoun.gov/Default.aspx?tabid=499</href>
+      <active>false</active>
+    </tab>
+    <submenu>
+      <name>Search Starts With...</name>
+      <alt>Search Starts With...</alt>
+      <value>subtab69</value>
+      <active>false</active>
+    </submenu>
+    <submenu>
+      <name>Keyword Search</name>
+      <alt>Search by Keyword</alt>
+      <value>subtab86</value>
+      <active>false</active>
+    </submenu>
+    <submenu>
+      <name>Audiobooks, ;Movies, Music...</name>
+      <alt>Search Audiobooks, Movies Music Starts With...</alt>
+      <value>subtab91</value>
+      <active>false</active>
+    </submenu>
+    <submenu>
+      <name>Best Sellers</name>
+      <alt>Best Sellers</alt>
+      <value>{BSTLLR=a}</value>
+      <active>false</active>
+    </submenu>
+    <submenu>
+      <name>Number Search</name>
+      <alt>Number Search</alt>
+      <value>subtab89</value>
+      <active>true</active>
+    </submenu>
+    <submenu>
+      <name>Advanced Search</name>
+      <alt>Advanced search</alt>
+      <value>subtab70</value>
+      <active>false</active>
+    </submenu>
+    <submenu>
+      <name>Search History</name>
+      <alt>Your search history</alt>
+      <value>history</value>
+      <active>false</active>
+    </submenu>
+    <submenu>
+      <name>Catalog FAQ</name>
+      <alt>Catalog FAQ</alt>
+      <value>subtab88</value>
+      <href>
+      http://library.loudoun.gov/Default.aspx?tabid=258</href>
+      <active>false</active>
+    </submenu>
+    <bestseller></bestseller>
+    <help>basicsearch.htm</help>
+    <logoinfo>
+      <logo>/hipres/logos/finescatalogimage.gif</logo>
+      <homepageurl>http://library.loudoun.gov/fines</homepageurl>
+      <homepagelinktext></homepagelinktext>
+    </logoinfo>
+  </toolbar>
+  <active_aspect>subtab89</active_aspect>
+  <active_menu>
+    <simple>
+      <value>simple</value>
+      <desc>Number Search</desc>
+      <explanation>Enter number in only ONE box for each search and
+      click "Go".</explanation>
+    </simple>
+  </active_menu>
+  <aspectlist>
+    <aspectentry>
+      <aspectlabel>ISBN/ISSN Search</aspectlabel>
+      <aspectnumber>3100027</aspectnumber>
+      <shortcut>PISBNEX</shortcut>
+      <keywordbrowseview></keywordbrowseview>
+    </aspectentry>
+    <aspectentry>
+      <aspectlabel>Dewey Call Numbers Search</aspectlabel>
+      <aspectnumber>3100012</aspectnumber>
+      <shortcut>CALLD</shortcut>
+      <keywordbrowseview></keywordbrowseview>
+    </aspectentry>
+    <aspectentry>
+      <aspectlabel>Barcode Search</aspectlabel>
+      <aspectnumber>3100010</aspectnumber>
+      <shortcut>BC</shortcut>
+      <keywordbrowseview></keywordbrowseview>
+    </aspectentry>
+    <aspectentry>
+      <aspectlabel>Bib No. Search</aspectlabel>
+      <aspectnumber>3100011</aspectnumber>
+      <shortcut>BIB</shortcut>
+      <keywordbrowseview></keywordbrowseview>
+    </aspectentry>
+  </aspectlist>
+  <operators>
+    <op_and>AND</op_and>
+    <op_or>OR</op_or>
+    <op_not>NOT</op_not>
+    <op_xor>XOR</op_xor>
+  </operators>
+  <predefsortlist>
+    <sortentry>
+      <label>Date - Newest First</label>
+      <sortview>3100014</sortview>
+    </sortentry>
+    <sortentry>
+      <label>Date - Oldest First</label>
+      <sortview>3100028</sortview>
+    </sortentry>
+    <sortentry>
+      <label>Title</label>
+      <sortview>3100015</sortview>
+    </sortentry>
+    <sortentry>
+      <label>Authors</label>
+      <sortview>3100012</sortview>
+    </sortentry>
+    <sortentry>
+      <label>Type of Material</label>
+      <sortview>3100013</sortview>
+    </sortentry>
+  </predefsortlist>
+  <predefinedlimits>
+    <limitbox>
+      <desc>By Collection or Media</desc>
+      <predeflimitentry>
+        <label>ADULT MATERIALS</label>
+        <limit>CO01 = gp_ADULT</limit>
+      </predeflimitentry>
+      <predeflimitentry>
+        <label>ADULT BOOKS</label>
+        <limit>CO01 = gp_ABOOK</limit>
+      </predeflimitentry>
+      <predeflimitentry>
+        <label>BOOKS</label>
+        <limit>IT01 = it_book</limit>
+      </predeflimitentry>
+      <predeflimitentry>
+        <label>E-BOOKS</label>
+        <limit>CO01 = co_EBOOK</limit>
+      </predeflimitentry>
+      <predeflimitentry>
+        <label>ADULT NON-BOOK</label>
+        <limit>CO01 = gp_ANONB</limit>
+      </predeflimitentry>
+      <predeflimitentry>
+        <label>AUDIOBOOKS</label>
+        <limit>CO01 = gp_CDBK</limit>
+      </predeflimitentry>
+      <predeflimitentry>
+        <label>PORTABLE AUDIOBOOKS</label>
+        <limit>IT01 = it_PAB</limit>
+      </predeflimitentry>
+      <predeflimitentry>
+        <label>DOWNLOADABLE E-AUDIO</label>
+        <limit>CO01 = co_EAUDIO</limit>
+      </predeflimitentry>
+      <predeflimitentry>
+        <label>CDS</label>
+        <limit>IT01 = it_CD</limit>
+      </predeflimitentry>
+      <predeflimitentry>
+        <label>DVDS</label>
+        <limit>IT01 = it_DVD</limit>
+      </predeflimitentry>
+      <predeflimitentry>
+        <label>DVDS and VIDEOS</label>
+        <limit>CO01 = gp_DDVO</limit>
+      </predeflimitentry>
+      <predeflimitentry>
+        <label>CHILDREN'S BOOKS</label>
+        <limit>CO01 = gp_CHBK</limit>
+      </predeflimitentry>
+      <predeflimitentry>
+        <label>CHILDREN'S NONFIC BOOKS</label>
+        <limit>CO01 = gp_CHNFBK</limit>
+      </predeflimitentry>
+      <predeflimitentry>
+        <label>EASY MATERIALS</label>
+        <limit>CO01 = gp_EASY</limit>
+      </predeflimitentry>
+      <predeflimitentry>
+        <label>EASY READER MATERIALS</label>
+        <limit>CO01 = gp_ER</limit>
+      </predeflimitentry>
+      <predeflimitentry>
+        <label>JUVENILE MATERIALS</label>
+        <limit>CO01 = gp_JUV</limit>
+      </predeflimitentry>
+      <predeflimitentry>
+        <label>YOUNG PEOPLE'S MATERIALS</label>
+        <limit>CO01 = gp_YP</limit>
+      </predeflimitentry>
+      <predeflimitentry>
+        <label>LARGE PRINT BOOKS</label>
+        <limit>CO01 = gp_LP</limit>
+      </predeflimitentry>
+      <predeflimitentry>
+        <label>MAGAZINES</label>
+        <limit>IT01 = it_MAG</limit>
+      </predeflimitentry>
+      <predeflimitentry>
+        <label>NEWSPAPERS</label>
+        <limit>CO01 = co_NEWS</limit>
+      </predeflimitentry>
+      <predeflimitentry>
+        <label>VIDEO GAMES</label>
+        <limit>IT01 = it_VGAME</limit>
+      </predeflimitentry>
+    </limitbox>
+    <limitbox>
+      <desc>By Location</desc>
+      <predeflimitentry>
+        <label>LIBRARY ADMINISTRATION</label>
+        <limit>LO01 = ADM</limit>
+      </predeflimitentry>
+      <predeflimitentry>
+        <label>ASHBURN LIBRARY</label>
+        <limit>LO01 = ASH</limit>
+      </predeflimitentry>
+      <predeflimitentry>
+        <label>CASCADES LIBRARY</label>
+        <limit>LO01 = CAS</limit>
+      </predeflimitentry>
+      <predeflimitentry>
+        <label>LOVETTSVILLE LIBRARY</label>
+        <limit>LO01 = LOV</limit>
+      </predeflimitentry>
+      <predeflimitentry>
+        <label>MIDDLEBURG LIBRARY</label>
+        <limit>LO01 = MID</limit>
+      </predeflimitentry>
+      <predeflimitentry>
+        <label>OUTREACH SERVICES</label>
+        <limit>LO01 = OUTR</limit>
+      </predeflimitentry>
+      <predeflimitentry>
+        <label>PURCELLVILLE LIBRARY</label>
+        <limit>LO01 = PUR</limit>
+      </predeflimitentry>
+      <predeflimitentry>
+        <label>RUST LIBRARY</label>
+        <limit>LO01 = RUST</limit>
+      </predeflimitentry>
+      <predeflimitentry>
+        <label>STERLING LIBRARY</label>
+        <limit>LO01 = STR</limit>
+      </predeflimitentry>
+      <predeflimitentry>
+        <label>T BALCH - LOCAL HIST. &amp; GENEALOGY</label>
+        <limit>LO01 = TBL</limit>
+      </predeflimitentry>
+    </limitbox>
+    <limitbox>
+      <desc>By Language</desc>
+      <predeflimitentry>
+        <label>Arabic</label>
+        <limit>LA01 = la_ara</limit>
+      </predeflimitentry>
+      <predeflimitentry>
+        <label>Chinese</label>
+        <limit>LA01 = la_chi</limit>
+      </predeflimitentry>
+      <predeflimitentry>
+        <label>English</label>
+        <limit>LA01 = la_eng</limit>
+      </predeflimitentry>
+      <predeflimitentry>
+        <label>French</label>
+        <limit>LA01 = la_fre</limit>
+      </predeflimitentry>
+      <predeflimitentry>
+        <label>German</label>
+        <limit>LA01 = la_ger</limit>
+      </predeflimitentry>
+      <predeflimitentry>
+        <label>Hebrew</label>
+        <limit>LA01 = la_heb</limit>
+      </predeflimitentry>
+      <predeflimitentry>
+        <label>Italian</label>
+        <limit>LA01 = la_ita</limit>
+      </predeflimitentry>
+      <predeflimitentry>
+        <label>Japanese</label>
+        <limit>LA01 = la_jpn</limit>
+      </predeflimitentry>
+      <predeflimitentry>
+        <label>Korean</label>
+        <limit>LA01 = la_kor</limit>
+      </predeflimitentry>
+      <predeflimitentry>
+        <label>Latin</label>
+        <limit>LA01 = la_lat</limit>
+      </predeflimitentry>
+      <predeflimitentry>
+        <label>Polish</label>
+        <limit>LA01 = la_pol</limit>
+      </predeflimitentry>
+      <predeflimitentry>
+        <label>Portuguese</label>
+        <limit>LA01 = la_por</limit>
+      </predeflimitentry>
+      <predeflimitentry>
+        <label>Russian</label>
+        <limit>LA01 = la_rus</limit>
+      </predeflimitentry>
+      <predeflimitentry>
+        <label>Spanish</label>
+        <limit>LA01 = la_spa</limit>
+      </predeflimitentry>
+      <predeflimitentry>
+        <label>Yiddish</label>
+        <limit>LA01 = la_yid</limit>
+      </predeflimitentry>
+    </limitbox>
+  </predefinedlimits>
+  <reservelocations></reservelocations>
+  <altprofiles>
+    <profiles>
+      <code>adm</code>
+      <lang>eng</lang>
+      <desc>LCPL Web Catalog</desc>
+    </profiles>
+    <profiles>
+      <code>adm-ada</code>
+      <lang>eng</lang>
+      <desc>LCPL Mobile Catalog (Text Only)</desc>
+    </profiles>
+    <selected>
+      <code>adm</code>
+      <lang>eng</lang>
+      <desc>LCPL Web Catalog</desc>
+    </selected>
+  </altprofiles>
+  <viewingbooklist>false</viewingbooklist>
+  <fromlink>link=direct</fromlink>
+  <lang>eng</lang>
+  <items>
+    <searchresults>
+      <parenttype>5</parenttype>
+      <header>
+        <col>
+          <label>Location</label>
+        </col>
+        <col>
+          <label>Collection</label>
+        </col>
+        <col>
+          <label>Call No.</label>
+        </col>
+        <col>
+          <label>Copy</label>
+        </col>
+        <col>
+          <label>Status</label>
+        </col>
+        <col>
+          <label>Due Date</label>
+        </col>
+      </header>
+      <results>
+        <row>
+          <sourceid>~!horizon_public</sourceid>
+          <cell>
+            <data>
+              <text>LIBRARY ADMINISTRATION</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>FICTION AREA</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>MCN(2)</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text></text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>ORDER REQUEST</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text></text>
+            </data>
+          </cell>
+          <error></error>
+          <key>1673378</key>
+          <displayRequestButton>true</displayRequestButton>
+          <showCopyLink>false</showCopyLink>
+          <RESTRICTIONS>
+            <data>
+              <text>LIBRARY ADMINISTRATION</text>
+            </data>
+          </RESTRICTIONS>
+          <AVAILABLETHRU>
+            <data>
+              <text>FICTION AREA</text>
+            </data>
+          </AVAILABLETHRU>
+          <MIDSPINE>
+            <data>
+              <text>MCN(2)</text>
+            </data>
+          </MIDSPINE>
+          <TEMPORARYLOCATION>
+            <data>
+              <text>ORDER REQUEST</text>
+            </data>
+          </TEMPORARYLOCATION>
+          <AVAILABILITYDATE>
+            <data>
+              <text></text>
+            </data>
+          </AVAILABILITYDATE>
+          <dimrow>true</dimrow>
+          <tablename></tablename>
+          <my_list>false</my_list>
+        </row>
+        <row>
+          <sourceid>~!horizon_public</sourceid>
+          <cell>
+            <data>
+              <text>ASHBURN LIBRARY</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>FICTION AREA</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>FICTION JOH</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>McN</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>Checked out</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>05/27/2011</text>
+            </data>
+          </cell>
+          <error></error>
+          <key>1666227</key>
+          <displayRequestButton>true</displayRequestButton>
+          <showCopyLink>false</showCopyLink>
+          <RESTRICTIONS>
+            <data>
+              <text>ASHBURN LIBRARY</text>
+            </data>
+          </RESTRICTIONS>
+          <AVAILABLETHRU>
+            <data>
+              <text>FICTION AREA</text>
+            </data>
+          </AVAILABLETHRU>
+          <MIDSPINE>
+            <data>
+              <text>FICTION JOH</text>
+            </data>
+          </MIDSPINE>
+          <TEMPORARYLOCATION>
+            <data>
+              <text>Checked out</text>
+            </data>
+          </TEMPORARYLOCATION>
+          <AVAILABILITYDATE>
+            <data>
+              <text>05/27/2011</text>
+            </data>
+          </AVAILABILITYDATE>
+          <dimrow>true</dimrow>
+          <tablename></tablename>
+          <my_list>false</my_list>
+        </row>
+        <row>
+          <sourceid>~!horizon_public</sourceid>
+          <cell>
+            <data>
+              <text>ASHBURN LIBRARY</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>FICTION AREA</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>FICTION JOH</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>McN</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>Checked out</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>05/26/2011</text>
+            </data>
+          </cell>
+          <error></error>
+          <key>1666232</key>
+          <displayRequestButton>true</displayRequestButton>
+          <showCopyLink>false</showCopyLink>
+          <RESTRICTIONS>
+            <data>
+              <text>ASHBURN LIBRARY</text>
+            </data>
+          </RESTRICTIONS>
+          <AVAILABLETHRU>
+            <data>
+              <text>FICTION AREA</text>
+            </data>
+          </AVAILABLETHRU>
+          <MIDSPINE>
+            <data>
+              <text>FICTION JOH</text>
+            </data>
+          </MIDSPINE>
+          <TEMPORARYLOCATION>
+            <data>
+              <text>Checked out</text>
+            </data>
+          </TEMPORARYLOCATION>
+          <AVAILABILITYDATE>
+            <data>
+              <text>05/26/2011</text>
+            </data>
+          </AVAILABILITYDATE>
+          <dimrow>true</dimrow>
+          <tablename></tablename>
+          <my_list>false</my_list>
+        </row>
+        <row>
+          <sourceid>~!horizon_public</sourceid>
+          <cell>
+            <data>
+              <text>ASHBURN LIBRARY</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>7 DAY LOAN-NONREQUESTABLE</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>FICTION JOH</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>McN</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>Shelving Cart</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text></text>
+            </data>
+          </cell>
+          <error></error>
+          <key>1666224</key>
+          <displayRequestButton>true</displayRequestButton>
+          <showCopyLink>false</showCopyLink>
+          <RESTRICTIONS>
+            <data>
+              <text>ASHBURN LIBRARY</text>
+            </data>
+          </RESTRICTIONS>
+          <AVAILABLETHRU>
+            <data>
+              <text>7 DAY LOAN-NONREQUESTABLE</text>
+            </data>
+          </AVAILABLETHRU>
+          <MIDSPINE>
+            <data>
+              <text>FICTION JOH</text>
+            </data>
+          </MIDSPINE>
+          <TEMPORARYLOCATION>
+            <data>
+              <text>Shelving Cart</text>
+            </data>
+          </TEMPORARYLOCATION>
+          <AVAILABILITYDATE>
+            <data>
+              <text></text>
+            </data>
+          </AVAILABILITYDATE>
+          <dimrow>true</dimrow>
+          <tablename></tablename>
+          <my_list>false</my_list>
+        </row>
+        <row>
+          <sourceid>~!horizon_public</sourceid>
+          <cell>
+            <data>
+              <text>ASHBURN LIBRARY</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>7 DAY LOAN-NONREQUESTABLE</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>FICTION JOH</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>McN</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>Checked out</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>05/20/2011</text>
+            </data>
+          </cell>
+          <error></error>
+          <key>1666225</key>
+          <displayRequestButton>true</displayRequestButton>
+          <showCopyLink>false</showCopyLink>
+          <RESTRICTIONS>
+            <data>
+              <text>ASHBURN LIBRARY</text>
+            </data>
+          </RESTRICTIONS>
+          <AVAILABLETHRU>
+            <data>
+              <text>7 DAY LOAN-NONREQUESTABLE</text>
+            </data>
+          </AVAILABLETHRU>
+          <MIDSPINE>
+            <data>
+              <text>FICTION JOH</text>
+            </data>
+          </MIDSPINE>
+          <TEMPORARYLOCATION>
+            <data>
+              <text>Checked out</text>
+            </data>
+          </TEMPORARYLOCATION>
+          <AVAILABILITYDATE>
+            <data>
+              <text>05/20/2011</text>
+            </data>
+          </AVAILABILITYDATE>
+          <dimrow>true</dimrow>
+          <tablename></tablename>
+          <my_list>false</my_list>
+        </row>
+        <row>
+          <sourceid>~!horizon_public</sourceid>
+          <cell>
+            <data>
+              <text>CASCADES LIBRARY</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>FICTION AREA</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>FICTION JOH</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text></text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>Checked out</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>05/19/2011</text>
+            </data>
+          </cell>
+          <error></error>
+          <key>1637619</key>
+          <displayRequestButton>true</displayRequestButton>
+          <showCopyLink>false</showCopyLink>
+          <RESTRICTIONS>
+            <data>
+              <text>CASCADES LIBRARY</text>
+            </data>
+          </RESTRICTIONS>
+          <AVAILABLETHRU>
+            <data>
+              <text>FICTION AREA</text>
+            </data>
+          </AVAILABLETHRU>
+          <MIDSPINE>
+            <data>
+              <text>FICTION JOH</text>
+            </data>
+          </MIDSPINE>
+          <TEMPORARYLOCATION>
+            <data>
+              <text>Checked out</text>
+            </data>
+          </TEMPORARYLOCATION>
+          <AVAILABILITYDATE>
+            <data>
+              <text>05/19/2011</text>
+            </data>
+          </AVAILABILITYDATE>
+          <dimrow>true</dimrow>
+          <tablename></tablename>
+          <my_list>false</my_list>
+        </row>
+        <row>
+          <sourceid>~!horizon_public</sourceid>
+          <cell>
+            <data>
+              <text>CASCADES LIBRARY</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>7 DAY LOAN-NONREQUESTABLE</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>FICTION JOH</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>McN</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>Checked out</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>05/19/2011</text>
+            </data>
+          </cell>
+          <error></error>
+          <key>1666222</key>
+          <displayRequestButton>true</displayRequestButton>
+          <showCopyLink>false</showCopyLink>
+          <RESTRICTIONS>
+            <data>
+              <text>CASCADES LIBRARY</text>
+            </data>
+          </RESTRICTIONS>
+          <AVAILABLETHRU>
+            <data>
+              <text>7 DAY LOAN-NONREQUESTABLE</text>
+            </data>
+          </AVAILABLETHRU>
+          <MIDSPINE>
+            <data>
+              <text>FICTION JOH</text>
+            </data>
+          </MIDSPINE>
+          <TEMPORARYLOCATION>
+            <data>
+              <text>Checked out</text>
+            </data>
+          </TEMPORARYLOCATION>
+          <AVAILABILITYDATE>
+            <data>
+              <text>05/19/2011</text>
+            </data>
+          </AVAILABILITYDATE>
+          <dimrow>true</dimrow>
+          <tablename></tablename>
+          <my_list>false</my_list>
+        </row>
+        <row>
+          <sourceid>~!horizon_public</sourceid>
+          <cell>
+            <data>
+              <text>CASCADES LIBRARY</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>7 DAY LOAN-NONREQUESTABLE</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>FICTION JOH</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>McN</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>Checked out</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>05/19/2011</text>
+            </data>
+          </cell>
+          <error></error>
+          <key>1666223</key>
+          <displayRequestButton>true</displayRequestButton>
+          <showCopyLink>false</showCopyLink>
+          <RESTRICTIONS>
+            <data>
+              <text>CASCADES LIBRARY</text>
+            </data>
+          </RESTRICTIONS>
+          <AVAILABLETHRU>
+            <data>
+              <text>7 DAY LOAN-NONREQUESTABLE</text>
+            </data>
+          </AVAILABLETHRU>
+          <MIDSPINE>
+            <data>
+              <text>FICTION JOH</text>
+            </data>
+          </MIDSPINE>
+          <TEMPORARYLOCATION>
+            <data>
+              <text>Checked out</text>
+            </data>
+          </TEMPORARYLOCATION>
+          <AVAILABILITYDATE>
+            <data>
+              <text>05/19/2011</text>
+            </data>
+          </AVAILABILITYDATE>
+          <dimrow>true</dimrow>
+          <tablename></tablename>
+          <my_list>false</my_list>
+        </row>
+        <row>
+          <sourceid>~!horizon_public</sourceid>
+          <cell>
+            <data>
+              <text>LOVETTSVILLE LIBRARY</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>7 DAY LOAN-NONREQUESTABLE</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>FICTION JOH</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>McN</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>Checked out</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>05/19/2011</text>
+            </data>
+          </cell>
+          <error></error>
+          <key>1666216</key>
+          <displayRequestButton>true</displayRequestButton>
+          <showCopyLink>false</showCopyLink>
+          <RESTRICTIONS>
+            <data>
+              <text>LOVETTSVILLE LIBRARY</text>
+            </data>
+          </RESTRICTIONS>
+          <AVAILABLETHRU>
+            <data>
+              <text>7 DAY LOAN-NONREQUESTABLE</text>
+            </data>
+          </AVAILABLETHRU>
+          <MIDSPINE>
+            <data>
+              <text>FICTION JOH</text>
+            </data>
+          </MIDSPINE>
+          <TEMPORARYLOCATION>
+            <data>
+              <text>Checked out</text>
+            </data>
+          </TEMPORARYLOCATION>
+          <AVAILABILITYDATE>
+            <data>
+              <text>05/19/2011</text>
+            </data>
+          </AVAILABILITYDATE>
+          <dimrow>true</dimrow>
+          <tablename></tablename>
+          <my_list>false</my_list>
+        </row>
+        <row>
+          <sourceid>~!horizon_public</sourceid>
+          <cell>
+            <data>
+              <text>MIDDLEBURG LIBRARY</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>7 DAY LOAN-NONREQUESTABLE</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>FICTION JOH</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>McN</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>Checked In</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text></text>
+            </data>
+          </cell>
+          <error></error>
+          <key>1666217</key>
+          <displayRequestButton>true</displayRequestButton>
+          <showCopyLink>false</showCopyLink>
+          <RESTRICTIONS>
+            <data>
+              <text>MIDDLEBURG LIBRARY</text>
+            </data>
+          </RESTRICTIONS>
+          <AVAILABLETHRU>
+            <data>
+              <text>7 DAY LOAN-NONREQUESTABLE</text>
+            </data>
+          </AVAILABLETHRU>
+          <MIDSPINE>
+            <data>
+              <text>FICTION JOH</text>
+            </data>
+          </MIDSPINE>
+          <TEMPORARYLOCATION>
+            <data>
+              <text>Checked In</text>
+            </data>
+          </TEMPORARYLOCATION>
+          <AVAILABILITYDATE>
+            <data>
+              <text></text>
+            </data>
+          </AVAILABILITYDATE>
+          <dimrow>true</dimrow>
+          <tablename></tablename>
+          <my_list>false</my_list>
+        </row>
+        <row>
+          <sourceid>~!horizon_public</sourceid>
+          <cell>
+            <data>
+              <text>PURCELLVILLE LIBRARY</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>FICTION AREA</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>FICTION JOH</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text></text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>Checked out</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>05/20/2011</text>
+            </data>
+          </cell>
+          <error></error>
+          <key>1637618</key>
+          <displayRequestButton>true</displayRequestButton>
+          <showCopyLink>false</showCopyLink>
+          <RESTRICTIONS>
+            <data>
+              <text>PURCELLVILLE LIBRARY</text>
+            </data>
+          </RESTRICTIONS>
+          <AVAILABLETHRU>
+            <data>
+              <text>FICTION AREA</text>
+            </data>
+          </AVAILABLETHRU>
+          <MIDSPINE>
+            <data>
+              <text>FICTION JOH</text>
+            </data>
+          </MIDSPINE>
+          <TEMPORARYLOCATION>
+            <data>
+              <text>Checked out</text>
+            </data>
+          </TEMPORARYLOCATION>
+          <AVAILABILITYDATE>
+            <data>
+              <text>05/20/2011</text>
+            </data>
+          </AVAILABILITYDATE>
+          <dimrow>true</dimrow>
+          <tablename></tablename>
+          <my_list>false</my_list>
+        </row>
+        <row>
+          <sourceid>~!horizon_public</sourceid>
+          <cell>
+            <data>
+              <text>PURCELLVILLE LIBRARY</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>FICTION AREA</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>FICTION JOH</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>McN</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>Item being held</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text></text>
+            </data>
+          </cell>
+          <error></error>
+          <key>1666231</key>
+          <displayRequestButton>true</displayRequestButton>
+          <showCopyLink>false</showCopyLink>
+          <RESTRICTIONS>
+            <data>
+              <text>PURCELLVILLE LIBRARY</text>
+            </data>
+          </RESTRICTIONS>
+          <AVAILABLETHRU>
+            <data>
+              <text>FICTION AREA</text>
+            </data>
+          </AVAILABLETHRU>
+          <MIDSPINE>
+            <data>
+              <text>FICTION JOH</text>
+            </data>
+          </MIDSPINE>
+          <TEMPORARYLOCATION>
+            <data>
+              <text>Item being held</text>
+            </data>
+          </TEMPORARYLOCATION>
+          <AVAILABILITYDATE>
+            <data>
+              <text></text>
+            </data>
+          </AVAILABILITYDATE>
+          <dimrow>true</dimrow>
+          <tablename></tablename>
+          <my_list>false</my_list>
+        </row>
+        <row>
+          <sourceid>~!horizon_public</sourceid>
+          <cell>
+            <data>
+              <text>PURCELLVILLE LIBRARY</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>FICTION AREA</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>FICTION JOH</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>McN</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>Checked out</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>05/25/2011</text>
+            </data>
+          </cell>
+          <error></error>
+          <key>1666229</key>
+          <displayRequestButton>true</displayRequestButton>
+          <showCopyLink>false</showCopyLink>
+          <RESTRICTIONS>
+            <data>
+              <text>PURCELLVILLE LIBRARY</text>
+            </data>
+          </RESTRICTIONS>
+          <AVAILABLETHRU>
+            <data>
+              <text>FICTION AREA</text>
+            </data>
+          </AVAILABLETHRU>
+          <MIDSPINE>
+            <data>
+              <text>FICTION JOH</text>
+            </data>
+          </MIDSPINE>
+          <TEMPORARYLOCATION>
+            <data>
+              <text>Checked out</text>
+            </data>
+          </TEMPORARYLOCATION>
+          <AVAILABILITYDATE>
+            <data>
+              <text>05/25/2011</text>
+            </data>
+          </AVAILABILITYDATE>
+          <dimrow>true</dimrow>
+          <tablename></tablename>
+          <my_list>false</my_list>
+        </row>
+        <row>
+          <sourceid>~!horizon_public</sourceid>
+          <cell>
+            <data>
+              <text>PURCELLVILLE LIBRARY</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>7 DAY LOAN-NONREQUESTABLE</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>FICTION JOH</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>McN</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>Checked out</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>05/16/2011</text>
+            </data>
+          </cell>
+          <error></error>
+          <key>1666220</key>
+          <displayRequestButton>true</displayRequestButton>
+          <showCopyLink>false</showCopyLink>
+          <RESTRICTIONS>
+            <data>
+              <text>PURCELLVILLE LIBRARY</text>
+            </data>
+          </RESTRICTIONS>
+          <AVAILABLETHRU>
+            <data>
+              <text>7 DAY LOAN-NONREQUESTABLE</text>
+            </data>
+          </AVAILABLETHRU>
+          <MIDSPINE>
+            <data>
+              <text>FICTION JOH</text>
+            </data>
+          </MIDSPINE>
+          <TEMPORARYLOCATION>
+            <data>
+              <text>Checked out</text>
+            </data>
+          </TEMPORARYLOCATION>
+          <AVAILABILITYDATE>
+            <data>
+              <text>05/16/2011</text>
+            </data>
+          </AVAILABILITYDATE>
+          <dimrow>true</dimrow>
+          <tablename></tablename>
+          <my_list>false</my_list>
+        </row>
+        <row>
+          <sourceid>~!horizon_public</sourceid>
+          <cell>
+            <data>
+              <text>PURCELLVILLE LIBRARY</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>7 DAY LOAN-NONREQUESTABLE</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>FICTION JOH</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>McN</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>Checked out</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>05/18/2011</text>
+            </data>
+          </cell>
+          <error></error>
+          <key>1666221</key>
+          <displayRequestButton>true</displayRequestButton>
+          <showCopyLink>false</showCopyLink>
+          <RESTRICTIONS>
+            <data>
+              <text>PURCELLVILLE LIBRARY</text>
+            </data>
+          </RESTRICTIONS>
+          <AVAILABLETHRU>
+            <data>
+              <text>7 DAY LOAN-NONREQUESTABLE</text>
+            </data>
+          </AVAILABLETHRU>
+          <MIDSPINE>
+            <data>
+              <text>FICTION JOH</text>
+            </data>
+          </MIDSPINE>
+          <TEMPORARYLOCATION>
+            <data>
+              <text>Checked out</text>
+            </data>
+          </TEMPORARYLOCATION>
+          <AVAILABILITYDATE>
+            <data>
+              <text>05/18/2011</text>
+            </data>
+          </AVAILABILITYDATE>
+          <dimrow>true</dimrow>
+          <tablename></tablename>
+          <my_list>false</my_list>
+        </row>
+        <row>
+          <sourceid>~!horizon_public</sourceid>
+          <cell>
+            <data>
+              <text>RUST LIBRARY</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>FICTION AREA</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>FICTION JOH</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text></text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>Checked out</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>05/19/2011</text>
+            </data>
+          </cell>
+          <error></error>
+          <key>1637617</key>
+          <displayRequestButton>true</displayRequestButton>
+          <showCopyLink>false</showCopyLink>
+          <RESTRICTIONS>
+            <data>
+              <text>RUST LIBRARY</text>
+            </data>
+          </RESTRICTIONS>
+          <AVAILABLETHRU>
+            <data>
+              <text>FICTION AREA</text>
+            </data>
+          </AVAILABLETHRU>
+          <MIDSPINE>
+            <data>
+              <text>FICTION JOH</text>
+            </data>
+          </MIDSPINE>
+          <TEMPORARYLOCATION>
+            <data>
+              <text>Checked out</text>
+            </data>
+          </TEMPORARYLOCATION>
+          <AVAILABILITYDATE>
+            <data>
+              <text>05/19/2011</text>
+            </data>
+          </AVAILABILITYDATE>
+          <dimrow>true</dimrow>
+          <tablename></tablename>
+          <my_list>false</my_list>
+        </row>
+        <row>
+          <sourceid>~!horizon_public</sourceid>
+          <cell>
+            <data>
+              <text>RUST LIBRARY</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>FICTION AREA</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>FICTION JOH</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>McN</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>Checked out</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>05/31/2011</text>
+            </data>
+          </cell>
+          <error></error>
+          <key>1666230</key>
+          <displayRequestButton>true</displayRequestButton>
+          <showCopyLink>false</showCopyLink>
+          <RESTRICTIONS>
+            <data>
+              <text>RUST LIBRARY</text>
+            </data>
+          </RESTRICTIONS>
+          <AVAILABLETHRU>
+            <data>
+              <text>FICTION AREA</text>
+            </data>
+          </AVAILABLETHRU>
+          <MIDSPINE>
+            <data>
+              <text>FICTION JOH</text>
+            </data>
+          </MIDSPINE>
+          <TEMPORARYLOCATION>
+            <data>
+              <text>Checked out</text>
+            </data>
+          </TEMPORARYLOCATION>
+          <AVAILABILITYDATE>
+            <data>
+              <text>05/31/2011</text>
+            </data>
+          </AVAILABILITYDATE>
+          <dimrow>true</dimrow>
+          <tablename></tablename>
+          <my_list>false</my_list>
+        </row>
+        <row>
+          <sourceid>~!horizon_public</sourceid>
+          <cell>
+            <data>
+              <text>RUST LIBRARY</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>7 DAY LOAN-NONREQUESTABLE</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>FICTION JOH</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>McN</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>Checked out</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>05/10/2011</text>
+            </data>
+          </cell>
+          <error></error>
+          <key>1666218</key>
+          <displayRequestButton>true</displayRequestButton>
+          <showCopyLink>false</showCopyLink>
+          <RESTRICTIONS>
+            <data>
+              <text>RUST LIBRARY</text>
+            </data>
+          </RESTRICTIONS>
+          <AVAILABLETHRU>
+            <data>
+              <text>7 DAY LOAN-NONREQUESTABLE</text>
+            </data>
+          </AVAILABLETHRU>
+          <MIDSPINE>
+            <data>
+              <text>FICTION JOH</text>
+            </data>
+          </MIDSPINE>
+          <TEMPORARYLOCATION>
+            <data>
+              <text>Checked out</text>
+            </data>
+          </TEMPORARYLOCATION>
+          <AVAILABILITYDATE>
+            <data>
+              <text>05/10/2011</text>
+            </data>
+          </AVAILABILITYDATE>
+          <dimrow>true</dimrow>
+          <tablename></tablename>
+          <my_list>false</my_list>
+        </row>
+        <row>
+          <sourceid>~!horizon_public</sourceid>
+          <cell>
+            <data>
+              <text>RUST LIBRARY</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>7 DAY LOAN-NONREQUESTABLE</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>FICTION JOH</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>McN</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>Checked out</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>05/21/2011</text>
+            </data>
+          </cell>
+          <error></error>
+          <key>1666219</key>
+          <displayRequestButton>true</displayRequestButton>
+          <showCopyLink>false</showCopyLink>
+          <RESTRICTIONS>
+            <data>
+              <text>RUST LIBRARY</text>
+            </data>
+          </RESTRICTIONS>
+          <AVAILABLETHRU>
+            <data>
+              <text>7 DAY LOAN-NONREQUESTABLE</text>
+            </data>
+          </AVAILABLETHRU>
+          <MIDSPINE>
+            <data>
+              <text>FICTION JOH</text>
+            </data>
+          </MIDSPINE>
+          <TEMPORARYLOCATION>
+            <data>
+              <text>Checked out</text>
+            </data>
+          </TEMPORARYLOCATION>
+          <AVAILABILITYDATE>
+            <data>
+              <text>05/21/2011</text>
+            </data>
+          </AVAILABILITYDATE>
+          <dimrow>true</dimrow>
+          <tablename></tablename>
+          <my_list>false</my_list>
+        </row>
+        <row>
+          <sourceid>~!horizon_public</sourceid>
+          <cell>
+            <data>
+              <text>STERLING LIBRARY</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>FICTION AREA</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>FICTION JOH</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text></text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>Checked out</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>05/21/2011</text>
+            </data>
+          </cell>
+          <error></error>
+          <key>1637620</key>
+          <displayRequestButton>true</displayRequestButton>
+          <showCopyLink>false</showCopyLink>
+          <RESTRICTIONS>
+            <data>
+              <text>STERLING LIBRARY</text>
+            </data>
+          </RESTRICTIONS>
+          <AVAILABLETHRU>
+            <data>
+              <text>FICTION AREA</text>
+            </data>
+          </AVAILABLETHRU>
+          <MIDSPINE>
+            <data>
+              <text>FICTION JOH</text>
+            </data>
+          </MIDSPINE>
+          <TEMPORARYLOCATION>
+            <data>
+              <text>Checked out</text>
+            </data>
+          </TEMPORARYLOCATION>
+          <AVAILABILITYDATE>
+            <data>
+              <text>05/21/2011</text>
+            </data>
+          </AVAILABILITYDATE>
+          <dimrow>true</dimrow>
+          <tablename></tablename>
+          <my_list>false</my_list>
+        </row>
+      </results>
+      <dispotherlocation>ok</dispotherlocation>
+      <otherlocations>true</otherlocations>
+      <hitcount></hitcount>
+      <resultid>1</resultid>
+      <error></error>
+    </searchresults>
+  </items>
+  <youritems>
+    <hits>23</hits>
+    <view>
+      <npp>20</npp>
+      <currpage>1</currpage>
+      <start>1</start>
+      <end>20</end>
+    </view>
+    <pagenumbers>
+      <group>0</group>
+      <page>1</page>
+      <page>2</page>
+    </pagenumbers>
+  </youritems>
+  <view>items</view>
+  <yoursearch>
+    <searchdata>
+      <search>
+        <shortcut>PISBNEX</shortcut>
+        <term>9780312651206</term>
+      </search>
+    </searchdata>
+    <sources>
+      <source>
+        <id>~!horizon_public</id>
+      </source>
+    </sources>
+    <sorts>
+      <sort>3100014</sort>
+    </sorts>
+    <searchdata>
+      <link>full%3D3100023%7E%21648818%7E%210</link>
+    </searchdata>
+    <hits>1</hits>
+    <totalhits>1</totalhits>
+    <view>
+      <npp>20</npp>
+      <currpage>1</currpage>
+      <start>1</start>
+      <end>20</end>
+    </view>
+    <pagenumbers>
+      <group>0</group>
+    </pagenumbers>
+  </yoursearch>
+  <lang>eng</lang>
+  <fullnonmarc>
+    <searchresults>
+      <parenttype>5</parenttype>
+      <header>
+        <col>
+          <label>Call #</label>
+        </col>
+        <col>
+          <label>Series</label>
+        </col>
+        <col>
+          <label>Description</label>
+        </col>
+        <col>
+          <label>Edition</label>
+        </col>
+        <col>
+          <label>Contents</label>
+        </col>
+        <col>
+          <label>Linked Bibs</label>
+        </col>
+        <col>
+          <label>URL</label>
+        </col>
+        <col>
+          <label>Notes</label>
+        </col>
+        <col>
+          <label>Credits</label>
+        </col>
+        <col>
+          <label>Performers</label>
+        </col>
+        <col>
+          <label>Summary</label>
+        </col>
+        <col>
+          <label>Audience</label>
+        </col>
+        <col>
+          <label>Add Authors</label>
+        </col>
+        <col>
+          <label>ISBN</label>
+        </col>
+        <col>
+          <label>ISSN</label>
+        </col>
+        <col>
+          <label>Requests</label>
+        </col>
+        <col>
+          <label>Available Copies</label>
+        </col>
+      </header>
+      <results>
+        <row>
+          <sourceid>~!horizon_public</sourceid>
+          <cell>
+            <data>
+              <text>FICTION JOH</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>An Eve Duncan forensics thriller ; #12</text>
+              <link>
+                <func>search=SERW~!An Eve Duncan forensics thriller
+                ; #12</func>
+              </link>
+            </data>
+            <data>
+              <text>Johansen, Iris. Eve Duncan forensics
+              thriller.</text>
+              <link>
+                <func>search=SERW~!Johansen, Iris. Eve Duncan
+                forensics thriller.</func>
+              </link>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>378 p. ; 25 cm.</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>1st ed.</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text></text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text></text>
+              <link>
+                <func>full=3100001~!648818~!0</func>
+              </link>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text></text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text></text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text></text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text></text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>Forensic sculptor Eve Duncan zeros in on the
+              kidnapper and serial killer who years earlier
+              abducted and murdered her seven-year-old daughter,
+              Bonnie.</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text></text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text></text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>9780312651206 (hbk.)</text>
+            </data>
+            <data>
+              <text>0312651201 (hbk.)</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text></text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>42</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>1</text>
+            </data>
+          </cell>
+          <error></error>
+          <isbn>9780312651206</isbn>
+          <hipoclc>651912728</hipoclc>
+          <small_ec_image_url>
+          http%3A%2F%2Fwww.syndetics.com%2Findex.aspx%3Ftype%3Dxw12%26isbn%3D9780312651206%2FSC.GIF%26client%3Dloudp%26upc%3D%26oclc%3Docn651912728</small_ec_image_url>
+          <medium_ec_image_url>
+          http%3A%2F%2Fwww.syndetics.com%2Findex.aspx%3Ftype%3Dxw12%26isbn%3D9780312651206%2FMC.GIF%26client%3Dloudp%26upc%3D%26oclc%3Docn651912728</medium_ec_image_url>
+          <large_ec_image_url>
+          http%3A%2F%2Fwww.syndetics.com%2Findex.aspx%3Ftype%3Dxw12%26isbn%3D9780312651206%2FLC.GIF%26client%3Dloudp%26upc%3D%26oclc%3Docn651912728</large_ec_image_url>
+          <key>648818</key>
+          <marcleader7>m</marcleader7>
+          <displayRequestButton>true</displayRequestButton>
+          <showCopyLink>false</showCopyLink>
+          <TITLE>
+            <data>
+              <text>Eve / Iris Johansen.</text>
+              <link>
+                <func>search=PALLT~!Eve /</func>
+              </link>
+            </data>
+          </TITLE>
+          <AUTHOR>
+            <data>
+              <text>Johansen, Iris.</text>
+              <link>
+                <func>search=BAW~!Johansen, Iris.</func>
+              </link>
+            </data>
+          </AUTHOR>
+          <PUBLISHER>
+            <data>
+              <text>New York : St. Martin's Press, 2011.</text>
+            </data>
+          </PUBLISHER>
+          <SUBJECT>
+            <data>
+              <text>Duncan, Eve (Fictitious character) --
+              Fiction.</text>
+              <link>
+                <func>link=3100016~!362058~!3100001~!3100002</func>
+              </link>
+            </data>
+            <data>
+              <text>Facial reconstruction (Anthropology) --
+              Fiction.</text>
+              <link>
+                <func>link=3100016~!244938~!3100001~!3100002</func>
+              </link>
+            </data>
+            <data>
+              <text>Women sculptors -- Fiction.</text>
+              <link>
+                <func>link=3100016~!212745~!3100001~!3100002</func>
+              </link>
+            </data>
+            <data>
+              <text>Missing children -- Fiction.</text>
+              <link>
+                <func>link=3100016~!242301~!3100001~!3100002</func>
+              </link>
+            </data>
+          </SUBJECT>
+          <dimrow>true</dimrow>
+          <tablename>BIB</tablename>
+          <my_list>true</my_list>
+        </row>
+      </results>
+      <hitcount></hitcount>
+      <resultid>1</resultid>
+      <error></error>
+    </searchresults>
+  </fullnonmarc>
+  <enhanced_content_types_available>
+    <AUTHOR_NOTES>true</AUTHOR_NOTES>
+    <FICTION>true</FICTION>
+    <LARGE_COVER>true</LARGE_COVER>
+    <LIBRARY_JOURNAL_REVIEW>true</LIBRARY_JOURNAL_REVIEW>
+    <MEDIUM_COVER>true</MEDIUM_COVER>
+    <PUBLISHERS_WEEKLY_REVIEW>true</PUBLISHERS_WEEKLY_REVIEW>
+    <SMALL_COVER>true</SMALL_COVER>
+    <SUMMARY>true</SUMMARY>
+  </enhanced_content_types_available>
+  <popupurl>
+  http%3A%2F%2Fsyndetics.com%2Findex.aspx%3Ftype%3Drn12%26client%3Dloudp%26upc%3D%26oclc%3D651912728%26isbn%3D9780312651206%2FINDEX.HTML</popupurl>
+  <OpenURL>
+    <no_links />
+  </OpenURL>
+  <CommercialStore>
+    <link>
+      <link_name>Amazon</link_name>
+      <link_url>
+      http://www.amazon.com/exec/obidos/ASIN/9780312651206</link_url>
+      <link_open_type>1</link_open_type>
+    </link>
+    <link>
+      <link_name>Barnes and Noble</link_name>
+      <link_url>
+      http://shop.barnesandnoble.com/bookSearch/isbnInquiry.asp?ISBN=9780312651206</link_url>
+      <link_open_type>1</link_open_type>
+    </link>
+  </CommercialStore>
+  <bibinfo>
+    <subscriptionsummary>false</subscriptionsummary>
+    <volumes>false</volumes>
+    <closedstack>false</closedstack>
+    <items>true</items>
+    <error></error>
+  </bibinfo>
+  <group>
+    <pools>
+      <id>adm</id>
+      <datapool>
+        <emailreplyto>lcplcatalog@loudoun.gov</emailreplyto>
+        <emailpostmaster>lcplcatalog@loudoun.gov</emailpostmaster>
+        <source>
+          <sourcelabel>Loudoun County Public Library</sourcelabel>
+          <id>~!horizon_public</id>
+          <type>200</type>
+          <requesttype>1</requesttype>
+          <loginrequired>false</loginrequired>
+          <maxhitlimit>100000</maxhitlimit>
+          <sortviewnum>3100014</sortviewnum>
+          <sourcenum>3100001</sourcenum>
+        </source>
+        <opensource>
+          <source>
+            <sorthitlimit>2000</sorthitlimit>
+            <limitmaxhitlimit>0</limitmaxhitlimit>
+            <sortviewnum>3100014</sortviewnum>
+            <id>~!horizon_public</id>
+            <opened>true</opened>
+            <error></error>
+          </source>
+        </opensource>
+      </datapool>
+    </pools>
+    <size>1</size>
+    <dedup_option_id>1</dedup_option_id>
+  </group>
+  <dedup_checked>0</dedup_checked>
+  <method>GET</method>
+</searchresponse>

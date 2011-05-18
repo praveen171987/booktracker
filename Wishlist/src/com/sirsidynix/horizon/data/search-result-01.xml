@@ -1,0 +1,674 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<searchresponse>
+  <version>2.1</version>
+  <session>13056646D2K1U.16957</session>
+  <profile>dial--3</profile>
+  <lang>eng</lang>
+  <expirepage>300</expirepage>
+  <illurl></illurl>
+  <contenturl>
+  http://syndetics.com/index.aspx?client=&amp;type=xw12&amp;isbn=</contenturl>
+  <httpserver>
+    <servername>libraries.rochdale.gov.uk</servername>
+    <host>libraries.rochdale.gov.uk</host>
+    <port>80</port>
+  </httpserver>
+  <browser>
+    <type>NN</type>
+    <majorversion>5</majorversion>
+    <minorversion>0</minorversion>
+    <os>Windows NT</os>
+    <addr>15.203.233.78</addr>
+  </browser>
+  <bookbag>
+    <size>0</size>
+  </bookbag>
+  <security>
+    <auth>false</auth>
+    <name></name>
+  </security>
+  <toolbar>
+    <active_tab>search</active_tab>
+    <bgcolor>#2D6B42</bgcolor>
+    <bg>null</bg>
+    <userlimits></userlimits>
+    <tab>
+      <name>Home;</name>
+      <alt>Home</alt>
+      <value>home</value>
+      <active>false</active>
+    </tab>
+    <tab>
+      <name>Search;the Catalogue</name>
+      <alt>Search the Library Catalogue</alt>
+      <value>search</value>
+      <active>true</active>
+    </tab>
+    <tab>
+      <name>Reading;links</name>
+      <alt>Links and searches for people who like reading</alt>
+      <value>lists</value>
+      <active>false</active>
+    </tab>
+    <tab>
+      <name>Learning &amp;; lifestyle</name>
+      <alt>Links to information and non-fiction resources</alt>
+      <value>learn</value>
+      <active>false</active>
+    </tab>
+    <tab>
+      <name>Online ;references</name>
+      <alt>Access to online reference services for library
+      members</alt>
+      <value>online_subs</value>
+      <active>false</active>
+    </tab>
+    <tab>
+      <name>My Account &amp;;Loan renewals</name>
+      <alt>View my account information</alt>
+      <value>account</value>
+      <active>false</active>
+    </tab>
+    <tab>
+      <name>Links for;library staff</name>
+      <alt>Links for;library staff</alt>
+      <value>links for library staff</value>
+      <active>false</active>
+    </tab>
+    <submenu>
+      <name>Quick search</name>
+      <alt>Quick Search</alt>
+      <value>basic_search</value>
+      <active>true</active>
+    </submenu>
+    <submenu>
+      <name>Power search</name>
+      <alt>Power search</alt>
+      <value>power</value>
+      <active>false</active>
+    </submenu>
+    <submenu>
+      <name>Your search history</name>
+      <alt>Your search history</alt>
+      <value>history</value>
+      <active>false</active>
+    </submenu>
+    <submenu>
+      <name>More Children's Searches</name>
+      <alt>More Children's Searches</alt>
+      <value>search</value>
+      <href>
+      http://libraries.rochdale.gov.uk/ipac20/ipac.jsp?profile=dial--11</href>
+      <active>false</active>
+    </submenu>
+    <bestseller>
+      <aspectentry>
+        <aspectlabel>Best Sellers</aspectlabel>
+        <aspectnumber>1000003</aspectnumber>
+        <shortcut>BSL</shortcut>
+        <keywordbrowseview></keywordbrowseview>
+      </aspectentry>
+    </bestseller>
+    <help>basicsearch.htm</help>
+    <logoinfo>
+      <logo>
+      http://www.rochdale.gov.uk/site_images/rmbc_logo.gif</logo>
+      <homepageurl>
+      http://www.rochdale.gov.uk/libraries</homepageurl>
+      <homepagelinktext>Information, news and contact details of
+      Rochdale Library Service</homepagelinktext>
+    </logoinfo>
+  </toolbar>
+  <active_aspect>basic_search</active_aspect>
+  <active_menu>
+    <simple>
+      <value>simple</value>
+      <desc>Quick Search</desc>
+      <explanation>Choose the type of search you want from the
+      drop-down box. If you choose an "any words" or "keyword"
+      search, the more words you use the shorter and more useful
+      the list of results will be.</explanation>
+    </simple>
+  </active_menu>
+  <aspectlist>
+    <aspectentry>
+      <aspectlabel>Author/artist (surname first)</aspectlabel>
+      <aspectnumber>1100004</aspectnumber>
+      <shortcut>AA</shortcut>
+      <keywordbrowseview></keywordbrowseview>
+    </aspectentry>
+    <aspectentry>
+      <aspectlabel>Children's Library author</aspectlabel>
+      <aspectnumber>1100056</aspectnumber>
+      <shortcut>KAL</shortcut>
+      <keywordbrowseview></keywordbrowseview>
+    </aspectentry>
+    <aspectentry>
+      <aspectlabel>Any word in the title</aspectlabel>
+      <aspectnumber>1100029</aspectnumber>
+      <shortcut>TW</shortcut>
+      <keywordbrowseview>1100039</keywordbrowseview>
+    </aspectentry>
+    <aspectentry>
+      <aspectlabel>Children's Library keyword</aspectlabel>
+      <aspectnumber>1100018</aspectnumber>
+      <shortcut>KW</shortcut>
+      <keywordbrowseview>1100054</keywordbrowseview>
+    </aspectentry>
+    <aspectentry>
+      <aspectlabel>Browse by Title</aspectlabel>
+      <aspectnumber>1100028</aspectnumber>
+      <shortcut>TL</shortcut>
+      <keywordbrowseview></keywordbrowseview>
+    </aspectentry>
+    <aspectentry>
+      <aspectlabel>Children's Library title list</aspectlabel>
+      <aspectnumber>1100057</aspectnumber>
+      <shortcut>KTL</shortcut>
+      <keywordbrowseview></keywordbrowseview>
+    </aspectentry>
+    <aspectentry>
+      <aspectlabel>Subject Keyword(s)</aspectlabel>
+      <aspectnumber>1100027</aspectnumber>
+      <shortcut>SAW</shortcut>
+      <keywordbrowseview></keywordbrowseview>
+    </aspectentry>
+    <aspectentry>
+      <aspectlabel>Browse by Subject</aspectlabel>
+      <aspectnumber>1100026</aspectnumber>
+      <shortcut>SA</shortcut>
+      <keywordbrowseview></keywordbrowseview>
+    </aspectentry>
+    <aspectentry>
+      <aspectlabel>Search by ISBN</aspectlabel>
+      <aspectnumber>1100016</aspectnumber>
+      <shortcut>ISBN</shortcut>
+      <keywordbrowseview>1100050</keywordbrowseview>
+    </aspectentry>
+    <aspectentry>
+      <aspectlabel>Series search</aspectlabel>
+      <aspectnumber>1100025</aspectnumber>
+      <shortcut>SE</shortcut>
+      <keywordbrowseview></keywordbrowseview>
+    </aspectentry>
+    <aspectentry>
+      <aspectlabel>Class Number</aspectlabel>
+      <aspectnumber>1100006</aspectnumber>
+      <shortcut>DDC</shortcut>
+      <keywordbrowseview></keywordbrowseview>
+    </aspectentry>
+  </aspectlist>
+  <operators>
+    <op_and>and</op_and>
+    <op_or>or</op_or>
+    <op_not>not</op_not>
+    <op_xor>xor</op_xor>
+  </operators>
+  <predefsortlist>
+    <sortentry>
+      <label>Author, Title, Publication Date</label>
+      <sortview>1100031</sortview>
+    </sortentry>
+    <sortentry>
+      <label>Class no., then author</label>
+      <sortview>1100048</sortview>
+    </sortentry>
+    <sortentry>
+      <label>Publication Date, Title, Author</label>
+      <sortview>1100032</sortview>
+    </sortentry>
+    <sortentry>
+      <label>Title, Author, Publication Date</label>
+      <sortview>1100030</sortview>
+    </sortentry>
+    <sortentry>
+      <label>Word Sort</label>
+      <sortview>1100029</sortview>
+    </sortentry>
+    <sortentry>
+      <label>Series order</label>
+      <sortview>1100064</sortview>
+    </sortentry>
+    <sortentry>
+      <label>Series order (last one first)</label>
+      <sortview>1100065</sortview>
+    </sortentry>
+  </predefsortlist>
+  <predefinedlimits>
+    <predeflimitentry>
+      <label>Adult non-fiction</label>
+      <limit>CLA01 &gt; 0 AND &lt; A</limit>
+    </predeflimitentry>
+    <predeflimitentry>
+      <label>Children's non-fiction</label>
+      <limit>CLA01 &gt; J0 AND &lt; JA</limit>
+    </predeflimitentry>
+    <predeflimitentry>
+      <label>Adult + Children's non-fiction</label>
+      <limit>CLA02 &lt;&gt; JZ AND &lt;&gt; ""</limit>
+    </predeflimitentry>
+    <predeflimitentry>
+      <label>Compact Disc</label>
+      <limit>GMD01 = CD</limit>
+    </predeflimitentry>
+    <predeflimitentry>
+      <label>On cassette</label>
+      <limit>GMD01 = CAS</limit>
+    </predeflimitentry>
+    <predeflimitentry>
+      <label>On cassette</label>
+      <limit>GMD01 = CAS</limit>
+    </predeflimitentry>
+    <predeflimitentry>
+      <label>Poetry (adult)</label>
+      <limit>IND01 = J</limit>
+    </predeflimitentry>
+    <predeflimitentry>
+      <label>Children's books</label>
+      <limit>EDI01 = LARGE PRINT?</limit>
+    </predeflimitentry>
+    <predeflimitentry>
+      <label>Children's books</label>
+      <limit>EDI01 = LARGE PRINT?</limit>
+    </predeflimitentry>
+    <predeflimitentry>
+      <label>Large print</label>
+      <limit>MED01 = ER</limit>
+    </predeflimitentry>
+    <predeflimitentry>
+      <label>Large print</label>
+      <limit>CLA01 = ""</limit>
+    </predeflimitentry>
+    <predeflimitentry>
+      <label>Electronic format</label>
+      <limit>CLA01 = SW</limit>
+    </predeflimitentry>
+    <predeflimitentry>
+      <label>Fiction</label>
+      <limit>CLA01 = B ?</limit>
+    </predeflimitentry>
+    <predeflimitentry>
+      <label>Books on cassette</label>
+      <limit>COL01 = AL</limit>
+    </predeflimitentry>
+    <predeflimitentry>
+      <label>Books on cassette</label>
+      <limit>COL01 = AL</limit>
+    </predeflimitentry>
+    <predeflimitentry>
+      <label>Biographies</label>
+      <limit>COL01 = CSW</limit>
+    </predeflimitentry>
+    <predeflimitentry>
+      <label>Quick Reads</label>
+      <limit>COL01 = JFB</limit>
+    </predeflimitentry>
+    <predeflimitentry>
+      <label>Quick Reads</label>
+      <limit>COL01 = JFB</limit>
+    </predeflimitentry>
+    <predeflimitentry>
+      <label>Reference stock</label>
+      <limit>COL01 = JFP</limit>
+    </predeflimitentry>
+    <predeflimitentry>
+      <label>Reference stock</label>
+      <limit>COL01 = JFP</limit>
+    </predeflimitentry>
+    <predeflimitentry>
+      <label>CD spoken word</label>
+      <limit>COL01 = HOU]</limit>
+    </predeflimitentry>
+    <predeflimitentry>
+      <label>CD spoken word</label>
+      <limit>COL01 = HOU]</limit>
+    </predeflimitentry>
+  </predefinedlimits>
+  <reservelocations></reservelocations>
+  <altprofiles>
+    <profiles>
+      <code>dial--4</code>
+      <desc>Newspaper Index</desc>
+    </profiles>
+    <profiles>
+      <code>dial--11</code>
+      <desc>Kids' Portal</desc>
+    </profiles>
+    <profiles>
+      <code>dial--3</code>
+      <desc>Rochdale Library Catalogue</desc>
+    </profiles>
+    <profiles>
+      <code>dial--12</code>
+      <desc>Local Studies</desc>
+    </profiles>
+    <selected>
+      <code>dial--3</code>
+      <desc>Rochdale Library Catalogue</desc>
+    </selected>
+  </altprofiles>
+  <viewingbooklist>false</viewingbooklist>
+  <lang>eng</lang>
+  <items>
+    <searchresults>
+      <header>
+        <col>
+          <label>Location</label>
+        </col>
+        <col>
+          <label>Class No.</label>
+        </col>
+        <col>
+          <label>Collection</label>
+        </col>
+        <col>
+          <label>Item Type</label>
+        </col>
+        <col>
+          <label>Status</label>
+        </col>
+      </header>
+      <results>
+        <row>
+          <sourceid>10.5.5.100@!dial</sourceid>
+          <cell>
+            <data>
+              <text>Castleton Library</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>FICTION</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>Horror novels</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>Adult F.Pbk</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>Being Held</text>
+            </data>
+          </cell>
+          <error></error>
+          <key>38024011855786</key>
+          <RESTRICTIONS>
+            <data>
+              <text>CAS</text>
+            </data>
+          </RESTRICTIONS>
+          <MIDSPINE>
+            <data>
+              <text>FICTION</text>
+            </data>
+          </MIDSPINE>
+          <AVAILABLETHRU>
+            <data>
+              <text>FICTION</text>
+            </data>
+          </AVAILABLETHRU>
+          <ITEMID>
+            <data>
+              <text>AFH</text>
+            </data>
+          </ITEMID>
+          <TEMPORARYLOCATION>
+            <data>
+              <text>AFP</text>
+            </data>
+          </TEMPORARYLOCATION>
+          <tablename></tablename>
+        </row>
+      </results>
+      <otherlocations>true</otherlocations>
+      <hitcount></hitcount>
+      <resultid>3</resultid>
+      <error></error>
+    </searchresults>
+  </items>
+  <youritems>
+    <hits>1</hits>
+    <view>
+      <npp>30</npp>
+      <currpage>0</currpage>
+      <start>1</start>
+      <end>1</end>
+    </view>
+    <pagenumbers>
+      <group>0</group>
+    </pagenumbers>
+  </youritems>
+  <view>items</view>
+  <yoursearch>
+    <searchdata>
+      <search>
+        <shortcut>AA</shortcut>
+        <term>KING STEPHEN</term>
+      </search>
+    </searchdata>
+    <sources>
+      <source>
+        <id>10.5.5.100@!dial</id>
+      </source>
+    </sources>
+    <sorts>
+      <sort>1100031</sort>
+    </sorts>
+    <staffonly></staffonly>
+    <searchdata>
+      <link>full%3D1100001%40%2121696%40%216</link>
+    </searchdata>
+    <searchdata>
+      <link>full%3D1100001%40%2121696%40%216</link>
+      <prevlink>full%3D1100001%40%21216224%40%215</prevlink>
+      <nextlink>full%3D1100001%40%2121846%40%217</nextlink>
+    </searchdata>
+    <hits>1</hits>
+    <totalhits>1</totalhits>
+    <view>
+      <npp>10</npp>
+      <currpage>0</currpage>
+      <start>1</start>
+      <end>1</end>
+    </view>
+    <pagenumbers>
+      <group>0</group>
+    </pagenumbers>
+  </yoursearch>
+  <lang>eng</lang>
+  <fullnonmarc>
+    <searchresults>
+      <header>
+        <col>
+          <label>Additional Authors</label>
+        </col>
+        <col>
+          <label>ISBN</label>
+        </col>
+        <col>
+          <label>ISSN</label>
+        </col>
+        <col>
+          <label>Class No</label>
+        </col>
+        <col>
+          <label>Series no.</label>
+        </col>
+        <col>
+          <label>Description</label>
+        </col>
+        <col>
+          <label>Edition</label>
+        </col>
+        <col>
+          <label>Notes</label>
+        </col>
+        <col>
+          <label>Contents</label>
+        </col>
+        <col>
+          <label>Notes</label>
+        </col>
+      </header>
+      <results>
+        <row>
+          <sourceid>10.5.5.100@!dial</sourceid>
+          <cell>
+            <data>
+              <text></text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text>0340364777</text>
+            </data>
+            <data>
+              <text>0450411435</text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text></text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text></text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text></text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text></text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text></text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text></text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text></text>
+            </data>
+          </cell>
+          <cell>
+            <data>
+              <text></text>
+            </data>
+          </cell>
+          <error></error>
+          <isbn>0340364777</isbn>
+          <key>21696</key>
+          <marcleader7>m</marcleader7>
+          <TITLE>
+            <data>
+              <text>IT</text>
+              <link>
+                <func>search=TL@!IT</func>
+              </link>
+            </data>
+          </TITLE>
+          <AUTHOR>
+            <data>
+              <text>KING STEPHEN</text>
+            </data>
+          </AUTHOR>
+          <PUBLISHER>
+            <data>
+              <text>HODDER</text>
+            </data>
+          </PUBLISHER>
+          <PUBDATE>
+            <data>
+              <text>1986</text>
+            </data>
+          </PUBDATE>
+          <SUBJECT>
+            <data>
+              <text></text>
+              <link>
+                <func>search=SW@!</func>
+              </link>
+            </data>
+          </SUBJECT>
+          <SERIES>
+            <data>
+              <text></text>
+              <link>
+                <func>search=SER@!</func>
+              </link>
+            </data>
+          </SERIES>
+          <URL856>
+            <data>
+              <text></text>
+              <link>
+                <url></url>
+              </link>
+            </data>
+          </URL856>
+          <tablename>BIB</tablename>
+        </row>
+      </results>
+      <hitcount></hitcount>
+      <resultid>3</resultid>
+      <error></error>
+    </searchresults>
+  </fullnonmarc>
+  <bibinfo>
+    <subscriptionsummary>false</subscriptionsummary>
+    <volumes>false</volumes>
+    <closedstack>false</closedstack>
+    <items>true</items>
+    <error></error>
+  </bibinfo>
+  <group>
+    <pools>
+      <id>dial--3</id>
+      <datapool>
+        <emailreplyto></emailreplyto>
+        <emailpostmaster></emailpostmaster>
+        <source>
+          <sourcelabel>Rochdale Library Service</sourcelabel>
+          <id>10.5.5.100@!dial</id>
+          <type>202</type>
+          <requesttype>1</requesttype>
+          <loginrequired>false</loginrequired>
+          <maxhitlimit>100000</maxhitlimit>
+          <sortviewnum>1100031</sortviewnum>
+          <sourcenum>1100002</sourcenum>
+        </source>
+        <opensource>
+          <source>
+            <sorthitlimit>0</sorthitlimit>
+            <limitmaxhitlimit>0</limitmaxhitlimit>
+            <sortviewnum>1100031</sortviewnum>
+            <id>10.5.5.100@!dial</id>
+            <opened>true</opened>
+            <error></error>
+          </source>
+        </opensource>
+      </datapool>
+    </pools>
+    <size>1</size>
+  </group>
+  <returnURL>
+  http://libraries.rochdale.gov.uk/ipac20/ipac.jsp?session=13056646D2K1U.16957&amp;profile=dial--3&amp;uri=link=1100003@!S67523@!1100001@!1100002&amp;aspect=basic_search&amp;menu=search&amp;ri=1&amp;source=10.5.5.100@!dial&amp;term=KING+STEPHEN&amp;index=AA</returnURL>
+  <method>GET</method>
+</searchresponse>

@@ -1,0 +1,630 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<patronpersonalresponse>
+  <version>3.20d_75.00</version>
+  <session>E305JR8704012.309</session>
+  <profile>adm</profile>
+  <lang>eng</lang>
+  <expirepage>300</expirepage>
+  <illurl></illurl>
+  <httpserver>
+    <servername>catalog.lcpl.lib.va.us</servername>
+    <host>catalog.lcpl.lib.va.us</host>
+    <port>80</port>
+  </httpserver>
+  <browser>
+    <type>unknown</type>
+    <majorversion></majorversion>
+    <minorversion></minorversion>
+    <os>unknown</os>
+    <addr>10.255.255.107</addr>
+  </browser>
+  <bookbag>
+    <size>3</size>
+  </bookbag>
+  <security>
+    <auth>true</auth>
+    <name>HESS, AMANDA ELIZABETH</name>
+    <patronid>239660</patronid>
+    <address>21747 OMEARA TER APT 204 , ASHBURN VA 20147</address>
+    <emailaddress>JARIRIS1@YAHOO.COM</emailaddress>
+    <phone>304-839-8264</phone>
+    <maxbibs>500</maxbibs>
+  </security>
+  <toolbar>
+    <active_tab>account</active_tab>
+    <bgcolor>#1B5790</bgcolor>
+    <bg>null</bg>
+    <userlimits></userlimits>
+    <tab>
+      <name>Catalog;Search</name>
+      <alt>Catalog Search</alt>
+      <value>search</value>
+      <active>false</active>
+    </tab>
+    <tab>
+      <name>My Library;Card</name>
+      <alt>View my account information</alt>
+      <value>account</value>
+      <active>true</active>
+    </tab>
+    <tab>
+      <name>eBooks &amp;;eAudios</name>
+      <alt>eBooks &amp; eAudios</alt>
+      <value>tab19</value>
+      <href>http://library.loudoun.gov/Default.aspx?tabid=43</href>
+      <active>false</active>
+    </tab>
+    <tab>
+      <name>What to; Read Page</name>
+      <alt>What to Read Page</alt>
+      <value>tab38</value>
+      <href>
+      http://library.loudoun.gov/Default.aspx?tabid=269</href>
+      <active>false</active>
+    </tab>
+    <tab>
+      <name>Databases &amp;; Homework</name>
+      <alt>Loudoun County Public Library Databases and Homework
+      Help</alt>
+      <value>home</value>
+      <href>http://library.loudoun.gov/Default.aspx?tabid=41</href>
+      <active>false</active>
+    </tab>
+    <tab>
+      <name>Ask A;Librarian</name>
+      <alt>Ask A Librarian</alt>
+      <value>tab18</value>
+      <href>http://library.loudoun.gov/Default.aspx?tabid=94</href>
+      <active>false</active>
+    </tab>
+    <tab>
+      <name>Suggest; A Title</name>
+      <alt>Suggest A Title</alt>
+      <value>tab22</value>
+      <href>
+      http://library.loudoun.gov/Default.aspx?tabid=226</href>
+      <active>false</active>
+    </tab>
+    <tab>
+      <name>Library;Info</name>
+      <alt>Loudoun County Public Library Information</alt>
+      <value>basic</value>
+      <active>false</active>
+    </tab>
+    <tab>
+      <name>Online;Payment</name>
+      <alt>Online Payment</alt>
+      <value>tab58</value>
+      <href>
+      http://library.loudoun.gov/Default.aspx?tabid=499</href>
+      <active>false</active>
+    </tab>
+    <submenu>
+      <name>My Account; Overview</name>
+      <alt>My Account Overview</alt>
+      <value>overview</value>
+      <active>false</active>
+    </submenu>
+    <submenu>
+      <name>Checked Out;(RENEW Here!)</name>
+      <alt>Checked Out - Renew Here</alt>
+      <value>itemsout</value>
+      <active>true</active>
+    </submenu>
+    <submenu>
+      <name>My Holds</name>
+      <alt>My Holds</alt>
+      <value>holds</value>
+      <active>false</active>
+    </submenu>
+    <submenu>
+      <name>Account Status</name>
+      <alt>Account Status</alt>
+      <value>blocks</value>
+      <active>false</active>
+    </submenu>
+    <submenu>
+      <name>My Contact; Information</name>
+      <alt>My Contact Information</alt>
+      <value>info</value>
+      <active>false</active>
+    </submenu>
+    <submenu>
+      <name>Email Notification</name>
+      <alt>Email Notification</alt>
+      <value>subtab78</value>
+      <href>http://library.loudoun.gov/Default.aspx?tabid=96</href>
+      <active>false</active>
+    </submenu>
+    <bestseller></bestseller>
+    <help>checkedout.htm</help>
+    <logoinfo>
+      <logo>/hipres/logos/finescatalogimage.gif</logo>
+      <homepageurl>http://library.loudoun.gov/fines</homepageurl>
+      <homepagelinktext></homepagelinktext>
+    </logoinfo>
+  </toolbar>
+  <active_aspect>itemsout</active_aspect>
+  <active_menu>
+    <itemsout>
+      <value>itemsout</value>
+      <desc>Checked Out</desc>
+      <explanation></explanation>
+    </itemsout>
+  </active_menu>
+  <aspectlist></aspectlist>
+  <operators>
+    <op_and>AND</op_and>
+    <op_or>OR</op_or>
+    <op_not>NOT</op_not>
+    <op_xor>XOR</op_xor>
+  </operators>
+  <predefsortlist>
+    <sortentry>
+      <label>Date - Newest First</label>
+      <sortview>3100014</sortview>
+    </sortentry>
+    <sortentry>
+      <label>Date - Oldest First</label>
+      <sortview>3100028</sortview>
+    </sortentry>
+    <sortentry>
+      <label>Title</label>
+      <sortview>3100015</sortview>
+    </sortentry>
+    <sortentry>
+      <label>Authors</label>
+      <sortview>3100012</sortview>
+    </sortentry>
+    <sortentry>
+      <label>Type of Material</label>
+      <sortview>3100013</sortview>
+    </sortentry>
+  </predefsortlist>
+  <predefinedlimits>
+    <limitbox>
+      <desc>By Collection or Media</desc>
+      <predeflimitentry>
+        <label>ADULT MATERIALS</label>
+        <limit>CO01 = gp_ADULT</limit>
+      </predeflimitentry>
+      <predeflimitentry>
+        <label>ADULT BOOKS</label>
+        <limit>CO01 = gp_ABOOK</limit>
+      </predeflimitentry>
+      <predeflimitentry>
+        <label>BOOKS</label>
+        <limit>IT01 = it_book</limit>
+      </predeflimitentry>
+      <predeflimitentry>
+        <label>E-BOOKS</label>
+        <limit>CO01 = co_EBOOK</limit>
+      </predeflimitentry>
+      <predeflimitentry>
+        <label>ADULT NON-BOOK</label>
+        <limit>CO01 = gp_ANONB</limit>
+      </predeflimitentry>
+      <predeflimitentry>
+        <label>AUDIOBOOKS</label>
+        <limit>CO01 = gp_CDBK</limit>
+      </predeflimitentry>
+      <predeflimitentry>
+        <label>PORTABLE AUDIOBOOKS</label>
+        <limit>IT01 = it_PAB</limit>
+      </predeflimitentry>
+      <predeflimitentry>
+        <label>DOWNLOADABLE E-AUDIO</label>
+        <limit>CO01 = co_EAUDIO</limit>
+      </predeflimitentry>
+      <predeflimitentry>
+        <label>CDS</label>
+        <limit>IT01 = it_CD</limit>
+      </predeflimitentry>
+      <predeflimitentry>
+        <label>DVDS</label>
+        <limit>IT01 = it_DVD</limit>
+      </predeflimitentry>
+      <predeflimitentry>
+        <label>DVDS and VIDEOS</label>
+        <limit>CO01 = gp_DDVO</limit>
+      </predeflimitentry>
+      <predeflimitentry>
+        <label>CHILDREN'S BOOKS</label>
+        <limit>CO01 = gp_CHBK</limit>
+      </predeflimitentry>
+      <predeflimitentry>
+        <label>CHILDREN'S NONFIC BOOKS</label>
+        <limit>CO01 = gp_CHNFBK</limit>
+      </predeflimitentry>
+      <predeflimitentry>
+        <label>EASY MATERIALS</label>
+        <limit>CO01 = gp_EASY</limit>
+      </predeflimitentry>
+      <predeflimitentry>
+        <label>EASY READER MATERIALS</label>
+        <limit>CO01 = gp_ER</limit>
+      </predeflimitentry>
+      <predeflimitentry>
+        <label>JUVENILE MATERIALS</label>
+        <limit>CO01 = gp_JUV</limit>
+      </predeflimitentry>
+      <predeflimitentry>
+        <label>YOUNG PEOPLE'S MATERIALS</label>
+        <limit>CO01 = gp_YP</limit>
+      </predeflimitentry>
+      <predeflimitentry>
+        <label>LARGE PRINT BOOKS</label>
+        <limit>CO01 = gp_LP</limit>
+      </predeflimitentry>
+      <predeflimitentry>
+        <label>MAGAZINES</label>
+        <limit>IT01 = it_MAG</limit>
+      </predeflimitentry>
+      <predeflimitentry>
+        <label>NEWSPAPERS</label>
+        <limit>CO01 = co_NEWS</limit>
+      </predeflimitentry>
+      <predeflimitentry>
+        <label>VIDEO GAMES</label>
+        <limit>IT01 = it_VGAME</limit>
+      </predeflimitentry>
+    </limitbox>
+    <limitbox>
+      <desc>By Location</desc>
+      <predeflimitentry>
+        <label>LIBRARY ADMINISTRATION</label>
+        <limit>LO01 = ADM</limit>
+      </predeflimitentry>
+      <predeflimitentry>
+        <label>ASHBURN LIBRARY</label>
+        <limit>LO01 = ASH</limit>
+      </predeflimitentry>
+      <predeflimitentry>
+        <label>CASCADES LIBRARY</label>
+        <limit>LO01 = CAS</limit>
+      </predeflimitentry>
+      <predeflimitentry>
+        <label>LOVETTSVILLE LIBRARY</label>
+        <limit>LO01 = LOV</limit>
+      </predeflimitentry>
+      <predeflimitentry>
+        <label>MIDDLEBURG LIBRARY</label>
+        <limit>LO01 = MID</limit>
+      </predeflimitentry>
+      <predeflimitentry>
+        <label>OUTREACH SERVICES</label>
+        <limit>LO01 = OUTR</limit>
+      </predeflimitentry>
+      <predeflimitentry>
+        <label>PURCELLVILLE LIBRARY</label>
+        <limit>LO01 = PUR</limit>
+      </predeflimitentry>
+      <predeflimitentry>
+        <label>RUST LIBRARY</label>
+        <limit>LO01 = RUST</limit>
+      </predeflimitentry>
+      <predeflimitentry>
+        <label>STERLING LIBRARY</label>
+        <limit>LO01 = STR</limit>
+      </predeflimitentry>
+      <predeflimitentry>
+        <label>T BALCH - LOCAL HIST. &amp; GENEALOGY</label>
+        <limit>LO01 = TBL</limit>
+      </predeflimitentry>
+    </limitbox>
+    <limitbox>
+      <desc>By Language</desc>
+      <predeflimitentry>
+        <label>Arabic</label>
+        <limit>LA01 = la_ara</limit>
+      </predeflimitentry>
+      <predeflimitentry>
+        <label>Chinese</label>
+        <limit>LA01 = la_chi</limit>
+      </predeflimitentry>
+      <predeflimitentry>
+        <label>English</label>
+        <limit>LA01 = la_eng</limit>
+      </predeflimitentry>
+      <predeflimitentry>
+        <label>French</label>
+        <limit>LA01 = la_fre</limit>
+      </predeflimitentry>
+      <predeflimitentry>
+        <label>German</label>
+        <limit>LA01 = la_ger</limit>
+      </predeflimitentry>
+      <predeflimitentry>
+        <label>Hebrew</label>
+        <limit>LA01 = la_heb</limit>
+      </predeflimitentry>
+      <predeflimitentry>
+        <label>Italian</label>
+        <limit>LA01 = la_ita</limit>
+      </predeflimitentry>
+      <predeflimitentry>
+        <label>Japanese</label>
+        <limit>LA01 = la_jpn</limit>
+      </predeflimitentry>
+      <predeflimitentry>
+        <label>Korean</label>
+        <limit>LA01 = la_kor</limit>
+      </predeflimitentry>
+      <predeflimitentry>
+        <label>Latin</label>
+        <limit>LA01 = la_lat</limit>
+      </predeflimitentry>
+      <predeflimitentry>
+        <label>Polish</label>
+        <limit>LA01 = la_pol</limit>
+      </predeflimitentry>
+      <predeflimitentry>
+        <label>Portuguese</label>
+        <limit>LA01 = la_por</limit>
+      </predeflimitentry>
+      <predeflimitentry>
+        <label>Russian</label>
+        <limit>LA01 = la_rus</limit>
+      </predeflimitentry>
+      <predeflimitentry>
+        <label>Spanish</label>
+        <limit>LA01 = la_spa</limit>
+      </predeflimitentry>
+      <predeflimitentry>
+        <label>Yiddish</label>
+        <limit>LA01 = la_yid</limit>
+      </predeflimitentry>
+    </limitbox>
+  </predefinedlimits>
+  <reservelocations></reservelocations>
+  <altprofiles>
+    <profiles>
+      <code>adm</code>
+      <lang>eng</lang>
+      <desc>LCPL Web Catalog</desc>
+    </profiles>
+    <profiles>
+      <code>adm-ada</code>
+      <lang>eng</lang>
+      <desc>LCPL Mobile Catalog (Text Only)</desc>
+    </profiles>
+    <selected>
+      <code>adm</code>
+      <lang>eng</lang>
+      <desc>LCPL Web Catalog</desc>
+    </selected>
+  </altprofiles>
+  <group>
+    <pools>
+      <datapool>
+        <emailreplyto>lcplcatalog@loudoun.gov</emailreplyto>
+        <emailpostmaster>lcplcatalog@loudoun.gov</emailpostmaster>
+        <source>
+          <sourcelabel>Loudoun County Public Library</sourcelabel>
+          <id>~!horizon_public</id>
+          <type>200</type>
+          <requesttype>1</requesttype>
+          <loginrequired>false</loginrequired>
+          <maxhitlimit>100000</maxhitlimit>
+          <sortviewnum>3100014</sortviewnum>
+          <sourcenum>3100001</sourcenum>
+        </source>
+      </datapool>
+    </pools>
+  </group>
+  <itemsoutdata>
+    <sortby>sorttitle</sortby>
+    <renewalsallowed>true</renewalsallowed>
+    <totalcount>4</totalcount>
+    <totaloverdue>1</totaloverdue>
+    <totallost>0</totallost>
+    <itemout>
+      <sourceid>~!horizon_public</sourceid>
+      <cell>
+        <data>
+          <text>Santa Monica, CA : A &amp; M Records, p2003.</text>
+        </data>
+      </cell>
+      <error></error>
+      <small_ec_image_url>
+      http%3A%2F%2Fwww.syndetics.com%2Findex.aspx%3Ftype%3Dxw12%26isbn%3D%2FSC.GIF%26client%3Dloudp%26upc%3D%26oclc%3D</small_ec_image_url>
+      <medium_ec_image_url>
+      http%3A%2F%2Fwww.syndetics.com%2Findex.aspx%3Ftype%3Dxw12%26isbn%3D%2FMC.GIF%26client%3Dloudp%26upc%3D%26oclc%3D</medium_ec_image_url>
+      <large_ec_image_url>
+      http%3A%2F%2Fwww.syndetics.com%2Findex.aspx%3Ftype%3Dxw12%26isbn%3D%2FLC.GIF%26client%3Dloudp%26upc%3D%26oclc%3D</large_ec_image_url>
+      <key>416612</key>
+      <ikey>1549703</ikey>
+      <marcleader7>m</marcleader7>
+      <TITLE>
+        <data>
+          <text>Elephunk</text>
+          <link>
+            <func>full=3100001~!416612~!0</func>
+          </link>
+        </data>
+      </TITLE>
+      <AUTHOR>
+        <data>
+          <text>Black Eyed Peas (Musical group)</text>
+        </data>
+      </AUTHOR>
+      <CALL>
+        <data>
+          <text>RAP/HIP-HOP BLA</text>
+        </data>
+      </CALL>
+      <dimrow>true</dimrow>
+      <tablename></tablename>
+      <my_list>false</my_list>
+      <disptitle>Elephunk</disptitle>
+      <sorttitle>ELEPHUNK</sorttitle>
+      <location>ASH</location>
+      <holdingkey>31696131983999</holdingkey>
+      <numrenewals>0</numrenewals>
+      <ckodate>04/20/2011</ckodate>
+      <rawckodate>15084</rawckodate>
+      <duedate>05/04/2011</duedate>
+      <rawduedate>15098</rawduedate>
+      <duetime></duetime>
+    </itemout>
+    <itemout>
+      <sourceid>~!horizon_public</sourceid>
+      <cell>
+        <data>
+          <text>Prince Frederick, MD : Recorded Books,
+          p2009.</text>
+        </data>
+      </cell>
+      <error></error>
+      <isbn>9781436178518</isbn>
+      <small_ec_image_url>
+      http%3A%2F%2Fwww.syndetics.com%2Findex.aspx%3Ftype%3Dxw12%26isbn%3D9781436178518%2FSC.GIF%26client%3Dloudp%26upc%3D%26oclc%3D</small_ec_image_url>
+      <medium_ec_image_url>
+      http%3A%2F%2Fwww.syndetics.com%2Findex.aspx%3Ftype%3Dxw12%26isbn%3D9781436178518%2FMC.GIF%26client%3Dloudp%26upc%3D%26oclc%3D</medium_ec_image_url>
+      <large_ec_image_url>
+      http%3A%2F%2Fwww.syndetics.com%2Findex.aspx%3Ftype%3Dxw12%26isbn%3D9781436178518%2FLC.GIF%26client%3Dloudp%26upc%3D%26oclc%3D</large_ec_image_url>
+      <key>607399</key>
+      <ikey>1457987</ikey>
+      <marcleader7>m</marcleader7>
+      <TITLE>
+        <data>
+          <text>American rust a novel /</text>
+          <link>
+            <func>full=3100001~!607399~!1</func>
+          </link>
+        </data>
+      </TITLE>
+      <AUTHOR>
+        <data>
+          <text>Meyer, Philipp, 1974-</text>
+        </data>
+        <data>
+          <text>Stechschulte, Tom.</text>
+        </data>
+      </AUTHOR>
+      <CALL>
+        <data>
+          <text>CD FICTION MEY</text>
+        </data>
+      </CALL>
+      <dimrow>true</dimrow>
+      <tablename></tablename>
+      <my_list>false</my_list>
+      <disptitle>American rust a novel /</disptitle>
+      <sorttitle>AMERICAN RUST A NOVEL /</sorttitle>
+      <location>ASH</location>
+      <holdingkey>31696130555731</holdingkey>
+      <numrenewals>0</numrenewals>
+      <ckodate>05/03/2011</ckodate>
+      <rawckodate>15097</rawckodate>
+      <duedate>05/17/2011</duedate>
+      <rawduedate>15111</rawduedate>
+      <duetime></duetime>
+    </itemout>
+    <itemout>
+      <sourceid>~!horizon_public</sourceid>
+      <cell>
+        <data>
+          <text>New York : Random House, c2011.</text>
+        </data>
+      </cell>
+      <error></error>
+      <isbn>9781400068722</isbn>
+      <small_ec_image_url>
+      http%3A%2F%2Fwww.syndetics.com%2Findex.aspx%3Ftype%3Dxw12%26isbn%3D9781400068722%2FSC.GIF%26client%3Dloudp%26upc%3D%26oclc%3D</small_ec_image_url>
+      <medium_ec_image_url>
+      http%3A%2F%2Fwww.syndetics.com%2Findex.aspx%3Ftype%3Dxw12%26isbn%3D9781400068722%2FMC.GIF%26client%3Dloudp%26upc%3D%26oclc%3D</medium_ec_image_url>
+      <large_ec_image_url>
+      http%3A%2F%2Fwww.syndetics.com%2Findex.aspx%3Ftype%3Dxw12%26isbn%3D9781400068722%2FLC.GIF%26client%3Dloudp%26upc%3D%26oclc%3D</large_ec_image_url>
+      <key>649496</key>
+      <ikey>1655303</ikey>
+      <marcleader7>m</marcleader7>
+      <TITLE>
+        <data>
+          <text>Blood, bones, &amp; butter : the inadvertent
+          education of a reluctant chef /</text>
+          <link>
+            <func>full=3100001~!649496~!2</func>
+          </link>
+        </data>
+      </TITLE>
+      <AUTHOR>
+        <data>
+          <text>Hamilton, Gabrielle.</text>
+        </data>
+      </AUTHOR>
+      <CALL>
+        <data>
+          <text>641.5092 HAM</text>
+        </data>
+      </CALL>
+      <tablename></tablename>
+      <my_list>false</my_list>
+      <disptitle>Blood, bones, &amp; butter : the inadvertent
+      education of a reluctant chef /</disptitle>
+      <sorttitle>BLOOD, BONES, &amp; BUTTER : THE INADVERTENT
+      EDUCATION OF A RELUCTANT CHEF /</sorttitle>
+      <location>PUR</location>
+      <holdingkey>31696134426384</holdingkey>
+      <numrenewals>0</numrenewals>
+      <ckodate>05/03/2011</ckodate>
+      <rawckodate>15097</rawckodate>
+      <duedate>05/17/2011</duedate>
+      <rawduedate>15111</rawduedate>
+      <duetime></duetime>
+    </itemout>
+    <itemout>
+      <sourceid>~!horizon_public</sourceid>
+      <cell>
+        <data>
+          <text>New York : Tor, 2004.</text>
+        </data>
+      </cell>
+      <error></error>
+      <isbn>0765322889</isbn>
+      <small_ec_image_url>
+      http%3A%2F%2Fwww.syndetics.com%2Findex.aspx%3Ftype%3Dxw12%26isbn%3D0765322889%2FSC.GIF%26client%3Dloudp%26upc%3D%26oclc%3D</small_ec_image_url>
+      <medium_ec_image_url>
+      http%3A%2F%2Fwww.syndetics.com%2Findex.aspx%3Ftype%3Dxw12%26isbn%3D0765322889%2FMC.GIF%26client%3Dloudp%26upc%3D%26oclc%3D</medium_ec_image_url>
+      <large_ec_image_url>
+      http%3A%2F%2Fwww.syndetics.com%2Findex.aspx%3Ftype%3Dxw12%26isbn%3D0765322889%2FLC.GIF%26client%3Dloudp%26upc%3D%26oclc%3D</large_ec_image_url>
+      <key>609847</key>
+      <ikey>1451192</ikey>
+      <marcleader7>m</marcleader7>
+      <TITLE>
+        <data>
+          <text>Gardens of the moon /</text>
+          <link>
+            <func>full=3100001~!609847~!3</func>
+          </link>
+        </data>
+      </TITLE>
+      <AUTHOR>
+        <data>
+          <text>Erikson, Steven.</text>
+        </data>
+      </AUTHOR>
+      <CALL>
+        <data>
+          <text>FICTION ERI</text>
+        </data>
+      </CALL>
+      <dimrow>true</dimrow>
+      <tablename></tablename>
+      <my_list>false</my_list>
+      <disptitle>Gardens of the moon /</disptitle>
+      <sorttitle>GARDENS OF THE MOON /</sorttitle>
+      <location>RUST</location>
+      <holdingkey>31696118686177</holdingkey>
+      <numrenewals>1</numrenewals>
+      <ckodate>04/20/2011</ckodate>
+      <rawckodate>15084</rawckodate>
+      <duedate>05/26/2011</duedate>
+      <rawduedate>15120</rawduedate>
+      <duetime></duetime>
+    </itemout>
+    <resultid>1</resultid>
+    <resultid>1</resultid>
+  </itemsoutdata>
+  <method>GET</method>
+</patronpersonalresponse>
