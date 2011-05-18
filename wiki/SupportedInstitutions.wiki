@@ -1,0 +1,13 @@
+#summary Which libraries we explicitly or implicitly support
+#labels Phase-Support,Featured
+
+= Introduction =
+
+While there are a great many libraries in the world, they mostly seem to use a handful of library systems. We've done our best to allow integration with those systems in a way that is flexible and easily extendable.
+
+
+= Details =
+
+||*Library Name*||*State*||*Catalog URL*||*System*||*Notes*||
+||Arlington Public||VA||http://libsys.arlingtonva.us/||WebPac||||
+||Columbus Metropolitan||OH||http://catalog.columbuslibrary.org/||AquaBrowser||||
