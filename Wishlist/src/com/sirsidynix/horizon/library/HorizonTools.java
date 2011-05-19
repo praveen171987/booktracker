@@ -42,14 +42,15 @@ public class HorizonTools {
 	 * @param isbnIndex the code used to 
 	 * @param isbn
 	 */
-	public String searchIsbnForStatus(String url, String isbnIndex, String isbn) {
+	public HorizonStatus searchIsbnForStatus(String url, String isbnIndex, String isbn) {
 		// find the "index" keyword for the library, if not provided
+	  String index = new String(isbnIndex);
 		if (isEmpty(isbnIndex)) {
-			isbnIndex = findIsbnSearchIndex(url);
+		  index = findIsbnSearchIndex(url);
 		}
 		List<NameValuePair> parameters = new ArrayList<NameValuePair>();
 		// index, code that determines the search type that will be executed
-		parameters.add(new BasicNameValuePair("index", isbnIndex));
+		parameters.add(new BasicNameValuePair("index", index));
 		// term, the search value
 		parameters.add(new BasicNameValuePair("term", isbn));
 		// items per page, effects the number of searchresults/results/row items shown on a page, set to a perceived large enough number that all entries will be on a single page
@@ -64,7 +65,7 @@ public class HorizonTools {
 		// TODO: handle case when more than 1 search result happens
 		NodeList nodeList = XPathUtil.getNodeListFromXPath(element,"/searchresponse/items/searchresults/results/row");
 		String requestsColumn = XPathUtil.getStringFromXPath(element, "count(/searchresponse/fullnonmarc/searchresults/header/col[label='Requests']/preceding-sibling::*)");
-		String waitStatus = "ERROR";
+		HorizonStatus status = HorizonStatus.ERROR;
 		int requests = 0;
 		int copies = nodeList.getLength();
 		try {
@@ -79,15 +80,15 @@ public class HorizonTools {
 			// either the 'columnNum' or the 'requests' had invalid numbers, so move on with the default value
 		}
 		if (requests == 0 && copies == 0) {
-			waitStatus = "NO_COPIES"; // an entry exists, but no copies exist
+			status = HorizonStatus.NO_COPIES; // an entry exists, but no copies exist
 		} else if (requests <= 0 && copies > 0) {
-			waitStatus = "AVAILABLE";
+			status = HorizonStatus.AVAILABLE;
 		} else if (requests > 0 && requests < copies) {
-			waitStatus = "SHORT_WAIT";
+			status = HorizonStatus.SHORT_WAIT;
 		} else if (requests > 0 && copies <= requests && requests <= 2*copies) {
-			waitStatus = "WAIT";
+			status = HorizonStatus.WAIT;
 		} else if (requests >0 && requests > 2*copies) {
-			waitStatus = "LONG_WAIT";
+			status = HorizonStatus.LONG_WAIT;
 		}
 
 		NodeList errorList = XPathUtil.getNodeListFromXPath(element, "//error");
@@ -100,12 +101,12 @@ public class HorizonTools {
 
 			StringBuilder b = new StringBuilder().append(errorType).append(errorSubject).append(errorReason).append(errorMessage);
 			if (!isEmpty(b.toString())) {
-				waitStatus = "NO_MATCH";
+				status = HorizonStatus.NO_MATCH;
 				//System.out.println(b.toString()); // for debugging
 			}
 		}
 		//System.out.println("requests="+requests+" copies="+copies+" wait status: "+waitStatus); // for debugging
-		return waitStatus;
+		return status;
 	}
 	
 	/**
@@ -179,7 +180,7 @@ public class HorizonTools {
 	 * TODO: this method may be obsolete if the changes to requestLogin works
 	 */
 	public void gatherLibraryAccountInfo(String url, String username, String password) {
-		String sessionId = requestSessionId(url, username, password);
+		String sessionId = requestSessionId(url);
 
 		boolean loggedIn = requestLogin(url, username, password, sessionId);
 		
@@ -245,7 +246,7 @@ public class HorizonTools {
 	 * NOTE: not fit for consumption yet
 	 * The key to getting a sessionId that will allow logging in is the 'auth' parameter
 	 */
-	public String requestSessionId(String url, String username, String password) {
+	public String requestSessionId(String url) {
 		List<NameValuePair> parameters = new ArrayList<NameValuePair>();
 		parameters.add(new BasicNameValuePair("auth", "true"));
 		parameters.add(new BasicNameValuePair("GetXML", "true"));
@@ -565,60 +566,60 @@ public class HorizonTools {
 	public void showSearchResults(Element element) {
 		NodeList nodeList = XPathUtil.getNodeListFromXPath(element,"/searchresponse/items/searchresults/results/row");
 		String requestsColumn = XPathUtil.getStringFromXPath(element, "count(/searchresponse/fullnonmarc/searchresults/header/col[label='Requests']/preceding-sibling::*)+1");
+		int requests = 0;
 		try {
 			int columnNum = Integer.parseInt(requestsColumn);
 			String requestsStr = XPathUtil.getStringFromXPath(element, "/searchresponse/fullnonmarc/searchresults/results/row/cell["+columnNum+"]/data/text");
 			System.out.println("requests="+requestsStr);
-			int requests = Integer.parseInt(requestsStr);
-			if (nodeList != null) {
-				int copies = nodeList.getLength();
-				System.out.println("response: copies="+copies);
-				String waitStatus = "UNKNOWN";
-				if (requests <= 0 && copies > 0) {
-					waitStatus = "AVAILABLE";
-				} else if (requests > 0 && requests < copies) {
-					waitStatus = "SHORT_WAIT";
-				} else if (requests > 0 && copies <= requests && requests <= 2*copies) {
-					waitStatus = "WAIT";
-				} else if (requests >0 && requests > 2*copies) {
-					waitStatus = "LONG_WAIT";
-				}
-				System.out.println("wait status: "+waitStatus);
-				
+			requests = Integer.parseInt(requestsStr);
+    } catch (NumberFormatException e) {
+      // ignore
+    }
+		if (nodeList != null) {
+			int copies = nodeList.getLength();
+			System.out.println("response: copies="+copies);
+			String waitStatus = "UNKNOWN";
+			if (requests <= 0 && copies > 0) {
+				waitStatus = "AVAILABLE";
+			} else if (requests > 0 && requests < copies) {
+				waitStatus = "SHORT_WAIT";
+			} else if (requests > 0 && copies <= requests && requests <= 2*copies) {
+				waitStatus = "WAIT";
+			} else if (requests >0 && requests > 2*copies) {
+				waitStatus = "LONG_WAIT";
 			}
-		} catch (NumberFormatException e) {
-			// ignore
-		}
-		// circulation status list
-		for (int i = 0; i < nodeList.getLength(); i++) {
-			Node node = nodeList.item(i);
-			String key = XPathUtil.getStringFromXPath(node, "key");
-			String callNumber = XPathUtil.getStringFromXPath(node, "CALLNUMBER/data/text");
-			String copyNumber = XPathUtil.getStringFromXPath(node, "COPYNUMBER/data/text");
-			String midspine = XPathUtil.getStringFromXPath(node, "MIDSPINE/data/text");
-			String restrictions = XPathUtil.getStringFromXPath(node, "RESTRICTIONS/data/text");
-			String availableThru = XPathUtil.getStringFromXPath(node, "AVAILABLETHRU/data/text");
-			String availabilityDate = XPathUtil.getStringFromXPath(node, "AVAILABILITYDATE/data/text");
-			String shelvingData = XPathUtil.getStringFromXPath(node, "SHELVINGDATA/data/text");
-			String shelvingLocation = XPathUtil.getStringFromXPath(node, "SHELVINGLOCATION/data/text");
-			String localLocation = XPathUtil.getStringFromXPath(node, "LOCALLOCATION/data/text");
-			String temporaryLocation = XPathUtil.getStringFromXPath(node, "TEMPORARYLOCATION/data/text");
-			String publicNote = XPathUtil.getStringFromXPath(node, "PUBLICNOTE/data/text");
-			String itemId = XPathUtil.getStringFromXPath(node, "ITEMID/data/text");
-			System.out.println("response: Item #" + i);
-			System.out.println("response: key=" + key);
-			System.out.println("response: restrictions="+ restrictions);
-			System.out.println("response: availableThru=" + availableThru);
-			System.out.println("response: availabilityDate=" + availabilityDate);
-			System.out.println("response: midspine=" + midspine);
-			System.out.println("response: callNumber=" + callNumber);
-			System.out.println("response: copyNumber=" + copyNumber);
-			System.out.println("response: shelvingData=" + shelvingData);
-			System.out.println("response: shelvingLocation=" + shelvingLocation);
-			System.out.println("response: localLocation=" + localLocation);
-			System.out.println("response: publicNote=" + publicNote);
-			System.out.println("response: itemId=" + itemId);
-			System.out.println("response: temporaryLocation=" + temporaryLocation);
+			System.out.println("wait status: "+waitStatus);
+			// circulation status list
+	    for (int i = 0; i < nodeList.getLength(); i++) {
+	      Node node = nodeList.item(i);
+	      String key = XPathUtil.getStringFromXPath(node, "key");
+	      String callNumber = XPathUtil.getStringFromXPath(node, "CALLNUMBER/data/text");
+	      String copyNumber = XPathUtil.getStringFromXPath(node, "COPYNUMBER/data/text");
+	      String midspine = XPathUtil.getStringFromXPath(node, "MIDSPINE/data/text");
+	      String restrictions = XPathUtil.getStringFromXPath(node, "RESTRICTIONS/data/text");
+	      String availableThru = XPathUtil.getStringFromXPath(node, "AVAILABLETHRU/data/text");
+	      String availabilityDate = XPathUtil.getStringFromXPath(node, "AVAILABILITYDATE/data/text");
+	      String shelvingData = XPathUtil.getStringFromXPath(node, "SHELVINGDATA/data/text");
+	      String shelvingLocation = XPathUtil.getStringFromXPath(node, "SHELVINGLOCATION/data/text");
+	      String localLocation = XPathUtil.getStringFromXPath(node, "LOCALLOCATION/data/text");
+	      String temporaryLocation = XPathUtil.getStringFromXPath(node, "TEMPORARYLOCATION/data/text");
+	      String publicNote = XPathUtil.getStringFromXPath(node, "PUBLICNOTE/data/text");
+	      String itemId = XPathUtil.getStringFromXPath(node, "ITEMID/data/text");
+	      System.out.println("response: Item #" + i);
+	      System.out.println("response: key=" + key);
+	      System.out.println("response: restrictions="+ restrictions);
+	      System.out.println("response: availableThru=" + availableThru);
+	      System.out.println("response: availabilityDate=" + availabilityDate);
+	      System.out.println("response: midspine=" + midspine);
+	      System.out.println("response: callNumber=" + callNumber);
+	      System.out.println("response: copyNumber=" + copyNumber);
+	      System.out.println("response: shelvingData=" + shelvingData);
+	      System.out.println("response: shelvingLocation=" + shelvingLocation);
+	      System.out.println("response: localLocation=" + localLocation);
+	      System.out.println("response: publicNote=" + publicNote);
+	      System.out.println("response: itemId=" + itemId);
+	      System.out.println("response: temporaryLocation=" + temporaryLocation);
+	    }
 		}
 	}
 	/*
