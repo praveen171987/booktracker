@@ -16,7 +16,6 @@
             </intent-filter>
         </activity>
 		<activity android:name=".EditItem"/>
-		<activity android:name=".ItemDetails"/>
 		<activity android:name=".Preferences"/>
     </application>
 </manifest>
