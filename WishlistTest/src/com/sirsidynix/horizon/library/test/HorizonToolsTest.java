@@ -3,6 +3,8 @@ package com.sirsidynix.horizon.library.test;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import android.test.AndroidTestCase;
+
 import com.sirsidynix.horizon.library.HorizonStatus;
 import com.sirsidynix.horizon.library.HorizonTools;
 
@@ -11,12 +13,22 @@ import com.sirsidynix.horizon.library.HorizonTools;
  * @author Jesse Hess
  * TODO: flesh this out, figure out how to simulate responses using local XML
  */
-public class HorizonToolsTest {
+public class HorizonToolsTest extends AndroidTestCase {
 
+  private HorizonTools tools;
+  
+  public HorizonToolsTest() {
+    this.tools = new HorizonTools();
+  }
+  
+  public void testNothingAtAll() {
+    assertTrue(true);
+  }
+  
   /**
    * @param args
    */
-  public static void main(String[] args) {
+  public void testIsbnSearch() {
     // for testing ISBN
 //    String isbn = "9780765315151"; // 1 result
 //    String isbn = "9780441020379"; // no results
@@ -104,22 +116,15 @@ public class HorizonToolsTest {
 //    urlMap.put("http://siris-archives.si.edu/ipac20/ipac.jsp", ""); // Expected left paren or shortcut, misplaced symbol: 0375504397
 //    urlMap.put("http://206.187.12.10/ipac20/ipac.jsp", ""); // Expected left paren or shortcut, misplaced symbol: 0375504397
 //    urlMap.put("http://216.170.15.165/ipac20/ipac.jsp", "");  // Expected left paren or shortcut, misplaced symbol: 0375504397
-
-    HorizonTools tools;
-    if (args.length > 1) {
-      String proxyUrl = args[0];
-      int proxyPort = Integer.parseInt(args[1]);
-      tools = new HorizonTools(proxyUrl, proxyPort);
-    } else {
-      tools = new HorizonTools();
-    }
         
     int count = 0;
     for (String url : urlMap.keySet()) {
       System.out.println((count+1)+" of "+urlMap.size());
-      HorizonStatus status = tools.searchIsbnForStatus(url, urlMap.get(url), isbn);
+      HorizonStatus status = this.tools.searchIsbnForStatus(url, urlMap.get(url), isbn);
+      assertTrue(status+" for "+ url, true);
       System.out.println(status+" for "+ url);
       count++;
     }
+    assertTrue(true);
   }
 }
