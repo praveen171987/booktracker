@@ -9,5 +9,13 @@ While there are a great many libraries in the world, they mostly seem to use a h
 = Details =
 
 ||*Library Name*||*State*||*Catalog URL*||*System*||*Notes*||
-||Arlington Public||VA||http://libsys.arlingtonva.us/||WebPac||||
+||*Ohio*||||||||||
 ||Columbus Metropolitan||OH||http://catalog.columbuslibrary.org/||AquaBrowser||||
+||*Virginia*||||||||||
+||Arlington Public||VA||http://libsys.arlingtonva.us/search/||WebPac||||
+||Chesterfield County||VA||http://library.chesterfield.gov/search/||WebPac|||| 
+||Falls Church||VA||http://millennium.fallschurchva.gov/search/||WebPac||||
+||Fauquier County||VA||http://innopac.fauquiercounty.gov/search/||WebPac||||
+||Jefferson-Madison Regional||VA||http://aries.jmrl.org/search/||WebPac||||
+||Washington County||VA||http://innopac.hal.org/search/||WebPac||||
+||Watauga Regional||VA||http://libraries.etsu.edu/search/||WebPac||||
