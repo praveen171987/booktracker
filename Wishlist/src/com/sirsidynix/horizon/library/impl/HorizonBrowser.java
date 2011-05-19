@@ -1,5 +1,8 @@
 package com.sirsidynix.horizon.library.impl;
 
+import java.net.URI;
+import java.net.URISyntaxException;
+
 import com.sirsidynix.horizon.library.HorizonStatus;
 import com.sirsidynix.horizon.library.HorizonTools;
 import com.softwaresmithy.library.LibStatus;
@@ -53,5 +56,12 @@ public class HorizonBrowser extends Library implements LibStatus {
       wishListStatus = STATUS.NO_MATCH;
     }
 		return wishListStatus;
+	}
+	
+	@Override
+	public boolean isCompatible(String url) throws URISyntaxException {
+		URI uri = new URI(url);
+		
+		return uri.getPath().endsWith("/ipac20/ipac.jsp");
 	}
 }

@@ -9,4 +9,9 @@ public class Default extends Library {
 
 	}
 
+	@Override
+	public boolean isCompatible(String url) {
+		return true;
+	}
+
 }

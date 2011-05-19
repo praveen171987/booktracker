@@ -1,9 +1,13 @@
 package com.softwaresmithy.library.impl;
 
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Scanner;
 import java.util.regex.MatchResult;
 
 import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -58,6 +62,29 @@ public class WebPac extends Library implements LibStatus{
     		if(get != null)
     			get.abort();
     	}
+	}
+	@Override
+	public boolean isCompatible(String url) throws URISyntaxException{
+		URI checkurl = new URI(url);
+		
+		HttpGet get = null;
+		try{
+			HttpClient client = new DefaultHttpClient();
+			get = new HttpGet(checkurl);
+			HttpResponse resp = client.execute(get);
+			
+			Scanner s = new Scanner(resp.getEntity().getContent());
+			String pattern = s.findWithinHorizon("<link.*\"/scripts/ProStyles.css\"", 0);
+			return (pattern != null && !pattern.equals(""));
+		} catch (ClientProtocolException e) {
+			Log.e(this.getClass().getName(), "failed checking compatibility", e);
+		} catch (IOException e) {
+			Log.e(this.getClass().getName(), "failed checking compatibility", e);
+		}finally{
+			if(get != null)
+				get.abort();
+		}
+		return false;
 	}
 
 }
