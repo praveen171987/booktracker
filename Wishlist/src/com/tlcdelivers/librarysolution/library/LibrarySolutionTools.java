@@ -41,7 +41,7 @@ public class LibrarySolutionTools {
    * @param isbn
    * @return
    */
-  public STATUS searchIsbnForStatus(String url, String isbn) {
+  public LibrarySolutionStatus searchIsbnForStatus(String url, String isbn) {
     List<NameValuePair> parameters = new ArrayList<NameValuePair>();
     parameters.add(new BasicNameValuePair("GetAvailability", ""));
     parameters.add(new BasicNameValuePair("type", "isbn"));
@@ -54,11 +54,11 @@ public class LibrarySolutionTools {
     //<r><t><lo tc="value"></t></r>
     int copies = getCountFromElementUsingXPath(element, "/r/t/lo/@tc");
     System.out.println("available="+available+" copies="+copies);
-    STATUS status = STATUS.NO_MATCH;
+    LibrarySolutionStatus status = LibrarySolutionStatus.NO_MATCH;
     if (copies > 0 && available > 0) {
-    	status = STATUS.AVAILABLE;
+    	status = LibrarySolutionStatus.AVAILABLE;
     } else if (copies > 0 && available == 0) {
-    	status = STATUS.WAIT;
+    	status = LibrarySolutionStatus.WAIT;
     }
     return status;
   }

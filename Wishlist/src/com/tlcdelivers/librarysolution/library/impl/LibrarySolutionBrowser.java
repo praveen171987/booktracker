@@ -4,6 +4,7 @@ import java.net.URISyntaxException;
 
 import com.softwaresmithy.library.LibStatus;
 import com.softwaresmithy.library.Library;
+import com.tlcdelivers.librarysolution.library.LibrarySolutionStatus;
 import com.tlcdelivers.librarysolution.library.LibrarySolutionTools;
 
 /**
@@ -31,7 +32,15 @@ public class LibrarySolutionBrowser extends Library implements LibStatus {
 	@Override
 	public STATUS checkAvailability(String isbn) {
 		LibrarySolutionTools tools = new LibrarySolutionTools();
-		STATUS status = tools.searchIsbnForStatus(this.url, isbn);
+		LibrarySolutionStatus librarySolutionStatus = tools.searchIsbnForStatus(this.url, isbn);
+		STATUS status = STATUS.NO_MATCH;
+		if (librarySolutionStatus == LibrarySolutionStatus.AVAILABLE) {
+			status = STATUS.AVAILABLE;
+		} else if (librarySolutionStatus == LibrarySolutionStatus.NO_MATCH) {
+			status = STATUS.NO_MATCH;
+		} else if (librarySolutionStatus == LibrarySolutionStatus.WAIT) {
+			status = STATUS.WAIT;
+		}
 		return status;
 	}
 
