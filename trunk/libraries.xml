@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xml>
+  <library>
+    <name>Arlington Public</name>
+    <state>VA</state>
+    <class>com.softwaresmithy.library.impl.WebPac</class>
+    <arg key="url">http://libsys.arlingtonva.us/search/</arg>
+    <arg key="scope">1</arg>
+  </library>
+  <library>
+    <name>Columbus Metropolitan</name>
+    <state>OH</state>
+    <class>com.softwaresmithy.library.impl.AquaBrowser</class>
+    <arg key="url">http://catalog.columbuslibrary.org/rss.ashx</arg>
+  </library>
+</xml>
