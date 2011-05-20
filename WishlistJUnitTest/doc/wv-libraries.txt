@@ -1,0 +1,28 @@
+--WebPAC PRO iii.com millenium
+http://catalog1.mln.lib.wv.us/search // mountain library network
+http://nwvlc.clark.lib.wv.us/search // clark co
+http://marlo.fairmontstate.edu/search/ // marion libraries online
+
+--SirsiDynix cgisirsi iBistro WebCat
+http://gerry.cabell.lib.wv.us/uhtbin/cgisirsi/L7oMNblvvO/HUNTINGTON/38940076/38/0/POWER_SEARCH // western co regional
+http://kcpl.kanawha.lib.wv.us/uhtbin/cgisirsi/M4tYpTQ5lN/CHAS_PL/117440233/2/3 // kanawha co
+
+--?
+http://hardycounty.martin.lib.wv.us/athcgi/athweb.pl // hardy co, down for maintenance
+
+--webopac, Follett Softwar Company
+http://webopac.bridgeportwv.com/webopac/main?siteid=1 // bridgeport
+http://lbpl.lib.wv.us/webopac/main?siteid=LBPL148 // louis bennett
+
+--
+http://martinsburg.lib.wv.us/TLCScripts/interpac.dll?SearchForm&Directions=1&Config=8ysm&Branch=8,802,803 // keyser-mineral co
+http://opac.scpl.wvnet.edu/TLCScripts/interpac.dll?SearchForm&Directions=1&Config=pac&Branch=,0,&FormId=
+
+--Sagebrush
+http://claycatalog.lib.wv.us/InfoCentre/LibraryQuick.do;jsessionid=F0006F715FC1AE8E1DE02A1A0C1B2B6B // clay co
+
+--Sagebrush Corporation, Athena Webserver 4.3
+http://hampshire.lib.wv.us/athcgi/athweb.pl?a=b&ci=HC&st=adv&pg=7&k1=&loc=All+Locations&jw=
+
+--AGent Iluminar Auto-Graphics Inc (http://www4.auto-graphics.com/solutions/solutions.htm)
+http://catalog.wheeling.lib.wv.us/iluminar/home.asp?lid=ohpl#Iluminar // ohio co
