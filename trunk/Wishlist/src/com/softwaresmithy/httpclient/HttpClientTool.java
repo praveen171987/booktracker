@@ -77,7 +77,9 @@ public class HttpClientTool {
 		StringBuilder b = new StringBuilder();
 		boolean isFirst = true;
 		for (NameValuePair parameter : parameters) {
-			b.append((isFirst ? "?" : "&") + parameter.getName() + "=" + parameter.getValue());
+		  String n = parameter.getName();
+		  String v = parameter.getValue();
+			b.append((isFirst ? "?" : "&") + n + (v != null && !v.trim().equals("") ? "=" + v : ""));
 			isFirst = false;
 		}
 		return b.toString();
@@ -92,7 +94,7 @@ public class HttpClientTool {
 		String response = "";
 		HttpResponse postResponse;
 		try {
-			postResponse = httpClient.execute(request);
+			postResponse = this.httpClient.execute(request);
 			response = EntityUtils.toString(postResponse.getEntity());
 		} catch (ClientProtocolException e) {
 			e.printStackTrace();
@@ -108,11 +110,11 @@ public class HttpClientTool {
 	 * @param port
 	 */
 	private void createHttpClient(String hostName, int port) {
-		httpClient = new DefaultHttpClient();
+		this.httpClient = new DefaultHttpClient();
 		/* handling sending via a proxy */
 		if (hostName != null) {
 			HttpHost httpHost = new HttpHost(hostName, port);
-			httpClient.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, httpHost);
+			this.httpClient.getParams().setParameter(ConnRoutePNames.DEFAULT_PROXY, httpHost);
 		}
 	}
 
