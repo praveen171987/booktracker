@@ -10,6 +10,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import com.softwaresmithy.httpclient.HttpClientTool;
+import com.softwaresmithy.library.LibStatus.STATUS;
 import com.softwaresmithy.xpath.util.XPathUtil;
 
 /**
@@ -25,7 +26,22 @@ public class LibrarySolutionTools {
     httpClientTool = new HttpClientTool();
   }
   
-  public void searchIsbnForStatus(String url, String isbn) {
+	/**
+	 * for using via a proxy
+	 * @param d
+	 * @param port
+	 */
+	public LibrarySolutionTools(String proxyHostName, int proxyPort) {
+		httpClientTool = new HttpClientTool(proxyHostName, proxyPort);
+	}
+
+  /**
+   * This implementation gives status of AVAILABLE, NO_MATCH, or WAIT because the number of 'holds' is unknown
+   * @param url
+   * @param isbn
+   * @return
+   */
+  public STATUS searchIsbnForStatus(String url, String isbn) {
     List<NameValuePair> parameters = new ArrayList<NameValuePair>();
     parameters.add(new BasicNameValuePair("GetAvailability", ""));
     parameters.add(new BasicNameValuePair("type", "isbn"));
@@ -33,32 +49,18 @@ public class LibrarySolutionTools {
     String xml = httpClientTool.httpGet(url, parameters);
     System.out.println(xml);
     Element element = XPathUtil.getElement(xml);
-    int available = getAvailableCount(element);
-    int copies = getCopyCount(element);
-    System.out.println("available="+available+" copies="+copies);
-    // TODO: return the "status" based on the values given
-  }
-  
-  /**
-   * perform XPATH to get the number of available
-   * @param element
-   * @return
-   */
-  private int getAvailableCount(Element element) {
     //<r><t><lo ac="value"></t></r>
-    int count = getCountFromElementUsingXPath(element, "/r/t/lo/@ac");
-    return count;
-  }
-  
-  /**
-   * perform XPATH to get the number of total copies
-   * @param element
-   * @return
-   */
-  private int getCopyCount(Element element) {
+    int available = getCountFromElementUsingXPath(element, "/r/t/lo/@ac");
     //<r><t><lo tc="value"></t></r>
-    int count = getCountFromElementUsingXPath(element, "/r/t/lo/@tc");
-    return count;
+    int copies = getCountFromElementUsingXPath(element, "/r/t/lo/@tc");
+    System.out.println("available="+available+" copies="+copies);
+    STATUS status = STATUS.NO_MATCH;
+    if (copies > 0 && available > 0) {
+    	status = STATUS.AVAILABLE;
+    } else if (copies > 0 && available == 0) {
+    	status = STATUS.WAIT;
+    }
+    return status;
   }
   
   /**
