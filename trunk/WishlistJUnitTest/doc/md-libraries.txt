@@ -1,0 +1,31 @@
+--?
+http://64.193.88.213:8080 // allegany co, LS2 PAC
+
+--Sirsi WebCat
+http://pac.epfl.net/uhtbin/cgisirsi/OGki7kgBKn/CENTRAL/76440077/60/1180/X // enoch pratt free, 
+http://cosmos.somd.lib.md.us/uhtbin/cgisirsi/Ydog6ORB90/COMMINFO/36800004/60/1180/X // calvert
+http://catalog.carolib.org/uhtbin/cgisirsi.exe/wiNoisAtEE/CENTRAL/323720024/60/1180/X // caroline co
+http://ceco.sirsi.net/uhtbin/cgisirsi/YWR2uJmJtE/ELKTON/258850056/38/1/X/BLASTOFF // cecil co, WebCat
+http://www.fcpl.org/uhtbin/cgisirsi/?ps=QOlwKCy2HM/AR/83870153/60/1180/X // frederick co
+http://webcat.montgomerylibrary.org/uhtbin/cgisirsi/CVAz6FXQ7N/ADMIN_HQ/113370090/38/0/POWER_SEARCH // montgomery co
+http://quan.sirsi.net/uhtbin/cgisirsi/e3uKnAsbzf/CEN/241650042/60/1182/X // queen anne's co free
+http://64.26.76.143/uhtbin/cgisirsi.exe/2fReuoJymA/HAGERSTOWN/83550006/2/1000 // washington co free
+
+--Polaris Library Systems (see http://www.polarislibrary.com/products-services/api.html and Z39.50)
+http://catalog.bcpl.lib.md.us/polaris/search/default.aspx?ctx=1.1033.0.0.3&type=Keyword // baltimore co, polaris library systems
+http://catalog.carr.org/Search/default.aspx?ctx=17.1033.0.0.5&type=Default // carroll co, polaris
+http://polaris.hclibrary.org/polaris/search/default.aspx?ctx=1.1033.0.0.6&type=Advanced&srchopt=1 // howard co
+http://catalog.pgcmls.info/polaris/search/default.aspx?ctx=1.1033.0.0.1&type=Default // prince george's co memorial
+http://catalog.tcfl.org/search/default.aspx?ctx=3.1033.0.0.1&type=Advanced&srchopt=1 // talbot co free
+
+--WebPAC PRO Innovative Interfaces, Inc. (www.iii.com, products: millennium ILS, )
+http://heron.wico.lib.md.us/search/i // lower shore, 
+
+--?
+http://catalog.relib.net/TLCScripts/interpac.dll?SearchForm?Directions=1&config=pac // ruth enlow
+
+--SirsiDynix Horizon
+http://hip.hcplonline.info/ipac20/ipac.jsp // harford co
+
+--Evergreen open-ils.org
+https://catalog.kentcountylibrary.org/opac/en-US/skin/default/xml/myopac.xml?d=0 // kent co, Evergreen open-ils.org (OSS)
