@@ -16,6 +16,9 @@ import com.softwaresmithy.xpath.XPathUtil;
  * Tools for interacting with The Library Corporation's Library.Solution.PAC product
  * @author Jesse Hess
  *
+ * If there is ever a need to point someone to the book HTML page:
+ *   /TLCScripts/interpac.dll?LabelDisplay&config=pac&recordnumber=${record_number}
+ *   ${record_number} is available in the XML returned from the ISBN search
  */
 public class LibrarySolutionTools {
 
