@@ -13,4 +13,4 @@ http://your/library/address/TLCScripts/interpac.dll
 
 = Implementation =
 
-The implementation uses the {{{GetAvailability}}} argument which responds with valid XML is easily traversed using XPath.
+The implementation uses the {{{GetAvailability}}} argument which responds with valid XML and is easily traversed using XPath.
