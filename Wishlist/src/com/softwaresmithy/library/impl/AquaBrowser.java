@@ -30,7 +30,7 @@ public class AquaBrowser extends Library implements LibStatus {
 	public AquaBrowser(){
 		XPath xpath = XPathFactory.newInstance().newXPath();
 		try{
-			itemXpath = xpath.compile("/rss/channel/item[1]/link");
+			this.itemXpath = xpath.compile("/rss/channel/item[1]/link");
 		}catch(XPathException e){
 			Log.e(this.getClass().getName(), "Something bad happened building xpath constants", e);
 		}
@@ -38,7 +38,7 @@ public class AquaBrowser extends Library implements LibStatus {
 	@Override
 	public void init(String... strings) {
 		if(strings.length > 0){
-			isbnSearchUrl = strings[0];
+			this.isbnSearchUrl = strings[0];
 		}
 	}
 	@Override
@@ -46,16 +46,15 @@ public class AquaBrowser extends Library implements LibStatus {
 		HttpGet get = null;
 		try{
 			HttpClient client = new DefaultHttpClient();
-			get = new HttpGet(String.format(isbnSearchUrl, isbn));
+			get = new HttpGet(String.format(this.isbnSearchUrl, isbn));
 			HttpResponse resp = client.execute(get);
 			
-			String link = (String) itemXpath.evaluate(new InputSource(resp.getEntity().getContent()), XPathConstants.STRING);
+			String link = (String) this.itemXpath.evaluate(new InputSource(resp.getEntity().getContent()), XPathConstants.STRING);
 			if(link != null && !link.equals("")){
 				//TODO: follow said link to determine the wait time
 				return STATUS.AVAILABLE;
-			}else{
-				return STATUS.NO_MATCH;
 			}
+			return STATUS.NO_MATCH;
 		}catch(Exception e){
 			Log.e(this.getClass().getName(), e.getMessage(), e);
 			return null;       		
