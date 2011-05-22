@@ -22,7 +22,7 @@ public class WebPac extends Library implements LibStatus{
 	@Override
 	public void init(String... strings) {
 		if(strings.length > 0){
-			isbnSearchUrl = strings[0];
+			this.isbnSearchUrl = strings[0];
 		}
 		
 	}
@@ -31,7 +31,7 @@ public class WebPac extends Library implements LibStatus{
     	HttpGet get = null;
     	try{
         	HttpClient client = new DefaultHttpClient();
-			get = new HttpGet(String.format(isbnSearchUrl, isbn));
+			get = new HttpGet(String.format(this.isbnSearchUrl, isbn));
 			HttpResponse resp = client.execute(get);
 			Scanner s = new Scanner(resp.getEntity().getContent());
 			String pattern = s.findWithinHorizon("((\\d*) hold[s]? on first copy returned of (\\d*) )?[cC]opies", 0);
@@ -41,17 +41,16 @@ public class WebPac extends Library implements LibStatus{
 				if(match.groupCount() == 3){
 					if(match.group(2) == null){
 						return STATUS.AVAILABLE;
-					}else{
-						int numHolds = Integer.parseInt(match.group(2));
-						int numCopies = Integer.parseInt(match.group(3));
-						if(numHolds < numCopies){
-							return STATUS.SHORT_WAIT;
-						}else if(numHolds >= numCopies && numHolds <= (2*numCopies)){
-							return STATUS.WAIT;
-						}else{
-							return STATUS.LONG_WAIT;
-						}
 					}
+					int numHolds = Integer.parseInt(match.group(2));
+					int numCopies = Integer.parseInt(match.group(3));
+					if(numHolds < numCopies){
+						return STATUS.SHORT_WAIT;
+					}else if(numHolds >= numCopies && numHolds <= (2*numCopies)){
+						return STATUS.WAIT;
+					}else{
+						return STATUS.LONG_WAIT;
+					}					
 				}
 			}
 			return STATUS.NO_MATCH;
