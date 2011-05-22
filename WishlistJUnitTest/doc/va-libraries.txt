@@ -67,7 +67,7 @@ http://libraries.etsu.edu/search/i // watauga regional
 http://library.chesterfield.gov/search/Y // chesterfield co, http://www.iii.com
 http://millennium.fallschurchva.gov/search/i // falls church, encore, 
 
---?
+--http://www.iii.com WebPAC Pro
 http://innopac.fauquiercounty.gov/search~S6 // fauquier co, WebPAC PRO Innovative Interfaces
 http://aries.jmrl.org/search/ // jefferson-madison regional WebPAC PRO © Innovative Interfaces, Inc.
 http://libsys.arlingtonva.us/ // encore, innovative interfaces, inc.
@@ -78,14 +78,15 @@ http://innopac.hal.org/search // washington co
 http://216.54.20.245:8080/heading/search // newport news, http://www.vtls.com/
 http://vtls.sbrl.org:8088/search/advanced // smyth-bland
 
---?
-http://catalog.norfolk.gov/web2/tramp2.exe/goto/A07jgua0.000?screen=Home.html // norfolk, sirsi
-http://173.0.98.62/scripts/AfWiInq.dll?Search // northumberland, http://www2.softlinkint.com
-
---?
+--Sirsi, not like I've seen before
+http://catalog.norfolk.gov/web2/tramp2.exe/log_in?setting_key=english // norfolk, sirsi
 http://library.poquoson-va.gov:8088/rooms/portal/page/Sirsi_AdvancedCatalogSearch.psml?eventSubmit_doGotoheadingbrowse=1 // sirsi
 
 --?
+http://173.0.98.62/scripts/AfWiInq.dll?Search // northumberland, http://www2.softlinkint.com
+
+--http://www.polarislibrary.com/ Polaris ILS (also a product called Galaxy)
+--iPhone app by Hybrid Forge called Owl iLibrary for Polaris ILS
 http://librarycatalog.pwcgov.org/polaris/search/default.aspx?ctx=1.1033.0.0.3&type=Advanced // prince william, polaris library systems
 http://catalog.suffolk.lib.va.us/polaris/search/default.aspx?ctx=1.1033.0.0.5&type=Keyword // suffolk
 
