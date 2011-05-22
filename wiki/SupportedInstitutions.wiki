@@ -12,31 +12,31 @@ While there are a great many libraries in the world, they mostly seem to use a h
 ||*Ohio*||||||||||
 ||Columbus Metropolitan||OH||http://catalog.columbuslibrary.org/||AquaBrowser||||
 ||*Virginia*||||||||||
+||Appomattox Regional||VA||http://65.168.251.21/TLCScripts/interpac.dll||LibrarySolution||||
 ||Arlington Public||VA||http://libsys.arlingtonva.us/search/||WebPac||||
+||Blackwater Regional||VA||http://166.61.230.4/TLCScripts/interpac.dll||LibrarySolution||||
+||Blue Ridge Regional||VA||http://www.brrl.lib.va.us/TLCScripts/interpac.dll||LibrarySolution||||
+||Campbell County||VA||http://ccl.campbell.k12.va.us/TLCScripts/interpac.dll||LibrarySolution||||
+||Charles P. Jones||VA||http://64.4.111.3/TLCScripts/interpac.dll||LibrarySolution||||
+||Charlotte County||VA||http://www.cclibrary.net/TLCScripts/interpac.dll||LibrarySolution||||
 ||Chesterfield County||VA||http://library.chesterfield.gov/search/||WebPac|||| 
+||Culpeper County||VA||http://pac.cclva.org/TLCScripts/interpac.dll||LibrarySolution||||
 ||Falls Church||VA||http://millennium.fallschurchva.gov/search/||WebPac||||
 ||Fauquier County||VA||http://innopac.fauquiercounty.gov/search/||WebPac||||
+||Fluvanna County||VA||http://www.fcplva.org/TLCScripts/interpac.dll||LibrarySolution||||
+||Gloucester County||VA||http://206.113.131.6/TLCScripts/interpac.dll||LibrarySolution||||
 ||Jefferson-Madison Regional||VA||http://aries.jmrl.org/search/||WebPac||||
+||Lancaster Community||VA||http://207.68.46.102/TLCScripts/interpac.dll||LibrarySolution||||
+||Lonesome Pine Regional||VA||http://www.lprlibrary.org/TLCScripts/interpac.dll||LibrarySolution||||
+||Middlesex County||VA||http://mcplva.org/TLCScripts/interpac.dll||LibrarySolution||||
+||Mountain Network||VA||http://circdesk.wythegrayson.lib.va.us/TLCScripts/interpac.dll||LibrarySolution||||
+||Nottoway County||VA||http://71.0.81.91/TLCScripts/interpac.dll||LibrarySolution||||
+||Pittsylvania County||VA||http://65.254.191.49/TLCScripts/interpac.dll||LibrarySolution||||
+||Pulaski County||VA||http://libcat.pclibs.org/TLCScripts/interpac.dll||LibrarySolution||||
+||Rockbridge Regional||VA||http://206.248.241.200/TLCScripts/interpac.dll||LibrarySolution||||
+||Russell County||VA||http://69.27.84.133/TLCScripts/interpac.dll||LibrarySolution||||
+||Shenandoah County||VA||http://204.111.4.131/TLCScripts/interpac.dll||LibrarySolution||||
+||Southside Regional||VA||http://12.131.0.195/TLCScripts/interpac.dll||LibrarySolution||||
+||Valley Libraries Connection||VA||http://www.valleylibraries.org/TLCScripts/interpac.dll||LibrarySolution||||
 ||Washington County||VA||http://innopac.hal.org/search/||WebPac||||
 ||Watauga Regional||VA||http://libraries.etsu.edu/search/||WebPac||||
-||Southside Regional||VA||http://12.131.0.195/TLCScripts/interpac.dll||LibrarySolution||||
-||Blackwater Regional||VA||http://166.61.230.4/TLCScripts/interpac.dll||LibrarySolution||||
-||Shenandoah County||VA||http://204.111.4.131/TLCScripts/interpac.dll||LibrarySolution||||
-||Gloucester County||VA||http://206.113.131.6/TLCScripts/interpac.dll||LibrarySolution||||
-||Rockbridge Regional||VA||http://206.248.241.200/TLCScripts/interpac.dll||LibrarySolution||||
-||Lancaster Community||VA||http://207.68.46.102/TLCScripts/interpac.dll||LibrarySolution||||
-||Charles P. Jones||VA||http://64.4.111.3/TLCScripts/interpac.dll||LibrarySolution||||
-||Appomattox Regional||VA||http://65.168.251.21/TLCScripts/interpac.dll||LibrarySolution||||
-||Pittsylvania County||VA||http://65.254.191.49/TLCScripts/interpac.dll||LibrarySolution||||
-||Russell County||VA||http://69.27.84.133/TLCScripts/interpac.dll||LibrarySolution||||
-||Nottoway County||VA||http://71.0.81.91/TLCScripts/interpac.dll||LibrarySolution||||
-||Campbell County||VA||http://ccl.campbell.k12.va.us/TLCScripts/interpac.dll||LibrarySolution||||
-||Mountain Network||VA||http://circdesk.wythegrayson.lib.va.us/TLCScripts/interpac.dll||LibrarySolution||||
-||Pulaski County||VA||http://libcat.pclibs.org/TLCScripts/interpac.dll||LibrarySolution||||
-||Middlesex County||VA||http://mcplva.org/TLCScripts/interpac.dll||LibrarySolution||||
-||Culpeper County||VA||http://pac.cclva.org/TLCScripts/interpac.dll||LibrarySolution||||
-||Blue Ridge Regional||VA||http://www.brrl.lib.va.us/TLCScripts/interpac.dll||LibrarySolution||||
-||Charlotte County||VA||http://www.cclibrary.net/TLCScripts/interpac.dll||LibrarySolution||||
-||Fluvanna County||VA||http://www.fcplva.org/TLCScripts/interpac.dll||LibrarySolution||||
-||Lonesome Pine Regional||VA||http://www.lprlibrary.org/TLCScripts/interpac.dll||LibrarySolution||||
-||Valley Libraries Connection||VA||http://www.valleylibraries.org/TLCScripts/interpac.dll||LibrarySolution||||
