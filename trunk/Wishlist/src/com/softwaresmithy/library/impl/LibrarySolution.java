@@ -1,4 +1,4 @@
-package com.tlcdelivers.librarysolution.library.impl;
+package com.softwaresmithy.library.impl;
 
 import java.net.URISyntaxException;
 
@@ -12,7 +12,7 @@ import com.tlcdelivers.librarysolution.library.LibrarySolutionTools;
  * @author Jesse Hess
  *
  */
-public class LibrarySolutionBrowser extends Library implements LibStatus {
+public class LibrarySolution extends Library implements LibStatus {
 
 	private String url;
 	
@@ -48,9 +48,9 @@ public class LibrarySolutionBrowser extends Library implements LibStatus {
 	 * Assumes the URL will end in 'TLCScripts/interpac.dll'
 	 */
 	@Override
-	public boolean isCompatible(String url) throws URISyntaxException {
+	public boolean isCompatible(String sUrl) throws URISyntaxException {
 		boolean compatible = false;
-		if (url != null && url.endsWith("TLCScripts/interpac.dll")) {
+		if (sUrl != null && sUrl.endsWith("TLCScripts/interpac.dll")) {
 			compatible = true;
 		}
 		return compatible;

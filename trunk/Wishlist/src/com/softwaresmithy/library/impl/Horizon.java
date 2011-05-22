@@ -1,4 +1,4 @@
-package com.sirsidynix.horizon.library.impl;
+package com.softwaresmithy.library.impl;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -13,7 +13,7 @@ import com.softwaresmithy.library.Library;
  * @author Jesse Hess
  *
  */
-public class HorizonBrowser extends Library implements LibStatus {
+public class Horizon extends Library implements LibStatus {
 	
 	private String url;
 	private String isbnIndex;
@@ -59,8 +59,8 @@ public class HorizonBrowser extends Library implements LibStatus {
 	}
 	
 	@Override
-	public boolean isCompatible(String url) throws URISyntaxException {
-		URI uri = new URI(url);
+	public boolean isCompatible(String sUrl) throws URISyntaxException {
+		URI uri = new URI(sUrl);
 		
 		return uri.getPath().endsWith("/ipac20/ipac.jsp");
 	}
