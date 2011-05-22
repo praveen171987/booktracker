@@ -8,8 +8,10 @@
 
 = Requisites =
 
-The catalog url should be of the form
-{{{http://your/library/address/ipac20/ipac.jsp}}}
+The catalog url should be of the form:
+{{{
+http://your/library/address/ipac20/ipac.jsp
+}}}
 
 = Implementation =
 
