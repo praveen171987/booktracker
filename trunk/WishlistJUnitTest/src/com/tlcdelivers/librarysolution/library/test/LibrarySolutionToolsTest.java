@@ -3,6 +3,7 @@ package com.tlcdelivers.librarysolution.library.test;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.tlcdelivers.librarysolution.library.LibrarySolutionStatus;
 import com.tlcdelivers.librarysolution.library.LibrarySolutionTools;
 
 
@@ -46,7 +47,8 @@ public class LibrarySolutionToolsTest {
 		String isbn = "0375504397";
 		for (String url : urls) {
 			System.out.println((urls.indexOf(url)+1)+" of "+urls.size()+" for "+url);
-			tools.searchIsbnForStatus(url, isbn);
+			LibrarySolutionStatus status = tools.searchIsbnForStatus(url, isbn);
+			System.out.println(status);
 		}
 	}
 
