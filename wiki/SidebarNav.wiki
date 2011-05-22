@@ -8,5 +8,5 @@
 
 ===Implementation===
   * [WebPac]
-
+  * [Horizon]
   * *[http://code.google.com/p/booktracker/w/list Full list of pages]*
