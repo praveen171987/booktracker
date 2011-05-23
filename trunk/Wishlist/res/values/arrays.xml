@@ -20,4 +20,12 @@
 		<item>Some Wait</item>
 		<item>Long Wait</item>
 	</string-array>
+	<!-- DON'T INTERNATIONALIZE, this is to map from the above statuses to the enum constants -->
+	<string-array name="enum_map">
+		<item>NO_MATCH</item>
+		<item>AVAILABLE</item>
+		<item>SHORT_WAIT</item>
+		<item>WAIT</item>
+		<item>LONG_WAIT</item>
+	</string-array>
 </resources>
