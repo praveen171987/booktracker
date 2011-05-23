@@ -1,6 +1,7 @@
 package com.softwaresmithy;
 
 import java.util.Arrays;
+import java.util.HashSet;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -27,7 +28,6 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
 
 import com.google.zxing.integration.android.IntentIntegrator;
@@ -41,7 +41,7 @@ public class Wishlist extends ListActivity {
 	
 	private WishlistDbAdapter mDbHelper;
 	private EditText isbnInput;
-	private SimpleCursorAdapter listData;
+	private ImageCursorAdapter listData;
 	private Cursor listCursor;
 	
 	private Library library;
@@ -53,6 +53,9 @@ public class Wishlist extends ListActivity {
 	private final int ACTIVITY_CREATE = 0;
 	private final int ACTIVITY_EDIT = 1;
 	private final int SET_PREFS = 2;
+	
+	private HashSet<String> currentStateFilter = new HashSet<String>();
+	private String currentStringFilter = "";
 	
 	//Same index used to map from database table column to layout ID in item view
 	private String[] mapFrom = new String[]{WishlistDbAdapter.COL_TITLE, WishlistDbAdapter.COL_AUTHOR};	
@@ -116,6 +119,7 @@ public class Wishlist extends ListActivity {
     	
     	listData = new ImageCursorAdapter(this, mDbHelper, R.layout.list_item, listCursor, mapFrom, mapTo,getExternalCacheDir().getAbsolutePath());
     	setListAdapter(listData);
+    	
     }
     
     @Override
@@ -164,7 +168,7 @@ public class Wishlist extends ListActivity {
 				}
 			}.execute(isbn);
     	}else{
-    		//TODO: Change this to an abort/continue dialog, chance it's legitimately wrong but accurate
+    		//TODO: Change this to an abort/continue dialog, (small) chance it's legitimately wrong but accurate
     		Toast.makeText(this, isbn+" is not a valid ISBN", Toast.LENGTH_SHORT).show();
     	}
     }
@@ -257,8 +261,24 @@ public class Wishlist extends ListActivity {
 				
 				@Override
 				public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-					listCursor = listData.runQueryOnBackgroundThread("NO_MATCH");
-					listCursor.requery();
+					if(isChecked){
+						currentStateFilter.remove(getResources().getStringArray(R.array.enum_map)[which]);
+					}else {
+						currentStateFilter.add(getResources().getStringArray(R.array.enum_map)[which]);
+					}
+					StringBuilder filterString = null;
+					for(String s : currentStateFilter.toArray(new String[]{})){
+						if(filterString == null){
+							filterString = new StringBuilder(s);
+						}else {
+							filterString.append(","+s);
+						}
+					}
+					
+					listCursor = listData.filterByStatus(filterString==null?null:filterString.toString());
+			    	listData = new ImageCursorAdapter(getApplicationContext(), mDbHelper, R.layout.list_item, listCursor, mapFrom, mapTo,getExternalCacheDir().getAbsolutePath());
+			    	setListAdapter(listData);
+
 				}
 			})
     		.create();
@@ -279,14 +299,6 @@ public class Wishlist extends ListActivity {
 		}
 		return null;
 	}    
-
-	@Override
-	protected void onPrepareDialog(int id, Dialog dialog) {
-		switch(id){
-		case DIALOG_FILTER:
-			break;
-		}
-	}
 	
 	public boolean validIsbn(String isbn){
     	char[] nums = isbn.toCharArray();

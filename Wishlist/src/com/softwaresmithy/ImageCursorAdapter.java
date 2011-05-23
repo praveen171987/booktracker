@@ -26,6 +26,7 @@ public class ImageCursorAdapter extends SimpleCursorAdapter implements Filterabl
 		this.imagePath = imagePath;
 		this.context = context;
 		this.mDbHelper = mDbHelper;
+		
 	}
 
 	@Override
@@ -69,14 +70,14 @@ public class ImageCursorAdapter extends SimpleCursorAdapter implements Filterabl
 		iv.setImageBitmap(cover);
 		return retView;
 	}
-
-	@Override
-	public Cursor runQueryOnBackgroundThread(CharSequence constraint) {
+	
+	public Cursor filterByStatus(CharSequence constraint){
+		System.out.println("all rows count: "+mDbHelper.getAll().getCount());
 		if(constraint == null){
 			return mDbHelper.getAll();
 		}else{
+			System.out.println(constraint+" count: "+mDbHelper.filterByStatus(constraint).getCount());
 			return mDbHelper.filterByStatus(constraint);
-		}
+		}		
 	}
-
 }
