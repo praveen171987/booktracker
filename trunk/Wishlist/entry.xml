@@ -1,4 +1,5 @@
 <entry xmlns="http://www.w3.org/2005/Atom">
+  <!-- Testing mime-type addition via SVN auto-props -->
   <id>http://www.google.com/books/feeds/volumes/HCI3SQAACAAJ</id>
   <updated>2011-05-06T20:00:01.000Z</updated>
   <category scheme="http://schemas.google.com/g/2005#kind"
