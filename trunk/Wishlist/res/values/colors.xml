@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="status_available">#FFFFFFFF</color>
+    <color name="status_short_wait">#FF66CCFF</color>
+    <color name="status_wait">#FF0066FF</color>
+    <color name="status_long_wait">#FF0000CC</color>
+    <color name="status_default">#FF222222</color>
+</resources>

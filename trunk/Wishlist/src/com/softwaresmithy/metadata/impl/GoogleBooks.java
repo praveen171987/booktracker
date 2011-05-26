@@ -40,6 +40,8 @@ public class GoogleBooks implements MetadataProvider {
 	private static XPathExpression thumbXpath;
 	private static XPathExpression entityXpath;
 	
+	private static final int COMPRESSION_RATIO = 95;
+	
 	//For injection during testing
 	private HttpClient client;
 	
@@ -124,7 +126,7 @@ public class GoogleBooks implements MetadataProvider {
 			if(resp.getEntity().getContentType().getValue().equals("image/jpeg")){
 				Bitmap image = BitmapFactory.decodeStream(resp.getEntity().getContent());
 				File file = new File(context.getExternalCacheDir(),volumeId+".jpg");
-				image.compress(CompressFormat.JPEG, 95, new FileOutputStream(file));
+				image.compress(CompressFormat.JPEG, COMPRESSION_RATIO, new FileOutputStream(file));
 			}
 			return true;
 		}catch(Exception e){

@@ -50,9 +50,9 @@ public class Wishlist extends ListActivity {
 	private long selectedItem;
 	
 	//Intent request states
-	private final int ACTIVITY_CREATE = 0;
-	private final int ACTIVITY_EDIT = 1;
-	private final int SET_PREFS = 2;
+	private static final int ACTIVITY_CREATE = 0;
+	private static final int ACTIVITY_EDIT = 1;
+	private static final int SET_PREFS = 2;
 	
 	private HashSet<String> currentStateFilter = new HashSet<String>();
 	private String currentStringFilter = "";
@@ -141,6 +141,8 @@ public class Wishlist extends ListActivity {
     		selectedItem = info.id;
 			showDialog(DIALOG_DELETE_ITEM);
     		break;
+    	default:
+    		Log.w(this.getClass().getName(), "Unexpected context menu item selected");
     	}
     	return super.onContextItemSelected(item);
     }
@@ -211,19 +213,17 @@ public class Wishlist extends ListActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
     	switch(requestCode){
-	    	case IntentIntegrator.REQUEST_CODE: {
-	    		IntentResult res = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-	    		
-	    		String scanContents;
-	    		if(res != null){
-	    			scanContents = res.getContents();
-	    		}else {
-	    			return;
-	    			//Nothing to see here, move along
-	    		}
-	    		createItem(scanContents);
-	    	}
-	    	return;
+	    	case IntentIntegrator.REQUEST_CODE: 
+		    	IntentResult res = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+				String scanContents;
+				if(res != null){
+					scanContents = res.getContents();
+				}else {
+					return;
+					//Nothing to see here, move along
+				}
+				createItem(scanContents);
+				return;
 	    	case SET_PREFS:
     			try{
     				//TODO: This is a whole lot more complicated, if they've actually changed their library, should we delete their current statuses?
@@ -296,6 +296,8 @@ public class Wishlist extends ListActivity {
 			})
 			.setNegativeButton(R.string.no, null)
 			.create();
+    	default:
+    		Log.w(this.getClass().getName(), "Unexpected dialog selected");
 		}
 		return null;
 	}    
@@ -321,7 +323,4 @@ public class Wishlist extends ListActivity {
     	}
     	return false;
     }
-
-
-
 }

@@ -1,13 +1,18 @@
 package com.softwaresmithy.view;
 
+import java.util.List;
+
 import android.content.Context;
 import android.preference.EditTextPreference;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
-import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+
+import com.softwaresmithy.LibraryJB;
+import com.softwaresmithy.LibraryResourceAdapter;
+import com.softwaresmithy.library.LibraryResourceParser;
 
 public class AutoCompletePreference extends EditTextPreference {
 
@@ -17,7 +22,9 @@ public class AutoCompletePreference extends EditTextPreference {
 		super(context, attrs);
 		mEditText = new AutoCompleteTextView(context, attrs);
 		mEditText.setThreshold(0);
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_dropdown_item_1line, COUNTRIES);
+		//ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_dropdown_item_1line, COUNTRIES);
+		List<LibraryJB> libList = new LibraryResourceParser(context).getLibraries();
+		LibraryResourceAdapter adapter = new LibraryResourceAdapter(context, android.R.layout.simple_dropdown_item_1line, libList);
 		mEditText.setAdapter(adapter);
 	}
     private static final String[] COUNTRIES = new String[] {

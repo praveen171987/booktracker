@@ -14,12 +14,42 @@ import android.widget.SimpleCursorAdapter;
 
 import com.softwaresmithy.library.LibStatus.STATUS;
 
+/**
+ * A custom cursor adapter to generate item entries for each of the objects in the passed cursor.
+ * In this case, it makes sure the images are retrieved from the file system and displayed
+ * appropriately.
+ * @author SZY4ZQ
+ *
+ */
 public class ImageCursorAdapter extends SimpleCursorAdapter implements Filterable{
+	/**
+	 * A cursor containing the DB rows to be displayed on the UI.
+	 */
 	private Cursor c;
+	/**
+	 * The folder on the filesystem containing images to be displayed.
+	 * TODO: Should this be retrieved from the context instead?
+	 */
 	private String imagePath;
+	/**
+	 * The larger application context.
+	 */
 	private Context context;
+	/**
+	 * Database accessor.
+	 */
 	private WishlistDbAdapter mDbHelper;
 
+	/**
+	 * 
+	 * @param context application context
+	 * @param mDbHelper database accessor
+	 * @param layout pointer to target layout object
+	 * @param c list of db rows to display
+	 * @param from db column names
+	 * @param to layout view IDs
+	 * @param imagePath path to image directory
+	 */
 	public ImageCursorAdapter(Context context, WishlistDbAdapter mDbHelper, int layout, Cursor c, String[] from, int[] to, String imagePath) {
 		super(context, layout, c, from, to);
 		this.c = c;
@@ -42,21 +72,23 @@ public class ImageCursorAdapter extends SimpleCursorAdapter implements Filterabl
 		if(statusStr != null){
 			STATUS status = STATUS.valueOf(statusStr);
 			switch(status){
-			case NO_MATCH:
-				state.setBackgroundColor(0xFF000000);
-				break;
+			
 			case AVAILABLE:
-				state.setBackgroundColor(0xFFFFFFFF);
+				state.setBackgroundColor(context.getResources().getColor(R.color.status_available));
 				break;
 			case SHORT_WAIT:
-				state.setBackgroundColor(0xFF66CCFF);
+				state.setBackgroundColor(context.getResources().getColor(R.color.status_short_wait));
 				break;
 			case WAIT:
-				state.setBackgroundColor(0xFF0066FF);
+				state.setBackgroundColor(context.getResources().getColor(R.color.status_wait));
 				break;
 			case LONG_WAIT:
-				state.setBackgroundColor(0xFF0000CC);
+				state.setBackgroundColor(context.getResources().getColor(R.color.status_long_wait));
 				break;
+			case NO_MATCH:
+			default:
+				state.setBackgroundColor(context.getResources().getColor(R.color.status_default));
+				break;	
 			}
 		}
 		ImageView iv = (ImageView) retView.findViewById(R.id.cover);
@@ -71,12 +103,15 @@ public class ImageCursorAdapter extends SimpleCursorAdapter implements Filterabl
 		return retView;
 	}
 	
+	/**
+	 * This will return a cursor containing only those elements intended to display based on the passed CSV list of statuses to hide.
+	 * @param constraint comma separated list of LibStatus.STATUS enums to hide from view
+	 * @return cursor limiting data shown according to status
+	 */
 	public Cursor filterByStatus(CharSequence constraint){
-		System.out.println("all rows count: "+mDbHelper.getAll().getCount());
 		if(constraint == null){
 			return mDbHelper.getAll();
 		}else{
-			System.out.println(constraint+" count: "+mDbHelper.filterByStatus(constraint).getCount());
 			return mDbHelper.filterByStatus(constraint);
 		}		
 	}

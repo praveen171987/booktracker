@@ -12,9 +12,25 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+/**
+ * Simple activity for manually editing metadata through a UI screen.
+ * 
+ * TODO: Update based on database changes (volume ID)
+ * @author SZY4ZQ
+ *
+ */
 public class EditItem extends Activity {
+	/**
+	 * Database accessor.
+	 */
 	private WishlistDbAdapter dbHelper;
+	/**
+	 * Primary key in DB table.
+	 */
 	private Long rowId;
+	/**
+	 * One row cursor for retrieving data from the DB.
+	 */
 	private Cursor item;
 	
 	@Override
@@ -31,6 +47,10 @@ public class EditItem extends Activity {
 		populateFields();
 	}
 	
+	/**
+	 * Set values into layout fields, retrieve thumbnail from filesystem (if exists)
+	 * and set into view. 
+	 */
 	private void populateFields(){
 		Bitmap cover;
 		if(rowId != null){
@@ -56,13 +76,28 @@ public class EditItem extends Activity {
 
 	}
 	
+	/**
+	 * Convenience method to look up cover view by id.
+	 * @return container to hold cover art
+	 */
 	private ImageView getCoverView(){
 		return (ImageView) findViewById(R.id.cover);
 	}
+	/**
+	 * Convenience method to look up EditText views by id.
+	 * @param id Android R id of the requested EditText
+	 * @return the EditText appropriately cast
+	 */
 	private EditText getEditView(int id){
 		return (EditText) findViewById(id);
 	}
-	//onClick listeners:
+	/**
+	 * Callback method specified in edit_item.xml layout for the 'Save' button.
+	 * If a unique ID is present (from populateFields) then an update operation is performed
+	 * else, a new entry is created.
+	 * @param button View that was clicked (unused)
+	 * TODO: refactor to a single onclick method using the button.getId() method in a switch?
+	 */
 	public void onSaveButtonClick(View button){
 		//TODO: Refactor this, this is awful cursor to java helper method?
 		if(rowId != null){
@@ -92,6 +127,10 @@ public class EditItem extends Activity {
 		}
 		finish();
 	}
+	/**
+	 * Close the action and return to the calling Activity without persisting changes.
+	 * @param button the button that was clicked.
+	 */
 	public void onDiscardButtonClick(View button){
 		finish();
 	}

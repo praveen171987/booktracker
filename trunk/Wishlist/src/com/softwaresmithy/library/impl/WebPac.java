@@ -19,6 +19,11 @@ import com.softwaresmithy.library.Library;
 
 public class WebPac extends Library implements LibStatus{
 	private String isbnSearchUrl;
+	
+	private final String holdRegex = "((\\d*) hold[s]? on first copy returned of (\\d*) )?[cC]opies";
+	private final int totalGroups = 3;
+	private final int numHoldsGroup = 2;
+	private final int numCopiesGroup = 3;
 	@Override
 	public void init(String... strings) {
 		if(strings.length > 0){
@@ -34,16 +39,17 @@ public class WebPac extends Library implements LibStatus{
 			get = new HttpGet(String.format(this.isbnSearchUrl, isbn));
 			HttpResponse resp = client.execute(get);
 			Scanner s = new Scanner(resp.getEntity().getContent());
-			String pattern = s.findWithinHorizon("((\\d*) hold[s]? on first copy returned of (\\d*) )?[cC]opies", 0);
+			String pattern = s.findWithinHorizon(holdRegex, 0);
 			
 			if(pattern != null){
 				MatchResult match = s.match();
-				if(match.groupCount() == 3){
-					if(match.group(2) == null){
+				if(match.groupCount() == totalGroups){
+					if(match.group(numHoldsGroup) == null){
+						//Found the regex, but not enough info available to return a specific status
 						return STATUS.AVAILABLE;
 					}
-					int numHolds = Integer.parseInt(match.group(2));
-					int numCopies = Integer.parseInt(match.group(3));
+					int numHolds = Integer.parseInt(match.group(numHoldsGroup));
+					int numCopies = Integer.parseInt(match.group(numCopiesGroup));
 					if(numHolds < numCopies){
 						return STATUS.SHORT_WAIT;
 					}else if(numHolds >= numCopies && numHolds <= (2*numCopies)){
@@ -58,8 +64,9 @@ public class WebPac extends Library implements LibStatus{
 			Log.e(this.getClass().getName(), e.getMessage(), e);
 			return null;       		
     	}finally{
-    		if(get != null)
+    		if(get != null){
     			get.abort();
+    		}
     	}
 	}
 	@Override
@@ -80,8 +87,9 @@ public class WebPac extends Library implements LibStatus{
 		} catch (IOException e) {
 			Log.e(this.getClass().getName(), "failed checking compatibility", e);
 		}finally{
-			if(get != null)
+			if(get != null){
 				get.abort();
+			}
 		}
 		return false;
 	}
