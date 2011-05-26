@@ -21,7 +21,9 @@ public class LibraryFactory {
 			if(allArgs.length>1){
 				args = (String[]) Arrays.asList(allArgs).subList(1, allArgs.length).toArray(allArgs);
 			}
-        }else throw new RuntimeException("Library implementation not found in Preferences");
+        }else {
+        	throw new RuntimeException("Library implementation not found in Preferences");
+        }
 	}
 	
 	public Library getLibrary() throws IllegalAccessException, InstantiationException, ClassNotFoundException {

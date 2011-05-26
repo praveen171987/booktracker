@@ -5,7 +5,6 @@ import java.util.Date;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -28,7 +27,7 @@ public class WishlistDbAdapter {
 	public static final String COL_CLOSED_DATE="closed_date";
 	public static final String COL_STATE="state";
 	
-	public static final String[] allColumns = new String[]{COL_ID, COL_ISBN, COL_VOLUME_ID, COL_TITLE, COL_AUTHOR, COL_PUB_DATE, COL_ADD_DATE, COL_DUE_DATE, COL_CLOSED_DATE, COL_STATE};
+	public static final String[] ALL_COLUMNS = new String[]{COL_ID, COL_ISBN, COL_VOLUME_ID, COL_TITLE, COL_AUTHOR, COL_PUB_DATE, COL_ADD_DATE, COL_DUE_DATE, COL_CLOSED_DATE, COL_STATE};
 	
 	private final Context mCtx;
 	
@@ -67,7 +66,7 @@ public class WishlistDbAdapter {
 	public long createItem(BookJB b){
 		ContentValues i = new ContentValues();
 		i.put(COL_ISBN, b.getIsbn());
-		i.put(COL_VOLUME_ID, b.getVolume_id());
+		i.put(COL_VOLUME_ID, b.getVolumeId());
 		i.put(COL_TITLE, b.getTitle());
 		i.put(COL_AUTHOR, b.getAuthor());
 		if(b.getPubDate() != null){
@@ -90,7 +89,7 @@ public class WishlistDbAdapter {
 	}
 	
 	public Cursor readItem(long id){
-		Cursor c= mDb.query(DATABASE_TABLE, allColumns, COL_ID + "=?",new String[]{Long.toString(id)}, null, null, null);
+		Cursor c= mDb.query(DATABASE_TABLE, ALL_COLUMNS, COL_ID + "=?",new String[]{Long.toString(id)}, null, null, null);
 		if(c != null){
 			c.moveToFirst();
 		}
@@ -98,7 +97,7 @@ public class WishlistDbAdapter {
 	}
 	
 	public BookJB readItemByIsbn(String isbn){
-		Cursor c= mDb.query(DATABASE_TABLE, allColumns, COL_ISBN + "=?",new String[]{isbn}, null, null, null);
+		Cursor c= mDb.query(DATABASE_TABLE, ALL_COLUMNS, COL_ISBN + "=?",new String[]{isbn}, null, null, null);
 		if(c != null){
 			c.moveToFirst();
 		}
@@ -109,7 +108,7 @@ public class WishlistDbAdapter {
 		BookJB retVal = new BookJB();
 		retVal.set_id(c.getLong(c.getColumnIndexOrThrow(COL_ID)));
 		retVal.setIsbn(c.getString(c.getColumnIndexOrThrow(COL_ISBN)));
-		retVal.setVolume_id(c.getString(c.getColumnIndexOrThrow(COL_VOLUME_ID)));
+		retVal.setVolumeId(c.getString(c.getColumnIndexOrThrow(COL_VOLUME_ID)));
 		retVal.setTitle(c.getString(c.getColumnIndexOrThrow(COL_TITLE)));
 		retVal.setAuthor(c.getString(c.getColumnIndexOrThrow(COL_AUTHOR)));
 		retVal.setPubDate(new Date(c.getLong(c.getColumnIndexOrThrow(COL_PUB_DATE))));
@@ -123,7 +122,7 @@ public class WishlistDbAdapter {
 	public boolean updateItem(BookJB b){
 		ContentValues i = new ContentValues();
 		i.put(COL_ISBN, b.getIsbn());
-		i.put(COL_VOLUME_ID, b.getVolume_id());
+		i.put(COL_VOLUME_ID, b.getVolumeId());
 		i.put(COL_TITLE, b.getTitle());
 		i.put(COL_AUTHOR, b.getAuthor());
 		if(b.getPubDate() != null){
@@ -149,13 +148,13 @@ public class WishlistDbAdapter {
 		return mDb.delete(DATABASE_TABLE, COL_ID + "=?",new String[]{Long.toString(id)}) > 0;
 	}
 	public Cursor getAll(){
-		return mDb.query(DATABASE_TABLE, allColumns, null, null, null, null, null);
+		return mDb.query(DATABASE_TABLE, ALL_COLUMNS, null, null, null, null, null);
 	}
 	public WishlistDbAdapter(Context ctx){
 		this.mCtx = ctx;
 	}
 	
-	public WishlistDbAdapter open() throws SQLException {
+	public WishlistDbAdapter open() {
 		mDbHelper = new DatabaseHelper(mCtx);
 		mDb = mDbHelper.getWritableDatabase();
 		return this;
@@ -167,6 +166,6 @@ public class WishlistDbAdapter {
 
 	public Cursor filterByStatus(CharSequence constraint) {
 		String statuses = "'"+((String)constraint).replace(",","','")+"'";
-		return mDb.query(DATABASE_TABLE, allColumns, COL_STATE + " NOT IN ("+statuses+")", null, null, null, null);
+		return mDb.query(DATABASE_TABLE, ALL_COLUMNS, COL_STATE + " NOT IN ("+statuses+")", null, null, null, null);
 	}
 }

@@ -1,6 +1,7 @@
 package com.softwaresmithy.library.impl;
 
 import java.io.IOException;
+import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -73,9 +74,9 @@ public class AquaBrowser extends Library implements LibStatus {
 		try{
 			HttpResponse resp = client.execute(get);
 			StatusLine respStatus = resp.getStatusLine();
-			if(respStatus.getStatusCode() == 200){
+			if(respStatus.getStatusCode() == HttpURLConnection.HTTP_OK){
 				return true;
-			}else if(respStatus.getStatusCode() == 503 && respStatus.getReasonPhrase().equals("Rss module not active.")){
+			}else if(respStatus.getStatusCode() == HttpURLConnection.HTTP_UNAVAILABLE && respStatus.getReasonPhrase().equals("Rss module not active.")){
 				//retStatus="AquaBrowser, but unsupported";
 				return false;
 			}else{

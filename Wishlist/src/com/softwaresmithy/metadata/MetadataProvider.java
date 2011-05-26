@@ -5,6 +5,6 @@ import android.content.Context;
 import com.softwaresmithy.BookJB;
 
 public interface MetadataProvider {
-	public BookJB getInfo(String isbn);
-	public boolean saveThumbnail(Context context, String volumeId, String thumbUrl);
+	BookJB getInfo(String isbn);
+	boolean saveThumbnail(Context context, String volumeId, String thumbUrl);
 }
