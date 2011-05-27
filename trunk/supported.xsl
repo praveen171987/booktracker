@@ -25,6 +25,7 @@
         <th>Name</th>
         <th>State</th>
         <th class="sorttable_nosort">Catalog URL</th>
+		<th>System</th>
       </tr>
       <xsl:for-each select="xml/library">
 		  <tr>
@@ -48,6 +49,13 @@
 					<xsl:value-of select="arg[@key='url']"/>
 				 </xsl:attribute>
 				 <xsl:value-of select="arg[@key='url']"/>
+			  </a>
+			</td>
+			<td>
+			  <a><xsl:attribute name="href">
+					<xsl:value-of select="concat('http://code.google.com/p/booktracker/wiki/',substring-after(class,'com.softwaresmithy.library.impl.'))"/>
+				 </xsl:attribute>
+				 <xsl:value-of select="substring-after(class,'com.softwaresmithy.library.impl.')"/>
 			  </a>
 			</td>
 		  </tr>
