@@ -7,6 +7,7 @@
   * [freeVsPay]
 
 ===Implementation===
+  * [AquaBrowser]
   * [WebPac]
   * [Horizon]
   * [LibrarySolution]
