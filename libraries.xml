@@ -1,248 +1,249 @@
 <?xml version="1.0" encoding="utf-8"?>
 <?xml-stylesheet type="text/xsl" href="supported.xsl"?>
 <xml>
-  <library>
+  <library id="1">
     <name>Columbus Metropolitan</name>
     <state>OH</state>
 	<link>http://www.columbuslibrary.org</link>
     <class>com.softwaresmithy.library.impl.AquaBrowser</class>
     <arg key='url'>http://catalog.columbuslibrary.org/</arg>
   </library>
-  <library>
+  <library id="2">
     <name>Amherst County</name>
     <state>VA</state>
     <class>com.softwaresmithy.library.impl.Horizon</class>
     <arg key='url'>http://192.69.117.21/ipac20/ipac.jsp</arg>
   </library>
-  <library>
+  <library id="3">
     <name>Appomattox Regional</name>
     <state>VA</state>
     <class>com.softwaresmithy.library.impl.LibrarySolution</class>
     <arg key='url'>
     http://65.168.251.21/TLCScripts/interpac.dll</arg>
   </library>
-  <library>
+  <library id="4">
     <name>Arlington Public</name>
     <state>VA</state>
 	<link>http://library.arlingtonva.us/</link>
     <class>com.softwaresmithy.library.impl.WebPac</class>
     <arg key='url'>http://libsys.arlingtonva.us/search/</arg>
+	<arg key='scope'>1</arg>
   </library>
-  <library>
+  <library id="5">
     <name>Blackwater Regional</name>
     <state>VA</state>
     <class>com.softwaresmithy.library.impl.LibrarySolution</class>
     <arg key='url'>
     http://166.61.230.4/TLCScripts/interpac.dll</arg>
   </library>
-  <library>
+  <library id="6">
     <name>Blue Ridge Regional</name>
     <state>VA</state>
     <class>com.softwaresmithy.library.impl.LibrarySolution</class>
     <arg key='url'>
     http://www.brrl.lib.va.us/TLCScripts/interpac.dll</arg>
   </library>
-  <library>
+  <library id="7">
     <name>Campbell County</name>
     <state>VA</state>
     <class>com.softwaresmithy.library.impl.LibrarySolution</class>
     <arg key='url'>
     http://ccl.campbell.k12.va.us/TLCScripts/interpac.dll</arg>
   </library>
-  <library>
+  <library id="8">
     <name>Central Rappahannock Regional</name>
     <state>VA</state>
     <class>com.softwaresmithy.library.impl.Horizon</class>
     <arg key='url'>
     http://ipac.librarypoint.org/ipac20/ipac.jsp</arg>
   </library>
-  <library>
+  <library id="9">
     <name>Charles P. Jones</name>
     <state>VA</state>
     <class>com.softwaresmithy.library.impl.LibrarySolution</class>
     <arg key='url'>http://64.4.111.3/TLCScripts/interpac.dll</arg>
   </library>
-  <library>
+  <library id="10">
     <name>Charlotte County</name>
     <state>VA</state>
     <class>com.softwaresmithy.library.impl.LibrarySolution</class>
     <arg key='url'>
     http://www.cclibrary.net/TLCScripts/interpac.dll</arg>
   </library>
-  <library>
+  <library id="11">
     <name>Chesterfield County</name>
     <state>VA</state>
     <class>com.softwaresmithy.library.impl.WebPac</class>
     <arg key='url'>http://library.chesterfield.gov/search/</arg>
   </library>
-  <library>
+  <library id="12">
     <name>Culpeper County</name>
     <state>VA</state>
     <class>com.softwaresmithy.library.impl.LibrarySolution</class>
     <arg key='url'>
     http://pac.cclva.org/TLCScripts/interpac.dll</arg>
   </library>
-  <library>
+  <library id="13">
     <name>Falls Church</name>
     <state>VA</state>
     <class>com.softwaresmithy.library.impl.WebPac</class>
     <arg key='url'>
     http://millennium.fallschurchva.gov/search/</arg>
   </library>
-  <library>
+  <library id="14">
     <name>Fauquier County</name>
     <state>VA</state>
     <class>com.softwaresmithy.library.impl.WebPac</class>
     <arg key='url'>http://innopac.fauquiercounty.gov/search/</arg>
   </library>
-  <library>
+  <library id="15">
     <name>Fluvanna County</name>
     <state>VA</state>
     <class>com.softwaresmithy.library.impl.LibrarySolution</class>
     <arg key='url'>
     http://www.fcplva.org/TLCScripts/interpac.dll</arg>
   </library>
-  <library>
+  <library id="16">
     <name>Gloucester County</name>
     <state>VA</state>
     <class>com.softwaresmithy.library.impl.LibrarySolution</class>
     <arg key='url'>
     http://206.113.131.6/TLCScripts/interpac.dll</arg>
   </library>
-  <library>
+  <library id="17">
     <name>Hampton</name>
     <state>VA</state>
     <class>com.softwaresmithy.library.impl.Horizon</class>
     <arg key='url'>
     http://hip.hamptonpubliclibrary.org/ipac20/ipac.jsp</arg>
   </library>
-  <library>
+  <library id="18">
     <name>Jefferson-Madison Regional</name>
     <state>VA</state>
     <class>com.softwaresmithy.library.impl.WebPac</class>
     <arg key='url'>http://aries.jmrl.org/search/</arg>
   </library>
-  <library>
+  <library id="19">
     <name>Lancaster Community</name>
     <state>VA</state>
     <class>com.softwaresmithy.library.impl.LibrarySolution</class>
     <arg key='url'>
     http://207.68.46.102/TLCScripts/interpac.dll</arg>
   </library>
-  <library>
+  <library id="20">
     <name>Lonesome Pine Regional</name>
     <state>VA</state>
     <class>com.softwaresmithy.library.impl.LibrarySolution</class>
     <arg key='url'>
     http://www.lprlibrary.org/TLCScripts/interpac.dll</arg>
   </library>
-  <library>
+  <library id="21">
     <name>Loudoun County</name>
     <state>VA</state>
     <class>com.softwaresmithy.library.impl.Horizon</class>
     <arg key='url'>
     http://catalog.lcpl.lib.va.us/ipac20/ipac.jsp</arg>
   </library>
-  <library>
+  <library id="22">
     <name>Middlesex County</name>
     <state>VA</state>
     <class>com.softwaresmithy.library.impl.LibrarySolution</class>
     <arg key='url'>http://mcplva.org/TLCScripts/interpac.dll</arg>
   </library>
-  <library>
+  <library id="23">
     <name>Mountain Network</name>
     <state>VA</state>
     <class>com.softwaresmithy.library.impl.LibrarySolution</class>
     <arg key='url'>
     http://circdesk.wythegrayson.lib.va.us/TLCScripts/interpac.dll</arg>
   </library>
-  <library>
+  <library id="24">
     <name>Nottoway County</name>
     <state>VA</state>
     <class>com.softwaresmithy.library.impl.LibrarySolution</class>
     <arg key='url'>http://71.0.81.91/TLCScripts/interpac.dll</arg>
   </library>
-  <library>
+  <library id="25">
     <name>Pittsylvania County</name>
     <state>VA</state>
     <class>com.softwaresmithy.library.impl.LibrarySolution</class>
     <arg key='url'>
     http://65.254.191.49/TLCScripts/interpac.dll</arg>
   </library>
-  <library>
+  <library id="26">
     <name>Portsmouth</name>
     <state>VA</state>
     <class>com.softwaresmithy.library.impl.Horizon</class>
     <arg key='url'>http://216.54.20.117/ipac20/ipac.jsp</arg>
   </library>
-  <library>
+  <library id="27">
     <name>Pulaski County</name>
     <state>VA</state>
     <class>com.softwaresmithy.library.impl.LibrarySolution</class>
     <arg key='url'>
     http://libcat.pclibs.org/TLCScripts/interpac.dll</arg>
   </library>
-  <library>
+  <library id="28">
     <name>Rockbridge Regional</name>
     <state>VA</state>
     <class>com.softwaresmithy.library.impl.LibrarySolution</class>
     <arg key='url'>
     http://206.248.241.200/TLCScripts/interpac.dll</arg>
   </library>
-  <library>
+  <library id="29">
     <name>Russell County</name>
     <state>VA</state>
     <class>com.softwaresmithy.library.impl.LibrarySolution</class>
     <arg key='url'>
     http://69.27.84.133/TLCScripts/interpac.dll</arg>
   </library>
-  <library>
+  <library id="30">
     <name>Samuels</name>
     <state>VA</state>
     <class>com.softwaresmithy.library.impl.Horizon</class>
     <arg key='url'>
     http://horizon.samuelslibrary.net/ipac20/ipac.jsp</arg>
   </library>
-  <library>
+  <library id="31">
     <name>Shenandoah County</name>
     <state>VA</state>
     <class>com.softwaresmithy.library.impl.LibrarySolution</class>
     <arg key='url'>
     http://204.111.4.131/TLCScripts/interpac.dll</arg>
   </library>
-  <library>
+  <library id="32">
     <name>Southside Regional</name>
     <state>VA</state>
     <class>com.softwaresmithy.library.impl.LibrarySolution</class>
     <arg key='url'>
     http://12.131.0.195/TLCScripts/interpac.dll</arg>
   </library>
-  <library>
+  <library id="33">
     <name>Valley Libraries Connection</name>
     <state>VA</state>
     <class>com.softwaresmithy.library.impl.LibrarySolution</class>
     <arg key='url'>
     http://www.valleylibraries.org/TLCScripts/interpac.dll</arg>
   </library>
-  <library>
+  <library id="34">
     <name>Washington County</name>
     <state>VA</state>
     <class>com.softwaresmithy.library.impl.WebPac</class>
     <arg key='url'>http://innopac.hal.org/search/</arg>
   </library>
-  <library>
+  <library id="35">
     <name>Watauga Regional</name>
     <state>VA</state>
     <class>com.softwaresmithy.library.impl.WebPac</class>
     <arg key='url'>http://libraries.etsu.edu/search/</arg>
   </library>
-  <library>
+  <library id="36">
     <name>Williamsburg Regional</name>
     <state>VA</state>
     <class>com.softwaresmithy.library.impl.Horizon</class>
     <arg key='url'>http://catalog.wrl.org/ipac20/ipac.jsp</arg>
   </library>
-  <library>
+  <library id="37">
     <name>York County</name>
     <state>VA</state>
     <class>com.softwaresmithy.library.impl.Horizon</class>
