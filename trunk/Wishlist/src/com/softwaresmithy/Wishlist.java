@@ -36,6 +36,7 @@ import com.softwaresmithy.library.Library;
 import com.softwaresmithy.library.LibraryFactory;
 import com.softwaresmithy.metadata.DataProviderFactory;
 import com.softwaresmithy.metadata.MetadataProvider;
+import com.softwaresmithy.preferences.Preferences;
 
 public class Wishlist extends ListActivity {
 	
@@ -71,7 +72,7 @@ public class Wishlist extends ListActivity {
         //TODO: How do I get one of those screens that runs on the initial load of the application but not any other time?
         try {
         	SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-            String prefVal = prefs.getString(getString(R.string.perf_libName), null);
+            String prefVal = prefs.getString(getString(R.string.pref_key_libChoice), null);
             if(prefVal == null){
             	//Show preferences on initial load
             	Intent i = new Intent(this, Preferences.class);
@@ -117,6 +118,7 @@ public class Wishlist extends ListActivity {
     	listCursor = mDbHelper.getAll();
     	startManagingCursor(listCursor);
     	
+    	//TODO: getExternalCacheDir is null if you're in USB Connect mode, check for that!
     	listData = new ImageCursorAdapter(this, mDbHelper, R.layout.list_item, listCursor, mapFrom, mapTo,getExternalCacheDir().getAbsolutePath());
     	setListAdapter(listData);
     	
@@ -299,7 +301,7 @@ public class Wishlist extends ListActivity {
     	default:
     		Log.w(this.getClass().getName(), "Unexpected dialog selected");
 		}
-		return null;
+		return super.onCreateDialog(id);
 	}    
 	
 	public boolean validIsbn(String isbn){

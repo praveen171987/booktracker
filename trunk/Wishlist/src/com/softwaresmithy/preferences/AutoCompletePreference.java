@@ -1,4 +1,4 @@
-package com.softwaresmithy.view;
+package com.softwaresmithy.preferences;
 
 import java.util.List;
 
@@ -8,28 +8,29 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
+import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-
-import com.softwaresmithy.LibraryJB;
-import com.softwaresmithy.LibraryResourceAdapter;
-import com.softwaresmithy.library.LibraryResourceParser;
 
 public class AutoCompletePreference extends EditTextPreference {
 
-	private static AutoCompleteTextView mEditText = null;
-
+	private AutoCompleteTextView mEditText = null;
+	private final String[] COUNTRIES = new String[] {
+        "Belgium", "France", "Italy", "Germany", "Spain"
+    };
+	private ArrayAdapter<? extends Object> adapter;
+	
 	public AutoCompletePreference(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		mEditText = new AutoCompleteTextView(context, attrs);
 		mEditText.setThreshold(0);
-		//ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_dropdown_item_1line, COUNTRIES);
-		List<LibraryJB> libList = new LibraryResourceParser(context).getLibraries();
-		LibraryResourceAdapter adapter = new LibraryResourceAdapter(context, android.R.layout.simple_dropdown_item_1line, libList);
+		adapter = new ArrayAdapter<String>(context, android.R.layout.simple_dropdown_item_1line, COUNTRIES);
 		mEditText.setAdapter(adapter);
 	}
-    private static final String[] COUNTRIES = new String[] {
-        "Belgium", "France", "Italy", "Germany", "Spain"
-    };
+	
+	public void setAdapterContent(List<String> newList) {
+		adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_dropdown_item_1line, newList);
+		mEditText.setAdapter(adapter);
+	}
 
 	@Override
 	protected void onBindDialogView(View view) {
@@ -55,4 +56,12 @@ public class AutoCompletePreference extends EditTextPreference {
             }
         }
 	}
+
+	@Override
+	public void setEnabled(boolean enabled) {
+		super.setEnabled(enabled);
+		mEditText.setEnabled(enabled);
+	}
+	
+	
 }

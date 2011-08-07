@@ -168,4 +168,10 @@ public class WishlistDbAdapter {
 		String statuses = "'"+((String)constraint).replace(",","','")+"'";
 		return mDb.query(DATABASE_TABLE, ALL_COLUMNS, COL_STATE + " NOT IN ("+statuses+")", null, null, null, null);
 	}
+	public boolean resetState() {
+		ContentValues nullState = new ContentValues();
+		nullState.putNull(COL_STATE);
+		int numRows = mDb.update(DATABASE_TABLE, nullState, null, null);
+		return numRows > 0;
+	}
 }

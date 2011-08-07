@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:a="http://schemas.android.com/apk/res/android">
   	<PreferenceCategory a:title="Library Preferences">
-		<com.softwaresmithy.view.AutoCompletePreference 
-			a:title="AutoComplete Preference"
-			a:key="libChoice"/>
+  		<ListPreference a:key="@string/pref_key_stateName"
+  			a:title="@string/pref_state_title"
+  			a:enabled="false"
+  			/>
+  			
+		<com.softwaresmithy.preferences.AutoCompletePreference 
+			a:title="@string/pref_lib_name"
+			a:key="@string/pref_key_libChoice"
+			a:enabled="false"
+			/>
   	</PreferenceCategory>
 </PreferenceScreen>
