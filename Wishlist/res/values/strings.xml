@@ -21,8 +21,18 @@
     <string name="del_message">Do you want to delete this item?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    
+    
     <string name="view_prefs">Preferences</string>
+    <string name="pref_state_title">State</string>
+    <string name="pref_lib_name">Library Name</string>
     
     <!-- Application specific internal constants -->
-    <string name="perf_libName">libName</string>
+    <string name="pref_key_libChoice">libChoice</string>
+    <string name="pref_key_stateName">stateName</string>
+    
+    <!-- Preferences Display Values -->
+    <string name="switch_lib_title">Are you sure?</string>
+    <string name="switch_lib_message">Switching libraries will delete all existing availability information, would you like to continue?</string>
+    
 </resources>

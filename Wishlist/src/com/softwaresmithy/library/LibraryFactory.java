@@ -1,34 +1,52 @@
 package com.softwaresmithy.library;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.util.Arrays;
 
-import com.softwaresmithy.R;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathFactory;
+
+import org.w3c.dom.Node;
+import org.xml.sax.InputSource;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Environment;
 import android.preference.PreferenceManager;
+
+import com.softwaresmithy.R;
 
 
 public class LibraryFactory {
 	private String className;
-	private String[] args;
+	private Node libNode;
 	public LibraryFactory(Context context){
     	SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        String prefVal = prefs.getString(context.getString(R.string.perf_libName), null);
-        if(prefVal != null){
-			String[] allArgs = prefVal.split(" ");
-			className = allArgs[0];
-			if(allArgs.length>1){
-				args = (String[]) Arrays.asList(allArgs).subList(1, allArgs.length).toArray(allArgs);
-			}
-        }else {
-        	throw new RuntimeException("Library implementation not found in Preferences");
-        }
+        String libName = prefs.getString(context.getString(R.string.pref_key_libChoice), null);
+        String stateName = prefs.getString(context.getString(R.string.pref_key_stateName), null);
+        if(libName != null && stateName != null){
+        	File libXml = new File(Environment.getExternalStorageDirectory(), "libraries.xml");
+        	if(libXml.exists()){
+        		try {
+					InputSource source = new InputSource(new FileInputStream(libXml));
+					XPath newXPath = XPathFactory.newInstance().newXPath();
+					String libNodeXpath = "/xml/library[state='"+stateName+"' and name='"+libName+"']";
+					libNode = (Node) newXPath.evaluate(libNodeXpath, source, XPathConstants.NODE);
+					className = newXPath.evaluate("class", libNode);
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+        	}
+
+       }else throw new RuntimeException("Library implementation not found in Preferences");
 	}
 	
 	public Library getLibrary() throws IllegalAccessException, InstantiationException, ClassNotFoundException {
 		Library clazz = (Library) Class.forName(className).newInstance();
-		clazz.init(args);
+		clazz.init(libNode);
 		return clazz;
 	}
 }
