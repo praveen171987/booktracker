@@ -6,7 +6,7 @@
     <state>OH</state>
 	<link>http://www.columbuslibrary.org</link>
     <class>com.softwaresmithy.library.impl.AquaBrowser</class>
-    <arg key='url'>http://catalog.columbuslibrary.org/</arg>
+    <arg key='url'>http://catalog.columbuslibrary.org/rss.ashx?q=%s&amp;uilang=en</arg>
   </library>
   <library id="2">
     <name>Amherst County</name>
