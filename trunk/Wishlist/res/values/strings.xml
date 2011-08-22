@@ -7,6 +7,7 @@
     <string name="add_scratch">Add from Scratch</string>
     <string name="edit_item">Edit</string>
     <string name="delete_item">Delete</string>
+    <string name="update_item">Update Status</string>
     <string name="title_label">Title</string>
     <string name="author_label">Author</string>
     <string name="isbn_label">ISBN (required)</string>
@@ -22,14 +23,25 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     
+    <!-- Loading Lib XML File Dialog -->
+    <string name="xml_refresh_title">Refreshing XML</string>
+    <string name="xml_refresh_message">Loading most recent list of libraries</string>
     
     <string name="view_prefs">Preferences</string>
+    <string name="pref_cat_lib">Library Preferences</string>
     <string name="pref_state_title">State</string>
     <string name="pref_lib_name">Library Name</string>
+    <string name="pref_xml_file">Refresh Resource File</string>
+    <string name="pref_xml_file_summary">Last updated %s</string>
+    <string name="pref_cat_application">Application Preferences</string>
+    
+    <string name="file_date_format">MM/dd/yyyy hh:mm aa</string>
+    
     
     <!-- Application specific internal constants -->
     <string name="pref_key_libChoice">libChoice</string>
     <string name="pref_key_stateName">stateName</string>
+    <string name="pref_key_xml_file">xmlFile</string>
     
     <!-- Preferences Display Values -->
     <string name="switch_lib_title">Are you sure?</string>

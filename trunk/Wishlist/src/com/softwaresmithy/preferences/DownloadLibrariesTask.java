@@ -20,13 +20,15 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Environment;
 import android.util.Log;
 
 import com.softwaresmithy.util.MapList;
 
-public class DownloadLibrariesTask extends AsyncTask<Object, Void, Boolean> {
+public class DownloadLibrariesTask extends AsyncTask<Object, Void, Long> {
 	
 	private XPathExpression rootXpath;
 	private XPathExpression libraries;
@@ -38,6 +40,8 @@ public class DownloadLibrariesTask extends AsyncTask<Object, Void, Boolean> {
 	private MapList<String, String> libList = new MapList<String, String>();
 	private XPath xpath;
 	private Node rootNode;
+
+	private Context fContext;
 	
 	public DownloadLibrariesTask() {
 		super();
@@ -53,22 +57,26 @@ public class DownloadLibrariesTask extends AsyncTask<Object, Void, Boolean> {
 			Log.e(this.getClass().getName(), "xpath error", e);
 		}		
 	}
-	
+	public void setContext(Context aContext){
+		fContext = aContext;
+	}
 	@Override
-	protected Boolean doInBackground(Object... params) {
+	protected Long doInBackground(Object... params) {
+		HttpClient client = (HttpClient) params[0];
+		HttpGet getLibs = new HttpGet((String)params[1]);
+		Boolean reload = params.length > 2 ? (Boolean) params[2] : false;
 		
 		File storageDir = Environment.getExternalStorageDirectory();
 		File libXml = new File(storageDir, "libraries.xml");
 		InputSource inputSource = null;
 		try {
-			if(libXml.exists()){
+			if(libXml.exists() && !reload){
 				inputSource = new InputSource(new FileInputStream(libXml));
 			}else {
-				HttpClient client = (HttpClient) params[0];
-				HttpGet getLibs = new HttpGet((String)params[1]);		
 				HttpResponse resp = client.execute(getLibs);
 				InputStream is = resp.getEntity().getContent();
 				
+				libXml.delete();
 				if(libXml.createNewFile()){
 					FileOutputStream fos = new FileOutputStream(libXml);
 					try {
@@ -103,7 +111,7 @@ public class DownloadLibrariesTask extends AsyncTask<Object, Void, Boolean> {
 				inputSource.getByteStream().close();
 			} catch (Exception e) {}
 		}
-		return null;
+		return libXml.lastModified();
 	}
 	
 	public Set<String> getDistinctStates() {
@@ -112,5 +120,6 @@ public class DownloadLibrariesTask extends AsyncTask<Object, Void, Boolean> {
 
 	public Node getRootNode() {
 		return rootNode;
-	} 
+	}
+
 }
