@@ -1,6 +1,8 @@
 package com.softwaresmithy.preferences;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -16,13 +18,16 @@ import org.w3c.dom.NodeList;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
 import android.content.DialogInterface.OnClickListener;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
+import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.widget.Toast;
@@ -39,41 +44,12 @@ public class Preferences extends PreferenceActivity implements OnClickListener, 
 	private Node rootNode;
 	private XPath xpath = XPathFactory.newInstance().newXPath();
 	private WishlistClickListener listener = new WishlistClickListener();
+	private SimpleDateFormat xmlDateFormat;
 	
 	private String oldValue;
 	
 	public Preferences() {
 		client = new DefaultHttpClient();
-		
-		new DownloadLibrariesTask(){
-
-			@Override
-			protected void onPostExecute(Boolean result) {
-				super.onPostExecute(result);
-				
-				distinctStates = getDistinctStates();
-					
-				CharSequence[] distinctStatesArray = distinctStates.toArray(new String[]{});
-				
-				ListPreference stateList = (ListPreference) findPreference(getText(R.string.pref_key_stateName));	
-				AutoCompletePreference libraries = (AutoCompletePreference) findPreference(getText(R.string.pref_key_libChoice));
-
-				stateList.setEntries(distinctStatesArray);
-				stateList.setEntryValues(distinctStatesArray);
-				stateList.setEnabled(true);
-				
-				rootNode = getRootNode();
-				
-				String selectedState = stateList.getValue();
-				if(selectedState != null){
-					libraries.setAdapterContent(getLibraryNames(selectedState));
-					libraries.setEnabled(true);
-
-				}
-			}
-			
-		}.execute(client, XML_URL);
-		
 	}
 	@Override
 	/* Steps:
@@ -86,8 +62,28 @@ public class Preferences extends PreferenceActivity implements OnClickListener, 
 		super.onCreate(savedInstanceState);
 		addPreferencesFromResource(R.xml.global_prefs);
 		
-		ListPreference stateList = (ListPreference) findPreference(getText(R.string.pref_key_stateName));	
+		final Preference xmlFile = findPreference(getString(R.string.pref_key_xml_file));
+		
+		xmlFile.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+			@Override
+			public boolean onPreferenceClick(Preference preference) {
+				new GetLibraries().execute(client, XML_URL, true);
+				return true;
+			}
+		});
+		xmlFile.setSummary(getFormattedFileDate());
+		
+		ListPreference stateList = (ListPreference) findPreference(getText(R.string.pref_key_stateName));
+		stateList.setSummary(getPreferences().getString(getString(R.string.pref_key_stateName), ""));
+		
+		if(distinctStates == null) {
+			new GetLibraries().execute(client, XML_URL);
+		}else {
+			stateList.setEnabled(true);
+		}
+		
 		final AutoCompletePreference libraries = (AutoCompletePreference) findPreference(getText(R.string.pref_key_libChoice));
+		libraries.setSummary(getPreferences().getString(getString(R.string.pref_key_libChoice), ""));
 		
 		stateList.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
 			
@@ -103,7 +99,7 @@ public class Preferences extends PreferenceActivity implements OnClickListener, 
 			
 			@Override
 			public boolean onPreferenceChange(Preference preference, Object newValue) {
-				oldValue = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).getString(preference.getKey(), null);
+				oldValue = getPreferences().getString(preference.getKey(), null);
 				if(!oldValue.equals(newValue)){
 					showDialog(DIALOG_CHANGE_LIBRARY);
 				}
@@ -111,6 +107,19 @@ public class Preferences extends PreferenceActivity implements OnClickListener, 
 			}
 		});
 		
+	}
+	
+	private SharedPreferences getPreferences() {
+		return PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+	}
+	
+	private String getFormattedFileDate() {
+		if(xmlDateFormat == null){
+			xmlDateFormat = new SimpleDateFormat(getString(R.string.file_date_format));
+		}
+		
+		Long updateTime = getPreferences().getLong(getString(R.string.pref_key_xml_file), 0);
+		return String.format(getString(R.string.pref_xml_file_summary), xmlDateFormat.format(new Date(updateTime)));
 	}
 	private List<String> getLibraryNames(String state) {
 		try {
@@ -148,7 +157,7 @@ public class Preferences extends PreferenceActivity implements OnClickListener, 
 	@Override
 	public void onClick(DialogInterface dialog, int which) {
 		if(which != DialogInterface.BUTTON_POSITIVE){
-			PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit()
+			getPreferences().edit()
 				.putString(getString(R.string.pref_key_libChoice), oldValue).commit();
 			Toast.makeText(this, "Fine, keep it!", Toast.LENGTH_LONG).show();
 		}else {
@@ -160,8 +169,44 @@ public class Preferences extends PreferenceActivity implements OnClickListener, 
 	}
 	@Override
 	public void onCancel(DialogInterface dialog) {
-		PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit()
+		getPreferences().edit()
 			.putString(getString(R.string.pref_key_libChoice), oldValue).commit();
 		Toast.makeText(this, "Fine, keep it!", Toast.LENGTH_LONG).show();
+	}
+	
+	private class GetLibraries extends DownloadLibrariesTask {
+		private ProgressDialog fProgressDialog;
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+			fProgressDialog = ProgressDialog.show(Preferences.this, getString(R.string.xml_refresh_title), getString(R.string.xml_refresh_message), true, false);
+		}
+		@Override
+		protected void onPostExecute(Long lastModifiedTime) {
+			super.onPostExecute(lastModifiedTime);
+			
+			distinctStates = getDistinctStates();
+				
+			CharSequence[] distinctStatesArray = distinctStates.toArray(new String[]{});
+			
+			ListPreference stateList = (ListPreference) findPreference(getText(R.string.pref_key_stateName));	
+			AutoCompletePreference libraries = (AutoCompletePreference) findPreference(getText(R.string.pref_key_libChoice));
+
+			stateList.setEntries(distinctStatesArray);
+			stateList.setEntryValues(distinctStatesArray);
+			stateList.setEnabled(true);
+			
+			rootNode = getRootNode();
+			
+			String selectedState = stateList.getValue();
+			if(selectedState != null){
+				libraries.setAdapterContent(getLibraryNames(selectedState));
+				libraries.setEnabled(true);
+			}
+			getPreferences().edit().putLong(getString(R.string.pref_key_xml_file), lastModifiedTime).commit();
+			findPreference(getString(R.string.pref_key_xml_file)).setSummary(getFormattedFileDate());
+			fProgressDialog.dismiss();
+		}
+		
 	}
 }

@@ -3,4 +3,6 @@
 		a:title="@string/edit_item"/>
 	<item a:id="@+id/delete_item"
 		a:title="@string/delete_item"/>
+	<item a:id="@+id/update_item"
+		a:title="@string/update_item"/>
 </menu>

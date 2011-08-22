@@ -6,12 +6,16 @@ import java.util.HashSet;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ListActivity;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.ContextMenu;
@@ -32,6 +36,8 @@ import android.widget.Toast;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
+import com.softwaresmithy.NotificationService.LocalBinder;
+import com.softwaresmithy.library.LibStatus.STATUS;
 import com.softwaresmithy.library.Library;
 import com.softwaresmithy.library.LibraryFactory;
 import com.softwaresmithy.metadata.DataProviderFactory;
@@ -61,13 +67,34 @@ public class Wishlist extends ListActivity {
 	//Same index used to map from database table column to layout ID in item view
 	private String[] mapFrom = new String[]{WishlistDbAdapter.COL_TITLE, WishlistDbAdapter.COL_AUTHOR};	
 	private int[] mapTo = new int[]{R.id.title, R.id.author};
+	private NotificationService localService;
+	private ServiceConnection serviceConnection = new ServiceConnection() {
+
+		@Override
+		public void onServiceConnected(ComponentName name, IBinder service) {
+			System.out.println("service connected!");
+			localService = ((LocalBinder)service).getService();
+			localService.setLibrary(library);
+			localService.setDatabase(mDbHelper);
+		}
+
+		@Override
+		public void onServiceDisconnected(ComponentName name) {
+			System.out.println("service unconnected!");
+		}
+		
+	};
 	
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        
         setContentView(R.layout.main);
         registerForContextMenu(getListView());
+        
+        Intent toService = new Intent(this, NotificationService.class );
+        bindService(toService, serviceConnection, Context.BIND_AUTO_CREATE);
         
         //TODO: How do I get one of those screens that runs on the initial load of the application but not any other time?
         try {
@@ -99,7 +126,6 @@ public class Wishlist extends ListActivity {
 	        	startActivity(intent);
             }
           });
-
         
         mDbHelper = new WishlistDbAdapter(this);
         mDbHelper.open();
@@ -143,6 +169,11 @@ public class Wishlist extends ListActivity {
     		selectedItem = info.id;
 			showDialog(DIALOG_DELETE_ITEM);
     		break;
+    	case R.id.update_item:
+    		Cursor c = mDbHelper.readItem(info.id);
+    		String isbn = c.getString(
+					c.getColumnIndexOrThrow(WishlistDbAdapter.COL_ISBN));
+    		localService.getStatus(isbn);
     	default:
     		Log.w(this.getClass().getName(), "Unexpected context menu item selected");
     	}
