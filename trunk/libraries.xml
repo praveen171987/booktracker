@@ -26,7 +26,7 @@
     <state>VA</state>
 	<link>http://library.arlingtonva.us/</link>
     <class>com.softwaresmithy.library.impl.WebPac</class>
-    <arg key='url'>http://libsys.arlingtonva.us/search/?searchtype=i&searcharg=%s&searchscope=1</arg>
+    <arg key='url'>http://libsys.arlingtonva.us/search/?searchtype=i&amp;searcharg=%s&amp;searchscope=1</arg>
 	<arg key='scope'>1</arg>
   </library>
   <library id="5">
