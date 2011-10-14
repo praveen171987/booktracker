@@ -10,15 +10,19 @@ This is my list of objectives, hopefully it won't grow too much faster than they
 ==Short Term (this month)==
   * Add periodic polling for status updates from library
   * XSLT to map google book data to custom format as item details (short click on item) (means it's only available when user is online, is that an issue?)
-  * Notification when an item becomes available/status changes
+  * ~~Notification when an item becomes available/status changes~~
   * ~~Define Library interface(s) for future expansion/compatability~~
   * Make list filterable by ~~status~~ and/or by text
+  * Required art assets
+    * Application icon
+    * Notification icon (same thing?)
+    * Generic cover art
 
 ==Medium Term (next month)==
   * Refactor to Fragments for Android 3.0
-  * Create a Settings page for easy customization
+  * ~~Create a Settings page for easy customization~~
     * Decide on what qualifies as settable
-  * Clean up error handling (network unavailable)
+  * Clean up error handling (network unavailable, etc.)
   * Set up a web presence for advertising/support/feedback
   * ~~Register as an Android Dev~~
   * Further library integration (making and tracking reservations)
