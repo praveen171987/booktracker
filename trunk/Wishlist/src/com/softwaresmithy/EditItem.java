@@ -2,6 +2,8 @@ package com.softwaresmithy;
 
 import java.io.File;
 import java.util.Date;
+import java.util.List;
+import java.util.Arrays;
 
 import android.app.Activity;
 import android.database.Cursor;
@@ -11,6 +13,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 
 /**
  * Simple activity for manually editing metadata through a UI screen.
@@ -33,6 +36,8 @@ public class EditItem extends Activity {
 	 */
 	private Cursor item;
 	
+	private List<String> statuses;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -43,7 +48,7 @@ public class EditItem extends Activity {
 		
 		Bundle extras = getIntent().getExtras();
 		rowId = extras != null ? extras.getLong(WishlistDbAdapter.COL_ID) : null;
-		
+		statuses = Arrays.asList(getResources().getStringArray(R.array.enum_map));
 		populateFields();
 	}
 	
@@ -56,6 +61,10 @@ public class EditItem extends Activity {
 		if(rowId != null){
 			item = dbHelper.readItem(rowId);
 			startManagingCursor(item);
+			Spinner status = (Spinner) findViewById(R.id.status_spinner);
+			status.setSelection(statuses.indexOf(item.getString(
+					item.getColumnIndexOrThrow(WishlistDbAdapter.COL_STATE))));
+			
 			getEditView(R.id.title_text).setText(item.getString(
 					item.getColumnIndexOrThrow(WishlistDbAdapter.COL_TITLE)));
 			getEditView(R.id.author_text).setText(item.getString(
@@ -63,7 +72,10 @@ public class EditItem extends Activity {
 			String isbn = item.getString(
 					item.getColumnIndexOrThrow(WishlistDbAdapter.COL_ISBN));
 			getEditView(R.id.isbn_text).setText(isbn);
-			File file = new File(getExternalCacheDir(),isbn+".jpg");
+			
+			String id = item.getString(
+					item.getColumnIndexOrThrow(WishlistDbAdapter.COL_VOLUME_ID));
+			File file = new File(getExternalCacheDir(),id+".jpg");
 			if(file.exists()){
 				cover = BitmapFactory.decodeFile(file.getAbsolutePath());
 			}else{
@@ -96,11 +108,12 @@ public class EditItem extends Activity {
 	 * If a unique ID is present (from populateFields) then an update operation is performed
 	 * else, a new entry is created.
 	 * @param button View that was clicked (unused)
-	 * TODO: refactor to a single onclick method using the button.getId() method in a switch?
+	 * TODO: refactor to a single onClick method using the button.getId() method in a switch?
 	 */
 	public void onSaveButtonClick(View button){
 		//TODO: Refactor this, this is awful cursor to java helper method?
 		if(rowId != null){
+			Spinner status = (Spinner) findViewById(R.id.status_spinner);
 			dbHelper.updateItem(new BookJB(
 					rowId, 
 					getEditView(R.id.isbn_text).getText().toString(), 
@@ -111,7 +124,7 @@ public class EditItem extends Activity {
 					new Date(item.getLong(item.getColumnIndexOrThrow(WishlistDbAdapter.COL_ADD_DATE))),
 					null,//getEditView(R.id.duedate_text).getText().toString(), 
 					null, 
-					null));
+					status.getSelectedItem().toString()));
 		}else { //creating a new one
 			dbHelper.createItem(new BookJB(
 					null, 

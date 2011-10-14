@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Map;
 
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
@@ -36,17 +37,10 @@ public class AquaBrowser extends AndroidLibStatus {
 			Log.e(this.getClass().getName(), "Something bad happened building xpath constants", e);
 		}
 	}
-	@Override
-	public void init(String... strings) {
-		if(strings.length > 0){
-			this.isbnSearchUrl = strings[0];
+	public void init(Map<String, String> args) {
+		if(args.containsKey("url")){
+			this.isbnSearchUrl = args.get("url");
 		}
-	}
-	
-	@Override
-	public void init(Node xmlNode) {
-		super.init(xmlNode);
-		this.isbnSearchUrl = getArgs().get("url");
 	}
 
 	@Override

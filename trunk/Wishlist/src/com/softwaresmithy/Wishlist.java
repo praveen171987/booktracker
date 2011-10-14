@@ -37,14 +37,15 @@ import android.widget.Toast;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.softwaresmithy.NotificationService.LocalBinder;
-import com.softwaresmithy.library.LibStatus.STATUS;
+import com.softwaresmithy.library.AndroidLibStatus.STATUS;
+import com.softwaresmithy.library.LibStatusListener;
 import com.softwaresmithy.library.Library;
 import com.softwaresmithy.library.LibraryFactory;
 import com.softwaresmithy.metadata.DataProviderFactory;
 import com.softwaresmithy.metadata.MetadataProvider;
 import com.softwaresmithy.preferences.Preferences;
 
-public class Wishlist extends ListActivity {
+public class Wishlist extends ListActivity implements LibStatusListener {
 	
 	private WishlistDbAdapter mDbHelper;
 	private EditText isbnInput;
@@ -76,11 +77,13 @@ public class Wishlist extends ListActivity {
 			localService = ((LocalBinder)service).getService();
 			localService.setLibrary(library);
 			localService.setDatabase(mDbHelper);
+			localService.registerLibStatusListener(Wishlist.this);
 		}
 
 		@Override
 		public void onServiceDisconnected(ComponentName name) {
 			System.out.println("service unconnected!");
+			localService = null;
 		}
 		
 	};
@@ -89,6 +92,7 @@ public class Wishlist extends ListActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        
         
         setContentView(R.layout.main);
         registerForContextMenu(getListView());
@@ -356,4 +360,11 @@ public class Wishlist extends ListActivity {
     	}
     	return false;
     }
+
+	@Override
+	public void onItemStatusChange(String isbn, STATUS result) {
+		//refresh the screen when a status has changed
+		fillData();
+		
+	}
 }

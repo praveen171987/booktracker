@@ -3,6 +3,7 @@ package com.softwaresmithy.library.impl;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.regex.MatchResult;
 
@@ -14,10 +15,9 @@ import org.apache.http.impl.client.DefaultHttpClient;
 
 import android.util.Log;
 
-import com.softwaresmithy.library.LibStatus;
-import com.softwaresmithy.library.Library;
+import com.softwaresmithy.library.AndroidLibStatus;
 
-public class WebPac extends Library implements LibStatus{
+public class WebPac extends AndroidLibStatus{
 	private String isbnSearchUrl;
 	
 	private final String holdRegex = "((\\d*) hold[s]? on first copy returned of (\\d*) )?[cC]opies";
@@ -25,9 +25,9 @@ public class WebPac extends Library implements LibStatus{
 	private final int numHoldsGroup = 2;
 	private final int numCopiesGroup = 3;
 	@Override
-	public void init(String... strings) {
-		if(strings.length > 0){
-			this.isbnSearchUrl = strings[0];
+	public void init(Map<String, String> args) {
+		if(args.containsKey("url")){
+			this.isbnSearchUrl = args.get("url");
 		}
 		
 	}

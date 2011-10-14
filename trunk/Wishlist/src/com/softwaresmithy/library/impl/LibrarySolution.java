@@ -1,6 +1,7 @@
 package com.softwaresmithy.library.impl;
 
 import java.net.URISyntaxException;
+import java.util.Map;
 
 import com.softwaresmithy.library.LibStatus;
 import com.softwaresmithy.library.Library;
@@ -19,10 +20,9 @@ public class LibrarySolution extends Library implements LibStatus {
 	/**
 	 * Initialize the URL
 	 */
-	@Override
-	public void init(String... strings) {
-		if(strings.length > 0){
-			this.url = strings[0];
+	public void init(Map<String, String> args) {
+		if(args.containsKey("url")){
+			this.url = args.get("url");
 		}
 	}	
 	

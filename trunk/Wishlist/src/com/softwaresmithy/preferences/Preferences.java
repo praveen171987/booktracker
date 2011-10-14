@@ -100,7 +100,7 @@ public class Preferences extends PreferenceActivity implements OnClickListener, 
 			@Override
 			public boolean onPreferenceChange(Preference preference, Object newValue) {
 				oldValue = getPreferences().getString(preference.getKey(), null);
-				if(!oldValue.equals(newValue)){
+				if(oldValue != null && !oldValue.equals(newValue)){
 					showDialog(DIALOG_CHANGE_LIBRARY);
 				}
 				return true;

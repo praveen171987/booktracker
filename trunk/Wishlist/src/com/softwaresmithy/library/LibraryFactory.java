@@ -46,7 +46,7 @@ public class LibraryFactory {
 	
 	public Library getLibrary() throws IllegalAccessException, InstantiationException, ClassNotFoundException {
 		Library clazz = (Library) Class.forName(className).newInstance();
-		clazz.init(libNode);
+		clazz.parseNode(libNode);
 		return clazz;
 	}
 }
