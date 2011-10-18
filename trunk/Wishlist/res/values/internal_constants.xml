@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- DO NOT LOCALIZE -->
+<!-- These are internal system settings, not visible to the user -->
+<resources>
+    <!-- Application specific internal constants -->
+    <string name="pref_key_libChoice">libChoice</string>
+    <string name="pref_key_stateName">stateName</string>
+    <string name="pref_key_xml_file">xmlFile</string>
+    <string name="pref_key_data_import">importExport</string>
+</resources>

@@ -19,7 +19,8 @@
             </intent-filter>
         </activity>
 		<activity android:name=".EditItem"/>
-		<activity android:name="com.softwaresmithy.preferences.Preferences"/>
+		<activity android:name=".preferences.Preferences"/>
+		<activity android:name=".DataImportExport"/>
 		<service android:label="Notification Service" android:name="NotificationService"/>
     </application>
 </manifest>
