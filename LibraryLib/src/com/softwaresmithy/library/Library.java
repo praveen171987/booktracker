@@ -38,8 +38,8 @@ public abstract class Library {
 	private String link;
 	private Map<String, String> args = new HashMap<String, String>();
 	
-	public abstract void init(String...strings);
-	public void init(Node xmlNode) {
+	public abstract void init(Map<String, String> args);
+	public void parseNode(Node xmlNode) {
 		try {
 			name = nameXml.evaluate(xmlNode);
 			state = stateXml.evaluate(xmlNode);
@@ -51,6 +51,7 @@ public abstract class Library {
 				String val = argNode.getTextContent();
 				args.put(key, val);
 			}
+			init(args);
 		} catch (XPathExpressionException e) {
 			e.printStackTrace();
 		}		
