@@ -71,9 +71,13 @@ public class NotificationService extends Service implements LibStatusListener {
 		if(currentStatusStr != null){
 			oldStatus = STATUS.valueOf(currentStatusStr);
 		}
-		if(result == STATUS.AVAILABLE && oldStatus != result){
+		
+		if(result != null) {
 			changedBook.setState(result.name());
 			mDbHelper.updateItem(changedBook);
+		}
+		
+		if(result == STATUS.AVAILABLE && oldStatus != result){
 			Notification notification = new Notification(R.drawable.unknown, 
 					getString(R.string.app_name), System.currentTimeMillis());
 			Context context = getApplicationContext();

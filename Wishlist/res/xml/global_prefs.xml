@@ -16,7 +16,10 @@
 			a:summary="@string/pref_xml_file_summary"/>
   	</PreferenceCategory>
   	<PreferenceCategory a:title="@string/pref_cat_application">
-  	
+  		<Preference 
+  			a:title="@string/pref_data_import_button"
+  			a:key="@string/pref_key_data_import">
+  		</Preference>
   	</PreferenceCategory>
   	
 </PreferenceScreen>

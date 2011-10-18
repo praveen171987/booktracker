@@ -20,6 +20,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.DialogInterface.OnCancelListener;
 import android.content.DialogInterface.OnClickListener;
 import android.content.SharedPreferences;
@@ -32,12 +33,14 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.widget.Toast;
 
+import com.softwaresmithy.DataImportExport;
 import com.softwaresmithy.R;
 import com.softwaresmithy.WishlistDbAdapter;
 
 public class Preferences extends PreferenceActivity implements OnClickListener, OnCancelListener {
 
 	private static final String XML_URL = "http://booktracker.googlecode.com/svn/trunk/libraries.xml";
+	protected static final int DATA_IMPORT = 0;
 	private HttpClient client;
 	
 	private Set<String> distinctStates = new HashSet<String>();
@@ -61,6 +64,17 @@ public class Preferences extends PreferenceActivity implements OnClickListener, 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		addPreferencesFromResource(R.xml.global_prefs);
+		
+		Preference importLink = findPreference(getString(R.string.pref_key_data_import));
+		importLink.setOnPreferenceClickListener(new OnPreferenceClickListener() {	
+			@Override
+			public boolean onPreferenceClick(Preference preference) {
+				Intent i = new Intent(Preferences.this, DataImportExport.class);
+            	startActivityForResult(i, DATA_IMPORT);
+            	return true;
+			}
+		});
+		
 		
 		final Preference xmlFile = findPreference(getString(R.string.pref_key_xml_file));
 		

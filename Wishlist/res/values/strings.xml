@@ -36,13 +36,9 @@
     <string name="pref_xml_file">Refresh Resource File</string>
     <string name="pref_xml_file_summary">Last updated %s</string>
     <string name="pref_cat_application">Application Preferences</string>
+    <string name="pref_data_import_button">Data Import/Export</string>
     
     <string name="file_date_format">MM/dd/yyyy hh:mm aa</string>
-    
-    <!-- Application specific internal constants -->
-    <string name="pref_key_libChoice">libChoice</string>
-    <string name="pref_key_stateName">stateName</string>
-    <string name="pref_key_xml_file">xmlFile</string>
     
     <!-- Preferences Display Values -->
     <string name="switch_lib_title">Are you sure?</string>
@@ -51,5 +47,11 @@
     <!-- Notifications -->
     <string name="note_title">A new book has become available</string>
     <string name="note_body">%1$s by %2$s</string>
+    
+    <!-- Data Import/Export -->
+    <string name="import_category">Import</string>
+    <string name="export_category">Export</string>
+    <string name="import_select_file_button">Select a File</string>
+    <string name="import_none_selected">&lt;None Selected&gt;</string>
     
 </resources>
