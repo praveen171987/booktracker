@@ -78,7 +78,7 @@ public class NotificationService extends Service implements LibStatusListener {
 		}
 		
 		if(result == STATUS.AVAILABLE && oldStatus != result){
-			Notification notification = new Notification(R.drawable.unknown, 
+			Notification notification = new Notification(R.drawable.personreading, 
 					getString(R.string.app_name), System.currentTimeMillis());
 			Context context = getApplicationContext();
 			Intent notificationIntent = new Intent(context, Wishlist.class);

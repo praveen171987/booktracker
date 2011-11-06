@@ -1,7 +1,5 @@
 package com.softwaresmithy.metadata.impl;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,10 +22,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
-import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Bitmap.CompressFormat;
+import android.net.Uri;
 import android.util.Log;
 
 import com.softwaresmithy.BookJB;
@@ -39,8 +34,6 @@ public class GoogleBooks implements MetadataProvider {
 	private static XPathExpression volumeIdXpath;
 	private static XPathExpression thumbXpath;
 	private static XPathExpression entityXpath;
-	
-	private static final int COMPRESSION_RATIO = 95;
 	
 	//For injection during testing
 	private HttpClient client;
@@ -80,6 +73,7 @@ public class GoogleBooks implements MetadataProvider {
     		Log.d(this.getClass().getName(), "volumeId: "+volumeId);
     		
     		String thumbUrl = (String) thumbXpath.evaluate(bookNode, XPathConstants.STRING);
+    		thumbUrl = thumbUrl.replaceFirst("&edge(=[^&]*)?(?=&|$)|^edge(=[^&]*)?(&|$)", "");
     		
     		BookJB retVal = new BookJB(isbn, volumeId, title, author);
     		retVal.setThumbUrl(thumbUrl);
@@ -101,44 +95,19 @@ public class GoogleBooks implements MetadataProvider {
 		}
 		return str.toString();
     }
-	@Override
-	public boolean saveThumbnail(Context context, String volumeId, String thumbUrl) {
-		try {
-    		URI dest;
-    		if(thumbUrl != null){
-    			dest = new URI(thumbUrl);
-    			String[] args = dest.getQuery().split("&");
-    			//TODO: remove the 'edge' arg (if exists)
-    		}else {
-    			//http://bks3.books.google.com/books?id=1abqveXLr1QC&amp;printsec=frontcover&amp;img=1&amp;zoom=5&amp;edge=curl&amp;source=gbs_gdata
-    			List<NameValuePair> params = new ArrayList<NameValuePair>();
-    			params.add(new BasicNameValuePair("id",volumeId));
-    			params.add(new BasicNameValuePair("printsec","frontcover"));
-    			params.add(new BasicNameValuePair("img","1"));
-    			params.add(new BasicNameValuePair("zoom","5"));
-    			params.add(new BasicNameValuePair("source","gbs_gdata"));
-    			
-    			dest = URIUtils.createURI("http", "bks3.books.google.com", -1, "/books", URLEncodedUtils.format(params, "UTF-8"), null);
-    		}
-		
-			HttpGet cover = new HttpGet(dest);
-			HttpResponse resp = client.execute(cover);
-			if(resp.getEntity().getContentType().getValue().equals("image/jpeg")){
-				Bitmap image = BitmapFactory.decodeStream(resp.getEntity().getContent());
-				File file = new File(context.getExternalCacheDir(),volumeId+".jpg");
-				image.compress(CompressFormat.JPEG, COMPRESSION_RATIO, new FileOutputStream(file));
-			}
-			return true;
-		}catch(Exception e){
-			Log.e(this.getClass().getName(), e.getMessage(), e);
-			return false;
-		}
-	}
 	public HttpClient getClient() {
 		return client;
 	}
 	public void setClient(HttpClient client) {
 		this.client = client;
+	}
+	@Override
+	public Uri getBookInfoPage(BookJB book) {
+		return Uri.parse("http://books.google.com/books?id="+book.getVolumeId());
+	}
+	@Override
+	public String getProviderName() {
+		return "Google Books";
 	}
 
 }

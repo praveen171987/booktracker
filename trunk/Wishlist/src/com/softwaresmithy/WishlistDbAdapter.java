@@ -104,6 +104,9 @@ public class WishlistDbAdapter {
 		return cursorToBookJB(c);
 	}
 	
+	public BookJB getItemFromCursor(Cursor c) {
+		return cursorToBookJB(c);
+	}
 	private BookJB cursorToBookJB(Cursor c){
 		BookJB retVal = new BookJB();
 		retVal.set_id(c.getLong(c.getColumnIndexOrThrow(COL_ID)));
