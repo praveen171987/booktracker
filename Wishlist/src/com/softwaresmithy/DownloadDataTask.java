@@ -1,7 +1,20 @@
 package com.softwaresmithy;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.net.URI;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.Bitmap.CompressFormat;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.softwaresmithy.library.LibStatus;
 import com.softwaresmithy.library.LibStatus.STATUS;
@@ -38,6 +51,13 @@ public class DownloadDataTask extends AsyncTask<String, Void, Boolean> {
 	private MetadataProvider data;
 	
 	/**
+	 * JPEG Compression ratio
+	 */
+	private static final int COMPRESSION_RATIO = 95;
+	
+	private static final HttpClient client = new DefaultHttpClient();
+	
+	/**
 	 * Default constructor, just sets parameters to local class variables.
 	 * @param c application context
 	 * @param db database accessor
@@ -58,12 +78,23 @@ public class DownloadDataTask extends AsyncTask<String, Void, Boolean> {
 		//Retrieve data from data provider and persist to database
 		BookJB jb = addItemToDB(isbn);
 		if(jb != null){
-			//Retrieve and persist thumbnail image
-			data.saveThumbnail(c, jb.getVolumeId(), jb.getThumbUrl());
+			try {
+				URI dest = new URI(jb.getThumbUrl());
+				//Retrieve and persist thumbnail image
+				HttpGet cover = new HttpGet(dest);
+				HttpResponse resp = client.execute(cover);
+				if(resp.getEntity().getContentType().getValue().equals("image/jpeg")){
+					Bitmap image = BitmapFactory.decodeStream(resp.getEntity().getContent());
+					File file = new File(c.getExternalCacheDir(),jb.getVolumeId()+".jpg");
+					image.compress(CompressFormat.JPEG, COMPRESSION_RATIO, new FileOutputStream(file));
+				}
+			} catch (Exception e) {
+				Log.e(DownloadDataTask.class.getName(), "Unable to save thumbnail", e);
+			} 
 			
 			STATUS retVal = null;
 			if(library instanceof LibStatus){
-				retVal = ((LibStatus)library).checkAvailability(isbn);
+				retVal = ((LibStatus)library).checkAvailability(jb.getIsbn());
 				if(retVal != null){
 					jb.setState(retVal.name());
 					mDbHelper.updateItem(jb);

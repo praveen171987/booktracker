@@ -13,7 +13,6 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
@@ -122,11 +121,9 @@ public class Wishlist extends ListActivity implements LibStatusListener {
                 int position, long id) {
 	        	ListView list = ((ListView)parent);
 	        	Cursor c = (Cursor)list.getItemAtPosition(position);
-	        	String volumeId = c.getString(c.getColumnIndexOrThrow(WishlistDbAdapter.COL_VOLUME_ID));
+	        	BookJB jb = mDbHelper.readItemByIsbn(c.getString(c.getColumnIndexOrThrow(WishlistDbAdapter.COL_ISBN)));
 	        	//TODO: Investigate using a custom XSLT to provide tighter integration with the app look and feel
-	        	//Also, export this activity to the MetadataProvider interface
-	        	Uri bookUri =  Uri.parse("http://books.google.com/books?id="+volumeId);
-	        	Intent intent = new Intent(Intent.ACTION_VIEW, bookUri);
+	        	Intent intent = new Intent(Intent.ACTION_VIEW, data.getBookInfoPage(jb));
 	        	startActivity(intent);
             }
           });
@@ -158,11 +155,13 @@ public class Wishlist extends ListActivity implements LibStatusListener {
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo){
     	super.onCreateContextMenu(menu, v, menuInfo);
     	getMenuInflater().inflate(R.menu.item_menu, menu);
+    	menu.findItem(R.id.metadata_page).setTitle(getResources().getString(R.string.view_metadata, data.getProviderName()));
     }
     
     @Override
     public boolean onContextItemSelected(MenuItem item){
     	final AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
+    	Cursor c = mDbHelper.readItem(info.id);
     	switch(item.getItemId()){
     	case R.id.edit_item:
 	    	Intent i = new Intent(this,EditItem.class);
@@ -174,10 +173,15 @@ public class Wishlist extends ListActivity implements LibStatusListener {
 			showDialog(DIALOG_DELETE_ITEM);
     		break;
     	case R.id.update_item:
-    		Cursor c = mDbHelper.readItem(info.id);
     		String isbn = c.getString(
 					c.getColumnIndexOrThrow(WishlistDbAdapter.COL_ISBN));
     		localService.getStatus(isbn);
+    		break;
+    	case R.id.metadata_page:
+    		BookJB jb = mDbHelper.getItemFromCursor(c);
+        	Intent intent = new Intent(Intent.ACTION_VIEW, data.getBookInfoPage(jb));
+        	startActivity(intent);
+        	break;
     	default:
     		Log.w(this.getClass().getName(), "Unexpected context menu item selected");
     	}
