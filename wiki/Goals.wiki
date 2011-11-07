@@ -9,13 +9,12 @@ This is my list of objectives, hopefully it won't grow too much faster than they
 
 ==Short Term (this month)==
   * Add periodic polling for status updates from library
-  * XSLT to map google book data to custom format as item details (short click on item) (means it's only available when user is online, is that an issue?)
   * ~~Notification when an item becomes available/status changes~~
   * ~~Define Library interface(s) for future expansion/compatability~~
   * Make list filterable by ~~status~~ and/or by text
   * Required art assets
-    * Application icon
-    * Notification icon (same thing?)
+    * ~~Application icon~~
+    * ~~Notification icon (same thing?)~~
     * Generic cover art
 
 ==Medium Term (next month)==
