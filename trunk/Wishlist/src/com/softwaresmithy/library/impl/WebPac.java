@@ -13,6 +13,7 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import android.net.Uri;
 import android.util.Log;
 
 import com.softwaresmithy.library.AndroidLibStatus;
@@ -92,6 +93,10 @@ public class WebPac extends AndroidLibStatus{
 			}
 		}
 		return false;
+	}
+	@Override
+	public Uri getStatusPage(String isbn) {
+		return Uri.parse(String.format(isbnSearchUrl, isbn));
 	}
 
 }

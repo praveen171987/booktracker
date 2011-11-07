@@ -1,8 +1,10 @@
 package com.softwaresmithy.library;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.net.Uri;
 import android.os.AsyncTask;
 
 public abstract class AndroidLibStatus extends Library {
@@ -15,6 +17,7 @@ public abstract class AndroidLibStatus extends Library {
 	};
 	
 	protected abstract STATUS checkAvailability(String isbn);
+	public abstract Uri getStatusPage(String isbn);
 	
 	private List<LibStatusListener> fListeners = new ArrayList<LibStatusListener>();
 	

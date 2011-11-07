@@ -36,6 +36,7 @@ import android.widget.Toast;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.softwaresmithy.NotificationService.LocalBinder;
+import com.softwaresmithy.library.AndroidLibStatus;
 import com.softwaresmithy.library.AndroidLibStatus.STATUS;
 import com.softwaresmithy.library.LibStatusListener;
 import com.softwaresmithy.library.Library;
@@ -122,9 +123,11 @@ public class Wishlist extends ListActivity implements LibStatusListener {
 	        	ListView list = ((ListView)parent);
 	        	Cursor c = (Cursor)list.getItemAtPosition(position);
 	        	BookJB jb = mDbHelper.readItemByIsbn(c.getString(c.getColumnIndexOrThrow(WishlistDbAdapter.COL_ISBN)));
-	        	//TODO: Investigate using a custom XSLT to provide tighter integration with the app look and feel
-	        	Intent intent = new Intent(Intent.ACTION_VIEW, data.getBookInfoPage(jb));
-	        	startActivity(intent);
+
+	        	if(library instanceof AndroidLibStatus) {
+	        		Intent intent = new Intent(Intent.ACTION_VIEW, ((AndroidLibStatus)library).getStatusPage(jb.getIsbn()));
+	        		startActivity(intent);
+	        	}
             }
           });
         
