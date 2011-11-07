@@ -18,9 +18,9 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.w3c.dom.Node;
 import org.xml.sax.InputSource;
 
+import android.net.Uri;
 import android.util.Log;
 
 import com.softwaresmithy.library.AndroidLibStatus;
@@ -94,6 +94,10 @@ public class AquaBrowser extends AndroidLibStatus {
 				get.abort();
 			}
 		}
+	}
+	@Override
+	public Uri getStatusPage(String isbn) {
+		return Uri.parse(String.format(isbnSearchUrl, isbn));
 	}
 
 }

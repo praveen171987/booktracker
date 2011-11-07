@@ -80,6 +80,8 @@ public class NotificationService extends Service implements LibStatusListener {
 		if(result == STATUS.AVAILABLE && oldStatus != result){
 			Notification notification = new Notification(R.drawable.personreading, 
 					getString(R.string.app_name), System.currentTimeMillis());
+			
+			//TODO: Take the user to a view filtered by "AVAILABLE" titles
 			Context context = getApplicationContext();
 			Intent notificationIntent = new Intent(context, Wishlist.class);
 			PendingIntent contentIntent = PendingIntent.getActivity(getApplicationContext(), 0, notificationIntent, 0);
