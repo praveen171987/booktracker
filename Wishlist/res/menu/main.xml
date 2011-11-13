@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:a="http://schemas.android.com/apk/res/android">
-	<item a:id="@+id/add_text"
-		a:title="@string/add_text"/>
-	<item a:id="@+id/add_barcode"
-		a:title="@string/add_barcode"/>
-	<item a:id="@+id/add_scratch"
-		a:title="@string/add_scratch"/>
-	<item a:id="@+id/filter"
-		a:title="@string/filter"/>
-	<item a:id="@+id/preferences"
-		a:title="@string/view_prefs"/>
+    <item a:id="@+id/add_text"
+          a:title="@string/add_text"/>
+    <item a:id="@+id/add_barcode"
+          a:title="@string/add_barcode"
+          a:icon="@drawable/add_by_scan"/>
+    <item a:id="@+id/add_scratch"
+          a:title="@string/add_scratch"/>
+    <item a:id="@+id/filter"
+          a:title="@string/filter"/>
+    <item a:id="@+id/preferences"
+          a:title="@string/view_prefs"/>
 </menu>

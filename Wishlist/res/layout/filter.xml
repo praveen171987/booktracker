@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-  xmlns:a="http://schemas.android.com/apk/res/android"
-  a:layout_width="match_parent"
-  a:layout_height="match_parent"
- >
-  <!-- <CheckBox  a:id="@+id/filter_view"
-  	a:layout_height="fill_parent"
-  	a:layout_width="fill_parent"
-  	a:text="This is a checkbox"/> -->
-  	<ListView a:id="@+id/filter_list"
-	  	a:layout_height="fill_parent"
-	  	a:layout_width="fill_parent"/>
+        xmlns:a="http://schemas.android.com/apk/res/android"
+        a:layout_width="fill_parent"
+        a:layout_height="fill_parent"
+        >
+    <!-- <CheckBox  a:id="@+id/filter_view"
+       a:layout_height="fill_parent"
+       a:layout_width="fill_parent"
+       a:text="This is a checkbox"/> -->
+    <ListView a:id="@+id/filter_list"
+              a:layout_height="fill_parent"
+              a:layout_width="fill_parent"/>
 </LinearLayout>

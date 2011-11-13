@@ -1,0 +1,36 @@
+// General Settings
+FileSvg 'C:\Users\matt\workspace\Wishlist\art\person_reading.svg'
+FilePrefix ''
+FileName 'personreading'
+
+PathClear true
+FileFormat png
+
+// Low DPI
+PathExport 'launcherIcon/drawable-ldpi'
+ExportWidth 36
+ExportHeight 36
+ExportDpi 120
+Convert
+
+// Medium DPI
+PathExport 'launcherIcon/drawable-mdpi'
+ExportWidth 48
+ExportHeight 48
+ExportDpi 160
+Convert
+
+// High DPI
+PathExport 'launcherIcon/drawable-hdpi'
+ExportWidth 72
+ExportHeight 72
+ExportDpi 240
+Convert
+
+// Extra High DPI
+PathExport 'launcherIcon/drawable-xhdpi'
+ExportWidth 96
+ExportHeight 96
+ExportDpi 320
+Convert
+
