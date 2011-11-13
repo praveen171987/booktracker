@@ -1,10 +1,10 @@
 <menu xmlns:a="http://schemas.android.com/apk/res/android">
-	<item a:id="@+id/edit_item"
-		a:title="@string/edit_item"/>
-	<item a:id="@+id/delete_item"
-		a:title="@string/delete_item"/>
-	<item a:id="@+id/update_item"
-		a:title="@string/update_item"/>
-	<item a:id="@+id/metadata_page"
-		a:title="Placeholder"/>
+  <item a:id="@+id/edit_item"
+        a:title="@string/edit_item"/>
+  <item a:id="@+id/delete_item"
+        a:title="@string/delete_item"/>
+  <item a:id="@+id/update_item"
+        a:title="@string/update_item"/>
+  <item a:id="@+id/metadata_page"
+        a:title="Placeholder"/>
 </menu>

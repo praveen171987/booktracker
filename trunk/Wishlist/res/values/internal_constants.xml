@@ -2,22 +2,22 @@
 <!-- DO NOT LOCALIZE -->
 <!-- These are internal system settings, not visible to the user -->
 <resources>
-    <!-- Application specific internal constants -->
-    <string name="pref_key_libChoice">libChoice</string>
-    <string name="pref_key_stateName">stateName</string>
-    <string name="pref_key_xml_file">xmlFile</string>
-    <string name="pref_key_data_import">importExport</string>
-    <string name="broadcast_update">com.softwaresmithy.wishlist.UPDATE</string>
+  <!-- Application specific internal constants -->
+  <string name="pref_key_libChoice">libChoice</string>
+  <string name="pref_key_stateName">stateName</string>
+  <string name="pref_key_xml_file">xmlFile</string>
+  <string name="pref_key_data_import">importExport</string>
+  <string name="broadcast_update">com.softwaresmithy.wishlist.UPDATE</string>
 
-    <!--How many days to check for updates after user's last interaction-->
-    <integer name="status_update_days">21</integer>
+  <!--How many days to check for updates after user's last interaction-->
+  <integer name="status_update_days">21</integer>
 
-    <!-- DON'T INTERNATIONALIZE, this is to map from the above statuses to the enum constants -->
-    <string-array name="status_enum">
-        <item>NO_MATCH</item>
-        <item>AVAILABLE</item>
-        <item>SHORT_WAIT</item>
-        <item>WAIT</item>
-        <item>LONG_WAIT</item>
-    </string-array>
+  <!-- DON'T INTERNATIONALIZE, this is to map from the above statuses to the enum constants -->
+  <string-array name="status_enum">
+    <item>NO_MATCH</item>
+    <item>AVAILABLE</item>
+    <item>SHORT_WAIT</item>
+    <item>WAIT</item>
+    <item>LONG_WAIT</item>
+  </string-array>
 </resources>

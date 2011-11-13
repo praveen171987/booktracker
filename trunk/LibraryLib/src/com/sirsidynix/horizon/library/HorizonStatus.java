@@ -2,8 +2,8 @@ package com.sirsidynix.horizon.library;
 
 /**
  * A status Enum for the HorizonTools and HorizonBrowser
- * @author Jesse Hess
  *
+ * @author Jesse Hess
  */
 public enum HorizonStatus {
   AVAILABLE,

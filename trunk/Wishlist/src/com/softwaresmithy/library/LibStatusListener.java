@@ -4,5 +4,5 @@ import com.softwaresmithy.library.AndroidLibStatus.STATUS;
 
 
 public interface LibStatusListener {
-	void onItemStatusChange(String isbn, STATUS result);
+  void onItemStatusChange(String isbn, STATUS result);
 }
