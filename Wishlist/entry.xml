@@ -3,49 +3,58 @@
   <id>http://www.google.com/books/feeds/volumes/HCI3SQAACAAJ</id>
   <updated>2011-05-06T20:00:01.000Z</updated>
   <category scheme="http://schemas.google.com/g/2005#kind"
-  term="http://schemas.google.com/books/2008#volume" />
+            term="http://schemas.google.com/books/2008#volume"/>
   <title type="text">Where Angels Fear to Tread</title>
   <link rel="http://schemas.google.com/books/2008/thumbnail"
-  type="image/x-unknown"
-  href="http://bks6.books.google.com/books?id=HCI3SQAACAAJ&amp;printsec=frontcover&amp;img=1&amp;zoom=5&amp;source=gbs_gdata" />
+        type="image/x-unknown"
+        href="http://bks6.books.google.com/books?id=HCI3SQAACAAJ&amp;printsec=frontcover&amp;img=1&amp;zoom=5&amp;source=gbs_gdata"/>
   <link rel="http://schemas.google.com/books/2008/info"
-  type="text/html"
-  href="http://books.google.com/books?id=HCI3SQAACAAJ&amp;dq=9780451463821&amp;ie=ISO-8859-1&amp;source=gbs_gdata" />
+        type="text/html"
+        href="http://books.google.com/books?id=HCI3SQAACAAJ&amp;dq=9780451463821&amp;ie=ISO-8859-1&amp;source=gbs_gdata"/>
   <link rel="http://schemas.google.com/books/2008/preview"
-  type="text/html"
-  href="http://books.google.com/books?id=HCI3SQAACAAJ&amp;dq=9780451463821&amp;ie=ISO-8859-1&amp;cd=1&amp;source=gbs_gdata" />
+        type="text/html"
+        href="http://books.google.com/books?id=HCI3SQAACAAJ&amp;dq=9780451463821&amp;ie=ISO-8859-1&amp;cd=1&amp;source=gbs_gdata"/>
   <link rel="http://schemas.google.com/books/2008/annotation"
-  type="application/atom+xml"
-  href="http://www.google.com/books/feeds/users/me/volumes" />
+        type="application/atom+xml"
+        href="http://www.google.com/books/feeds/users/me/volumes"/>
   <link rel="alternate" type="text/html"
-  href="http://books.google.com/books?id=HCI3SQAACAAJ&amp;dq=9780451463821&amp;ie=ISO-8859-1" />
+        href="http://books.google.com/books?id=HCI3SQAACAAJ&amp;dq=9780451463821&amp;ie=ISO-8859-1"/>
   <link rel="self" type="application/atom+xml"
-  href="http://www.google.com/books/feeds/volumes/HCI3SQAACAAJ" />
+        href="http://www.google.com/books/feeds/volumes/HCI3SQAACAAJ"/>
   <gbs:contentVersion xmlns:gbs="http://schemas.google.com/books/2008">
-  preview-1.0.0</gbs:contentVersion>
+    preview-1.0.0
+  </gbs:contentVersion>
   <gbs:embeddability xmlns:gbs="http://schemas.google.com/books/2008"
-  value="http://schemas.google.com/books/2008#not_embeddable" />
+                     value="http://schemas.google.com/books/2008#not_embeddable"/>
   <gbs:openAccess xmlns:gbs="http://schemas.google.com/books/2008"
-  value="http://schemas.google.com/books/2008#disabled" />
+                  value="http://schemas.google.com/books/2008#disabled"/>
   <gbs:viewability xmlns:gbs="http://schemas.google.com/books/2008"
-  value="http://schemas.google.com/books/2008#view_no_pages" />
+                   value="http://schemas.google.com/books/2008#view_no_pages"/>
   <dc:creator xmlns:dc="http://purl.org/dc/terms">Thomas E.
-  Sniegoski</dc:creator>
+    Sniegoski
+  </dc:creator>
   <dc:date xmlns:dc="http://purl.org/dc/terms">2011-02-01</dc:date>
   <dc:format xmlns:dc="http://purl.org/dc/terms">304
-  pages</dc:format>
+    pages
+  </dc:format>
   <dc:format xmlns:dc="http://purl.org/dc/terms">book</dc:format>
   <dc:identifier xmlns:dc="http://purl.org/dc/terms">
-  HCI3SQAACAAJ</dc:identifier>
+    HCI3SQAACAAJ
+  </dc:identifier>
   <dc:identifier xmlns:dc="http://purl.org/dc/terms">
-  ISBN:045146382X</dc:identifier>
+    ISBN:045146382X
+  </dc:identifier>
   <dc:identifier xmlns:dc="http://purl.org/dc/terms">
-  ISBN:9780451463821</dc:identifier>
+    ISBN:9780451463821
+  </dc:identifier>
   <dc:language xmlns:dc="http://purl.org/dc/terms">en</dc:language>
   <dc:publisher xmlns:dc="http://purl.org/dc/terms">
-  Roc</dc:publisher>
+    Roc
+  </dc:publisher>
   <dc:title xmlns:dc="http://purl.org/dc/terms">Where Angels Fear
-  to Tread</dc:title>
+    to Tread
+  </dc:title>
   <dc:title xmlns:dc="http://purl.org/dc/terms">A Remy Chandler
-  Novel</dc:title>
+    Novel
+  </dc:title>
 </entry>

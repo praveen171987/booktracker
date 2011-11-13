@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="libEntries">
-        <item>Arlington Public Library</item>
-        <item>Columbus Metro. Library</item>
-        <!-- Default Value -->
-        <item>None</item>
-    </string-array>
-    <string-array name="libValues">
-        <item>com.softwaresmithy.library.impl.WebPac http://libsys.arlingtonva.us/search/?searchtype=i&amp;searcharg=%s&amp;searchscope=1</item>
-        <item>com.softwaresmithy.library.impl.AquaBrowser
-            http://catalog.columbuslibrary.org/rss.ashx?q=%s&amp;uilang=en
-        </item>
-        <!-- Default Value -->
-        <item>com.softwaresmithy.library.impl.Default</item>
-    </string-array>
+  <string-array name="libEntries">
+    <item>Arlington Public Library</item>
+    <item>Columbus Metro. Library</item>
+    <!-- Default Value -->
+    <item>None</item>
+  </string-array>
+  <string-array name="libValues">
+    <item>com.softwaresmithy.library.impl.WebPac http://libsys.arlingtonva.us/search/?searchtype=i&amp;searcharg=%s&amp;searchscope=1</item>
+    <item>com.softwaresmithy.library.impl.AquaBrowser
+      http://catalog.columbuslibrary.org/rss.ashx?q=%s&amp;uilang=en
+    </item>
+    <!-- Default Value -->
+    <item>com.softwaresmithy.library.impl.Default</item>
+  </string-array>
 
-    <string-array name="status_text">
-        <item>Not Available</item>
-        <item>Available</item>
-        <item>Short Wait</item>
-        <item>Some Wait</item>
-        <item>Long Wait</item>
-    </string-array>
+  <string-array name="status_text">
+    <item>Not Available</item>
+    <item>Available</item>
+    <item>Short Wait</item>
+    <item>Some Wait</item>
+    <item>Long Wait</item>
+  </string-array>
 </resources>
