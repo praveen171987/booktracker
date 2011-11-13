@@ -1,0 +1,36 @@
+// General Settings
+FileSvg 'C:\Users\matt\workspace\Wishlist\art\add_by_scan.svg'
+FilePrefix ''
+FileName 'add_by_scan'
+
+PathClear true
+FileFormat png
+
+// Low DPI
+PathExport 'add_by_scan/drawable-ldpi'
+ExportWidth 18
+ExportHeight 18
+ExportDpi 120
+Convert
+
+// Medium DPI
+PathExport 'add_by_scan/drawable-mdpi'
+ExportWidth 24
+ExportHeight 24
+ExportDpi 160
+Convert
+
+// High DPI
+PathExport 'add_by_scan/drawable-hdpi'
+ExportWidth 36
+ExportHeight 36
+ExportDpi 240
+Convert
+
+// Extra High DPI
+PathExport 'add_by_scan/drawable-xhdpi'
+ExportWidth 48
+ExportHeight 48
+ExportDpi 320
+Convert
+
