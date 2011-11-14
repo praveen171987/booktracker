@@ -49,7 +49,7 @@ public class Wishlist extends ListActivity implements LibStatusListener {
   private static final int ACTIVITY_EDIT = 1;
   private static final int SET_PREFS = 2;
 
-  private HashSet<STATUS> currentStateFilter = new HashSet<STATUS>();
+  private HashSet<STATUS> currentStateFilter = new HashSet<STATUS>(STATUS.getAllAsList());
   private String currentStringFilter = "";
 
   //Same index used to map from database table column to layout ID in item view
@@ -73,6 +73,7 @@ public class Wishlist extends ListActivity implements LibStatusListener {
   };
   private UpdateReceiver fReceiver = new UpdateReceiver();
   private List<String> expectingResponse = new ArrayList<String>();
+  private boolean[] show = new boolean[STATUS.size()];
 
   /**
    * Called when the activity is first created.
@@ -80,6 +81,7 @@ public class Wishlist extends ListActivity implements LibStatusListener {
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    Arrays.fill(show, true);
 
     setContentView(R.layout.main);
     registerForContextMenu(getListView());
@@ -136,6 +138,21 @@ public class Wishlist extends ListActivity implements LibStatusListener {
     listData = new ImageCursorAdapter(this, mDbHelper, R.layout.list_item, listCursor, mapFrom, mapTo, getExternalCacheDir().getAbsolutePath());
     setListAdapter(listData);
 
+  }
+
+  @Override
+  protected void onNewIntent(Intent intent) {
+    super.onNewIntent(intent);
+    if (intent.getAction().equals("com.softwaresmithy.wishlist.FILTER")) {
+      STATUS status = STATUS.valueOf(intent.getData().getHost());
+      currentStateFilter.clear();
+      currentStateFilter.add(status);
+      Arrays.fill(show, false);
+      show[status.ordinal()] = true;
+      listCursor = listData.filterInByStatus(currentStateFilter);
+      listData = new ImageCursorAdapter(getApplicationContext(), mDbHelper, R.layout.list_item, listCursor, mapFrom, mapTo, getExternalCacheDir().getAbsolutePath());
+      setListAdapter(listData);
+    }
   }
 
   @Override
@@ -287,8 +304,6 @@ public class Wishlist extends ListActivity implements LibStatusListener {
         final View filterView = factory.inflate(R.layout.filter, null);
         ListView filterList = (ListView) filterView.findViewById(R.id.filter_list);
         String[] items = getResources().getStringArray(R.array.status_text);
-        boolean[] show = new boolean[items.length];
-        Arrays.fill(show, true);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, items);
         filterList.setAdapter(adapter);
         return new AlertDialog.Builder(this)
@@ -299,14 +314,13 @@ public class Wishlist extends ListActivity implements LibStatusListener {
               public void onClick(DialogInterface dialog, int which, boolean isChecked) {
                 STATUS status = STATUS.valueOf(getResources().getStringArray(R.array.status_enum)[which]);
                 if (isChecked) {
-                  currentStateFilter.remove(status);
-                } else {
                   currentStateFilter.add(status);
+                } else {
+                  currentStateFilter.remove(status);
                 }
-                listCursor = listData.filterOutByStatus(currentStateFilter);
+                listCursor = listData.filterInByStatus(currentStateFilter);
                 listData = new ImageCursorAdapter(getApplicationContext(), mDbHelper, R.layout.list_item, listCursor, mapFrom, mapTo, getExternalCacheDir().getAbsolutePath());
                 setListAdapter(listData);
-
               }
             })
             .create();

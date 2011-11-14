@@ -7,6 +7,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Binder;
 import android.os.IBinder;
 import android.util.Log;
@@ -137,7 +138,7 @@ public class NotificationService extends IntentService implements LibStatusListe
 
       //TODO: Take the user to a view filtered by "AVAILABLE" titles
       Context context = getApplicationContext();
-      Intent notificationIntent = new Intent(context, Wishlist.class);
+      Intent notificationIntent = new Intent("com.softwaresmithy.wishlist.FILTER", Uri.parse("filter://AVAILABLE"), context, Wishlist.class);
       PendingIntent contentIntent = PendingIntent.getActivity(getApplicationContext(), 0, notificationIntent, 0);
 
       notification.setLatestEventInfo(context, getString(R.string.note_title),

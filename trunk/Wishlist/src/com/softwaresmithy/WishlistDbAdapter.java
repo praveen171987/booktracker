@@ -174,9 +174,14 @@ public class WishlistDbAdapter {
     mDbHelper.close();
   }
 
-  public Cursor filterByStatus(Collection<AndroidLibStatus.STATUS> constraints) {
+  public Cursor filterOutByStatus(Collection<AndroidLibStatus.STATUS> constraints) {
     String statuses = "'" + join(constraints, "','") + "'";
     return mDb.query(DATABASE_TABLE, ALL_COLUMNS, COL_STATE + " NOT IN (" + statuses + ")", null, null, null, null);
+  }
+
+  public Cursor filterInByStatus(Collection<AndroidLibStatus.STATUS> constraints) {
+    String statuses = "'" + join(constraints, "','") + "'";
+    return mDb.query(DATABASE_TABLE, ALL_COLUMNS, COL_STATE + " IN (" + statuses + ")", null, null, null, null);
   }
 
   private String join(Collection<AndroidLibStatus.STATUS> constraints, String concatenation) {
