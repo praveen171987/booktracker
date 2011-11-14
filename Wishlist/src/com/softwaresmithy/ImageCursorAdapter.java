@@ -105,15 +105,19 @@ public class ImageCursorAdapter extends SimpleCursorAdapter implements Filterabl
   /**
    * This will return a cursor containing only those elements intended to display based on the passed CSV list of statuses to hide.
    *
-   * @param constraint comma separated list of LibStatus.STATUS enums to hide from view
+   * @param excludes comma separated list of LibStatus.STATUS enums to hide from view
    * @return cursor limiting data shown according to status
    */
-  public Cursor filterOutByStatus(Collection<STATUS> constraint) {
-    if (constraint.isEmpty()) {
+  public Cursor filterOutByStatus(Collection<STATUS> excludes) {
+    if (excludes.isEmpty()) {
       return mDbHelper.getAll();
     } else {
 
-      return mDbHelper.filterByStatus(constraint);
+      return mDbHelper.filterOutByStatus(excludes);
     }
+  }
+
+  public Cursor filterInByStatus(Collection<STATUS> includes) {
+    return mDbHelper.filterInByStatus(includes);
   }
 }

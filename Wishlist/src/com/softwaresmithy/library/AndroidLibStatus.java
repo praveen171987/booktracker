@@ -4,6 +4,8 @@ import android.content.Context;
 import android.net.Uri;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 public abstract class AndroidLibStatus extends Library {
@@ -15,6 +17,15 @@ public abstract class AndroidLibStatus extends Library {
     SHORT_WAIT, //H = #Holds, C = #Copies, H < C
     WAIT, // C <= H <= 2C
     LONG_WAIT // H > 2C
+    ;
+
+    public static Collection<? extends STATUS> getAllAsList() {
+      return Arrays.asList(NO_MATCH, AVAILABLE, SHORT_WAIT, WAIT, LONG_WAIT);
+    }
+
+    public static int size() {
+      return 5;
+    }
   }
 
   protected abstract STATUS checkAvailability(String isbn);

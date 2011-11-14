@@ -1,7 +1,7 @@
 package com.softwaresmithy.preferences;
 
+import android.content.Context;
 import android.os.AsyncTask;
-import android.os.Environment;
 import android.util.Log;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -26,9 +26,11 @@ public class DownloadLibrariesTask extends AsyncTask<Object, Void, Long> {
 
   private Set<String> distinctStates = new HashSet<String>();
   private Node rootNode;
+  private Context context;
 
-  public DownloadLibrariesTask() {
+  public DownloadLibrariesTask(Context context) {
     super();
+    this.context = context;
     XPath xpath = XPathFactory.newInstance().newXPath();
     try {
       rootXpath = xpath.compile("/xml");
@@ -48,7 +50,7 @@ public class DownloadLibrariesTask extends AsyncTask<Object, Void, Long> {
     HttpGet getLibs = new HttpGet((String) params[1]);
     Boolean reload = params.length > 2 ? (Boolean) params[2] : false;
 
-    File storageDir = Environment.getExternalStorageDirectory();
+    File storageDir = context.getExternalFilesDir(null);
     File libXml = new File(storageDir, "libraries.xml");
     InputSource inputSource = null;
     try {

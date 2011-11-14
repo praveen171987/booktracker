@@ -2,7 +2,6 @@ package com.softwaresmithy.library;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.os.Environment;
 import android.preference.PreferenceManager;
 import com.softwaresmithy.R;
 import org.w3c.dom.Node;
@@ -24,7 +23,7 @@ public class LibraryFactory {
     String libName = prefs.getString(context.getString(R.string.pref_key_libChoice), null);
     String stateName = prefs.getString(context.getString(R.string.pref_key_stateName), null);
     if (libName != null && stateName != null) {
-      File libXml = new File(Environment.getExternalStorageDirectory(), "libraries.xml");
+      File libXml = new File(context.getExternalFilesDir(null), "libraries.xml");
       if (libXml.exists()) {
         try {
           InputSource source = new InputSource(new FileInputStream(libXml));

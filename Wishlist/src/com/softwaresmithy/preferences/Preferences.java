@@ -3,6 +3,7 @@ package com.softwaresmithy.preferences;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
 import android.content.DialogInterface.OnClickListener;
@@ -68,13 +69,12 @@ public class Preferences extends PreferenceActivity implements OnClickListener, 
       }
     });
 
-
     final Preference xmlFile = findPreference(getString(R.string.pref_key_xml_file));
 
     xmlFile.setOnPreferenceClickListener(new OnPreferenceClickListener() {
       @Override
       public boolean onPreferenceClick(Preference preference) {
-        new GetLibraries().execute(client, XML_URL, true);
+        new GetLibraries(Preferences.this).execute(client, XML_URL, true);
         return true;
       }
     });
@@ -84,7 +84,7 @@ public class Preferences extends PreferenceActivity implements OnClickListener, 
     stateList.setSummary(getPreferences().getString(getString(R.string.pref_key_stateName), ""));
 
     if (distinctStates == null) {
-      new GetLibraries().execute(client, XML_URL);
+      new GetLibraries(this).execute(client, XML_URL);
     } else {
       stateList.setEnabled(true);
     }
@@ -188,6 +188,10 @@ public class Preferences extends PreferenceActivity implements OnClickListener, 
 
   private class GetLibraries extends DownloadLibrariesTask {
     private ProgressDialog fProgressDialog;
+
+    public GetLibraries(Context context) {
+      super(context);
+    }
 
     @Override
     protected void onPreExecute() {
