@@ -69,7 +69,16 @@
   <!-- Data Import/Export -->
   <string name="import_category">Import</string>
   <string name="export_category">Export</string>
-  <string name="import_select_file_button">Select a File</string>
-  <string name="import_none_selected">&lt;None Selected&gt;</string>
+  <string name="import_start">Start Import</string>
+  <string name="import_none_selected">Select a File</string>
+  <string name="import_merge">Merge with Existing</string>
+  <string name="import_overwrite">Start from Scratch</string>
+  <string name="export_start">Start Export</string>
+  <string name="show_no_intent_checkbox">Don\'t show this message again</string>
+  <string name="no_intent_text">Picking a file is easier with the free OI File Manager but you can continue and just
+    type the filename if you would prefer
+  </string>
+  <string name="no_intent_continue">Continue</string>
+  <string name="no_intent_market">Go to Market</string>
 
 </resources>

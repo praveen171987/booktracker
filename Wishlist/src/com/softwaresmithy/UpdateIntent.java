@@ -10,6 +10,9 @@ public class UpdateIntent extends Intent {
   public UpdateIntent(String action, String isbn, STATUS oldStatus, STATUS newStatus) {
     super(action);
     putExtra(ISBN, isbn);
+    if (oldStatus == null) {
+      oldStatus = STATUS.NO_MATCH;
+    }
     putExtra("oldStatus", oldStatus.name());
     putExtra("newStatus", newStatus.name());
   }

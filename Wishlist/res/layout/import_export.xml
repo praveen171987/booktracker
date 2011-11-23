@@ -7,20 +7,48 @@
       a:layout_width="fill_parent"
       a:layout_height="wrap_content"
       a:text="@string/import_category"/>
-  <Button
-      a:id="@+id/import_file_button"
-      a:layout_width="fill_parent"
-      a:layout_height="wrap_content"
-      a:text="@string/import_select_file_button"
-      a:onClick="invokePickFile"/>
+  <!-- This layout only serves to prevent the edit text from having focus by default -->
+  <LinearLayout
+      a:focusable="true"
+      a:focusableInTouchMode="true"
+      a:layout_width="0px"
+      a:layout_height="0px"/>
   <EditText
       a:id="@+id/import_file_text"
       a:layout_width="fill_parent"
       a:layout_height="wrap_content"
       a:hint="@string/import_none_selected"
-      a:enabled="false"/>
+      a:onClick="invokePickFile"/>
+  <RadioGroup
+      a:layout_width="fill_parent"
+      a:layout_height="wrap_content">
+    <RadioButton
+        a:checked="true"
+        a:layout_width="fill_parent"
+        a:layout_height="wrap_content"
+        a:id="@+id/import_merge"
+        a:text="@string/import_merge"
+        a:focusable="true"/>
+    <RadioButton
+        a:checked="false"
+        a:layout_width="fill_parent"
+        a:layout_height="wrap_content"
+        a:id="@+id/import_overwrite"
+        a:text="@string/import_overwrite"/>
+  </RadioGroup>
+  <Button
+      a:id="@+id/import_file_button"
+      a:layout_width="fill_parent"
+      a:layout_height="wrap_content"
+      a:text="@string/import_start"/>
   <com.softwaresmithy.view.CategoryDivider
       a:layout_width="fill_parent"
       a:layout_height="wrap_content"
       a:text="@string/export_category"/>
+  <Button
+      a:id="@+id/export_file_button"
+      a:layout_width="fill_parent"
+      a:layout_height="wrap_content"
+      a:text="@string/export_start"
+      a:onClick="invokeStartExport"/>
 </LinearLayout>

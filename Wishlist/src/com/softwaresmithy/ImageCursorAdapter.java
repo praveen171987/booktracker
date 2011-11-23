@@ -63,11 +63,11 @@ public class ImageCursorAdapter extends SimpleCursorAdapter implements Filterabl
     View retView = super.getView(position, v, parent);
 
     c.moveToPosition(position);
-    String volumeId = c.getString(c.getColumnIndexOrThrow(WishlistDbAdapter.COL_VOLUME_ID));
+    String volumeId = c.getString(c.getColumnIndex(WishlistDbAdapter.COL_VOLUME_ID));
 
     View state = retView.findViewById(R.id.item_state);
 
-    String statusStr = c.getString(c.getColumnIndexOrThrow(WishlistDbAdapter.COL_STATE));
+    String statusStr = c.getString(c.getColumnIndex(WishlistDbAdapter.COL_STATE));
     if (statusStr != null) {
       STATUS status = STATUS.valueOf(statusStr);
       switch (status) {
