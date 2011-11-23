@@ -47,6 +47,10 @@ public class WishlistDbAdapter {
       ");";
   private static final int DATABASE_VERSION = 3;
 
+  public int getVersion() {
+    return DATABASE_VERSION;
+  }
+
   private static class DatabaseHelper extends SQLiteOpenHelper {
     public DatabaseHelper(Context context) {
       super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -113,16 +117,16 @@ public class WishlistDbAdapter {
 
   private BookJB cursorToBookJB(Cursor c) {
     BookJB retVal = new BookJB();
-    retVal.set_id(c.getLong(c.getColumnIndexOrThrow(COL_ID)));
-    retVal.setIsbn(c.getString(c.getColumnIndexOrThrow(COL_ISBN)));
-    retVal.setVolumeId(c.getString(c.getColumnIndexOrThrow(COL_VOLUME_ID)));
-    retVal.setTitle(c.getString(c.getColumnIndexOrThrow(COL_TITLE)));
-    retVal.setAuthor(c.getString(c.getColumnIndexOrThrow(COL_AUTHOR)));
-    retVal.setPubDate(new Date(c.getLong(c.getColumnIndexOrThrow(COL_PUB_DATE))));
-    retVal.setAddDate(new Date(c.getLong(c.getColumnIndexOrThrow(COL_ADD_DATE))));
-    retVal.setDueDate(new Date(c.getLong(c.getColumnIndexOrThrow(COL_DUE_DATE))));
-    retVal.setClosedDate(new Date(c.getLong(c.getColumnIndexOrThrow(COL_CLOSED_DATE))));
-    retVal.setState(c.getString(c.getColumnIndexOrThrow(COL_STATE)));
+    retVal.set_id(c.getLong(c.getColumnIndex(COL_ID)));
+    retVal.setIsbn(c.getString(c.getColumnIndex(COL_ISBN)));
+    retVal.setVolumeId(c.getString(c.getColumnIndex(COL_VOLUME_ID)));
+    retVal.setTitle(c.getString(c.getColumnIndex(COL_TITLE)));
+    retVal.setAuthor(c.getString(c.getColumnIndex(COL_AUTHOR)));
+    retVal.setPubDate(new Date(c.getLong(c.getColumnIndex(COL_PUB_DATE))));
+    retVal.setAddDate(new Date(c.getLong(c.getColumnIndex(COL_ADD_DATE))));
+    retVal.setDueDate(new Date(c.getLong(c.getColumnIndex(COL_DUE_DATE))));
+    retVal.setClosedDate(new Date(c.getLong(c.getColumnIndex(COL_CLOSED_DATE))));
+    retVal.setState(c.getString(c.getColumnIndex(COL_STATE)));
 
     return retVal;
   }

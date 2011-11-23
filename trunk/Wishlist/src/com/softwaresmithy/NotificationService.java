@@ -63,7 +63,7 @@ public class NotificationService extends IntentService implements LibStatusListe
             Log.i(NotificationService.class.getName(), "Starting to update books");
             while (allBooks.moveToNext()) {
               try {
-                String isbn = allBooks.getString(allBooks.getColumnIndexOrThrow(WishlistDbAdapter.COL_ISBN));
+                String isbn = allBooks.getString(allBooks.getColumnIndex(WishlistDbAdapter.COL_ISBN));
                 Log.d(NotificationService.class.getName(), "Updating " + isbn);
                 getStatus(isbn);
               } catch (RuntimeException e) {

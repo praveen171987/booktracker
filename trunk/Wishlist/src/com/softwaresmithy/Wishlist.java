@@ -108,7 +108,7 @@ public class Wishlist extends ListActivity implements LibStatusListener {
                               int position, long id) {
         ListView list = ((ListView) parent);
         Cursor c = (Cursor) list.getItemAtPosition(position);
-        BookJB jb = mDbHelper.readItemByIsbn(c.getString(c.getColumnIndexOrThrow(WishlistDbAdapter.COL_ISBN)));
+        BookJB jb = mDbHelper.readItemByIsbn(c.getString(c.getColumnIndex(WishlistDbAdapter.COL_ISBN)));
 
         if (library instanceof AndroidLibStatus) {
           Intent intent = new Intent(Intent.ACTION_VIEW, ((AndroidLibStatus) library).getStatusPage(jb.getIsbn()));
@@ -178,7 +178,7 @@ public class Wishlist extends ListActivity implements LibStatusListener {
         break;
       case R.id.update_item:
         String isbn = c.getString(
-            c.getColumnIndexOrThrow(WishlistDbAdapter.COL_ISBN));
+            c.getColumnIndex(WishlistDbAdapter.COL_ISBN));
         expectingResponse.add(isbn);
         startService(getStatusIntent(isbn));
         break;
@@ -288,7 +288,8 @@ public class Wishlist extends ListActivity implements LibStatusListener {
           Log.e(this.getClass().getName(), "error setting library from preferences", e);
         }
         return;
-      default: //unknown request code
+      default:
+        super.onActivityResult(requestCode, resultCode, data);
     }
   }
 
@@ -340,8 +341,8 @@ public class Wishlist extends ListActivity implements LibStatusListener {
             .create();
       default:
         Log.w(this.getClass().getName(), "Unexpected dialog selected");
+        return super.onCreateDialog(id);
     }
-    return super.onCreateDialog(id);
   }
 
   public boolean validIsbn(String isbn) {

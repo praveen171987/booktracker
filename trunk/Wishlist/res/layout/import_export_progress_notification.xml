@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:a="http://schemas.android.com/apk/res/android"
+                a:layout_width="fill_parent" a:layout_height="fill_parent"
+                a:padding="5dp">
+  <ImageView a:id="@+id/status_icon"
+             a:layout_width="wrap_content"
+             a:layout_height="fill_parent"
+             a:layout_alignParentLeft="true"
+             a:src="@drawable/personreading"/>
+
+  <RelativeLayout a:layout_width="fill_parent"
+                  a:layout_height="fill_parent" a:layout_toRightOf="@id/status_icon">
+
+    <TextView a:id="@+id/status_text" a:layout_width="fill_parent"
+              a:layout_height="wrap_content" a:layout_alignParentTop="true"/>
+    <ProgressBar a:id="@+id/status_progress"
+                 a:layout_width="fill_parent" a:layout_height="wrap_content"
+                 a:layout_below="@id/status_text"
+                 a:progressDrawable="@android:drawable/progress_horizontal"
+                 a:indeterminate="false" a:indeterminateOnly="false"/>
+  </RelativeLayout>
+
+</RelativeLayout>

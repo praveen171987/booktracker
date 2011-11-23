@@ -63,18 +63,18 @@ public class EditItem extends Activity {
       startManagingCursor(item);
       Spinner status = (Spinner) findViewById(R.id.status_spinner);
       status.setSelection(statuses.indexOf(item.getString(
-          item.getColumnIndexOrThrow(WishlistDbAdapter.COL_STATE))));
+          item.getColumnIndex(WishlistDbAdapter.COL_STATE))));
 
       getEditView(R.id.title_text).setText(item.getString(
-          item.getColumnIndexOrThrow(WishlistDbAdapter.COL_TITLE)));
+          item.getColumnIndex(WishlistDbAdapter.COL_TITLE)));
       getEditView(R.id.author_text).setText(item.getString(
-          item.getColumnIndexOrThrow(WishlistDbAdapter.COL_AUTHOR)));
+          item.getColumnIndex(WishlistDbAdapter.COL_AUTHOR)));
       String isbn = item.getString(
-          item.getColumnIndexOrThrow(WishlistDbAdapter.COL_ISBN));
+          item.getColumnIndex(WishlistDbAdapter.COL_ISBN));
       getEditView(R.id.isbn_text).setText(isbn);
 
       String id = item.getString(
-          item.getColumnIndexOrThrow(WishlistDbAdapter.COL_VOLUME_ID));
+          item.getColumnIndex(WishlistDbAdapter.COL_VOLUME_ID));
       File file = new File(getExternalCacheDir(), id + ".jpg");
       if (file.exists()) {
         cover = BitmapFactory.decodeFile(file.getAbsolutePath());
@@ -122,11 +122,11 @@ public class EditItem extends Activity {
       dbHelper.updateItem(new BookJB(
           rowId,
           getEditView(R.id.isbn_text).getText().toString(),
-          item.getString(item.getColumnIndexOrThrow(WishlistDbAdapter.COL_VOLUME_ID)),
+          item.getString(item.getColumnIndex(WishlistDbAdapter.COL_VOLUME_ID)),
           getEditView(R.id.title_text).getText().toString(),
           getEditView(R.id.author_text).getText().toString(),
-          new Date(item.getLong(item.getColumnIndexOrThrow(WishlistDbAdapter.COL_PUB_DATE))),
-          new Date(item.getLong(item.getColumnIndexOrThrow(WishlistDbAdapter.COL_ADD_DATE))),
+          new Date(item.getLong(item.getColumnIndex(WishlistDbAdapter.COL_PUB_DATE))),
+          new Date(item.getLong(item.getColumnIndex(WishlistDbAdapter.COL_ADD_DATE))),
           null,//getEditView(R.id.duedate_text).getText().toString(),
           null,
           status.getSelectedItem().toString()));
@@ -134,11 +134,11 @@ public class EditItem extends Activity {
       dbHelper.createItem(new BookJB(
           null,
           getEditView(R.id.isbn_text).getText().toString(),
-          item.getString(item.getColumnIndexOrThrow(WishlistDbAdapter.COL_VOLUME_ID)),
+          item.getString(item.getColumnIndex(WishlistDbAdapter.COL_VOLUME_ID)),
           getEditView(R.id.title_text).getText().toString(),
           getEditView(R.id.author_text).getText().toString(),
-          new Date(item.getLong(item.getColumnIndexOrThrow(WishlistDbAdapter.COL_PUB_DATE))),
-          new Date(item.getLong(item.getColumnIndexOrThrow(WishlistDbAdapter.COL_ADD_DATE))),
+          new Date(item.getLong(item.getColumnIndex(WishlistDbAdapter.COL_PUB_DATE))),
+          new Date(item.getLong(item.getColumnIndex(WishlistDbAdapter.COL_ADD_DATE))),
           null,//getEditView(R.id.duedate_text).getText().toString(),
           null,
           null));
